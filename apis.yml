@@ -1,0 +1,84 @@
+aid: jambase
+url: https://raw.githubusercontent.com/api-evangelist/jambase/refs/heads/main/apis.yml
+name: JamBase
+description: >-
+  JamBase is a live music data platform with over 25 years of concert history, providing access
+  to 5M+ performances, 616K+ artist profiles, 91K+ venues, and 20K+ festivals. Their REST API
+  delivers real-time global show listings, festival schedules, artist metadata, venue details,
+  and ticket pricing data. JamBase Data is trusted by Google, Spotify, and 450+ companies for
+  jam band and concert discovery, setlist information, tour dates, and live music event data.
+image: https://www.jambase.com/favicon.ico
+tags:
+  - Artists
+  - Concerts
+  - Events
+  - Festivals
+  - Live Music
+  - Music
+  - Setlists
+  - Tickets
+  - Tours
+  - Venues
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+apis:
+  - aid: jambase:jambase-data-api
+    name: JamBase Data API
+    description: >-
+      The JamBase Data API provides REST access to the world's most comprehensive live music
+      database with 25+ years of concert history. The v3 API covers events, artists, venues,
+      festivals, and setlists with normalized data. Features include real-time event status
+      updates (rescheduled, cancelled, postponed), third-party ID matching across 12 platforms
+      including Spotify, MusicBrainz, Ticketmaster, and SeatGeek, plus historical event data
+      dating back to 1999. Authentication uses Bearer token (API key) in the Authorization header.
+    image: https://www.jambase.com/favicon.ico
+    humanURL: https://data.jambase.com/api/reference
+    baseURL: https://data.jambase.com/v3
+    tags:
+      - Artists
+      - Concerts
+      - Events
+      - Festivals
+      - Live Music
+      - Setlists
+      - Tickets
+      - Tours
+      - Venues
+    properties:
+      - type: Documentation
+        url: https://data.jambase.com/api/reference
+      - type: GettingStarted
+        url: https://data.jambase.com/api/docs/getting-started
+      - type: Portal
+        url: https://data.jambase.com
+      - type: Pricing
+        url: https://data.jambase.com/pricing
+      - type: Plans
+        url: plans/jambase-plans-pricing.yml
+      - type: RateLimits
+        url: rate-limits/jambase-rate-limits.yml
+      - type: FinOps
+        url: finops/jambase-finops.yml
+common:
+  - type: Portal
+    url: https://data.jambase.com
+  - type: Documentation
+    url: https://data.jambase.com/api/reference
+  - type: GettingStarted
+    url: https://data.jambase.com/api/docs/getting-started
+  - type: Pricing
+    url: https://data.jambase.com/pricing
+  - type: Solutions
+    url: https://data.jambase.com/solutions
+  - type: Data
+    url: https://data.jambase.com/data
+  - type: MCP
+    url: https://data.jambase.com/mcp
+  - type: About
+    url: https://data.jambase.com/about
+  - type: Website
+    url: https://www.jambase.com
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

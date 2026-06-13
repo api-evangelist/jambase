@@ -1,0 +1,234 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: JamBase
+providerId: jambase
+created: '2026-06-13'
+modified: '2026-06-13'
+reconciled: true
+tags:
+  - Concerts
+  - Events
+  - Live Music
+  - Music
+description: >-
+  JamBase Data offers five access tiers for their concert and live music API. The Developer
+  plan is free for non-commercial use with a 1,000 call monthly quota. Paid plans (Startup,
+  Pro, Pro+) increase monthly quotas and hourly rate limits with tiered overage pricing.
+  Enterprise offers custom high-volume terms. All paid plans include a 20% discount for
+  annual billing and a 14-day free trial with no credit card required.
+sources:
+  - https://data.jambase.com/pricing
+  - https://data.jambase.com/api/docs/getting-started
+plans:
+  - id: jambase-developer
+    name: Developer
+    type: free
+    description: >-
+      Free non-commercial access to the JamBase Data API with a 1,000 call monthly quota.
+      Future events accessible for up to 6 months ahead. Basic event details including date,
+      time, venue, and ticket links. Attribution required. No credit card needed.
+    entries:
+      - label: Monthly Quota
+        name: monthly_quota
+        type: quota
+        metric: request
+        limit: 1000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Hourly Rate Limit
+        name: hourly_rate_limit
+        type: rate
+        metric: request
+        limit: 3600
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Overage
+        name: overage_per_call
+        type: usage
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.05'
+        userMultiplied: false
+    elements:
+      - name: Events API (6 month window)
+      - name: Basic event details (date, time, venue, ticket links)
+      - name: Non-commercial use only
+      - name: Attribution required
+  - id: jambase-startup
+    name: Startup
+    type: paid
+    description: >-
+      Entry-level paid plan at $500/month ($6,000/year with 20% annual discount). Includes
+      20,000 monthly calls and 7,200 calls per hour. Unlocks unlimited future events window,
+      external IDs across platforms, ticket pricing, and venue capacity data. Standard support
+      with attribution requested.
+    entries:
+      - label: Monthly Quota
+        name: monthly_quota
+        type: quota
+        metric: request
+        limit: 20000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '500.00'
+        userMultiplied: false
+      - label: Hourly Rate Limit
+        name: hourly_rate_limit
+        type: rate
+        metric: request
+        limit: 7200
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Overage
+        name: overage_per_call
+        type: usage
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.04'
+        userMultiplied: false
+    elements:
+      - name: Unlimited future events window
+      - name: External IDs (Spotify, MusicBrainz, Ticketmaster, SeatGeek, etc.)
+      - name: Ticket pricing data
+      - name: Venue capacity data
+      - name: Standard support
+  - id: jambase-pro
+    name: Pro
+    type: paid
+    description: >-
+      Mid-tier paid plan at $1,500/month ($18,000/year with 20% annual discount). Includes
+      50,000 monthly calls and 18,000 calls per hour. Adds 3 years of historical event data
+      and priority 48-hour support SLA. All Startup features included.
+    entries:
+      - label: Monthly Quota
+        name: monthly_quota
+        type: quota
+        metric: request
+        limit: 50000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '1500.00'
+        userMultiplied: false
+      - label: Hourly Rate Limit
+        name: hourly_rate_limit
+        type: rate
+        metric: request
+        limit: 18000
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Overage
+        name: overage_per_call
+        type: usage
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.03'
+        userMultiplied: false
+    elements:
+      - name: 3 years of historical event data
+      - name: All Startup features
+      - name: Priority support (48-hour SLA)
+  - id: jambase-pro-plus
+    name: Pro+
+    type: paid
+    description: >-
+      High-volume paid plan at $2,500/month ($30,000/year with 20% annual discount). Includes
+      150,000 monthly calls and 36,000 calls per hour. Adds complete historical event access
+      (25+ years back to 1999) and 24-hour priority support SLA. All Pro features included.
+    entries:
+      - label: Monthly Quota
+        name: monthly_quota
+        type: quota
+        metric: request
+        limit: 150000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '2500.00'
+        userMultiplied: false
+      - label: Hourly Rate Limit
+        name: hourly_rate_limit
+        type: rate
+        metric: request
+        limit: 36000
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Overage
+        name: overage_per_call
+        type: usage
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.02'
+        userMultiplied: false
+    elements:
+      - name: Complete historical event access (25+ years)
+      - name: All Pro features
+      - name: 24-hour priority support SLA
+  - id: jambase-enterprise
+    name: Enterprise
+    type: enterprise
+    description: >-
+      Custom high-volume plan for companies with complex integrations or high data needs.
+      Includes negotiated overages, custom rate limits, SLA guarantees, dedicated account
+      management, and flexible data delivery options including Snowflake, AWS, Azure, S3,
+      SFTP, and BigQuery.
+    entries:
+      - label: Monthly Quota
+        name: monthly_quota
+        type: quota
+        metric: request
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+      - label: Hourly Rate Limit
+        name: hourly_rate_limit
+        type: rate
+        metric: request
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: High-volume API access
+      - name: Custom rate limits
+      - name: SLA guarantees
+      - name: Dedicated account management
+      - name: Flexible data delivery (Snowflake, AWS, Azure, S3, SFTP, BigQuery)
+      - name: Negotiated overage pricing
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

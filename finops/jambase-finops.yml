@@ -1,0 +1,94 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: JamBase
+providerId: jambase
+created: '2026-06-13'
+modified: '2026-06-13'
+reconciled: true
+tags:
+  - Concerts
+  - Events
+  - FinOps
+  - FOCUS
+  - Live Music
+description: >-
+  FOCUS-aligned FinOps for the JamBase Data API: tiered subscription billing with per-call
+  overage charges. The free Developer plan (1,000 calls/month) and paid tiers (Startup at
+  $500/month, Pro at $1,500/month, Pro+ at $2,500/month) each carry distinct overage rates
+  ($0.05, $0.04, $0.03, $0.02 per call respectively). Enterprise terms are custom. A 20%
+  annual prepayment discount applies to all paid tiers.
+sources:
+  - https://data.jambase.com/pricing
+  - https://data.jambase.com/api/docs/getting-started
+  - https://focus.finops.org/focus-specification/v1-3/
+notes: >-
+  JamBase bills monthly subscriptions plus overage. FinOps focus is on tracking monthly
+  call consumption against the plan quota to predict overage costs, and on choosing the
+  right plan tier based on actual API usage volume.
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: JamBase Inc.
+serviceCategory: Live Music Data
+billingModel:
+  pricingCategory: Subscription + Usage Overage
+  billingFrequency: Monthly or Annual
+  billingCurrency: USD
+  chargeCategories:
+    - Subscription
+    - Usage
+focusColumns:
+  ServiceName: JamBase Data API
+  ServiceCategory: Live Music Data
+  ProviderName: JamBase
+  PublisherName: JamBase Inc.
+  BillingCurrency: USD
+  ChargeCategory: Subscription + Usage
+meters:
+  - name: api_requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - api_key
+      - endpoint
+      - plan_tier
+  - name: monthly_subscription
+    unit: subscription
+    aggregation: sum
+    dimensions:
+      - plan_tier
+      - billing_cycle
+  - name: overage_requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - api_key
+      - plan_tier
+principles:
+  - name: Visibility
+    description: Track per-key monthly call consumption against plan quota. Monitor usage
+      throughout the billing cycle to anticipate overage charges before they accumulate.
+  - name: Allocation
+    description: Issue distinct API keys per consuming application or environment so API
+      call costs and quota burn can be attributed to specific product teams or use cases.
+  - name: Optimization
+    description: Cache event, artist, and venue lookups aggressively to reduce redundant
+      API calls. Use geographical and date filters to fetch only needed data. Consider the
+      annual billing option for a 20% cost reduction on predictable usage volumes.
+  - name: Accountability
+    description: Designate an owner responsible for the JamBase developer account, plan
+      tier selection, quota increase requests, and monitoring overage spend. Right-size the
+      plan tier based on rolling 3-month actual usage to avoid chronic overages or
+      over-provisioning.
+  - name: Planning
+    description: Calculate break-even points between plan tiers using overage rates. For
+      example, a Startup plan with consistent overages beyond 37,500 additional calls/month
+      would cost more than upgrading to Pro. Model projected growth in API consumption
+      when selecting annual plan commitments.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

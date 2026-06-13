@@ -1,0 +1,95 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: JamBase
+providerId: jambase
+created: '2026-06-13'
+modified: '2026-06-13'
+reconciled: true
+tags:
+  - Concerts
+  - Events
+  - Live Music
+  - Rate Limiting
+description: >-
+  JamBase Data enforces plan-tiered rate limits using per-API-key hourly call limits and
+  monthly quotas. The free Developer plan allows 3,600 calls per hour and 1,000 calls per
+  month. Paid tiers scale from 7,200/hour (Startup) to 36,000/hour (Pro+). Overages are
+  billed per call at rates ranging from $0.02 to $0.05 depending on the plan tier. Enterprise
+  customers receive custom rate limits negotiated directly with JamBase.
+sources:
+  - https://data.jambase.com/pricing
+  - https://data.jambase.com/api/docs/getting-started
+limits:
+  - name: Developer plan monthly quota
+    scope: api-key
+    metric: requests_per_month
+    limit: 1000
+    timeFrame: month
+    notes: Free non-commercial tier; overages billed at $0.05 per call.
+  - name: Developer plan hourly rate limit
+    scope: api-key
+    metric: requests_per_hour
+    limit: 3600
+    timeFrame: hour
+    notes: Approximately 1 request per second sustained.
+  - name: Startup plan monthly quota
+    scope: api-key
+    metric: requests_per_month
+    limit: 20000
+    timeFrame: month
+    notes: Paid plan at $500/month; overages billed at $0.04 per call.
+  - name: Startup plan hourly rate limit
+    scope: api-key
+    metric: requests_per_hour
+    limit: 7200
+    timeFrame: hour
+    notes: Approximately 2 requests per second sustained.
+  - name: Pro plan monthly quota
+    scope: api-key
+    metric: requests_per_month
+    limit: 50000
+    timeFrame: month
+    notes: Paid plan at $1,500/month; overages billed at $0.03 per call.
+  - name: Pro plan hourly rate limit
+    scope: api-key
+    metric: requests_per_hour
+    limit: 18000
+    timeFrame: hour
+    notes: Approximately 5 requests per second sustained.
+  - name: Pro+ plan monthly quota
+    scope: api-key
+    metric: requests_per_month
+    limit: 150000
+    timeFrame: month
+    notes: Paid plan at $2,500/month; overages billed at $0.02 per call.
+  - name: Pro+ plan hourly rate limit
+    scope: api-key
+    metric: requests_per_hour
+    limit: 36000
+    timeFrame: hour
+    notes: Approximately 10 requests per second sustained.
+  - name: Enterprise plan
+    scope: api-key
+    metric: requests_per_hour
+    limit: see enterprise agreement
+    notes: Custom rate limits negotiated directly with JamBase for high-volume needs.
+policies:
+  - name: Bearer Token Authentication
+    description: All API requests must include the API key as a Bearer token in the
+      Authorization header. Requests without valid authentication are rejected.
+  - name: Overage Billing
+    description: Calls beyond the monthly quota are charged at the plan's per-call overage
+      rate. Developer plan overages cost $0.05/call, Startup $0.04/call, Pro $0.03/call,
+      and Pro+ $0.02/call.
+  - name: MCP Quota Parity
+    description: MCP (Model Context Protocol) tool calls count against the same monthly
+      API quota as REST API calls — one MCP tool call equals one REST API call.
+  - name: Annual Discount
+    description: All paid plans offer a 20% discount when billed annually instead of monthly.
+  - name: Free Trial
+    description: A 14-day free trial is available with no credit card required, providing
+      immediate access to the API to evaluate capabilities.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
