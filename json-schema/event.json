@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://data.jambase.com/json-schema/event.json",
+  "title": "Event",
+  "description": "A generic event.Please note that `startDate`,`endDate`,`previousStartDate`, and `doorTime` are all returned based on the venue's local time but without an offset. You can find the timezone at `event > location > address > x-timezone` if you need to do any conversions.\n",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Thing",
+      "properties": {
+        "sameAs": {
+          "description": "Only available for `Festival` type events, not `Concert`"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "eventStatus": {
+          "$ref": "#/components/schemas/enumEventStatus"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "iso-8601",
+          "description": "The start date and time of the item using ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]\n\\\nPlease note that `startDate` is returned based on the venue's local time but without an offset. You can find the timezone at `event > location > address > x-timezone` if you need to do any conversions.\n"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "iso-8601",
+          "description": "The end date of the item using ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]\n\\\nPlease note that `endDate` is returned based on the venue's local time but without an offset. You can find the timezone at `event > location > address > x-timezone` if you need to do any conversions.\n"
+        },
+        "previousStartDate": {
+          "type": "string",
+          "format": "iso-8601",
+          "description": "For rescheduled events, the previously scheduled start date using ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]\n\\\nPlease note that `previousStartDate` is returned based on the venue's local time but without an offset. You can find the timezone at `event > location > address > x-timezone` if you need to do any conversions.\n"
+        },
+        "doorTime": {
+          "type": "string",
+          "format": "iso-8601",
+          "description": "The time admission will commence in local time using ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]\n\\\nPlease note that `doorTime` is returned based on the venue's local time but without an offset. You can find the timezone at `event > location > address > x-timezone` if you need to do any conversions.\n"
+        },
+        "location": {
+          "$ref": "#/components/schemas/MusicVenue"
+        },
+        "offers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Offer"
+          }
+        },
+        "performer": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MusicGroup"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "x-performanceDate": {
+                    "type": "string",
+                    "format": "iso-8601",
+                    "description": "The date of the performance using ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]\n"
+                  },
+                  "x-performanceRank": {
+                    "type": "number",
+                    "format": "int32",
+                    "require": true,
+                    "description": "The \"rank\" for this performance whithin the event"
+                  },
+                  "x-isHeadliner": {
+                    "type": "boolean",
+                    "default": false,
+                    "require": true,
+                    "description": "If this performer is a headliner"
+                  },
+                  "x-dateIsConfirmed": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Required for Festivals.\nIf a Festival performance date is confirmed or not.\\\nIf not, it will appear on the first day of the Festival.\n"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "eventAttendanceMode": {
+          "$ref": "#/components/schemas/enumAttendanceMode"
+        },
+        "isAccessibleForFree": {
+          "type": "boolean",
+          "default": false
+        },
+        "x-promoImage": {
+          "type": "string",
+          "format": "uri",
+          "description": "A secondary promotional image for the event (e.g. admat)"
+        }
+      }
+    }
+  ]
+}

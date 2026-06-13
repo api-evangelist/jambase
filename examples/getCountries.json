@@ -1,0 +1,15 @@
+{
+  "path": "/geographies/countries",
+  "method": "GET",
+  "operationId": "getCountries",
+  "summary": "Get Countries",
+  "description": "Returns all Countries in alphabetical order by ISO2.\n",
+  "parameters": [
+    {
+      "name": "countryHasUpcomingEvents",
+      "in": "query",
+      "required": false,
+      "description": "Only include Countries with / without upcoming events. Omit for both."
+    }
+  ]
+}

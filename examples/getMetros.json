@@ -1,0 +1,27 @@
+{
+  "path": "/geographies/metros",
+  "method": "GET",
+  "operationId": "getMetros",
+  "summary": "Get Metros",
+  "description": "A Metro is a collection of Cities, such as the Los Angeles area which includes LA, Hollywood, Anaheim, and more that can be used to filter Events.\\\n\\\nReturns all Metros in Alphabetical order by identifier.\n",
+  "parameters": [
+    {
+      "name": "metroHasUpcomingEvents",
+      "in": "query",
+      "required": false,
+      "description": "Only include Metros with / without upcoming events. Omit for both."
+    },
+    {
+      "name": "cityHasUpcomingEvents",
+      "in": "query",
+      "required": false,
+      "description": "Only include Cities with / without upcoming events. Omit for both."
+    },
+    {
+      "name": "expandMetroCities",
+      "in": "query",
+      "required": false,
+      "description": "Use `true` to include the `containsPlace` node with the cities for each metro."
+    }
+  ]
+}

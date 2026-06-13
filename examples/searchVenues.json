@@ -1,0 +1,117 @@
+{
+  "path": "/venues",
+  "method": "GET",
+  "operationId": "searchVenues",
+  "summary": "Search Venues",
+  "description": "Search venues by location and more.\n\n<!-- theme: info  -->\n> #### Requirement\n>\n> Your request must include at the `venueName` or at least one of the geo parameters such as `geoCityId`, `geoCountryIso2`, `geoCountryIso3`, `geoIp`, `geoMetroId`, `geoStateIso`, or , `geoLatitude` and `geoLongitude`.\n",
+  "parameters": [
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "venueHasUpcomingEvents",
+      "in": "query",
+      "required": false,
+      "description": "Set to true to only return venues that have at least one upcoming event"
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    }
+  ]
+}

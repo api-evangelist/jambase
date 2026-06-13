@@ -60,6 +60,12 @@ apis:
         url: rate-limits/jambase-rate-limits.yml
       - type: FinOps
         url: finops/jambase-finops.yml
+      - type: OpenAPI
+        url: openapi/openapi.json
+      - type: JSONSchema
+        url: json-schema/jambase-schemas.json
+      - type: JSONLDContext
+        url: json-ld/jambase-context.jsonld
 common:
   - type: Portal
     url: https://data.jambase.com

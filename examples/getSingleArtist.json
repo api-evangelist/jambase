@@ -1,0 +1,57 @@
+{
+  "path": "/artists/id/{artistDataSource}:{artistId}",
+  "method": "GET",
+  "operationId": "getSingleArtist",
+  "summary": "Get / reverse-lookup an Artist by JamBase or third-party ID",
+  "description": "Retrieve a specific artist by JamBase or third-party ID.\n",
+  "parameters": [
+    {
+      "name": "artistDataSource",
+      "in": "path",
+      "required": true,
+      "description": "the ArtistDataSource of the ID for the artist"
+    },
+    {
+      "name": "artistId",
+      "in": "path",
+      "required": true,
+      "description": "the unique ID for the artist"
+    },
+    {
+      "name": "expandUpcomingEvents",
+      "in": "query",
+      "required": false,
+      "description": "Use `true` to include the `event` node with any upcoming events for the artist."
+    },
+    {
+      "name": "expandUpcomingStreams",
+      "in": "query",
+      "required": false,
+      "description": "Use `true` to include the `event` node with any upcoming Streams for the venue."
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    }
+  ]
+}

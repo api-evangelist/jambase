@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://data.jambase.com/json-schema/musicgroup.json",
+  "title": "MusicGroup",
+  "description": "A band or musician",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Thing"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "enum": [
+            "MusicGroup"
+          ]
+        },
+        "deletionStatus": {
+          "$ref": "#/components/schemas/propDeletionStatus"
+        },
+        "deletedAt": {
+          "$ref": "#/components/schemas/propDeletedAt"
+        },
+        "mergedInto": {
+          "$ref": "#/components/schemas/propMergedInto"
+        },
+        "member": {
+          "type": "array",
+          "description": "For bands, an array of the band's members",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "MusicGroup"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the item"
+              },
+              "identifier": {
+                "type": "string",
+                "example": "jambase:12345",
+                "description": "A unique identifier of the item"
+              },
+              "image": {
+                "type": "string",
+                "format": "uri",
+                "description": "An image of the item"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the item"
+              }
+            }
+          }
+        },
+        "memberOf": {
+          "type": "array",
+          "description": "For musicians, an array of the band's the musician is a member of",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "enum": [
+                  "MusicGroup"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the item"
+              },
+              "identifier": {
+                "type": "string",
+                "example": "jambase:98765",
+                "description": "A unique identifier of the item"
+              },
+              "image": {
+                "type": "string",
+                "format": "uri",
+                "description": "An image of the item"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the item"
+              }
+            }
+          }
+        },
+        "foundingLocation": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "Place"
+              ]
+            },
+            "name": {
+              "type": "string",
+              "example": "Chicago, IL"
+            }
+          },
+          "description": "The hometown of the artist"
+        },
+        "foundingDate": {
+          "type": "string",
+          "format": "iso-8601",
+          "example": "1983",
+          "description": "The year the artist first performed"
+        },
+        "genre": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/enumGenres"
+          }
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Concert"
+              },
+              {
+                "$ref": "#/components/schemas/Festival"
+              },
+              {
+                "$ref": "#/components/schemas/Stream"
+              }
+            ]
+          },
+          "description": "Only available when using `expandUpcomingEvents=true` and/or `expandUpcomingStreams=true` URL param.\n"
+        },
+        "x-bandOrMusician": {
+          "type": "string",
+          "enum": [
+            "band",
+            "musician"
+          ]
+        },
+        "x-numUpcomingEvents": {
+          "type": "number",
+          "format": "int32",
+          "example": 12,
+          "description": "The number of upcoming events for this artist.            \n"
+        },
+        "x-externalIdentifiers": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/components/schemas/ExternalIdentifier"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "path": "/lookups/stream-data-sources",
+  "method": "GET",
+  "operationId": "getstreamDataSources",
+  "summary": "Get Stream Data Sources",
+  "description": "These can be used to filter Streams from a specific Streaming platform.\\\n\\\nReturns all Stream Data Sources in Alphabetical order.\n",
+  "parameters": []
+}

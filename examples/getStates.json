@@ -1,0 +1,27 @@
+{
+  "path": "/geographies/states",
+  "method": "GET",
+  "operationId": "getStates",
+  "summary": "Get States / Regions / Provinces",
+  "description": "A States (or Region / Province) is a collection of Cities, such as California (USA) or Quebec (Canada) that can be used to filter Events.\\\n\\\nReturns all States/Regions in Alphabetical order by identifier.\n\\\nNote: Available for United States, Canada, and Australia only.\n",
+  "parameters": [
+    {
+      "name": "stateHasUpcomingEvents",
+      "in": "query",
+      "required": false,
+      "description": "Only include States with / without upcoming events. Omit for both."
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    }
+  ]
+}

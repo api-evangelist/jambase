@@ -1,0 +1,8 @@
+{
+  "path": "/lookups/artist-data-sources",
+  "method": "GET",
+  "operationId": "getArtistDataSources",
+  "summary": "Get Artist Data Sources",
+  "description": "These can be used to filter events by Artist IDs from third-party Data Sources.\\\n\\\nReturns all Artist Data Sources in Alphabetical order.\n",
+  "parameters": []
+}

@@ -1,0 +1,51 @@
+{
+  "path": "/venues/id/{venueDataSource}:{venueId}",
+  "method": "GET",
+  "operationId": "getSingleVenue",
+  "summary": "Get / reverse-lookup a Venue by JamBase or third-party ID",
+  "description": "Retrieve a specific venue by JamBase or third-party ID.\n",
+  "parameters": [
+    {
+      "name": "venueDataSource",
+      "in": "path",
+      "required": true,
+      "description": "the VenueDataSource of the ID for the artist"
+    },
+    {
+      "name": "venueId",
+      "in": "path",
+      "required": true,
+      "description": "the unique ID for the Venue"
+    },
+    {
+      "name": "expandUpcomingEvents",
+      "in": "query",
+      "required": false,
+      "description": "Use `true` to include the `event` node with any upcoming Concerts and Festivals for the venue."
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    }
+  ]
+}

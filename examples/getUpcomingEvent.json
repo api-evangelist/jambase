@@ -1,0 +1,39 @@
+{
+  "path": "/events/id/{eventDataSource}:{eventId}",
+  "method": "GET",
+  "operationId": "getUpcomingEvent",
+  "summary": "Get / reverse-lookup an Event by JamBase or third-party ID",
+  "description": "Retrieve a specific Event by JamBase or third-party ID\n",
+  "parameters": [
+    {
+      "name": "eventDataSource",
+      "in": "path",
+      "required": true,
+      "description": "The eventDataSource of the ID for the Event."
+    },
+    {
+      "name": "eventId",
+      "in": "path",
+      "required": true,
+      "description": "The unique ID for the Event."
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    }
+  ]
+}

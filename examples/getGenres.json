@@ -1,0 +1,8 @@
+{
+  "path": "/genres",
+  "method": "GET",
+  "operationId": "getGenres",
+  "summary": "Get Genres",
+  "description": "These can be used to filter Artists and Events.\\\n\\\nReturns all Genres in Alphabetical order.\n",
+  "parameters": []
+}

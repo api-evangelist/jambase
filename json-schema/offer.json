@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://data.jambase.com/json-schema/offer.json",
+  "title": "Offer",
+  "description": "Something for sale, typically a concert ticket",
+  "type": "object",
+  "required": [
+    "identifier",
+    "url",
+    "category",
+    "seller",
+    "validFrom"
+  ],
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Thing"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "A unique identifier of the item",
+          "example": "jambase:194164"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the item"
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the Offer, typically used to identify a primary or secondary ticketing link",
+          "examples": [
+            "ticketingLinkPrimary",
+            "ticketingLinkSecondary"
+          ]
+        },
+        "priceSpecification": {
+          "$ref": "#/components/schemas/PriceSpecification"
+        },
+        "seller": {
+          "$ref": "#/components/schemas/Organization",
+          "required": true
+        },
+        "validFrom": {
+          "example": "2022-12-07T12:42:00",
+          "schema": {
+            "type": "string",
+            "format": "dateTime"
+          }
+        }
+      }
+    }
+  ]
+}

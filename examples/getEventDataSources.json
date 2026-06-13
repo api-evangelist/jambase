@@ -1,0 +1,8 @@
+{
+  "path": "/lookups/event-data-sources",
+  "method": "GET",
+  "operationId": "getEventDataSources",
+  "summary": "Get Event Data Sources",
+  "description": "These can be used to filter events by Event IDs from third-party Data Sources.\\\n\\\nReturns all Event Data Sources in Alphabetical order.\n",
+  "parameters": []
+}

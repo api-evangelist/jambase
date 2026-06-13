@@ -1,0 +1,33 @@
+{
+  "path": "/streams/id/{streamDataSource}:{streamId}",
+  "method": "GET",
+  "operationId": "getStream",
+  "summary": "Get / reverse-lookup a Stream by JamBase or third-party ID",
+  "description": "Retrieve a specific stream by JamBase or third-party ID.\n",
+  "parameters": [
+    {
+      "name": "streamDataSource",
+      "in": "path",
+      "required": true,
+      "description": "The StreamDataSource of the ID for the Stream."
+    },
+    {
+      "name": "streamId",
+      "in": "path",
+      "required": true,
+      "description": "The unique ID for the Stream."
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    }
+  ]
+}

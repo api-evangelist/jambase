@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://data.jambase.com/json-schema/concert.json",
+  "title": "Concert",
+  "description": "A concert / show",
+  "type": "object",
+  "required": [
+    "@type",
+    "name",
+    "identifier",
+    "url",
+    "eventStatus",
+    "startDate",
+    "location",
+    "performer"
+  ],
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Event"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "enum": [
+            "Concert"
+          ]
+        },
+        "deletionStatus": {
+          "$ref": "#/components/schemas/propDeletionStatus"
+        },
+        "deletedAt": {
+          "$ref": "#/components/schemas/propDeletedAt"
+        },
+        "mergedInto": {
+          "$ref": "#/components/schemas/propMergedInto"
+        },
+        "x-externalIdentifiers": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/components/schemas/ExternalIdentifier"
+            }
+          ]
+        },
+        "x-customTitle": {
+          "type": "string",
+          "description": "To replace the default `event[name]` property"
+        },
+        "x-subtitle": {
+          "type": "string",
+          "description": "To supplement the title to help describe the event (e.g. Album Release Party)"
+        },
+        "x-headlinerInSupport": {
+          "type": "boolean",
+          "default": false,
+          "description": "if headlining performers should be listed with support acts (typically used with `x-customTitle`)"
+        },
+        "x-streamIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "jambase:12345"
+          },
+          "description": "An array of one or more IDs for Streams associated with a Concert"
+        }
+      }
+    }
+  ],
+  "x-stoplight": {
+    "id": "d7j9iw8g683w2"
+  }
+}

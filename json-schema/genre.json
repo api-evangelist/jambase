@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://data.jambase.com/json-schema/genre.json",
+  "title": "Genre",
+  "description": "A music genre",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The display name for the genre."
+    },
+    "identifier": {
+      "$ref": "#/components/schemas/enumGenres"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://data.jambase.com/json-schema/stream.json",
+  "title": "Stream",
+  "description": "A stream",
+  "type": "object",
+  "required": [
+    "@type",
+    "name",
+    "identifier",
+    "url",
+    "eventStatus",
+    "startDate",
+    "location",
+    "performer"
+  ],
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Event"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "enum": [
+            "Stream"
+          ]
+        },
+        "deletionStatus": {
+          "$ref": "#/components/schemas/propDeletionStatus"
+        },
+        "deletedAt": {
+          "$ref": "#/components/schemas/propDeletedAt"
+        },
+        "mergedInto": {
+          "$ref": "#/components/schemas/propMergedInto"
+        },
+        "isLiveBroadcast": {
+          "type": "boolean",
+          "description": "True if the broadcast is of a live event"
+        },
+        "broadcastOfEvent": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Concert"
+              },
+              {
+                "$ref": "#/components/schemas/Festival"
+              }
+            ]
+          }
+        },
+        "x-customTitle": {
+          "type": "string",
+          "description": "To replace the default `event[name]` property"
+        }
+      }
+    }
+  ],
+  "x-stoplight": {
+    "id": "fijmf4s5a9h9x"
+  }
+}

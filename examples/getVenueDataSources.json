@@ -1,0 +1,8 @@
+{
+  "path": "/lookups/venue-data-sources",
+  "method": "GET",
+  "operationId": "getVenueDataSources",
+  "summary": "Get Venue Data Sources",
+  "description": "These can be used to filter events by Venue IDs from third-party Data Sources.\\\n\\\nThis endpoint returns all Venue Data Sources in Alphabetical order.\n",
+  "parameters": []
+}

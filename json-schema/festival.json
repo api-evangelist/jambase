@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://data.jambase.com/json-schema/festival.json",
+  "title": "Festival",
+  "description": "A music festival",
+  "type": "object",
+  "required": [
+    "@type",
+    "name",
+    "identifier",
+    "url",
+    "eventStatus",
+    "startDate",
+    "endDate",
+    "location",
+    "performer",
+    "x-lineupDisplayOption"
+  ],
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Event"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "enum": [
+            "Festival"
+          ]
+        },
+        "deletionStatus": {
+          "$ref": "#/components/schemas/propDeletionStatus"
+        },
+        "deletedAt": {
+          "$ref": "#/components/schemas/propDeletedAt"
+        },
+        "mergedInto": {
+          "$ref": "#/components/schemas/propMergedInto"
+        },
+        "x-lineupDisplayOption": {
+          "$ref": "#/components/schemas/enumFestivalLineupDisplayOption"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "path": "/geographies/cities",
+  "method": "GET",
+  "operationId": "searchCities",
+  "summary": "Search Cities",
+  "description": "Search for cities. Results will be returned in order of most to least upcoming events in the city, and then alphabetically city name in the case of a tie.       \n\n<!-- theme: info  -->\n> #### Requirement\n> Your request must include at least one of the geo parameters such as `geoCityName`, `geoCountryIso2`, `geoCountryIso3`, `geoIp`, `geoMetroId`, `geoStateIso`, or `geoLatitude` and `geoLongitude`.\n    \n",
+  "parameters": [
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "cityHasUpcomingEvents",
+      "in": "query",
+      "required": false,
+      "description": "Only include Cities with / without upcoming events. Omit for both."
+    }
+  ]
+}

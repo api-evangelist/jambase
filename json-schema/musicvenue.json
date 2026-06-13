@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://data.jambase.com/json-schema/musicvenue.json",
+  "title": "MusicVenue",
+  "description": "A place to Go See Live Music",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Thing"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "deletionStatus": {
+          "$ref": "#/components/schemas/propDeletionStatus"
+        },
+        "deletedAt": {
+          "$ref": "#/components/schemas/propDeletedAt"
+        },
+        "mergedInto": {
+          "$ref": "#/components/schemas/propMergedInto"
+        },
+        "maximumAttendeeCapacity": {
+          "type": "number",
+          "format": "int32",
+          "example": 20789,
+          "description": "The total number of individuals that may attend an event or venue."
+        },
+        "address": {
+          "$ref": "#/components/schemas/PostalAddress"
+        },
+        "geo": {
+          "$ref": "#/components/schemas/GeoCoordinates"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Concert"
+              },
+              {
+                "$ref": "#/components/schemas/Festival"
+              }
+            ]
+          }
+        },
+        "x-isPermanentlyClosed": {
+          "type": "boolean",
+          "default": false,
+          "description": "If the venue is permanently closed."
+        },
+        "x-numUpcomingEvents": {
+          "type": "number",
+          "format": "int32",
+          "example": 12,
+          "description": "The number of upcoming events at this venue."
+        },
+        "x-externalIdentifiers": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/components/schemas/ExternalIdentifier"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "path": "/artists",
+  "method": "GET",
+  "operationId": "searchArtists",
+  "summary": "Search Artists",
+  "description": "Search artists by name and genre. \n<!-- theme: info -->\n> #### Requirement\n> Your request must include at least one of the `artistName` or `genreSlug` parameters.\n",
+  "parameters": [
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": "artistHasUpcomingEvents",
+      "in": "query",
+      "required": false,
+      "description": "Set to true to only return artists that have at least one upcoming Concert or Festival"
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    },
+    {
+      "name": null,
+      "in": null,
+      "required": false,
+      "description": ""
+    }
+  ]
+}
