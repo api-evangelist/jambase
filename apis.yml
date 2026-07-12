@@ -67,6 +67,12 @@ apis:
       - type: JSONLDContext
         url: json-ld/jambase-context.jsonld
 common:
+  - type: VulnerabilityDisclosure
+    url: security/jambase-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/jambase-domain-security.yml
+  - type: Authentication
+    url: authentication/jambase-authentication.yml
   - type: Portal
     url: https://data.jambase.com
   - type: Documentation
@@ -85,6 +91,8 @@ common:
     url: https://data.jambase.com/about
   - type: Website
     url: https://www.jambase.com
+  - url: https://www.jambase.com/feed
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

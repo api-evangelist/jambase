@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/openapi.json
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: API key as Bearer token. Get your key from your account dashboard.
+  sources:
+  - openapi/openapi.json
