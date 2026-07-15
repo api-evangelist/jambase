@@ -67,6 +67,8 @@ apis:
       - type: JSONLDContext
         url: json-ld/jambase-context.jsonld
 common:
+  - type: AgenticAccess
+    url: agentic-access/jambase-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/jambase-vulnerability-disclosure.yml
   - type: DomainSecurity
