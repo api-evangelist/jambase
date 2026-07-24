@@ -1,0 +1,1306 @@
+openapi: 3.1.0
+info:
+  description: REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.
+  version: 3.1.0
+  title: JamBase Concert Data Artists Geographies API
+  contact:
+    email: developer@jambase.com
+    name: Team JamBase
+    url: /contact
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.jambase.com/terms
+  summary: REST API for live music data from JamBase
+servers:
+- url: https://api.data.jambase.com/v3
+  description: JamBase Concert Data API
+security:
+- BearerAuth: []
+tags:
+- name: Geographies
+  description: Lookup Countries, Cities, Etc
+paths:
+  /geographies/cities:
+    get:
+      tags:
+      - Geographies
+      summary: Search Cities
+      operationId: searchCities
+      description: "Search for cities. Results will be returned in order of most to least upcoming events in the city, and then alphabetically city name in the case of a tie.       \n\n<!-- theme: info  -->\n> #### Requirement\n> Your request must include at least one of the geo parameters such as `geoCityName`, `geoCountryIso2`, `geoCountryIso3`, `geoIp`, `geoMetroId`, `geoStateIso`, or `geoLatitude` and `geoLongitude`.\n    \n"
+      parameters:
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/perPageParam'
+      - $ref: '#/components/parameters/geoCityNameParam'
+      - $ref: '#/components/parameters/geoCountryIso2Param'
+      - $ref: '#/components/parameters/geoCountryIso3Param'
+      - $ref: '#/components/parameters/geoIpParam'
+      - $ref: '#/components/parameters/geoLatitudeParam'
+      - $ref: '#/components/parameters/geoLongitudeParam'
+      - $ref: '#/components/parameters/geoMetroIdParam'
+      - $ref: '#/components/parameters/geoRadiusAmountParam'
+      - $ref: '#/components/parameters/geoRadiusUnitsParam'
+      - $ref: '#/components/parameters/geoStateIsoParam'
+      - schema:
+          type: boolean
+        in: query
+        name: cityHasUpcomingEvents
+        description: Only include Cities with / without upcoming events. Omit for both.
+      responses:
+        '200':
+          description: A list of Cities
+          content:
+            application/json:
+              schema:
+                title: searchCitiesResponseSchema
+                description: An array of `City` objects
+                type: object
+                properties:
+                  success:
+                    $ref: '#/components/schemas/Success'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  cities:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/City'
+                  request:
+                    $ref: '#/components/schemas/Request'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /geographies/metros:
+    get:
+      tags:
+      - Geographies
+      summary: Get Metros
+      operationId: getMetros
+      description: 'A Metro is a collection of Cities, such as the Los Angeles area which includes LA, Hollywood, Anaheim, and more that can be used to filter Events.\
+
+        \
+
+        Returns all Metros in Alphabetical order by identifier.
+
+        '
+      responses:
+        '200':
+          description: A list of Metros
+          content:
+            application/json:
+              schema:
+                description: An array of `Metro` objects with member `City` objects
+                type: object
+                properties:
+                  success:
+                    $ref: '#/components/schemas/Success'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                    x-stoplight:
+                      id: w8jf412psm43g
+                  metros:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AdministrativeArea'
+                  request:
+                    $ref: '#/components/schemas/Request'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+      parameters:
+      - in: query
+        name: metroHasUpcomingEvents
+        description: Only include Metros with / without upcoming events. Omit for both.
+        schema:
+          type: boolean
+      - in: query
+        name: cityHasUpcomingEvents
+        description: Only include Cities with / without upcoming events. Omit for both.
+        schema:
+          type: boolean
+      - in: query
+        name: expandMetroCities
+        description: Use `true` to include the `containsPlace` node with the cities for each metro.
+        schema:
+          type: boolean
+          default: false
+  /geographies/states:
+    get:
+      tags:
+      - Geographies
+      summary: Get States / Regions / Provinces
+      operationId: getStates
+      description: 'A States (or Region / Province) is a collection of Cities, such as California (USA) or Quebec (Canada) that can be used to filter Events.\
+
+        \
+
+        Returns all States/Regions in Alphabetical order by identifier.
+
+        \
+
+        Note: Available for United States, Canada, and Australia only.
+
+        '
+      responses:
+        '200':
+          description: A list of States
+          content:
+            application/json:
+              schema:
+                title: getStatesResponseSchema
+                description: An array of `States` objects
+                type: object
+                properties:
+                  success:
+                    $ref: '#/components/schemas/Success'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                    x-stoplight:
+                      id: pwzyvj1odd8es
+                  states:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/State'
+                  request:
+                    $ref: '#/components/schemas/Request'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+      parameters:
+      - schema:
+          type: boolean
+        in: query
+        name: stateHasUpcomingEvents
+        description: Only include States with / without upcoming events. Omit for both.
+      - $ref: '#/components/parameters/geoCountryIso2Param'
+      - $ref: '#/components/parameters/geoCountryIso3Param'
+  /geographies/countries:
+    get:
+      tags:
+      - Geographies
+      summary: Get Countries
+      operationId: getCountries
+      description: 'Returns all Countries in alphabetical order by ISO2.
+
+        '
+      responses:
+        '200':
+          description: A list of Countries
+          content:
+            application/json:
+              schema:
+                description: An array of `Country` objects
+                type: object
+                properties:
+                  success:
+                    $ref: '#/components/schemas/Success'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                    x-stoplight:
+                      id: nkhefgyd1zwbq
+                  countries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Country'
+                  request:
+                    $ref: '#/components/schemas/Request'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+      parameters:
+      - schema:
+          type: boolean
+        in: query
+        name: countryHasUpcomingEvents
+        description: Only include Countries with / without upcoming events. Omit for both.
+components:
+  schemas:
+    City:
+      title: City
+      description: A city or locality
+      type: object
+      properties:
+        '@type':
+          type: string
+          enum:
+          - City
+        identifier:
+          type: string
+          example: jambase:13412
+          description: The unique identifier for the City/Locality.
+        name:
+          type: string
+          example: New York
+          description: The name of the City/Locality
+        geo:
+          $ref: '#/components/schemas/GeoCoordinates'
+          description: The lat/lng for the centroid of the City/Locality.
+        address:
+          type: object
+          properties:
+            addressRegion:
+              $ref: '#/components/schemas/enumState'
+            addressCountry:
+              type: string
+              description: 'The two-letter ISO code for the Country.
+
+                '
+              example: US
+        x-timezone:
+          type: string
+          description: 'A "tz database" timezone [[docs](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)].
+
+            '
+          example: America/New_York
+        containedInPlace:
+          $ref: '#/components/schemas/AdministrativeArea'
+          description: When using the `/cities` endpoint, this will include the Metro Area if the city is part of one.
+        x-numUpcomingEvents:
+          type: number
+          format: int32
+          example: 12
+          description: The number of upcoming events in this City.
+    propLatitude:
+      title: propLatitude
+      type: number
+      format: float
+      minimum: -90
+      maximum: 90
+      example: 40.7505
+      description: The latitude of a location
+      x-stoplight:
+        id: 0gf3yu2lypo1r
+    GeoCoordinates:
+      title: GeoCoordinates
+      description: The latitude and longitude for a place
+      type: object
+      properties:
+        '@type':
+          type: string
+          enum:
+          - GeoCoordinates
+        latitude:
+          $ref: '#/components/schemas/propLatitude'
+        longitude:
+          $ref: '#/components/schemas/propLongitude'
+    Request:
+      title: Request
+      description: Enclosure for request details.
+      type: object
+      properties:
+        endpoint:
+          type: string
+          format: url
+          description: The base endpoint requested
+        method:
+          type: string
+          description: The request method (e.g. GET, POST)
+        params:
+          type: array
+          items: {}
+          format: string
+          description: The parameters for the request
+        ip:
+          oneOf:
+          - type: string
+            format: ipv4
+          - type: string
+            format: ipv6
+          description: The requesting IP address, IPv4 or IPv6
+        userAgent:
+          type: string
+          format: string
+          description: The requesting UserAgent
+    Pagination:
+      title: Pagination
+      description: Enclosure for pagination values.
+      type: object
+      properties:
+        page:
+          type: integer
+          description: The current page of results.
+          example: 1
+          minimum: 0
+        perPage:
+          type: integer
+          description: Number of events per page of results.
+          example: 10
+          minimum: 1
+        totalItems:
+          type: integer
+          description: Total results for the request.
+          example: 50
+          minimum: 0
+        totalPages:
+          type: integer
+          description: Total pages for the request.
+          example: 5
+          minimum: 0
+        nextPage:
+          type: string
+          format: url
+          description: The absolute URL for the next page of results, if available (e.g. `https://api.data.jambase.com/v3/events?page=2`).
+        previousPage:
+          type: string
+          format: url
+          description: The absolute URL for the previous page of results, if available (e.g. `https://api.data.jambase.com/v3/events?page=1`).
+    propLongitude:
+      title: propLongitude
+      type: number
+      format: float
+      minimum: -180
+      maximum: 180
+      example: -73.9934
+      description: The longitude of a location
+      x-stoplight:
+        id: udrk05v1mvsv9
+    enumRadiusUnits:
+      type: string
+      description: The units of measure for a geo search radius
+      enum:
+      - mi
+      - km
+      x-tags:
+      - Enums
+    State:
+      title: State
+      description: 'A State, Region, or Province.
+
+        \
+
+        Note 1: Available for United States, Canada, and Australia only.
+
+        \
+
+        Note 2: The `country` and `x-numUpcomingEvents` nodes are only provided in the Geography lookup endpoints, not as part of `addressRegion` within a Concert, Festival, or Stream.
+
+        '
+      type: object
+      x-stoplight:
+        id: rbp08k99t5o7m
+      properties:
+        '@type':
+          type: string
+          enum:
+          - State
+        identifier:
+          $ref: '#/components/schemas/enumState'
+        name:
+          type: string
+          example: Arizona
+          description: The name of the State
+        alternateName:
+          type: string
+          example: AZ
+          description: The indentifier without the Country code prefix
+        country:
+          $ref: '#/components/schemas/Country'
+          description: 'The country in which the state belongs.
+
+            \
+
+            Note: this is only provided in the Geography lookup endpoints, not as part of a location''s `addressCountry` within a Concert, Festival, or Stream.
+
+            '
+        x-numUpcomingEvents:
+          type: number
+          format: int32
+          example: 12
+          description: 'The number of upcoming events in this State.
+
+            \
+
+            Note: this is only provided in the Geography lookup endpoints, not as part of a location within a Concert, Festival, or Stream.
+
+            '
+    Country:
+      title: Country
+      description: A Country.
+      type: object
+      properties:
+        '@type':
+          type: string
+          enum:
+          - Country
+        identifier:
+          $ref: '#/components/schemas/enumCountryIso2'
+        name:
+          type: string
+          example: United States
+          description: The name of the Country Area
+        alternateName:
+          $ref: '#/components/schemas/enumCountryIso3'
+        x-numUpcomingEvents:
+          type: number
+          format: int32
+          example: 12
+          description: 'The number of upcoming events in this Country.
+
+            \
+
+            Note: this is only provided in the Geography lookup endpoints, not as part of a location within a Concert, Festival, or Stream.
+
+            '
+    enumCountryIso2:
+      type: string
+      format: iso-3166-alpha-2
+      example: US
+      description: 'The Country code in ISO 3166-1 alpha-2 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)].
+
+        '
+      enum:
+      - AD
+      - AE
+      - AF
+      - AG
+      - AI
+      - AL
+      - AM
+      - AO
+      - AR
+      - AS
+      - AT
+      - AU
+      - AW
+      - AZ
+      - BA
+      - BB
+      - BD
+      - BE
+      - BF
+      - BG
+      - BH
+      - BI
+      - BJ
+      - BL
+      - BM
+      - BN
+      - BO
+      - BR
+      - BS
+      - BT
+      - BW
+      - BY
+      - BZ
+      - CA
+      - CC
+      - CD
+      - CF
+      - CG
+      - CH
+      - CI
+      - CK
+      - CL
+      - CM
+      - CN
+      - CO
+      - CR
+      - CU
+      - CV
+      - CW
+      - CX
+      - CY
+      - CZ
+      - DE
+      - DJ
+      - DK
+      - DM
+      - DO
+      - DZ
+      - EC
+      - EE
+      - EG
+      - EH
+      - ER
+      - ES
+      - ET
+      - FI
+      - FJ
+      - FK
+      - FM
+      - FO
+      - FR
+      - GA
+      - GB
+      - GD
+      - GE
+      - GF
+      - GG
+      - GH
+      - GI
+      - GL
+      - GM
+      - GN
+      - GP
+      - GQ
+      - GR
+      - GS
+      - GT
+      - GU
+      - GW
+      - GY
+      - HK
+      - HN
+      - HR
+      - HT
+      - HU
+      - ID
+      - IE
+      - IL
+      - IM
+      - IN
+      - IO
+      - IQ
+      - IR
+      - IS
+      - IT
+      - JE
+      - JM
+      - JO
+      - JP
+      - KE
+      - KG
+      - KH
+      - KI
+      - KM
+      - KN
+      - KP
+      - KR
+      - KW
+      - KY
+      - KZ
+      - LA
+      - LB
+      - LC
+      - LI
+      - LK
+      - LR
+      - LS
+      - LT
+      - LU
+      - LV
+      - LY
+      - MA
+      - MC
+      - MD
+      - ME
+      - MF
+      - MG
+      - MH
+      - MK
+      - ML
+      - MM
+      - MN
+      - MO
+      - MP
+      - MQ
+      - MR
+      - MS
+      - MT
+      - MU
+      - MV
+      - MW
+      - MX
+      - MY
+      - MZ
+      - NA
+      - NC
+      - NE
+      - NF
+      - NG
+      - NI
+      - NL
+      - 'NO'
+      - NP
+      - NR
+      - NU
+      - NZ
+      - OM
+      - PA
+      - PE
+      - PF
+      - PG
+      - PH
+      - PK
+      - PL
+      - PM
+      - PN
+      - PR
+      - PT
+      - PW
+      - PY
+      - QA
+      - RE
+      - RO
+      - RS
+      - RU
+      - RW
+      - SA
+      - SB
+      - SC
+      - SD
+      - SE
+      - SG
+      - SH
+      - SI
+      - SK
+      - SL
+      - SM
+      - SN
+      - SO
+      - SR
+      - SS
+      - ST
+      - SV
+      - SX
+      - SY
+      - SZ
+      - TC
+      - TD
+      - TF
+      - TG
+      - TH
+      - TJ
+      - TK
+      - TL
+      - TM
+      - TN
+      - TO
+      - TR
+      - TT
+      - TV
+      - TW
+      - TZ
+      - UA
+      - UG
+      - US
+      - UY
+      - UZ
+      - VC
+      - VE
+      - VG
+      - VI
+      - VN
+      - VU
+      - WF
+      - WS
+      - XD
+      - XG
+      - XK
+      - XP
+      - XR
+      - XS
+      - XW
+      - YE
+      - YT
+      - ZA
+      - ZM
+      - ZW
+      x-stoplight:
+        id: 1ef0ob0u4hu6w
+      x-tags:
+      - Enums
+    ErrorsList:
+      description: A list of errors
+      x-stoplight:
+        id: 1253ab38a345c
+      type: array
+      items:
+        type: object
+        properties:
+          errorCode:
+            type: string
+            enum:
+            - no_lookup_results
+            - lookup_error
+            - parameter_missing
+            - parameter_invalid
+            - identifier_missing
+            - identifier_invalid
+            - parameter_out_of_range
+            - general_error
+          errorMessage:
+            type: string
+            example: The identifier `jambase:87121` is invalid.
+    enumCountryIso3:
+      type: string
+      format: iso-3166-alpha-3
+      example: USA
+      description: 'The Country code in ISO 3166-1 alpha-3 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)].
+
+        '
+      enum:
+      - ABW
+      - AFG
+      - AGO
+      - AIA
+      - ALB
+      - AND
+      - ARE
+      - ARG
+      - ARM
+      - ASM
+      - ATF
+      - ATG
+      - AUS
+      - AZE
+      - BDI
+      - BEL
+      - BEN
+      - BFA
+      - BGD
+      - BGR
+      - BHR
+      - BHS
+      - BIH
+      - BLM
+      - BLR
+      - BLZ
+      - BMU
+      - BOL
+      - BRA
+      - BRB
+      - BRN
+      - BTN
+      - BWA
+      - CAF
+      - CAN
+      - CCK
+      - CHE
+      - CHL
+      - CHN
+      - CIV
+      - CMR
+      - COD
+      - COG
+      - COK
+      - COL
+      - COM
+      - CPV
+      - CRI
+      - CUB
+      - CUW
+      - CXR
+      - CYM
+      - CYP
+      - CZE
+      - DEU
+      - DJI
+      - DMA
+      - DNK
+      - DOM
+      - DZA
+      - ECU
+      - EGY
+      - ERI
+      - ESH
+      - ESP
+      - EST
+      - ETH
+      - FIN
+      - FJI
+      - FLK
+      - FRA
+      - FRO
+      - FSM
+      - GAB
+      - GBR
+      - GEO
+      - GGY
+      - GHA
+      - GIB
+      - GIN
+      - GLP
+      - GMB
+      - GNB
+      - GNQ
+      - GRC
+      - GRD
+      - GRL
+      - GTM
+      - GUF
+      - GUM
+      - GUY
+      - HKG
+      - HND
+      - HRV
+      - HTI
+      - HUN
+      - IDN
+      - IMN
+      - IND
+      - IOT
+      - IRL
+      - IRN
+      - IRQ
+      - ISL
+      - ISR
+      - ITA
+      - JAM
+      - JEY
+      - JOR
+      - JPN
+      - KAZ
+      - KEN
+      - KGZ
+      - KHM
+      - KIR
+      - KNA
+      - KOR
+      - KWT
+      - LAO
+      - LBN
+      - LBR
+      - LBY
+      - LCA
+      - LIE
+      - LKA
+      - LSO
+      - LTU
+      - LUX
+      - LVA
+      - MAC
+      - MAF
+      - MAR
+      - MCO
+      - MDA
+      - MDG
+      - MDV
+      - MEX
+      - MHL
+      - MKD
+      - MLI
+      - MLT
+      - MMR
+      - MNE
+      - MNG
+      - MNP
+      - MOZ
+      - MRT
+      - MSR
+      - MTQ
+      - MUS
+      - MWI
+      - MYS
+      - MYT
+      - NAM
+      - NCL
+      - NER
+      - NFK
+      - NGA
+      - NIC
+      - NIU
+      - NLD
+      - NOR
+      - NPL
+      - NRU
+      - NZL
+      - OMN
+      - PAK
+      - PAN
+      - PCN
+      - PER
+      - PHL
+      - PLW
+      - PNG
+      - POL
+      - PRI
+      - PRK
+      - PRT
+      - PRY
+      - PYF
+      - QAT
+      - REU
+      - ROU
+      - RUS
+      - RWA
+      - SAU
+      - SDN
+      - SEN
+      - SGP
+      - SGS
+      - SHN
+      - SLB
+      - SLE
+      - SLV
+      - SMR
+      - SOM
+      - SPM
+      - SRB
+      - SSD
+      - STP
+      - SUR
+      - SVK
+      - SVN
+      - SWE
+      - SWZ
+      - SXM
+      - SYC
+      - SYR
+      - TCA
+      - TCD
+      - TGO
+      - THA
+      - TJK
+      - TKL
+      - TKM
+      - TLS
+      - TON
+      - TTO
+      - TUN
+      - TUR
+      - TUV
+      - TWN
+      - TZA
+      - UGA
+      - UKR
+      - URY
+      - USA
+      - UZB
+      - VCT
+      - VEN
+      - VGB
+      - VIR
+      - VNM
+      - VUT
+      - WLF
+      - WSM
+      - XGZ
+      - XKS
+      - XPR
+      - XQZ
+      - XSP
+      - XSV
+      - XWB
+      - XXD
+      - YEM
+      - ZAF
+      - ZMB
+      - ZWE
+      x-tags:
+      - Enums
+    enumState:
+      type: string
+      format: iso-3166-2
+      description: 'A State code in ISO 3166-2 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-2)].
+
+        '
+      example: US-AZ
+      enum:
+      - US-AL
+      - US-AK
+      - US-AZ
+      - US-AR
+      - US-CA
+      - US-CO
+      - US-CT
+      - US-DE
+      - US-FL
+      - US-GA
+      - US-HI
+      - US-ID
+      - US-IL
+      - US-IN
+      - US-IA
+      - US-KS
+      - US-KY
+      - US-LA
+      - US-ME
+      - US-MD
+      - US-MA
+      - US-MI
+      - US-MN
+      - US-MS
+      - US-MO
+      - US-MT
+      - US-NE
+      - US-NV
+      - US-NH
+      - US-NJ
+      - US-NM
+      - US-NY
+      - US-NC
+      - US-ND
+      - US-OH
+      - US-OK
+      - US-OR
+      - US-PA
+      - US-RI
+      - US-SC
+      - US-SD
+      - US-TN
+      - US-TX
+      - US-UT
+      - US-VT
+      - US-VA
+      - US-WA
+      - US-WV
+      - US-WI
+      - US-WY
+      - US-DC
+      - US-AS
+      - US-GU
+      - US-MP
+      - US-PR
+      - US-UM
+      - US-VI
+      - AU-ACT
+      - AU-NSW
+      - AU-NT
+      - AU-QLD
+      - AU-SA
+      - AU-TAS
+      - AU-VIC
+      - AU-WA
+      - CA-AB
+      - CA-BC
+      - CA-MB
+      - CA-NB
+      - CA-NL
+      - CA-NS
+      - CA-NT
+      - CA-NU
+      - CA-ON
+      - CA-PE
+      - CA-QC
+      - CA-SK
+      - CA-YT
+      x-tags:
+      - Enums
+    Success:
+      name: success
+      description: A successful response.
+      type: boolean
+      default: true
+    AdministrativeArea:
+      title: AdministrativeArea
+      description: A Metro Area comprised of multiple cities.
+      type: object
+      properties:
+        '@type':
+          type: string
+          enum:
+          - AdministrativeArea
+        identifier:
+          type: string
+          example: jambase:13412
+          description: The unique JamBase identifier for the Metro Area.
+        name:
+          type: string
+          example: New York Area
+          description: The name of the Metro Area
+        geo:
+          $ref: '#/components/schemas/GeoCoordinates'
+          description: The lat/lng for the centroid of the Metro Area
+        address:
+          type: object
+          properties:
+            addressRegion:
+              $ref: '#/components/schemas/enumState'
+              description: The primary State/Region for Metro Area.
+            addressCountry:
+              $ref: '#/components/schemas/enumCountryIso2'
+        containsPlace:
+          type: array
+          items:
+            $ref: '#/components/schemas/City'
+        x-primaryCityId:
+          type: number
+          format: int32
+          example: 12
+          description: The unique identifier for the primary City for Metro Area.
+        x-numUpcomingEvents:
+          type: number
+          format: int32
+          example: 12
+          description: The number of upcoming events across all Cities in this Metro.
+      x-stoplight:
+        id: xyb6dq20xkoa2
+  responses:
+    BadRequest:
+      description: Invalid input parameter
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                default: false
+              errors:
+                $ref: '#/components/schemas/ErrorsList'
+    UnauthorizedError:
+      description: API key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+  parameters:
+    geoCountryIso2Param:
+      in: query
+      name: geoCountryIso2
+      description: 'The two-letter ISO code for a country.
+
+        - geoCountryIso2=US
+
+
+        Use a pipe (|) to include multiple countries.
+
+        - geoCountryIso2=US|CA
+
+        '
+      schema:
+        $ref: '#/components/schemas/enumCountryIso2'
+    geoLongitudeParam:
+      in: query
+      name: geoLongitude
+      description: 'The longitude for geographic radius.
+
+        - geoLongitude=-73.9934
+
+        '
+      schema:
+        $ref: '#/components/schemas/propLongitude'
+    geoCountryIso3Param:
+      in: query
+      name: geoCountryIso3
+      description: 'The three-letter ISO code for a country.
+
+        - geoCountryIso3=USA
+
+
+        Use a pipe (|) to include multiple countries.
+
+        - geoCountryIso3=USA|CAN
+
+        '
+      schema:
+        $ref: '#/components/schemas/enumCountryIso3'
+    geoStateIsoParam:
+      in: query
+      name: geoStateIso
+      description: 'The State code in ISO_3166-2 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-2)].
+
+        - geoStateIso=US-NY
+
+
+        Use a pipe (|) to include multiple State codes.
+
+        - geoStateIso=US-NY|=US-PA
+
+
+        Note: Available for United States, Canada, and Australia only.
+
+        '
+      schema:
+        $ref: '#/components/schemas/enumState'
+    geoLatitudeParam:
+      in: query
+      name: geoLatitude
+      description: 'The latitude for geographic radius.
+
+        - geoLatitude=40.7505
+
+        '
+      schema:
+        $ref: '#/components/schemas/propLatitude'
+    geoMetroIdParam:
+      in: query
+      name: geoMetroId
+      description: 'Use to retrieve events for specific <a href="https://apidocs.jambase.com/docs/jambase-api/5b89026bb2462-get-metros">metro ID(s)</a>.
+
+        - geoMetroId=jambase:1
+
+
+        Use a pipe (|) to include multiple metro IDs.
+
+        - geoMetroId=jambase:1|jambase:5
+
+        '
+      example: jambase:1
+      schema:
+        type: string
+    perPageParam:
+      in: query
+      name: perPage
+      description: Number of events per page of results
+      required: false
+      schema:
+        type: integer
+        default: 40
+        minimum: 1
+        maximum: 100
+    geoCityNameParam:
+      in: query
+      name: geoCityName
+      description: 'Use to retrieve events for city name(s).
+
+        - geoCityName=Seattle
+
+
+        Use a pipe (|) to include multiple city names.
+
+        - geoCityName=Seattle|Tacoma
+
+
+        For more precise city-specific results try using `city[id]`
+
+        '
+      schema:
+        type: string
+    pageParam:
+      in: query
+      name: page
+      description: Page number of results to retrieve
+      required: false
+      schema:
+        type: integer
+        default: 1
+    geoRadiusAmountParam:
+      in: query
+      name: geoRadiusAmount
+      description: 'The search radius for lat/lng type searches.
+
+        - geoRadiusAmount=60
+
+        '
+      schema:
+        type: number
+        format: int32
+        minimum: 1
+        maximum: 5000
+        default: 60
+    geoRadiusUnitsParam:
+      in: query
+      name: geoRadiusUnits
+      description: 'Whether to use miles (default) or kilometers for radius.
+
+        - geoRadiusUnits=km
+
+        '
+      schema:
+        $ref: '#/components/schemas/enumRadiusUnits'
+    geoIpParam:
+      in: query
+      name: geoIp
+      description: 'Use to retrieve events near an IP address.\
+
+        Supports IPv4 or IPv6 values.
+
+        - geoIp=55.123.456.789
+
+        '
+      schema:
+        oneOf:
+        - type: string
+          format: ipv4
+        - type: string
+          format: ipv6
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key as Bearer token. Get your key from your account dashboard.

@@ -1,0 +1,204 @@
+openapi: 3.1.0
+info:
+  description: REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.
+  version: 3.1.0
+  title: JamBase Concert Data Artists Genres API
+  contact:
+    email: developer@jambase.com
+    name: Team JamBase
+    url: /contact
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.jambase.com/terms
+  summary: REST API for live music data from JamBase
+servers:
+- url: https://api.data.jambase.com/v3
+  description: JamBase Concert Data API
+security:
+- BearerAuth: []
+tags:
+- name: Genres
+  description: Lookup Genres
+paths:
+  /genres:
+    get:
+      tags:
+      - Genres
+      summary: Get Genres
+      operationId: getGenres
+      description: 'These can be used to filter Artists and Events.\
+
+        \
+
+        Returns all Genres in Alphabetical order.
+
+        '
+      responses:
+        '200':
+          description: A list of Genres
+          content:
+            application/json:
+              schema:
+                description: 'An array of Genres
+
+                  \
+
+                  Results are sorted alphabetically by name
+
+                  '
+                type: object
+                properties:
+                  success:
+                    $ref: '#/components/schemas/Success'
+                  genres:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Genre'
+                examples:
+                - success: true
+                  pagination:
+                    page: 1
+                    perPage: -1
+                    totalItems: 20
+                    totalPages: 1
+                  genres:
+                  - identifier: bluegrass
+                    name: Bluegrass
+                  - identifier: blues
+                    name: Blues
+                  - identifier: christian
+                    name: Christian
+                  - identifier: classical
+                    name: Classical
+                  - identifier: country-music
+                    name: Country Music
+                  - identifier: edm
+                    name: EDM
+                  - identifier: folk
+                    name: Folk
+                  - identifier: hip-hop-rap
+                    name: Hip Hop & Rap
+                  - identifier: indie
+                    name: Indie
+                  - identifier: jamband
+                    name: Jamband
+                  - identifier: jazz
+                    name: Jazz
+                  - identifier: kpop
+                    name: K-pop
+                  - identifier: latin
+                    name: Latin
+                  - identifier: metal
+                    name: Metal
+                  - identifier: pop
+                    name: Pop
+                  - identifier: punk
+                    name: Punk
+                  - identifier: reggae
+                    name: Reggae
+                  - identifier: rhythm-and-blues-soul
+                    name: Rhythm & Blues / Soul
+                  - identifier: rock
+                    name: Rock
+                  - identifier: tribute
+                    name: Tribute
+                  request:
+                    endpoint: https://api.data.jambase.com/v3/genres
+                    method: GET
+                    params: {}
+          x-internal: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+components:
+  schemas:
+    Genre:
+      title: Genre
+      description: A music genre
+      type: object
+      properties:
+        name:
+          type: string
+          description: The display name for the genre.
+        identifier:
+          $ref: '#/components/schemas/enumGenres'
+    Success:
+      name: success
+      description: A successful response.
+      type: boolean
+      default: true
+    ErrorsList:
+      description: A list of errors
+      x-stoplight:
+        id: 1253ab38a345c
+      type: array
+      items:
+        type: object
+        properties:
+          errorCode:
+            type: string
+            enum:
+            - no_lookup_results
+            - lookup_error
+            - parameter_missing
+            - parameter_invalid
+            - identifier_missing
+            - identifier_invalid
+            - parameter_out_of_range
+            - general_error
+          errorMessage:
+            type: string
+            example: The identifier `jambase:87121` is invalid.
+    enumGenres:
+      type: string
+      description: Music genres
+      summary: Multiple genres
+      enum:
+      - bluegrass
+      - blues
+      - christian
+      - classical
+      - country-music
+      - edm
+      - folk
+      - hip-hop-rap
+      - indie
+      - jamband
+      - jazz
+      - kpop
+      - latin
+      - metal
+      - pop
+      - punk
+      - reggae
+      - rhythm-and-blues-soul
+      - rock
+      - tribute
+      x-tags:
+      - Enums
+  responses:
+    BadRequest:
+      description: Invalid input parameter
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                default: false
+              errors:
+                $ref: '#/components/schemas/ErrorsList'
+    UnauthorizedError:
+      description: API key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key as Bearer token. Get your key from your account dashboard.
