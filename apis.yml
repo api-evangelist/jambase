@@ -7,6 +7,19 @@ description: >-
   delivers real-time global show listings, festival schedules, artist metadata, venue details,
   and ticket pricing data. JamBase Data is trusted by Google, Spotify, and 450+ companies for
   jam band and concert discovery, setlist information, tour dates, and live music event data.
+accessModel:
+  pricing: freemium
+  onboarding: open
+  trial: true
+  try_now: true
+  public: true
+  label: Freemium (free trial) · Open access
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://www.jambase.com/favicon.ico
 tags:
   - Artists
@@ -23,49 +36,202 @@ created: '2026-06-13'
 modified: '2026-06-13'
 specificationVersion: '0.19'
 apis:
-  - aid: jambase:jambase-data-api
-    name: JamBase Data API
-    description: >-
-      The JamBase Data API provides REST access to the world's most comprehensive live music
-      database with 25+ years of concert history. The v3 API covers events, artists, venues,
-      festivals, and setlists with normalized data. Features include real-time event status
-      updates (rescheduled, cancelled, postponed), third-party ID matching across 12 platforms
-      including Spotify, MusicBrainz, Ticketmaster, and SeatGeek, plus historical event data
-      dating back to 1999. Authentication uses Bearer token (API key) in the Authorization header.
-    image: https://www.jambase.com/favicon.ico
-    humanURL: https://data.jambase.com/api/reference
-    baseURL: https://data.jambase.com/v3
-    tags:
-      - Artists
-      - Concerts
-      - Events
-      - Festivals
-      - Live Music
-      - Setlists
-      - Tickets
-      - Tours
-      - Venues
-    properties:
-      - type: Documentation
-        url: https://data.jambase.com/api/reference
-      - type: GettingStarted
-        url: https://data.jambase.com/api/docs/getting-started
-      - type: Portal
-        url: https://data.jambase.com
-      - type: Pricing
-        url: https://data.jambase.com/pricing
-      - type: Plans
-        url: plans/jambase-plans-pricing.yml
-      - type: RateLimits
-        url: rate-limits/jambase-rate-limits.yml
-      - type: FinOps
-        url: finops/jambase-finops.yml
-      - type: OpenAPI
-        url: openapi/openapi.json
-      - type: JSONSchema
-        url: json-schema/jambase-schemas.json
-      - type: JSONLDContext
-        url: json-ld/jambase-context.jsonld
+- aid: jambase:jambase-artists-api
+  name: JamBase Artists API
+  description: Search Artists
+  humanURL: https://data.jambase.com/api/reference
+  baseURL: https://data.jambase.com/v3
+  tags:
+  - Artists
+  properties:
+  - type: OpenAPI
+    url: openapi/jambase-artists-api-openapi.yml
+  - type: Documentation
+    url: https://data.jambase.com/api/reference
+  - type: GettingStarted
+    url: https://data.jambase.com/api/docs/getting-started
+  - type: Portal
+    url: https://data.jambase.com
+  - type: Pricing
+    url: https://data.jambase.com/pricing
+  - type: Plans
+    url: plans/jambase-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/jambase-rate-limits.yml
+  - type: FinOps
+    url: finops/jambase-finops.yml
+  - type: JSONSchema
+    url: json-schema/jambase-schemas.json
+  - type: JSONLDContext
+    url: json-ld/jambase-context.jsonld
+- aid: jambase:jambase-events-api
+  name: JamBase Events API
+  description: Search Events
+  humanURL: https://data.jambase.com/api/reference
+  baseURL: https://data.jambase.com/v3
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/jambase-events-api-openapi.yml
+  - type: Documentation
+    url: https://data.jambase.com/api/reference
+  - type: GettingStarted
+    url: https://data.jambase.com/api/docs/getting-started
+  - type: Portal
+    url: https://data.jambase.com
+  - type: Pricing
+    url: https://data.jambase.com/pricing
+  - type: Plans
+    url: plans/jambase-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/jambase-rate-limits.yml
+  - type: FinOps
+    url: finops/jambase-finops.yml
+  - type: JSONSchema
+    url: json-schema/jambase-schemas.json
+  - type: JSONLDContext
+    url: json-ld/jambase-context.jsonld
+- aid: jambase:jambase-genres-api
+  name: JamBase Genres API
+  description: Lookup Genres
+  humanURL: https://data.jambase.com/api/reference
+  baseURL: https://data.jambase.com/v3
+  tags:
+  - Genres
+  properties:
+  - type: OpenAPI
+    url: openapi/jambase-genres-api-openapi.yml
+  - type: Documentation
+    url: https://data.jambase.com/api/reference
+  - type: GettingStarted
+    url: https://data.jambase.com/api/docs/getting-started
+  - type: Portal
+    url: https://data.jambase.com
+  - type: Pricing
+    url: https://data.jambase.com/pricing
+  - type: Plans
+    url: plans/jambase-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/jambase-rate-limits.yml
+  - type: FinOps
+    url: finops/jambase-finops.yml
+  - type: JSONSchema
+    url: json-schema/jambase-schemas.json
+  - type: JSONLDContext
+    url: json-ld/jambase-context.jsonld
+- aid: jambase:jambase-geographies-api
+  name: JamBase Geographies API
+  description: Lookup Countries, Cities, Etc
+  humanURL: https://data.jambase.com/api/reference
+  baseURL: https://data.jambase.com/v3
+  tags:
+  - Geographies
+  properties:
+  - type: OpenAPI
+    url: openapi/jambase-geographies-api-openapi.yml
+  - type: Documentation
+    url: https://data.jambase.com/api/reference
+  - type: GettingStarted
+    url: https://data.jambase.com/api/docs/getting-started
+  - type: Portal
+    url: https://data.jambase.com
+  - type: Pricing
+    url: https://data.jambase.com/pricing
+  - type: Plans
+    url: plans/jambase-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/jambase-rate-limits.yml
+  - type: FinOps
+    url: finops/jambase-finops.yml
+  - type: JSONSchema
+    url: json-schema/jambase-schemas.json
+  - type: JSONLDContext
+    url: json-ld/jambase-context.jsonld
+- aid: jambase:jambase-lookups-api
+  name: JamBase Lookups API
+  description: Lookup Identifiers
+  humanURL: https://data.jambase.com/api/reference
+  baseURL: https://data.jambase.com/v3
+  tags:
+  - Lookups
+  properties:
+  - type: OpenAPI
+    url: openapi/jambase-lookups-api-openapi.yml
+  - type: Documentation
+    url: https://data.jambase.com/api/reference
+  - type: GettingStarted
+    url: https://data.jambase.com/api/docs/getting-started
+  - type: Portal
+    url: https://data.jambase.com
+  - type: Pricing
+    url: https://data.jambase.com/pricing
+  - type: Plans
+    url: plans/jambase-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/jambase-rate-limits.yml
+  - type: FinOps
+    url: finops/jambase-finops.yml
+  - type: JSONSchema
+    url: json-schema/jambase-schemas.json
+  - type: JSONLDContext
+    url: json-ld/jambase-context.jsonld
+- aid: jambase:jambase-streams-api
+  name: JamBase Streams API
+  description: Search Streams
+  humanURL: https://data.jambase.com/api/reference
+  baseURL: https://data.jambase.com/v3
+  tags:
+  - Streams
+  properties:
+  - type: OpenAPI
+    url: openapi/jambase-streams-api-openapi.yml
+  - type: Documentation
+    url: https://data.jambase.com/api/reference
+  - type: GettingStarted
+    url: https://data.jambase.com/api/docs/getting-started
+  - type: Portal
+    url: https://data.jambase.com
+  - type: Pricing
+    url: https://data.jambase.com/pricing
+  - type: Plans
+    url: plans/jambase-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/jambase-rate-limits.yml
+  - type: FinOps
+    url: finops/jambase-finops.yml
+  - type: JSONSchema
+    url: json-schema/jambase-schemas.json
+  - type: JSONLDContext
+    url: json-ld/jambase-context.jsonld
+- aid: jambase:jambase-venues-api
+  name: JamBase Venues API
+  description: Search Venues
+  humanURL: https://data.jambase.com/api/reference
+  baseURL: https://data.jambase.com/v3
+  tags:
+  - Venues
+  properties:
+  - type: OpenAPI
+    url: openapi/jambase-venues-api-openapi.yml
+  - type: Documentation
+    url: https://data.jambase.com/api/reference
+  - type: GettingStarted
+    url: https://data.jambase.com/api/docs/getting-started
+  - type: Portal
+    url: https://data.jambase.com
+  - type: Pricing
+    url: https://data.jambase.com/pricing
+  - type: Plans
+    url: plans/jambase-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/jambase-rate-limits.yml
+  - type: FinOps
+    url: finops/jambase-finops.yml
+  - type: JSONSchema
+    url: json-schema/jambase-schemas.json
+  - type: JSONLDContext
+    url: json-ld/jambase-context.jsonld
 common:
   - type: AgenticAccess
     url: agentic-access/jambase-agentic-access.yml
