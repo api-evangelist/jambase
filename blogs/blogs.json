@@ -3,9 +3,12 @@
   "feeds": [
     {
       "source": "https://www.jambase.com/feed",
-      "error": "HTTPError"
+      "feed_url": "https://www.jambase.com/feed",
+      "title": "",
+      "saved": 20,
+      "method": "feed"
     }
   ],
-  "fetched": "2026-07-11T11:50:51Z",
-  "post_count": 40
+  "fetched": "2026-08-01T15:49:00Z",
+  "post_count": 100
 }

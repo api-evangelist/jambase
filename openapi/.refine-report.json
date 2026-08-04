@@ -1,0 +1,26 @@
+{
+  "provider": "jambase",
+  "sources": [
+    "jambase-artists-api-openapi.yml",
+    "jambase-events-api-openapi.yml",
+    "jambase-genres-api-openapi.yml",
+    "jambase-geographies-api-openapi.yml",
+    "jambase-lookups-api-openapi.yml",
+    "jambase-streams-api-openapi.yml",
+    "jambase-venues-api-openapi.yml"
+  ],
+  "outputs": [
+    "jambase-artists-api-openapi.yml",
+    "jambase-events-api-openapi.yml",
+    "jambase-genres-api-openapi.yml",
+    "jambase-geographies-api-openapi.yml",
+    "jambase-lookups-api-openapi.yml",
+    "jambase-streams-api-openapi.yml",
+    "jambase-venues-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
