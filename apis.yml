@@ -253,7 +253,7 @@ common:
     url: https://data.jambase.com/solutions
   - type: Data
     url: https://data.jambase.com/data
-  - type: MCP
+  - type: MCPServer
     url: https://data.jambase.com/mcp
   - type: About
     url: https://data.jambase.com/about
