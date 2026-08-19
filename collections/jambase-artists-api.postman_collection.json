@@ -1,0 +1,679 @@
+{
+  "item": [
+    {
+      "id": "b3887fe0-9d12-4e7a-a77b-8a895586eb34",
+      "name": "Artists",
+      "description": {
+        "content": "Search Artists",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2c4ce17f-1aae-4b5c-aff4-ed94e9a02f47",
+          "name": "Search Artists",
+          "request": {
+            "name": "Search Artists",
+            "description": {
+              "content": "Search artists by name and genre. \n<!-- theme: info -->\n> #### Requirement\n> Your request must include at least one of the `artistName` or `genreSlug` parameters.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "artists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number of results to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "40",
+                  "description": "Number of events per page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "artistName",
+                  "value": "<string>",
+                  "description": "A keyword-based search for artist name(s).\n- artistName=Billie%20Eilish\n\nUse a pipe (|) to include multiple artist names.\n- artistName=Billie%20Eilish|Lucy%20Dacus\n\nKeywords should be URL Encoded.\\\nFor more precise artist-specific results try using `artistId` or `artist[slug]`.\n\nPlease note that `artistName` cannot be used togehter with `artistId` type searches and will be ignored if `artistId` is provided.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "genreSlug",
+                  "value": "<string>",
+                  "description": "Restrict results to a genre.\n- genreSlug=bluegrass\n\nUse a pipe (|) to include results from multiple genres.\n- genreSlug=bluegrass|blues\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "artistHasUpcomingEvents",
+                  "value": "<boolean>",
+                  "description": "Set to true to only return artists that have at least one upcoming Concert or Festival"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateModifiedFrom",
+                  "value": "<rfc3339>",
+                  "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "datePublishedFrom",
+                  "value": "<rfc3339>",
+                  "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandExternalIdentifiers",
+                  "value": "false",
+                  "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandArtistSameAs",
+                  "value": "false",
+                  "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d8b4171-31e6-4256-861d-9e4ee2e5f401",
+              "name": "A list of Artists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "artists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "40"
+                    },
+                    {
+                      "key": "artistName",
+                      "value": "Billie Eilish"
+                    },
+                    {
+                      "key": "genreSlug",
+                      "value": "kpop"
+                    },
+                    {
+                      "key": "artistHasUpcomingEvents",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "dateModifiedFrom",
+                      "value": "2022-10-31 00:00:00"
+                    },
+                    {
+                      "key": "datePublishedFrom",
+                      "value": "2022-01-01 00:00:00"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"pagination\": {\n    \"page\": 1,\n    \"perPage\": 10,\n    \"totalItems\": 50,\n    \"totalPages\": 5,\n    \"nextPage\": \"string\",\n    \"previousPage\": \"string\"\n  },\n  \"artists\": [\n    {\n      \"name\": \"string\",\n      \"identifier\": \"jambase:194164\",\n      \"url\": \"https://piGPMRQ.chbTZSrT3-XtMhlEioZEHGibX6vc9DIzqZGH\",\n      \"image\": \"https://lWkHrAr.qoQ77yodYe14\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"http://TizlLszksPlWhmYNCldVMgjjO.ypLNP7cumjnKz0qYkjX,2TE-UJbH7sqtZdRAgiEv\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"http://GFUtZGOiPgeQUioRpG.ujoZzKiFo.oy+iMXuLS0wBoWpVAS-kVQKcUchTQ\"\n        }\n      ],\n      \"datePublished\": \"2022-12-14T15:35:48Z\",\n      \"dateModified\": \"2022-12-14T03:41:20Z\",\n      \"@type\": \"MusicGroup\",\n      \"deletionStatus\": \"deleted\",\n      \"deletedAt\": \"2026-04-12T18:01:00Z\",\n      \"mergedInto\": \"jambase:5632389\",\n      \"member\": [\n        {\n          \"type\": \"MusicGroup\",\n          \"name\": \"string\",\n          \"identifier\": \"jambase:12345\",\n          \"image\": \"https://ZoUUUggweOlIpgvPrBnt.xmWHC-fchpE9w1gKRFbRlBlVJFG+wYbcFrPRN1VOhp\",\n          \"url\": \"https://uwBLu.eidad\"\n        },\n        {\n          \"type\": \"MusicGroup\",\n          \"name\": \"string\",\n          \"identifier\": \"jambase:12345\",\n          \"image\": \"https://AFpGcJsIXIUJkkhhoDjMLhekNDMXRkv.aonstKblU+PjOVoM6YD7Chq7LVTx\",\n          \"url\": \"http://CvvulcrxRLppsRcyysXAqWR.irLsLn1YGQYDLHesSvLcT1qjQBx9tbs2nzjIXwrYB01cD9c8uoCozVpjXwcIDWGeugfbN6u2.XLiz3gST9ANTksXjZ5D\"\n        }\n      ],\n      \"memberOf\": [\n        {\n          \"@type\": \"MusicGroup\",\n          \"name\": \"string\",\n          \"identifier\": \"jambase:98765\",\n          \"image\": \"http://kThSTJGxermxmc.nefvwB2hxb4JotVGCWDWL4JbetkHfBMgQ.ePfFmdDUV+hLahAMlu6p\",\n          \"url\": \"http://cSWbYcofzcanhcYom.wjPL7QPw6NMly0vmNMBTa1xLg+1goZkMplPlDmxx79KUQ1ShKWkiJOfD\"\n        },\n        {\n          \"@type\": \"MusicGroup\",\n          \"name\": \"string\",\n          \"identifier\": \"jambase:98765\",\n          \"image\": \"https://GZz.efQFQ8-8UD+uj4H60s,S\",\n          \"url\": \"http://JwWVMWTWU.zcxv82-XBfMvQk7AL3DbCCKQyukR01j3FrBB6QMUThcFfJnguNELVcpKOdsR.WNO6oOhO968Twa\"\n        }\n      ],\n      \"foundingLocation\": {\n        \"@type\": \"Place\",\n        \"name\": \"Chicago, IL\"\n      },\n      \"foundingDate\": \"1983\",\n      \"genre\": [\n        \"bluegrass\",\n        \"tribute\"\n      ],\n      \"events\": [\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"x-bandOrMusician\": \"musician\",\n      \"x-numUpcomingEvents\": 12\n    },\n    {\n      \"name\": \"string\",\n      \"identifier\": \"jambase:194164\",\n      \"url\": \"https://tqxcTRCVvottySpKKAXGHMIzXE.mtoby4oxj-GVGC.TP7TbOvh4RrKj\",\n      \"image\": \"http://j.bfcEpO0IDOY6\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://PxjircfjsYsYwsEKurn.xkq6ndVwkZCl8UJkeT.idKdSz7ExNQ6FbyXGpSu\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://mdBrWbCiEHBtrsZwfGndQSZqbR.pvqtqzKUpo1,-AHJkxkc8RVv.z31RUxVOdGNGT\"\n        }\n      ],\n      \"datePublished\": \"2022-12-14T15:35:48Z\",\n      \"dateModified\": \"2022-12-14T03:41:20Z\",\n      \"@type\": \"MusicGroup\",\n      \"deletionStatus\": \"deleted\",\n      \"deletedAt\": \"2026-04-12T18:01:00Z\",\n      \"mergedInto\": \"jambase:5632389\",\n      \"member\": [\n        {\n          \"type\": \"MusicGroup\",\n          \"name\": \"string\",\n          \"identifier\": \"jambase:12345\",\n          \"image\": \"https://JfzE.rncSzoSTe4D8G0gmUkLgmRE+LfsrtAVzWOFSvq3wsodP1N7FOUJKzooHM1ezhhW8sLwzqOZ\",\n          \"url\": \"http://plc.iePnfOPEVNOwsITCKWYeD\"\n        },\n        {\n          \"type\": \"MusicGroup\",\n          \"name\": \"string\",\n          \"identifier\": \"jambase:12345\",\n          \"image\": \"http://YoKLwUmHTsZzp.jmhmZEcVepdkf8Jvm14fR4wt6,wcSUgo6fqeN4\",\n          \"url\": \"https://BsWSTph.hfewGJu9J9buuMY.B11RjEAhbZ0tKEQuBZN7Xn0xGUwR.pyr-WVIiVOE+lfXfrpB4F\"\n        }\n      ],\n      \"memberOf\": [\n        {\n          \"@type\": \"MusicGroup\",\n          \"name\": \"string\",\n          \"identifier\": \"jambase:98765\",\n          \"image\": \"https://jYAR.hahawEied0+cItXkx-,TDo4\",\n          \"url\": \"http://gPLYHEagSpuWwLPpts.yopyzzmwBBTwlVAOzTHJ7,jfvvmPS.xB\"\n        },\n        {\n          \"@type\": \"MusicGroup\",\n          \"name\": \"string\",\n          \"identifier\": \"jambase:98765\",\n          \"image\": \"https://wuvDMfaeuqqVKjxKpBLVOjhbPf.pmruGWIpl-YWA7uPrh7uqSCGow25.EOzWooQNxu7,LwD6E-CwrqmKKBs6g,EW\",\n          \"url\": \"http://unYhnhKPBeuakoGLdpcbl.dhkcPBKro2jrDkSDwon9oPj8KWJvxbF,Ubw\"\n        }\n      ],\n      \"foundingLocation\": {\n        \"@type\": \"Place\",\n        \"name\": \"Chicago, IL\"\n      },\n      \"foundingDate\": \"1983\",\n      \"genre\": [\n        \"country-music\",\n        \"indie\"\n      ],\n      \"events\": [\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"x-bandOrMusician\": \"band\",\n      \"x-numUpcomingEvents\": 12\n    }\n  ],\n  \"request\": {\n    \"endpoint\": \"string\",\n    \"method\": \"string\",\n    \"ip\": \"195.19.238.55\",\n    \"userAgent\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4d3e4b3-cb25-4889-9b84-1ee1a9625038",
+              "name": "Invalid input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "artists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "40"
+                    },
+                    {
+                      "key": "artistName",
+                      "value": "Billie Eilish"
+                    },
+                    {
+                      "key": "genreSlug",
+                      "value": "kpop"
+                    },
+                    {
+                      "key": "artistHasUpcomingEvents",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "dateModifiedFrom",
+                      "value": "2022-10-31 00:00:00"
+                    },
+                    {
+                      "key": "datePublishedFrom",
+                      "value": "2022-01-01 00:00:00"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"no_lookup_results\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"identifier_missing\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cb73ddb-8d9e-4318-8fb8-3f3bba20ea77",
+              "name": "API key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "artists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "40"
+                    },
+                    {
+                      "key": "artistName",
+                      "value": "Billie Eilish"
+                    },
+                    {
+                      "key": "genreSlug",
+                      "value": "kpop"
+                    },
+                    {
+                      "key": "artistHasUpcomingEvents",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "dateModifiedFrom",
+                      "value": "2022-10-31 00:00:00"
+                    },
+                    {
+                      "key": "datePublishedFrom",
+                      "value": "2022-01-01 00:00:00"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW_Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "838cbf0d-1105-4e53-b0f2-60f87e7ecbd0",
+          "name": "Get / reverse-lookup an Artist by JamBase or third-party ID",
+          "request": {
+            "name": "Get / reverse-lookup an Artist by JamBase or third-party ID",
+            "description": {
+              "content": "Retrieve a specific artist by JamBase or third-party ID.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "artists",
+                "id",
+                "{{artistDataSource}}:{{artistId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expandUpcomingEvents",
+                  "value": "false",
+                  "description": "Use `true` to include the `event` node with any upcoming events for the artist."
+                },
+                {
+                  "disabled": false,
+                  "key": "expandUpcomingStreams",
+                  "value": "false",
+                  "description": "Use `true` to include the `event` node with any upcoming Streams for the venue."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludeEventPerformers",
+                  "value": "false",
+                  "description": "Use `true` to suppress the `performer` node in `Concert` and `Festival` objects.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandExternalIdentifiers",
+                  "value": "false",
+                  "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandArtistSameAs",
+                  "value": "false",
+                  "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandPastEvents",
+                  "value": "false",
+                  "description": "Use `true` to include past/historical `Concert` and `Festival` objects.\n\\\nWhen searching events, must be combined with `artistId` or `venueId` parameter.\n\\\nNote: The `expandPastEvents` parameter requires that your apikey has the `expandPastEvents` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d66ada0-3050-41b3-af1a-83b750623382",
+              "name": "A single Artist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "artists",
+                    "id",
+                    "{{artistDataSource}}:{{artistId}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expandUpcomingEvents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandUpcomingStreams",
+                      "value": "false"
+                    },
+                    {
+                      "key": "excludeEventPerformers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandPastEvents",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"artist\": {\n    \"name\": \"string\",\n    \"identifier\": \"jambase:194164\",\n    \"url\": \"http://TfcEPHOwUVgUeTlapH.cic+N2toN1y-QbNot9kfZ2HFENYPzhEN4W4u8.UL1uIySzaZmPOtZFSbBdkMM0l3KQoSK1jTzjh\",\n    \"image\": \"https://YFcmkr.rokhoh8aEo6-8GJNZxwR.D98PYj+EPkSYy\",\n    \"sameAs\": [\n      {\n        \"@type\": \"URL\",\n        \"identifier\": \"facebook\",\n        \"url\": \"https://qmkefuXnkZUHjcFuQm.cskpSlgLXvomtw8QoTt,LUtu3PmBgwFSy6A7WF\"\n      },\n      {\n        \"@type\": \"URL\",\n        \"identifier\": \"iosApp\",\n        \"url\": \"https://OsckHleOsyZdFBWBpZBIWhKTscfGKjSw.uljNlo8zLGB2ugIRic1QHM9EkUglII9WcAb1QppgY-B\"\n      }\n    ],\n    \"datePublished\": \"2022-12-14T15:35:48Z\",\n    \"dateModified\": \"2022-12-14T03:41:20Z\",\n    \"@type\": \"MusicGroup\",\n    \"deletionStatus\": \"deleted\",\n    \"deletedAt\": \"2026-04-12T18:01:00Z\",\n    \"mergedInto\": \"jambase:5632389\",\n    \"member\": [\n      {\n        \"type\": \"MusicGroup\",\n        \"name\": \"string\",\n        \"identifier\": \"jambase:12345\",\n        \"image\": \"http://IcIHLNkhsaPqLcLxHmaCgVueTnjxMZluN.hnj7OSu,udYjpcSL9K\",\n        \"url\": \"https://rsxFHhVgGgSVyBdfydnlbFGMagAc.nlvf9-xdO+ymMvGbVSm9RLoOGXw7dlHC6mYnBFEvYyCSa8abHCNwuqgxloHP\"\n      },\n      {\n        \"type\": \"MusicGroup\",\n        \"name\": \"string\",\n        \"identifier\": \"jambase:12345\",\n        \"image\": \"http://xvOcqAkVzy.uybhmjxBDVetogiXgQWB.fYSBZpfteHtOrW5NzcPxV\",\n        \"url\": \"https://MckZjpniffNAFKvfMaqiPJdF.zvxapklJZ5V4Zx5IHTpbwC3DqZUuUj.\"\n      }\n    ],\n    \"memberOf\": [\n      {\n        \"@type\": \"MusicGroup\",\n        \"name\": \"string\",\n        \"identifier\": \"jambase:98765\",\n        \"image\": \"https://czoJZxjssFMMyXRdulL.ybxQ9r0ZTQI7U8H9H+E1Mc\",\n        \"url\": \"http://AZZnFzFu.adc.VNJQjLb.yQPqtNzkS\"\n      },\n      {\n        \"@type\": \"MusicGroup\",\n        \"name\": \"string\",\n        \"identifier\": \"jambase:98765\",\n        \"image\": \"http://cHJUemgLGpdvTHJdlRqQIU.lkzuPigqjjP+UcTLDMiAftFvbn0DSPsLY\",\n        \"url\": \"https://qlAOaDqfmcjJWhkbqD.imr1UTJoqK6hKzgD+,YNGjHZIVw+D-DjyhOFq79Uy83Arw9RCmQWVI0QwJ,xzsL\"\n      }\n    ],\n    \"foundingLocation\": {\n      \"@type\": \"Place\",\n      \"name\": \"Chicago, IL\"\n    },\n    \"foundingDate\": \"1983\",\n    \"genre\": [\n      \"christian\",\n      \"metal\"\n    ],\n    \"events\": [\n      {\n        \"@type\": \"Concert\",\n        \"deletionStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mergedInto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-externalIdentifiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"x-customTitle\": \"string\",\n        \"x-subtitle\": \"string\",\n        \"x-headlinerInSupport\": false,\n        \"x-streamIds\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"Concert\",\n        \"deletionStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mergedInto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-externalIdentifiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"x-customTitle\": \"string\",\n        \"x-subtitle\": \"string\",\n        \"x-headlinerInSupport\": false,\n        \"x-streamIds\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ],\n    \"x-bandOrMusician\": \"band\",\n    \"x-numUpcomingEvents\": 12\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b03f63b4-0bd9-4654-8cd4-d8a1e0180e83",
+              "name": "Invalid input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "artists",
+                    "id",
+                    "{{artistDataSource}}:{{artistId}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expandUpcomingEvents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandUpcomingStreams",
+                      "value": "false"
+                    },
+                    {
+                      "key": "excludeEventPerformers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandPastEvents",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"no_lookup_results\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"identifier_missing\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "244b5be8-09c3-4f1f-8560-e36dd57b9ae9",
+              "name": "API key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "artists",
+                    "id",
+                    "{{artistDataSource}}:{{artistId}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expandUpcomingEvents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandUpcomingStreams",
+                      "value": "false"
+                    },
+                    {
+                      "key": "excludeEventPerformers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandPastEvents",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW_Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.data.jambase.com/v3",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) the ArtistDataSource of the ID for the artist",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "jambase",
+      "key": "artistDataSource"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) the unique ID for the artist",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "artistId"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "541c542a-e271-4083-937e-baf467bb4342",
+    "name": "JamBase Concert Data Artists API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.\n\nContact Support:\n Name: Team JamBase\n Email: developer@jambase.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JamBase Concert Data Artists API",
+    "version": "3.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Artists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Artists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.data.jambase.com/v3/artists",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number of results to retrieve"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of events per page of results"
+              },
+              {
+                "name": "artistName",
+                "value": "Billie Eilish",
+                "type": "query",
+                "description": "A keyword-based search for artist name(s).\n- artistName=Billie%20Eilish\n\nUse a pipe (|) to include multiple artist names.\n- artistName=Billie%20Eilish|Lucy%20Dacus\n\nKeywords should be URL Encoded.\\\nFor more precise artist-specific results try using `artistId` or `artist[slug]`.\n\nPlease note that `artistName` cannot be used togehter with `artistId` type searches and will be ignored if `artistId` is provided.\n"
+              },
+              {
+                "name": "genreSlug",
+                "value": "",
+                "type": "query",
+                "description": "Restrict results to a genre.\n- genreSlug=bluegrass\n\nUse a pipe (|) to include results from multiple genres.\n- genreSlug=bluegrass|blues\n"
+              },
+              {
+                "name": "artistHasUpcomingEvents",
+                "value": "",
+                "type": "query",
+                "description": "Set to true to only return artists that have at least one upcoming Concert or Festival"
+              },
+              {
+                "name": "dateModifiedFrom",
+                "value": "2022-10-31 00:00:00",
+                "type": "query",
+                "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+              },
+              {
+                "name": "datePublishedFrom",
+                "value": "2022-01-01 00:00:00",
+                "type": "query",
+                "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+              },
+              {
+                "name": "expandExternalIdentifiers",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+              },
+              {
+                "name": "expandArtistSameAs",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
+              }
+            ]
+          },
+          "docs": "Search artists by name and genre. \n<!-- theme: info -->\n> #### Requirement\n> Your request must include at least one of the `artistName` or `genreSlug` parameters.\n"
+        },
+        {
+          "info": {
+            "name": "Get / reverse-lookup an Artist by JamBase or third-party ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.data.jambase.com/v3/artists/id/:artistDataSource::artistId",
+            "params": [
+              {
+                "name": "artistDataSource",
+                "value": "",
+                "type": "path",
+                "description": "the ArtistDataSource of the ID for the artist"
+              },
+              {
+                "name": "artistId",
+                "value": "",
+                "type": "path",
+                "description": "the unique ID for the artist"
+              },
+              {
+                "name": "expandUpcomingEvents",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include the `event` node with any upcoming events for the artist."
+              },
+              {
+                "name": "expandUpcomingStreams",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include the `event` node with any upcoming Streams for the venue."
+              },
+              {
+                "name": "excludeEventPerformers",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to suppress the `performer` node in `Concert` and `Festival` objects.\n"
+              },
+              {
+                "name": "expandExternalIdentifiers",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+              },
+              {
+                "name": "expandArtistSameAs",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
+              },
+              {
+                "name": "expandPastEvents",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include past/historical `Concert` and `Festival` objects.\n\\\nWhen searching events, must be combined with `artistId` or `venueId` parameter.\n\\\nNote: The `expandPastEvents` parameter requires that your apikey has the `expandPastEvents` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific artist by JamBase or third-party ID.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

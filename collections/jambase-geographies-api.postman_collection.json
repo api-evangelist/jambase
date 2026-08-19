@@ -1,0 +1,1097 @@
+{
+  "item": [
+    {
+      "id": "042145e3-2267-4ffc-a009-d6a6d53f1750",
+      "name": "Geographies",
+      "description": {
+        "content": "Lookup Countries, Cities, Etc",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e2f429d2-b966-4c68-86a0-ede6af2e0695",
+          "name": "Search Cities",
+          "request": {
+            "name": "Search Cities",
+            "description": {
+              "content": "Search for cities. Results will be returned in order of most to least upcoming events in the city, and then alphabetically city name in the case of a tie.       \n\n<!-- theme: info  -->\n> #### Requirement\n> Your request must include at least one of the geo parameters such as `geoCityName`, `geoCountryIso2`, `geoCountryIso3`, `geoIp`, `geoMetroId`, `geoStateIso`, or `geoLatitude` and `geoLongitude`.\n    \n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "geographies",
+                "cities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number of results to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "40",
+                  "description": "Number of events per page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoCityName",
+                  "value": "<string>",
+                  "description": "Use to retrieve events for city name(s).\n- geoCityName=Seattle\n\nUse a pipe (|) to include multiple city names.\n- geoCityName=Seattle|Tacoma\n\nFor more precise city-specific results try using `city[id]`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoCountryIso2",
+                  "value": "<iso-3166-alpha-2>",
+                  "description": "The two-letter ISO code for a country.\n- geoCountryIso2=US\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso2=US|CA\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoCountryIso3",
+                  "value": "<iso-3166-alpha-3>",
+                  "description": "The three-letter ISO code for a country.\n- geoCountryIso3=USA\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso3=USA|CAN\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoIp",
+                  "value": "<ipv4>",
+                  "description": "Use to retrieve events near an IP address.\\\nSupports IPv4 or IPv6 values.\n- geoIp=55.123.456.789\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoLatitude",
+                  "value": "<float>",
+                  "description": "The latitude for geographic radius.\n- geoLatitude=40.7505\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoLongitude",
+                  "value": "<float>",
+                  "description": "The longitude for geographic radius.\n- geoLongitude=-73.9934\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoMetroId",
+                  "value": "<string>",
+                  "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5b89026bb2462-get-metros\">metro ID(s)</a>.\n- geoMetroId=jambase:1\n\nUse a pipe (|) to include multiple metro IDs.\n- geoMetroId=jambase:1|jambase:5\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoRadiusAmount",
+                  "value": "60",
+                  "description": "The search radius for lat/lng type searches.\n- geoRadiusAmount=60\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoRadiusUnits",
+                  "value": "<string>",
+                  "description": "Whether to use miles (default) or kilometers for radius.\n- geoRadiusUnits=km\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoStateIso",
+                  "value": "<iso-3166-2>",
+                  "description": "The State code in ISO_3166-2 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-2)].\n- geoStateIso=US-NY\n\nUse a pipe (|) to include multiple State codes.\n- geoStateIso=US-NY|=US-PA\n\nNote: Available for United States, Canada, and Australia only.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "cityHasUpcomingEvents",
+                  "value": "<boolean>",
+                  "description": "Only include Cities with / without upcoming events. Omit for both."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "75db3d9e-b541-45a6-bf1e-163300bf5380",
+              "name": "A list of Cities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geographies",
+                    "cities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "40"
+                    },
+                    {
+                      "key": "geoCityName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geoCountryIso2",
+                      "value": "US"
+                    },
+                    {
+                      "key": "geoCountryIso3",
+                      "value": "USA"
+                    },
+                    {
+                      "key": "geoIp",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "40.7505"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "-73.9934"
+                    },
+                    {
+                      "key": "geoMetroId",
+                      "value": "jambase:1"
+                    },
+                    {
+                      "key": "geoRadiusAmount",
+                      "value": "60"
+                    },
+                    {
+                      "key": "geoRadiusUnits",
+                      "value": "km"
+                    },
+                    {
+                      "key": "geoStateIso",
+                      "value": "US-AZ"
+                    },
+                    {
+                      "key": "cityHasUpcomingEvents",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"pagination\": {\n    \"page\": 1,\n    \"perPage\": 10,\n    \"totalItems\": 50,\n    \"totalPages\": 5,\n    \"nextPage\": \"string\",\n    \"previousPage\": \"string\"\n  },\n  \"cities\": [\n    {\n      \"@type\": \"City\",\n      \"identifier\": \"jambase:13412\",\n      \"name\": \"New York\",\n      \"geo\": {\n        \"@type\": \"GeoCoordinates\",\n        \"latitude\": 40.7505,\n        \"longitude\": -73.9934\n      },\n      \"address\": {\n        \"addressRegion\": \"US-AZ\",\n        \"addressCountry\": \"US\"\n      },\n      \"x-timezone\": \"America/New_York\",\n      \"containedInPlace\": {\n        \"@type\": \"AdministrativeArea\",\n        \"identifier\": \"jambase:13412\",\n        \"name\": \"New York Area\",\n        \"geo\": {\n          \"@type\": \"GeoCoordinates\",\n          \"latitude\": 40.7505,\n          \"longitude\": -73.9934\n        },\n        \"address\": {\n          \"addressRegion\": \"US-AZ\",\n          \"addressCountry\": \"US\"\n        },\n        \"containsPlace\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/City detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/City detected>\"\n          }\n        ],\n        \"x-primaryCityId\": 12,\n        \"x-numUpcomingEvents\": 12\n      },\n      \"x-numUpcomingEvents\": 12\n    },\n    {\n      \"@type\": \"City\",\n      \"identifier\": \"jambase:13412\",\n      \"name\": \"New York\",\n      \"geo\": {\n        \"@type\": \"GeoCoordinates\",\n        \"latitude\": 40.7505,\n        \"longitude\": -73.9934\n      },\n      \"address\": {\n        \"addressRegion\": \"US-AZ\",\n        \"addressCountry\": \"US\"\n      },\n      \"x-timezone\": \"America/New_York\",\n      \"containedInPlace\": {\n        \"@type\": \"AdministrativeArea\",\n        \"identifier\": \"jambase:13412\",\n        \"name\": \"New York Area\",\n        \"geo\": {\n          \"@type\": \"GeoCoordinates\",\n          \"latitude\": 40.7505,\n          \"longitude\": -73.9934\n        },\n        \"address\": {\n          \"addressRegion\": \"US-AZ\",\n          \"addressCountry\": \"US\"\n        },\n        \"containsPlace\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/City detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/City detected>\"\n          }\n        ],\n        \"x-primaryCityId\": 12,\n        \"x-numUpcomingEvents\": 12\n      },\n      \"x-numUpcomingEvents\": 12\n    }\n  ],\n  \"request\": {\n    \"endpoint\": \"string\",\n    \"method\": \"string\",\n    \"ip\": \"245.241.141.55\",\n    \"userAgent\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8742d553-dce1-4d33-aa89-a1c4b01d60af",
+              "name": "Invalid input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geographies",
+                    "cities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "40"
+                    },
+                    {
+                      "key": "geoCityName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geoCountryIso2",
+                      "value": "US"
+                    },
+                    {
+                      "key": "geoCountryIso3",
+                      "value": "USA"
+                    },
+                    {
+                      "key": "geoIp",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "40.7505"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "-73.9934"
+                    },
+                    {
+                      "key": "geoMetroId",
+                      "value": "jambase:1"
+                    },
+                    {
+                      "key": "geoRadiusAmount",
+                      "value": "60"
+                    },
+                    {
+                      "key": "geoRadiusUnits",
+                      "value": "km"
+                    },
+                    {
+                      "key": "geoStateIso",
+                      "value": "US-AZ"
+                    },
+                    {
+                      "key": "cityHasUpcomingEvents",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"parameter_missing\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"identifier_missing\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0808abf7-9283-44fa-87df-ad807701287a",
+              "name": "API key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geographies",
+                    "cities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "40"
+                    },
+                    {
+                      "key": "geoCityName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geoCountryIso2",
+                      "value": "US"
+                    },
+                    {
+                      "key": "geoCountryIso3",
+                      "value": "USA"
+                    },
+                    {
+                      "key": "geoIp",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "40.7505"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "-73.9934"
+                    },
+                    {
+                      "key": "geoMetroId",
+                      "value": "jambase:1"
+                    },
+                    {
+                      "key": "geoRadiusAmount",
+                      "value": "60"
+                    },
+                    {
+                      "key": "geoRadiusUnits",
+                      "value": "km"
+                    },
+                    {
+                      "key": "geoStateIso",
+                      "value": "US-AZ"
+                    },
+                    {
+                      "key": "cityHasUpcomingEvents",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW_Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32a29adb-08cf-4a75-9820-c6fe47b09f74",
+          "name": "Get Metros",
+          "request": {
+            "name": "Get Metros",
+            "description": {
+              "content": "A Metro is a collection of Cities, such as the Los Angeles area which includes LA, Hollywood, Anaheim, and more that can be used to filter Events.\\\n\\\nReturns all Metros in Alphabetical order by identifier.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "geographies",
+                "metros"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "metroHasUpcomingEvents",
+                  "value": "<boolean>",
+                  "description": "Only include Metros with / without upcoming events. Omit for both."
+                },
+                {
+                  "disabled": false,
+                  "key": "cityHasUpcomingEvents",
+                  "value": "<boolean>",
+                  "description": "Only include Cities with / without upcoming events. Omit for both."
+                },
+                {
+                  "disabled": false,
+                  "key": "expandMetroCities",
+                  "value": "false",
+                  "description": "Use `true` to include the `containsPlace` node with the cities for each metro."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2817712-36e8-42ca-b790-b39786abbee5",
+              "name": "A list of Metros",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geographies",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metroHasUpcomingEvents",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "cityHasUpcomingEvents",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "expandMetroCities",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"pagination\": {\n    \"page\": 1,\n    \"perPage\": 10,\n    \"totalItems\": 50,\n    \"totalPages\": 5,\n    \"nextPage\": \"string\",\n    \"previousPage\": \"string\"\n  },\n  \"metros\": [\n    {\n      \"@type\": \"AdministrativeArea\",\n      \"identifier\": \"jambase:13412\",\n      \"name\": \"New York Area\",\n      \"geo\": {\n        \"@type\": \"GeoCoordinates\",\n        \"latitude\": 40.7505,\n        \"longitude\": -73.9934\n      },\n      \"address\": {\n        \"addressRegion\": \"US-AZ\",\n        \"addressCountry\": \"US\"\n      },\n      \"containsPlace\": [\n        {\n          \"@type\": \"City\",\n          \"identifier\": \"jambase:13412\",\n          \"name\": \"New York\",\n          \"geo\": {\n            \"@type\": \"GeoCoordinates\",\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"address\": {\n            \"addressRegion\": \"US-AZ\",\n            \"addressCountry\": \"US\"\n          },\n          \"x-timezone\": \"America/New_York\",\n          \"containedInPlace\": {\n            \"value\": \"<Circular reference to #/components/schemas/AdministrativeArea detected>\"\n          },\n          \"x-numUpcomingEvents\": 12\n        },\n        {\n          \"@type\": \"City\",\n          \"identifier\": \"jambase:13412\",\n          \"name\": \"New York\",\n          \"geo\": {\n            \"@type\": \"GeoCoordinates\",\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"address\": {\n            \"addressRegion\": \"US-AZ\",\n            \"addressCountry\": \"US\"\n          },\n          \"x-timezone\": \"America/New_York\",\n          \"containedInPlace\": {\n            \"value\": \"<Circular reference to #/components/schemas/AdministrativeArea detected>\"\n          },\n          \"x-numUpcomingEvents\": 12\n        }\n      ],\n      \"x-primaryCityId\": 12,\n      \"x-numUpcomingEvents\": 12\n    },\n    {\n      \"@type\": \"AdministrativeArea\",\n      \"identifier\": \"jambase:13412\",\n      \"name\": \"New York Area\",\n      \"geo\": {\n        \"@type\": \"GeoCoordinates\",\n        \"latitude\": 40.7505,\n        \"longitude\": -73.9934\n      },\n      \"address\": {\n        \"addressRegion\": \"US-AZ\",\n        \"addressCountry\": \"US\"\n      },\n      \"containsPlace\": [\n        {\n          \"@type\": \"City\",\n          \"identifier\": \"jambase:13412\",\n          \"name\": \"New York\",\n          \"geo\": {\n            \"@type\": \"GeoCoordinates\",\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"address\": {\n            \"addressRegion\": \"US-AZ\",\n            \"addressCountry\": \"US\"\n          },\n          \"x-timezone\": \"America/New_York\",\n          \"containedInPlace\": {\n            \"value\": \"<Circular reference to #/components/schemas/AdministrativeArea detected>\"\n          },\n          \"x-numUpcomingEvents\": 12\n        },\n        {\n          \"@type\": \"City\",\n          \"identifier\": \"jambase:13412\",\n          \"name\": \"New York\",\n          \"geo\": {\n            \"@type\": \"GeoCoordinates\",\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"address\": {\n            \"addressRegion\": \"US-AZ\",\n            \"addressCountry\": \"US\"\n          },\n          \"x-timezone\": \"America/New_York\",\n          \"containedInPlace\": {\n            \"value\": \"<Circular reference to #/components/schemas/AdministrativeArea detected>\"\n          },\n          \"x-numUpcomingEvents\": 12\n        }\n      ],\n      \"x-primaryCityId\": 12,\n      \"x-numUpcomingEvents\": 12\n    }\n  ],\n  \"request\": {\n    \"endpoint\": \"string\",\n    \"method\": \"string\",\n    \"ip\": \"99.40.207.100\",\n    \"userAgent\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c98ae6b9-0a74-4d11-9162-72fbb09a2123",
+              "name": "Invalid input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geographies",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metroHasUpcomingEvents",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "cityHasUpcomingEvents",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "expandMetroCities",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"parameter_missing\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"identifier_missing\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f07e4a1d-35b1-4406-9524-060b9ff75ad5",
+              "name": "API key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geographies",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metroHasUpcomingEvents",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "cityHasUpcomingEvents",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "expandMetroCities",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW_Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "287c2fb4-c1b2-4325-b288-72389799c9c1",
+          "name": "Get States / Regions / Provinces",
+          "request": {
+            "name": "Get States / Regions / Provinces",
+            "description": {
+              "content": "A States (or Region / Province) is a collection of Cities, such as California (USA) or Quebec (Canada) that can be used to filter Events.\\\n\\\nReturns all States/Regions in Alphabetical order by identifier.\n\\\nNote: Available for United States, Canada, and Australia only.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "geographies",
+                "states"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "stateHasUpcomingEvents",
+                  "value": "<boolean>",
+                  "description": "Only include States with / without upcoming events. Omit for both."
+                },
+                {
+                  "disabled": false,
+                  "key": "geoCountryIso2",
+                  "value": "<iso-3166-alpha-2>",
+                  "description": "The two-letter ISO code for a country.\n- geoCountryIso2=US\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso2=US|CA\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoCountryIso3",
+                  "value": "<iso-3166-alpha-3>",
+                  "description": "The three-letter ISO code for a country.\n- geoCountryIso3=USA\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso3=USA|CAN\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b1bc37a-2f0b-4629-a1fd-beb9f571d4c1",
+              "name": "A list of States",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geographies",
+                    "states"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "stateHasUpcomingEvents",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "geoCountryIso2",
+                      "value": "US"
+                    },
+                    {
+                      "key": "geoCountryIso3",
+                      "value": "USA"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"pagination\": {\n    \"page\": 1,\n    \"perPage\": 10,\n    \"totalItems\": 50,\n    \"totalPages\": 5,\n    \"nextPage\": \"string\",\n    \"previousPage\": \"string\"\n  },\n  \"states\": [\n    {\n      \"@type\": \"State\",\n      \"identifier\": \"US-AZ\",\n      \"name\": \"Arizona\",\n      \"alternateName\": \"AZ\",\n      \"country\": {\n        \"@type\": \"Country\",\n        \"identifier\": \"US\",\n        \"name\": \"United States\",\n        \"alternateName\": \"USA\",\n        \"x-numUpcomingEvents\": 12\n      },\n      \"x-numUpcomingEvents\": 12\n    },\n    {\n      \"@type\": \"State\",\n      \"identifier\": \"US-AZ\",\n      \"name\": \"Arizona\",\n      \"alternateName\": \"AZ\",\n      \"country\": {\n        \"@type\": \"Country\",\n        \"identifier\": \"US\",\n        \"name\": \"United States\",\n        \"alternateName\": \"USA\",\n        \"x-numUpcomingEvents\": 12\n      },\n      \"x-numUpcomingEvents\": 12\n    }\n  ],\n  \"request\": {\n    \"endpoint\": \"string\",\n    \"method\": \"string\",\n    \"ip\": \"201.181.252.160\",\n    \"userAgent\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16b9780f-666e-49ac-978c-73c4b1c2b31b",
+              "name": "Invalid input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geographies",
+                    "states"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "stateHasUpcomingEvents",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "geoCountryIso2",
+                      "value": "US"
+                    },
+                    {
+                      "key": "geoCountryIso3",
+                      "value": "USA"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"parameter_missing\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"identifier_missing\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44923ae7-dcad-4f26-b7bd-da51619533b7",
+              "name": "API key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geographies",
+                    "states"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "stateHasUpcomingEvents",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "geoCountryIso2",
+                      "value": "US"
+                    },
+                    {
+                      "key": "geoCountryIso3",
+                      "value": "USA"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW_Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a1c582e-4cc4-4d34-9a20-80996b2c9247",
+          "name": "Get Countries",
+          "request": {
+            "name": "Get Countries",
+            "description": {
+              "content": "Returns all Countries in alphabetical order by ISO2.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "geographies",
+                "countries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "countryHasUpcomingEvents",
+                  "value": "<boolean>",
+                  "description": "Only include Countries with / without upcoming events. Omit for both."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5401f4c-cf08-4622-9262-c5e5546a75c3",
+              "name": "A list of Countries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geographies",
+                    "countries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "countryHasUpcomingEvents",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"pagination\": {\n    \"page\": 1,\n    \"perPage\": 10,\n    \"totalItems\": 50,\n    \"totalPages\": 5,\n    \"nextPage\": \"string\",\n    \"previousPage\": \"string\"\n  },\n  \"countries\": [\n    {\n      \"@type\": \"Country\",\n      \"identifier\": \"US\",\n      \"name\": \"United States\",\n      \"alternateName\": \"USA\",\n      \"x-numUpcomingEvents\": 12\n    },\n    {\n      \"@type\": \"Country\",\n      \"identifier\": \"US\",\n      \"name\": \"United States\",\n      \"alternateName\": \"USA\",\n      \"x-numUpcomingEvents\": 12\n    }\n  ],\n  \"request\": {\n    \"endpoint\": \"string\",\n    \"method\": \"string\",\n    \"ip\": \"216.141.159.25\",\n    \"userAgent\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f75814d-4cb8-4c7a-846f-dde8d38a276a",
+              "name": "Invalid input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geographies",
+                    "countries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "countryHasUpcomingEvents",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"parameter_missing\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"identifier_missing\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "139be604-bd97-44ee-9726-66dc3f61517c",
+              "name": "API key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geographies",
+                    "countries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "countryHasUpcomingEvents",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW_Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.data.jambase.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d30284da-b773-48bd-a43f-160ccbe7d258",
+    "name": "JamBase Concert Data Artists Geographies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.\n\nContact Support:\n Name: Team JamBase\n Email: developer@jambase.com",
+      "type": "text/plain"
+    }
+  }
+}

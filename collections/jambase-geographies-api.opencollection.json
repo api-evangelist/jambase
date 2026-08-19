@@ -1,0 +1,196 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JamBase Concert Data Artists Geographies API",
+    "version": "3.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Geographies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Cities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.data.jambase.com/v3/geographies/cities",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number of results to retrieve"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of events per page of results"
+              },
+              {
+                "name": "geoCityName",
+                "value": "",
+                "type": "query",
+                "description": "Use to retrieve events for city name(s).\n- geoCityName=Seattle\n\nUse a pipe (|) to include multiple city names.\n- geoCityName=Seattle|Tacoma\n\nFor more precise city-specific results try using `city[id]`\n"
+              },
+              {
+                "name": "geoCountryIso2",
+                "value": "",
+                "type": "query",
+                "description": "The two-letter ISO code for a country.\n- geoCountryIso2=US\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso2=US|CA\n"
+              },
+              {
+                "name": "geoCountryIso3",
+                "value": "",
+                "type": "query",
+                "description": "The three-letter ISO code for a country.\n- geoCountryIso3=USA\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso3=USA|CAN\n"
+              },
+              {
+                "name": "geoIp",
+                "value": "",
+                "type": "query",
+                "description": "Use to retrieve events near an IP address.\\\nSupports IPv4 or IPv6 values.\n- geoIp=55.123.456.789\n"
+              },
+              {
+                "name": "geoLatitude",
+                "value": "",
+                "type": "query",
+                "description": "The latitude for geographic radius.\n- geoLatitude=40.7505\n"
+              },
+              {
+                "name": "geoLongitude",
+                "value": "",
+                "type": "query",
+                "description": "The longitude for geographic radius.\n- geoLongitude=-73.9934\n"
+              },
+              {
+                "name": "geoMetroId",
+                "value": "jambase:1",
+                "type": "query",
+                "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5b89026bb2462-get-metros\">metro ID(s)</a>.\n- geoMetroId=jambase:1\n\nUse a pipe (|) to include multiple metro IDs.\n- geoMetroId=jambase:1|jambase:5\n"
+              },
+              {
+                "name": "geoRadiusAmount",
+                "value": "",
+                "type": "query",
+                "description": "The search radius for lat/lng type searches.\n- geoRadiusAmount=60\n"
+              },
+              {
+                "name": "geoRadiusUnits",
+                "value": "",
+                "type": "query",
+                "description": "Whether to use miles (default) or kilometers for radius.\n- geoRadiusUnits=km\n"
+              },
+              {
+                "name": "geoStateIso",
+                "value": "",
+                "type": "query",
+                "description": "The State code in ISO_3166-2 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-2)].\n- geoStateIso=US-NY\n\nUse a pipe (|) to include multiple State codes.\n- geoStateIso=US-NY|=US-PA\n\nNote: Available for United States, Canada, and Australia only.\n"
+              },
+              {
+                "name": "cityHasUpcomingEvents",
+                "value": "",
+                "type": "query",
+                "description": "Only include Cities with / without upcoming events. Omit for both."
+              }
+            ]
+          },
+          "docs": "Search for cities. Results will be returned in order of most to least upcoming events in the city, and then alphabetically city name in the case of a tie.       \n\n<!-- theme: info  -->\n> #### Requirement\n> Your request must include at least one of the geo parameters such as `geoCityName`, `geoCountryIso2`, `geoCountryIso3`, `geoIp`, `geoMetroId`, `geoStateIso`, or `geoLatitude` and `geoLongitude`.\n    \n"
+        },
+        {
+          "info": {
+            "name": "Get Metros",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.data.jambase.com/v3/geographies/metros",
+            "params": [
+              {
+                "name": "metroHasUpcomingEvents",
+                "value": "",
+                "type": "query",
+                "description": "Only include Metros with / without upcoming events. Omit for both."
+              },
+              {
+                "name": "cityHasUpcomingEvents",
+                "value": "",
+                "type": "query",
+                "description": "Only include Cities with / without upcoming events. Omit for both."
+              },
+              {
+                "name": "expandMetroCities",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include the `containsPlace` node with the cities for each metro."
+              }
+            ]
+          },
+          "docs": "A Metro is a collection of Cities, such as the Los Angeles area which includes LA, Hollywood, Anaheim, and more that can be used to filter Events.\\\n\\\nReturns all Metros in Alphabetical order by identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Get States / Regions / Provinces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.data.jambase.com/v3/geographies/states",
+            "params": [
+              {
+                "name": "stateHasUpcomingEvents",
+                "value": "",
+                "type": "query",
+                "description": "Only include States with / without upcoming events. Omit for both."
+              },
+              {
+                "name": "geoCountryIso2",
+                "value": "",
+                "type": "query",
+                "description": "The two-letter ISO code for a country.\n- geoCountryIso2=US\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso2=US|CA\n"
+              },
+              {
+                "name": "geoCountryIso3",
+                "value": "",
+                "type": "query",
+                "description": "The three-letter ISO code for a country.\n- geoCountryIso3=USA\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso3=USA|CAN\n"
+              }
+            ]
+          },
+          "docs": "A States (or Region / Province) is a collection of Cities, such as California (USA) or Quebec (Canada) that can be used to filter Events.\\\n\\\nReturns all States/Regions in Alphabetical order by identifier.\n\\\nNote: Available for United States, Canada, and Australia only.\n"
+        },
+        {
+          "info": {
+            "name": "Get Countries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.data.jambase.com/v3/geographies/countries",
+            "params": [
+              {
+                "name": "countryHasUpcomingEvents",
+                "value": "",
+                "type": "query",
+                "description": "Only include Countries with / without upcoming events. Omit for both."
+              }
+            ]
+          },
+          "docs": "Returns all Countries in alphabetical order by ISO2.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

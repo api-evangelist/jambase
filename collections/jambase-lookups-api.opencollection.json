@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JamBase Concert Data Artists Lookups API",
+    "version": "3.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lookups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Event Data Sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.data.jambase.com/v3/lookups/event-data-sources"
+          },
+          "docs": "These can be used to filter events by Event IDs from third-party Data Sources.\\\n\\\nReturns all Event Data Sources in Alphabetical order.\n"
+        },
+        {
+          "info": {
+            "name": "Get Stream Data Sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.data.jambase.com/v3/lookups/stream-data-sources"
+          },
+          "docs": "These can be used to filter Streams from a specific Streaming platform.\\\n\\\nReturns all Stream Data Sources in Alphabetical order.\n"
+        },
+        {
+          "info": {
+            "name": "Get Artist Data Sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.data.jambase.com/v3/lookups/artist-data-sources"
+          },
+          "docs": "These can be used to filter events by Artist IDs from third-party Data Sources.\\\n\\\nReturns all Artist Data Sources in Alphabetical order.\n"
+        },
+        {
+          "info": {
+            "name": "Get Venue Data Sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.data.jambase.com/v3/lookups/venue-data-sources"
+          },
+          "docs": "These can be used to filter events by Venue IDs from third-party Data Sources.\\\n\\\nThis endpoint returns all Venue Data Sources in Alphabetical order.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,266 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JamBase Concert Data Artists Events API",
+    "version": "3.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.data.jambase.com/v3/events",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number of results to retrieve"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of events per page of results"
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query",
+                "description": "Used to isolate only concerts or only festivals(s)\\\nLeave blank to include both concerts and festivals\n- eventType=concert\n- eventType=festival\n"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "query",
+                "description": "Restrict the result set to a specific list of Event IDs.\\\n\\\nFor example to fetch a single event:\n- eventId=jambase:16013248\n\nUse a pipe (|) to include multiple event IDs (recommended form, consistent with `artistId` and `venueId`):\n- eventId=jambase:16013248|jambase:14331594\n\nA URL-encoded JSON array of IDs is also accepted for compatibility with the v1 `eventId` parameter:\n- eventId=%5B%22jambase%3A16013248%22%2C%22jambase%3A14331594%22%5D\n\nTo use non-JamBase data sources, use the EventDataSource [[enum](#)] for the ID(s) you are using.\n"
+              },
+              {
+                "name": "name",
+                "value": "Bonnaroo",
+                "type": "query",
+                "description": "A keyword-based search across event titles (e.g. festival names, special-billing show titles). Resolved server-side against the JamBase title-search index; combined as AND with any other filters (`artistId`, `geoCityId`, dates, etc.). Returns an empty list when nothing matches. Search-tier failures are treated as no matches, never as a 5xx.\n- name=Bonnaroo\n- name=Phish%20New%20Year\n"
+              },
+              {
+                "name": "artistId",
+                "value": "",
+                "type": "query",
+                "description": "The source and unique identifier for the artist(s).\\\n\\\nFor example to search for LCD Soundsystem events:\n\n- artistId=jambase:228924\n\nUse a pipe (|) to include multiple artist IDs.\\\n\\\nFor example to search for LCD Soundsystem & Khalid events:\n- artistId=jambase:228924|jambase:3074545\n\nTo use non-JamBase data sources, use the ArtistDataSource [[enum](#)] for the ID(s) you are using.\\\n\\\nFor example to search for LCD Soundsystem events using their Ticketmaster ID:\n  - artistId=ticketmaster:K8vZ9175st0\n"
+              },
+              {
+                "name": "artistName",
+                "value": "Billie Eilish",
+                "type": "query",
+                "description": "A keyword-based search for artist name(s).\n- artistName=Billie%20Eilish\n\nUse a pipe (|) to include multiple artist names.\n- artistName=Billie%20Eilish|Lucy%20Dacus\n\nKeywords should be URL Encoded.\\\nFor more precise artist-specific results try using `artistId` or `artist[slug]`.\n\nPlease note that `artistName` cannot be used togehter with `artistId` type searches and will be ignored if `artistId` is provided.\n"
+              },
+              {
+                "name": "genreSlug",
+                "value": "",
+                "type": "query",
+                "description": "Restrict results to a genre.\n- genreSlug=bluegrass\n\nUse a pipe (|) to include results from multiple genres.\n- genreSlug=bluegrass|blues\n"
+              },
+              {
+                "name": "venueId",
+                "value": "jambase:62108",
+                "type": "query",
+                "description": "The source and unique identifier for the venue(s)\n- venueId=jambase:62108\n\nUse a pipe (|) to include multiple venue IDs\n- venueId=jambase:62108|jambase:7932731\n\nTo use non-JamBase IDs, use the <a href=\"https://apidocs.jambase.com/docs/jambase-api/vg16q2jczs7fg-enum-venue-data-source\">source slug</a> for the ID(s) you are using\n- venueId=ticketmaster:k7vGF99ORYpnS\n"
+              },
+              {
+                "name": "venueName",
+                "value": "Brooklyn%20Bowl",
+                "type": "query",
+                "description": "A keyword-based search for venue name(s).\n- venueName=Brooklyn%20Bowl\n\nUse a pipe (|) to include multiple venue IDs.\n- venueName=Brooklyn%20Bowl|House%20of%20Blues\n\nFor more precise venue-specific results try using `venueId` or `venue[slug]`.\n"
+              },
+              {
+                "name": "geoCityId",
+                "value": "jambase:4223296",
+                "type": "query",
+                "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5474ac2525de2-search-cities\">JamBase city ID(s)</a>   .     \n- geoCityId=jambase:4223296\n\nUse a pipe (|) to include multiple city IDs.\n- geoCityId=jambase:4223296|jambase:4224564\n\nWhen using the `geoCityId` parameter, you can omit the the `geoRadiusAmount` parameter (or) set it to `0` (or) leave it empty to include only results from the city. Else, you can use a radius amount to include events within a radius around the city-center.\n"
+              },
+              {
+                "name": "geoCountryIso2",
+                "value": "",
+                "type": "query",
+                "description": "The two-letter ISO code for a country.\n- geoCountryIso2=US\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso2=US|CA\n"
+              },
+              {
+                "name": "geoCountryIso3",
+                "value": "",
+                "type": "query",
+                "description": "The three-letter ISO code for a country.\n- geoCountryIso3=USA\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso3=USA|CAN\n"
+              },
+              {
+                "name": "geoIp",
+                "value": "",
+                "type": "query",
+                "description": "Use to retrieve events near an IP address.\\\nSupports IPv4 or IPv6 values.\n- geoIp=55.123.456.789\n"
+              },
+              {
+                "name": "geoLatitude",
+                "value": "",
+                "type": "query",
+                "description": "The latitude for geographic radius.\n- geoLatitude=40.7505\n"
+              },
+              {
+                "name": "geoLongitude",
+                "value": "",
+                "type": "query",
+                "description": "The longitude for geographic radius.\n- geoLongitude=-73.9934\n"
+              },
+              {
+                "name": "geoMetroId",
+                "value": "jambase:1",
+                "type": "query",
+                "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5b89026bb2462-get-metros\">metro ID(s)</a>.\n- geoMetroId=jambase:1\n\nUse a pipe (|) to include multiple metro IDs.\n- geoMetroId=jambase:1|jambase:5\n"
+              },
+              {
+                "name": "geoRadiusAmount",
+                "value": "",
+                "type": "query",
+                "description": "The search radius for lat/lng type searches.\n- geoRadiusAmount=60\n"
+              },
+              {
+                "name": "geoRadiusUnits",
+                "value": "",
+                "type": "query",
+                "description": "Whether to use miles (default) or kilometers for radius.\n- geoRadiusUnits=km\n"
+              },
+              {
+                "name": "geoStateIso",
+                "value": "",
+                "type": "query",
+                "description": "The State code in ISO_3166-2 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-2)].\n- geoStateIso=US-NY\n\nUse a pipe (|) to include multiple State codes.\n- geoStateIso=US-NY|=US-PA\n\nNote: Available for United States, Canada, and Australia only.\n"
+              },
+              {
+                "name": "eventDatePreset",
+                "value": "tomorrow",
+                "type": "query",
+                "description": "Use a dynamic date preset.\n- eventDatePreset=tomorrow\n\nNotes: \n- The `eventDatePreset` will override `eventDateFrom` & `eventDateTo` if those are set as well.\n- The `halloween` preset returns events on 10/31 only. The `newYears` preset returns events on 12/31 only. The `july4th` preset returns events on or near July 4th.\n"
+              },
+              {
+                "name": "eventDateFrom",
+                "value": "2023-10-01",
+                "type": "query",
+                "description": "For `concerts` must start on or after this date.\\\nFor `festivals`, must start on or after this date.\\\nIf left blank or omitted, will use the current date.\\\nThe `expandPastEvents` parameter is required when using `eventDateFrom` before the current date.\n\n- eventDateFrom=2023-10-31\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n"
+              },
+              {
+                "name": "eventDateTo",
+                "value": "2023-12-31",
+                "type": "query",
+                "description": "For `concerts` must start on or before this date.\\\nFor `festivals` must end on or before this date.\\\nIf left blank or omitted, will return all events after `eventDateFrom`.\n\n- eventDateTo=2023-12-31\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n"
+              },
+              {
+                "name": "eventDataSource",
+                "value": "",
+                "type": "query",
+                "description": "The EventDataSource of for the Event."
+              },
+              {
+                "name": "dateModifiedFrom",
+                "value": "2022-10-31 00:00:00",
+                "type": "query",
+                "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+              },
+              {
+                "name": "datePublishedFrom",
+                "value": "2022-01-01 00:00:00",
+                "type": "query",
+                "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+              },
+              {
+                "name": "expandExternalIdentifiers",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+              },
+              {
+                "name": "expandArtistSameAs",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
+              },
+              {
+                "name": "expandPastEvents",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include past/historical `Concert` and `Festival` objects.\n\\\nWhen searching events, must be combined with `artistId` or `venueId` parameter.\n\\\nNote: The `expandPastEvents` parameter requires that your apikey has the `expandPastEvents` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the returned events.\n\\\n- `eventDate` — ascending by event date (oldest first). This is the default.\n\\\n- `-eventDate` — descending by event date (most recent first).\n\\\nThe leading `-` indicates descending order, following the [JSON:API](https://jsonapi.org/format/#fetching-sorting) convention.\n\\\nMost useful when combined with `expandPastEvents=true` to retrieve an artist's or venue's most recent shows first without paginating through their full history.\n"
+              },
+              {
+                "name": "excludeEventPerformers",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to suppress the `performer` node in `Concert` and `Festival` objects.\n"
+              }
+            ]
+          },
+          "docs": "Search events by location, date, artist, genre, and more.\n"
+        },
+        {
+          "info": {
+            "name": "Get / reverse-lookup an Event by JamBase or third-party ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.data.jambase.com/v3/events/id/:eventDataSource::eventId",
+            "params": [
+              {
+                "name": "eventDataSource",
+                "value": "",
+                "type": "path",
+                "description": "The eventDataSource of the ID for the Event."
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID for the Event."
+              },
+              {
+                "name": "expandExternalIdentifiers",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+              },
+              {
+                "name": "expandArtistSameAs",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
+              },
+              {
+                "name": "excludeEventPerformers",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to suppress the `performer` node in `Concert` and `Festival` objects.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific Event by JamBase or third-party ID\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

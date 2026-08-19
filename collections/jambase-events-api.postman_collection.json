@@ -1,0 +1,1021 @@
+{
+  "item": [
+    {
+      "id": "c46c6044-b2cf-4d2a-b037-fe28fdde1047",
+      "name": "Events",
+      "description": {
+        "content": "Search Events",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6c802569-3221-433a-b5d9-dea5cf58954d",
+          "name": "Search Events",
+          "request": {
+            "name": "Search Events",
+            "description": {
+              "content": "Search events by location, date, artist, genre, and more.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number of results to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "40",
+                  "description": "Number of events per page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "eventType",
+                  "value": "<string>",
+                  "description": "Used to isolate only concerts or only festivals(s)\\\nLeave blank to include both concerts and festivals\n- eventType=concert\n- eventType=festival\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "eventId",
+                  "value": "<string>",
+                  "description": "Restrict the result set to a specific list of Event IDs.\\\n\\\nFor example to fetch a single event:\n- eventId=jambase:16013248\n\nUse a pipe (|) to include multiple event IDs (recommended form, consistent with `artistId` and `venueId`):\n- eventId=jambase:16013248|jambase:14331594\n\nA URL-encoded JSON array of IDs is also accepted for compatibility with the v1 `eventId` parameter:\n- eventId=%5B%22jambase%3A16013248%22%2C%22jambase%3A14331594%22%5D\n\nTo use non-JamBase data sources, use the EventDataSource [[enum](#)] for the ID(s) you are using.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "A keyword-based search across event titles (e.g. festival names, special-billing show titles). Resolved server-side against the JamBase title-search index; combined as AND with any other filters (`artistId`, `geoCityId`, dates, etc.). Returns an empty list when nothing matches. Search-tier failures are treated as no matches, never as a 5xx.\n- name=Bonnaroo\n- name=Phish%20New%20Year\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "artistId",
+                  "value": "<string>",
+                  "description": "The source and unique identifier for the artist(s).\\\n\\\nFor example to search for LCD Soundsystem events:\n\n- artistId=jambase:228924\n\nUse a pipe (|) to include multiple artist IDs.\\\n\\\nFor example to search for LCD Soundsystem & Khalid events:\n- artistId=jambase:228924|jambase:3074545\n\nTo use non-JamBase data sources, use the ArtistDataSource [[enum](#)] for the ID(s) you are using.\\\n\\\nFor example to search for LCD Soundsystem events using their Ticketmaster ID:\n  - artistId=ticketmaster:K8vZ9175st0\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "artistName",
+                  "value": "<string>",
+                  "description": "A keyword-based search for artist name(s).\n- artistName=Billie%20Eilish\n\nUse a pipe (|) to include multiple artist names.\n- artistName=Billie%20Eilish|Lucy%20Dacus\n\nKeywords should be URL Encoded.\\\nFor more precise artist-specific results try using `artistId` or `artist[slug]`.\n\nPlease note that `artistName` cannot be used togehter with `artistId` type searches and will be ignored if `artistId` is provided.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "genreSlug",
+                  "value": "<string>",
+                  "description": "Restrict results to a genre.\n- genreSlug=bluegrass\n\nUse a pipe (|) to include results from multiple genres.\n- genreSlug=bluegrass|blues\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "venueId",
+                  "value": "<string>",
+                  "description": "The source and unique identifier for the venue(s)\n- venueId=jambase:62108\n\nUse a pipe (|) to include multiple venue IDs\n- venueId=jambase:62108|jambase:7932731\n\nTo use non-JamBase IDs, use the <a href=\"https://apidocs.jambase.com/docs/jambase-api/vg16q2jczs7fg-enum-venue-data-source\">source slug</a> for the ID(s) you are using\n- venueId=ticketmaster:k7vGF99ORYpnS\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "venueName",
+                  "value": "<string>",
+                  "description": "A keyword-based search for venue name(s).\n- venueName=Brooklyn%20Bowl\n\nUse a pipe (|) to include multiple venue IDs.\n- venueName=Brooklyn%20Bowl|House%20of%20Blues\n\nFor more precise venue-specific results try using `venueId` or `venue[slug]`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoCityId",
+                  "value": "<string>",
+                  "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5474ac2525de2-search-cities\">JamBase city ID(s)</a>   .     \n- geoCityId=jambase:4223296\n\nUse a pipe (|) to include multiple city IDs.\n- geoCityId=jambase:4223296|jambase:4224564\n\nWhen using the `geoCityId` parameter, you can omit the the `geoRadiusAmount` parameter (or) set it to `0` (or) leave it empty to include only results from the city. Else, you can use a radius amount to include events within a radius around the city-center.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoCountryIso2",
+                  "value": "<iso-3166-alpha-2>",
+                  "description": "The two-letter ISO code for a country.\n- geoCountryIso2=US\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso2=US|CA\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoCountryIso3",
+                  "value": "<iso-3166-alpha-3>",
+                  "description": "The three-letter ISO code for a country.\n- geoCountryIso3=USA\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso3=USA|CAN\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoIp",
+                  "value": "<ipv4>",
+                  "description": "Use to retrieve events near an IP address.\\\nSupports IPv4 or IPv6 values.\n- geoIp=55.123.456.789\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoLatitude",
+                  "value": "<float>",
+                  "description": "The latitude for geographic radius.\n- geoLatitude=40.7505\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoLongitude",
+                  "value": "<float>",
+                  "description": "The longitude for geographic radius.\n- geoLongitude=-73.9934\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoMetroId",
+                  "value": "<string>",
+                  "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5b89026bb2462-get-metros\">metro ID(s)</a>.\n- geoMetroId=jambase:1\n\nUse a pipe (|) to include multiple metro IDs.\n- geoMetroId=jambase:1|jambase:5\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoRadiusAmount",
+                  "value": "60",
+                  "description": "The search radius for lat/lng type searches.\n- geoRadiusAmount=60\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoRadiusUnits",
+                  "value": "<string>",
+                  "description": "Whether to use miles (default) or kilometers for radius.\n- geoRadiusUnits=km\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoStateIso",
+                  "value": "<iso-3166-2>",
+                  "description": "The State code in ISO_3166-2 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-2)].\n- geoStateIso=US-NY\n\nUse a pipe (|) to include multiple State codes.\n- geoStateIso=US-NY|=US-PA\n\nNote: Available for United States, Canada, and Australia only.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "eventDatePreset",
+                  "value": "<string>",
+                  "description": "Use a dynamic date preset.\n- eventDatePreset=tomorrow\n\nNotes: \n- The `eventDatePreset` will override `eventDateFrom` & `eventDateTo` if those are set as well.\n- The `halloween` preset returns events on 10/31 only. The `newYears` preset returns events on 12/31 only. The `july4th` preset returns events on or near July 4th.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "eventDateFrom",
+                  "value": "<date>",
+                  "description": "For `concerts` must start on or after this date.\\\nFor `festivals`, must start on or after this date.\\\nIf left blank or omitted, will use the current date.\\\nThe `expandPastEvents` parameter is required when using `eventDateFrom` before the current date.\n\n- eventDateFrom=2023-10-31\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "eventDateTo",
+                  "value": "<date>",
+                  "description": "For `concerts` must start on or before this date.\\\nFor `festivals` must end on or before this date.\\\nIf left blank or omitted, will return all events after `eventDateFrom`.\n\n- eventDateTo=2023-12-31\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "eventDataSource",
+                  "value": "<string>",
+                  "description": "The EventDataSource of for the Event."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateModifiedFrom",
+                  "value": "<rfc3339>",
+                  "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "datePublishedFrom",
+                  "value": "<rfc3339>",
+                  "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandExternalIdentifiers",
+                  "value": "false",
+                  "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandArtistSameAs",
+                  "value": "false",
+                  "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandPastEvents",
+                  "value": "false",
+                  "description": "Use `true` to include past/historical `Concert` and `Festival` objects.\n\\\nWhen searching events, must be combined with `artistId` or `venueId` parameter.\n\\\nNote: The `expandPastEvents` parameter requires that your apikey has the `expandPastEvents` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "eventDate",
+                  "description": "Sort order for the returned events.\n\\\n- `eventDate` — ascending by event date (oldest first). This is the default.\n\\\n- `-eventDate` — descending by event date (most recent first).\n\\\nThe leading `-` indicates descending order, following the [JSON:API](https://jsonapi.org/format/#fetching-sorting) convention.\n\\\nMost useful when combined with `expandPastEvents=true` to retrieve an artist's or venue's most recent shows first without paginating through their full history.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "excludeEventPerformers",
+                  "value": "false",
+                  "description": "Use `true` to suppress the `performer` node in `Concert` and `Festival` objects.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3af8d2c-e244-44c2-9146-e857d2116e5d",
+              "name": "A list of Events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "40"
+                    },
+                    {
+                      "key": "eventType",
+                      "value": "festivals"
+                    },
+                    {
+                      "key": "eventId",
+                      "value": "jambase:16013248|jambase:14331594"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Bonnaroo"
+                    },
+                    {
+                      "key": "artistId",
+                      "value": "jambase:228924"
+                    },
+                    {
+                      "key": "artistName",
+                      "value": "Billie Eilish"
+                    },
+                    {
+                      "key": "genreSlug",
+                      "value": "jazz"
+                    },
+                    {
+                      "key": "venueId",
+                      "value": "jambase:62108"
+                    },
+                    {
+                      "key": "venueName",
+                      "value": "Brooklyn%20Bowl"
+                    },
+                    {
+                      "key": "geoCityId",
+                      "value": "jambase:4223296"
+                    },
+                    {
+                      "key": "geoCountryIso2",
+                      "value": "US"
+                    },
+                    {
+                      "key": "geoCountryIso3",
+                      "value": "USA"
+                    },
+                    {
+                      "key": "geoIp",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "40.7505"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "-73.9934"
+                    },
+                    {
+                      "key": "geoMetroId",
+                      "value": "jambase:1"
+                    },
+                    {
+                      "key": "geoRadiusAmount",
+                      "value": "60"
+                    },
+                    {
+                      "key": "geoRadiusUnits",
+                      "value": "mi"
+                    },
+                    {
+                      "key": "geoStateIso",
+                      "value": "US-AZ"
+                    },
+                    {
+                      "key": "eventDatePreset",
+                      "value": "tomorrow"
+                    },
+                    {
+                      "key": "eventDateFrom",
+                      "value": "2023-10-01"
+                    },
+                    {
+                      "key": "eventDateTo",
+                      "value": "2023-12-31"
+                    },
+                    {
+                      "key": "eventDataSource",
+                      "value": "dice"
+                    },
+                    {
+                      "key": "dateModifiedFrom",
+                      "value": "2022-10-31 00:00:00"
+                    },
+                    {
+                      "key": "datePublishedFrom",
+                      "value": "2022-01-01 00:00:00"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandPastEvents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "eventDate"
+                    },
+                    {
+                      "key": "excludeEventPerformers",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"pagination\": {\n    \"page\": 1,\n    \"perPage\": 10,\n    \"totalItems\": 50,\n    \"totalPages\": 5,\n    \"nextPage\": \"string\",\n    \"previousPage\": \"string\"\n  },\n  \"events\": [\n    {\n      \"@type\": \"Concert\",\n      \"eventStatus\": \"rescheduled\",\n      \"startDate\": \"string\",\n      \"location\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"performer\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"sameAs\": {},\n      \"endDate\": \"string\",\n      \"previousStartDate\": \"string\",\n      \"doorTime\": \"string\",\n      \"offers\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"eventAttendanceMode\": \"offline\",\n      \"isAccessibleForFree\": false,\n      \"x-promoImage\": \"http://kDYqHlZeqHILnTnikKRUMSAgjCpZlJnG.bunqWNBfx2FjBDFNUdDMG69Hp2EJGrUHA-kz-\",\n      \"deletionStatus\": \"deleted\",\n      \"deletedAt\": \"2026-04-12T18:01:00Z\",\n      \"mergedInto\": \"jambase:5632389\",\n      \"x-customTitle\": \"string\",\n      \"x-subtitle\": \"string\",\n      \"x-headlinerInSupport\": false,\n      \"x-streamIds\": [\n        \"jambase:12345\",\n        \"jambase:12345\"\n      ]\n    },\n    {\n      \"@type\": \"Concert\",\n      \"eventStatus\": \"cancelled\",\n      \"startDate\": \"string\",\n      \"location\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"performer\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"sameAs\": {},\n      \"endDate\": \"string\",\n      \"previousStartDate\": \"string\",\n      \"doorTime\": \"string\",\n      \"offers\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"eventAttendanceMode\": \"offline\",\n      \"isAccessibleForFree\": false,\n      \"x-promoImage\": \"https://KWyozUprwdCCjnFglGlctqfZvRPKyEVOK.agyjq2u+m9MZfBaUdZe\",\n      \"deletionStatus\": \"deleted\",\n      \"deletedAt\": \"2026-04-12T18:01:00Z\",\n      \"mergedInto\": \"jambase:5632389\",\n      \"x-customTitle\": \"string\",\n      \"x-subtitle\": \"string\",\n      \"x-headlinerInSupport\": false,\n      \"x-streamIds\": [\n        \"jambase:12345\",\n        \"jambase:12345\"\n      ]\n    }\n  ],\n  \"request\": {\n    \"endpoint\": \"string\",\n    \"method\": \"string\",\n    \"ip\": \"60.19.45.122\",\n    \"userAgent\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e44bc2b-01e2-42aa-95da-d4c97c301859",
+              "name": "Invalid input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "40"
+                    },
+                    {
+                      "key": "eventType",
+                      "value": "festivals"
+                    },
+                    {
+                      "key": "eventId",
+                      "value": "jambase:16013248|jambase:14331594"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Bonnaroo"
+                    },
+                    {
+                      "key": "artistId",
+                      "value": "jambase:228924"
+                    },
+                    {
+                      "key": "artistName",
+                      "value": "Billie Eilish"
+                    },
+                    {
+                      "key": "genreSlug",
+                      "value": "jazz"
+                    },
+                    {
+                      "key": "venueId",
+                      "value": "jambase:62108"
+                    },
+                    {
+                      "key": "venueName",
+                      "value": "Brooklyn%20Bowl"
+                    },
+                    {
+                      "key": "geoCityId",
+                      "value": "jambase:4223296"
+                    },
+                    {
+                      "key": "geoCountryIso2",
+                      "value": "US"
+                    },
+                    {
+                      "key": "geoCountryIso3",
+                      "value": "USA"
+                    },
+                    {
+                      "key": "geoIp",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "40.7505"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "-73.9934"
+                    },
+                    {
+                      "key": "geoMetroId",
+                      "value": "jambase:1"
+                    },
+                    {
+                      "key": "geoRadiusAmount",
+                      "value": "60"
+                    },
+                    {
+                      "key": "geoRadiusUnits",
+                      "value": "mi"
+                    },
+                    {
+                      "key": "geoStateIso",
+                      "value": "US-AZ"
+                    },
+                    {
+                      "key": "eventDatePreset",
+                      "value": "tomorrow"
+                    },
+                    {
+                      "key": "eventDateFrom",
+                      "value": "2023-10-01"
+                    },
+                    {
+                      "key": "eventDateTo",
+                      "value": "2023-12-31"
+                    },
+                    {
+                      "key": "eventDataSource",
+                      "value": "dice"
+                    },
+                    {
+                      "key": "dateModifiedFrom",
+                      "value": "2022-10-31 00:00:00"
+                    },
+                    {
+                      "key": "datePublishedFrom",
+                      "value": "2022-01-01 00:00:00"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandPastEvents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "eventDate"
+                    },
+                    {
+                      "key": "excludeEventPerformers",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"general_error\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"parameter_invalid\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b546b779-3b1f-4d73-b62f-2f185160ede0",
+              "name": "API key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "40"
+                    },
+                    {
+                      "key": "eventType",
+                      "value": "festivals"
+                    },
+                    {
+                      "key": "eventId",
+                      "value": "jambase:16013248|jambase:14331594"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Bonnaroo"
+                    },
+                    {
+                      "key": "artistId",
+                      "value": "jambase:228924"
+                    },
+                    {
+                      "key": "artistName",
+                      "value": "Billie Eilish"
+                    },
+                    {
+                      "key": "genreSlug",
+                      "value": "jazz"
+                    },
+                    {
+                      "key": "venueId",
+                      "value": "jambase:62108"
+                    },
+                    {
+                      "key": "venueName",
+                      "value": "Brooklyn%20Bowl"
+                    },
+                    {
+                      "key": "geoCityId",
+                      "value": "jambase:4223296"
+                    },
+                    {
+                      "key": "geoCountryIso2",
+                      "value": "US"
+                    },
+                    {
+                      "key": "geoCountryIso3",
+                      "value": "USA"
+                    },
+                    {
+                      "key": "geoIp",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "40.7505"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "-73.9934"
+                    },
+                    {
+                      "key": "geoMetroId",
+                      "value": "jambase:1"
+                    },
+                    {
+                      "key": "geoRadiusAmount",
+                      "value": "60"
+                    },
+                    {
+                      "key": "geoRadiusUnits",
+                      "value": "mi"
+                    },
+                    {
+                      "key": "geoStateIso",
+                      "value": "US-AZ"
+                    },
+                    {
+                      "key": "eventDatePreset",
+                      "value": "tomorrow"
+                    },
+                    {
+                      "key": "eventDateFrom",
+                      "value": "2023-10-01"
+                    },
+                    {
+                      "key": "eventDateTo",
+                      "value": "2023-12-31"
+                    },
+                    {
+                      "key": "eventDataSource",
+                      "value": "dice"
+                    },
+                    {
+                      "key": "dateModifiedFrom",
+                      "value": "2022-10-31 00:00:00"
+                    },
+                    {
+                      "key": "datePublishedFrom",
+                      "value": "2022-01-01 00:00:00"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandPastEvents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "eventDate"
+                    },
+                    {
+                      "key": "excludeEventPerformers",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW_Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2967b424-1d9d-436b-b02f-f7579c6f3b68",
+          "name": "Get / reverse-lookup an Event by JamBase or third-party ID",
+          "request": {
+            "name": "Get / reverse-lookup an Event by JamBase or third-party ID",
+            "description": {
+              "content": "Retrieve a specific Event by JamBase or third-party ID\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                "id",
+                "{{eventDataSource}}:{{eventId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expandExternalIdentifiers",
+                  "value": "false",
+                  "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandArtistSameAs",
+                  "value": "false",
+                  "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "excludeEventPerformers",
+                  "value": "false",
+                  "description": "Use `true` to suppress the `performer` node in `Concert` and `Festival` objects.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8551380f-ce24-49a1-8926-8c1f16ded29e",
+              "name": "A single Event",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "id",
+                    "{{eventDataSource}}:{{eventId}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "excludeEventPerformers",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"event\": {\n    \"@type\": \"Concert\",\n    \"eventStatus\": \"cancelled\",\n    \"startDate\": \"string\",\n    \"location\": {\n      \"deletionStatus\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"deletedAt\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"mergedInto\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"maximumAttendeeCapacity\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"address\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"geo\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"events\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"x-isPermanentlyClosed\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"x-numUpcomingEvents\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"x-externalIdentifiers\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"performer\": [\n      {\n        \"x-performanceDate\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-performanceRank\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-isHeadliner\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-dateIsConfirmed\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"x-performanceDate\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-performanceRank\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-isHeadliner\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-dateIsConfirmed\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"sameAs\": {},\n    \"endDate\": \"string\",\n    \"previousStartDate\": \"string\",\n    \"doorTime\": \"string\",\n    \"offers\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ],\n    \"eventAttendanceMode\": \"offline\",\n    \"isAccessibleForFree\": false,\n    \"x-promoImage\": \"https://rtqAPDUJMlYQojURdYvQWEEuVguQ.jcMgD4dCdumpydFOLtNiWQhqQmCTDtrKKwspyrpzVDLs6mn9,3ykC\",\n    \"deletionStatus\": \"deleted\",\n    \"deletedAt\": \"2026-04-12T18:01:00Z\",\n    \"mergedInto\": \"jambase:5632389\",\n    \"x-customTitle\": \"string\",\n    \"x-subtitle\": \"string\",\n    \"x-headlinerInSupport\": false,\n    \"x-streamIds\": [\n      \"jambase:12345\",\n      \"jambase:12345\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "033b25af-3720-4709-82a6-e4cfbf220a54",
+              "name": "Invalid input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "id",
+                    "{{eventDataSource}}:{{eventId}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "excludeEventPerformers",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"general_error\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"parameter_invalid\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "def28056-8e48-4b17-9e7f-9ca8845f0643",
+              "name": "API key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "id",
+                    "{{eventDataSource}}:{{eventId}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "excludeEventPerformers",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW_Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.data.jambase.com/v3",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The eventDataSource of the ID for the Event.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "eventDataSource"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique ID for the Event.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "eventId"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e9bd104e-f8cc-4e41-9182-70c40ff46554",
+    "name": "JamBase Concert Data Artists Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.\n\nContact Support:\n Name: Team JamBase\n Email: developer@jambase.com",
+      "type": "text/plain"
+    }
+  }
+}

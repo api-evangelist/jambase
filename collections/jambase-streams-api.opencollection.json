@@ -1,0 +1,134 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JamBase Concert Data Artists Streams API",
+    "version": "3.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Streams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Upcoming Streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.data.jambase.com/v3/streams",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number of results to retrieve"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of events per page of results"
+              },
+              {
+                "name": "eventDatePreset",
+                "value": "tomorrow",
+                "type": "query",
+                "description": "Use a dynamic date preset.\n- eventDatePreset=tomorrow\n\nNotes: \n- The `eventDatePreset` will override `eventDateFrom` & `eventDateTo` if those are set as well.\n- The `halloween` preset returns events on 10/31 only. The `newYears` preset returns events on 12/31 only. The `july4th` preset returns events on or near July 4th.\n"
+              },
+              {
+                "name": "eventDateFrom",
+                "value": "2023-10-01",
+                "type": "query",
+                "description": "For `concerts` must start on or after this date.\\\nFor `festivals`, must start on or after this date.\\\nIf left blank or omitted, will use the current date.\\\nThe `expandPastEvents` parameter is required when using `eventDateFrom` before the current date.\n\n- eventDateFrom=2023-10-31\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n"
+              },
+              {
+                "name": "eventDateTo",
+                "value": "2023-12-31",
+                "type": "query",
+                "description": "For `concerts` must start on or before this date.\\\nFor `festivals` must end on or before this date.\\\nIf left blank or omitted, will return all events after `eventDateFrom`.\n\n- eventDateTo=2023-12-31\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n"
+              },
+              {
+                "name": "streamDataSource",
+                "value": "",
+                "type": "query",
+                "description": "Filter streams to those sourced from a specific stream platform.\n\nv3 currently exposes a single source slug — `jambase` — which represents JamBase's normalized stream catalog. Pipe-delimited values are supported for forward compatibility:\n\n- streamDataSource=jambase\n"
+              },
+              {
+                "name": "dateModifiedFrom",
+                "value": "2022-10-31 00:00:00",
+                "type": "query",
+                "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+              },
+              {
+                "name": "datePublishedFrom",
+                "value": "2022-01-01 00:00:00",
+                "type": "query",
+                "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+              },
+              {
+                "name": "expandExternalIdentifiers",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+              },
+              {
+                "name": "expandArtistSameAs",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
+              }
+            ]
+          },
+          "docs": "Search upcoming streams by date, artist, genre, and more.\nPast streams are not available via the API.\n"
+        },
+        {
+          "info": {
+            "name": "Get / reverse-lookup a Stream by JamBase or third-party ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.data.jambase.com/v3/streams/id/:streamDataSource::streamId",
+            "params": [
+              {
+                "name": "streamDataSource",
+                "value": "",
+                "type": "path",
+                "description": "The StreamDataSource of the ID for the Stream."
+              },
+              {
+                "name": "streamId",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID for the Stream."
+              },
+              {
+                "name": "expandExternalIdentifiers",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+              },
+              {
+                "name": "expandArtistSameAs",
+                "value": "",
+                "type": "query",
+                "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific stream by JamBase or third-party ID.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

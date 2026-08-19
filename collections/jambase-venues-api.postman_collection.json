@@ -1,0 +1,823 @@
+{
+  "item": [
+    {
+      "id": "f782b207-8ba7-4114-8be7-c677f19024f7",
+      "name": "Venues",
+      "description": {
+        "content": "Search Venues",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e4ce0a17-3aa1-47e2-a9d8-0bff6e3ea4a8",
+          "name": "Search Venues",
+          "request": {
+            "name": "Search Venues",
+            "description": {
+              "content": "Search venues by location and more.\n\n<!-- theme: info  -->\n> #### Requirement\n>\n> Your request must include at the `venueName` or at least one of the geo parameters such as `geoCityId`, `geoCountryIso2`, `geoCountryIso3`, `geoIp`, `geoMetroId`, `geoStateIso`, or , `geoLatitude` and `geoLongitude`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "venues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number of results to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "40",
+                  "description": "Number of events per page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "venueName",
+                  "value": "<string>",
+                  "description": "A keyword-based search for venue name(s).\n- venueName=Brooklyn%20Bowl\n\nUse a pipe (|) to include multiple venue IDs.\n- venueName=Brooklyn%20Bowl|House%20of%20Blues\n\nFor more precise venue-specific results try using `venueId` or `venue[slug]`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoCityId",
+                  "value": "<string>",
+                  "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5474ac2525de2-search-cities\">JamBase city ID(s)</a>   .     \n- geoCityId=jambase:4223296\n\nUse a pipe (|) to include multiple city IDs.\n- geoCityId=jambase:4223296|jambase:4224564\n\nWhen using the `geoCityId` parameter, you can omit the the `geoRadiusAmount` parameter (or) set it to `0` (or) leave it empty to include only results from the city. Else, you can use a radius amount to include events within a radius around the city-center.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoCityName",
+                  "value": "<string>",
+                  "description": "Use to retrieve events for city name(s).\n- geoCityName=Seattle\n\nUse a pipe (|) to include multiple city names.\n- geoCityName=Seattle|Tacoma\n\nFor more precise city-specific results try using `city[id]`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoCountryIso2",
+                  "value": "<iso-3166-alpha-2>",
+                  "description": "The two-letter ISO code for a country.\n- geoCountryIso2=US\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso2=US|CA\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoCountryIso3",
+                  "value": "<iso-3166-alpha-3>",
+                  "description": "The three-letter ISO code for a country.\n- geoCountryIso3=USA\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso3=USA|CAN\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoIp",
+                  "value": "<ipv4>",
+                  "description": "Use to retrieve events near an IP address.\\\nSupports IPv4 or IPv6 values.\n- geoIp=55.123.456.789\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoLatitude",
+                  "value": "<float>",
+                  "description": "The latitude for geographic radius.\n- geoLatitude=40.7505\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoLongitude",
+                  "value": "<float>",
+                  "description": "The longitude for geographic radius.\n- geoLongitude=-73.9934\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoMetroId",
+                  "value": "<string>",
+                  "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5b89026bb2462-get-metros\">metro ID(s)</a>.\n- geoMetroId=jambase:1\n\nUse a pipe (|) to include multiple metro IDs.\n- geoMetroId=jambase:1|jambase:5\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoRadiusAmount",
+                  "value": "60",
+                  "description": "The search radius for lat/lng type searches.\n- geoRadiusAmount=60\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoRadiusUnits",
+                  "value": "<string>",
+                  "description": "Whether to use miles (default) or kilometers for radius.\n- geoRadiusUnits=km\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoStateIso",
+                  "value": "<iso-3166-2>",
+                  "description": "The State code in ISO_3166-2 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-2)].\n- geoStateIso=US-NY\n\nUse a pipe (|) to include multiple State codes.\n- geoStateIso=US-NY|=US-PA\n\nNote: Available for United States, Canada, and Australia only.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateModifiedFrom",
+                  "value": "<rfc3339>",
+                  "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "datePublishedFrom",
+                  "value": "<rfc3339>",
+                  "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "venueHasUpcomingEvents",
+                  "value": "false",
+                  "description": "Set to true to only return venues that have at least one upcoming event"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandExternalIdentifiers",
+                  "value": "false",
+                  "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "88d0eeff-beef-4827-8d1a-2c545b4c4f36",
+              "name": "A list of Venues",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "40"
+                    },
+                    {
+                      "key": "venueName",
+                      "value": "Brooklyn%20Bowl"
+                    },
+                    {
+                      "key": "geoCityId",
+                      "value": "jambase:4223296"
+                    },
+                    {
+                      "key": "geoCityName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geoCountryIso2",
+                      "value": "US"
+                    },
+                    {
+                      "key": "geoCountryIso3",
+                      "value": "USA"
+                    },
+                    {
+                      "key": "geoIp",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "40.7505"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "-73.9934"
+                    },
+                    {
+                      "key": "geoMetroId",
+                      "value": "jambase:1"
+                    },
+                    {
+                      "key": "geoRadiusAmount",
+                      "value": "60"
+                    },
+                    {
+                      "key": "geoRadiusUnits",
+                      "value": "mi"
+                    },
+                    {
+                      "key": "geoStateIso",
+                      "value": "US-AZ"
+                    },
+                    {
+                      "key": "dateModifiedFrom",
+                      "value": "2022-10-31 00:00:00"
+                    },
+                    {
+                      "key": "datePublishedFrom",
+                      "value": "2022-01-01 00:00:00"
+                    },
+                    {
+                      "key": "venueHasUpcomingEvents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"pagination\": {\n    \"page\": 1,\n    \"perPage\": 10,\n    \"totalItems\": 50,\n    \"totalPages\": 5,\n    \"nextPage\": \"string\",\n    \"previousPage\": \"string\"\n  },\n  \"venues\": [\n    {\n      \"name\": \"string\",\n      \"identifier\": \"jambase:194164\",\n      \"url\": \"http://JMdpQkecuGEdp.kpxcxLO4VVYqDENIxt0DPDceFs+Xc0HKQPkARIA\",\n      \"image\": \"http://Xs.zsYnzv4OoZvuYDRN7QNs5s+NZBD-MUUdV7P0p5uIxUENQq\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"http://fItwemyOJXDgTtrVeSbiKOeQULUePd.jdMC7YibWnXdkh8l0n1hCtDgBz3\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://xQpotiInxDSlAoibnqqeVlRyDjdgi.icEe9DiGCi\"\n        }\n      ],\n      \"datePublished\": \"2022-12-14T15:35:48Z\",\n      \"dateModified\": \"2022-12-14T03:41:20Z\",\n      \"deletionStatus\": \"deleted\",\n      \"deletedAt\": \"2026-04-12T18:01:00Z\",\n      \"mergedInto\": \"jambase:5632389\",\n      \"maximumAttendeeCapacity\": 20789,\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"streetAddress\": \"4 Pennsylvania Plaza\",\n        \"addressLocality\": \"New York\",\n        \"postalCode\": \"10001\",\n        \"addressRegion\": {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"alternateName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"country\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-numUpcomingEvents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"addressCountry\": {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"alternateName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-numUpcomingEvents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"x-streetAddress2\": \"Second Floor\",\n        \"x-timezone\": \"America/New_York\",\n        \"x-jamBaseMetroId\": 1,\n        \"x-jamBaseCityId\": 4223296\n      },\n      \"geo\": {\n        \"@type\": \"GeoCoordinates\",\n        \"latitude\": 40.7505,\n        \"longitude\": -73.9934\n      },\n      \"events\": [\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"x-isPermanentlyClosed\": false,\n      \"x-numUpcomingEvents\": 12\n    },\n    {\n      \"name\": \"string\",\n      \"identifier\": \"jambase:194164\",\n      \"url\": \"https://eLUciqeaFcxBQaHlWtdNUjG.jlgkDcbFlb72Ul4tGNdaPyhl4R.H.vbCWCichMQGqSX5WCZQu-nTfBR1FafJhcYVh\",\n      \"image\": \"https://UfrfaxclxvGrtepyy.tsievK0L1oULX43zN5eGjUd6lzLc8FpAKKwbyAwvKtx048nY6ilvKiZvSTcfB\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://SocwnCFPeWjcSUtAMbTg.aaoztO-KxVDd+I,fncnzw+-dS2KGTyUIkknp6E\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"http://FxYJwEnqkYLlDTQhNICBpBJOP.qymGejlirzvCsNqrZnhIsf4S6CpePV7eWX.MDC-kRxBsGiW2Fg,EsqB2eBKcYA.tId\"\n        }\n      ],\n      \"datePublished\": \"2022-12-14T15:35:48Z\",\n      \"dateModified\": \"2022-12-14T03:41:20Z\",\n      \"deletionStatus\": \"deleted\",\n      \"deletedAt\": \"2026-04-12T18:01:00Z\",\n      \"mergedInto\": \"jambase:5632389\",\n      \"maximumAttendeeCapacity\": 20789,\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"streetAddress\": \"4 Pennsylvania Plaza\",\n        \"addressLocality\": \"New York\",\n        \"postalCode\": \"10001\",\n        \"addressRegion\": {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"alternateName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"country\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-numUpcomingEvents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"addressCountry\": {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"alternateName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-numUpcomingEvents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"x-streetAddress2\": \"Second Floor\",\n        \"x-timezone\": \"America/New_York\",\n        \"x-jamBaseMetroId\": 1,\n        \"x-jamBaseCityId\": 4223296\n      },\n      \"geo\": {\n        \"@type\": \"GeoCoordinates\",\n        \"latitude\": 40.7505,\n        \"longitude\": -73.9934\n      },\n      \"events\": [\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"x-isPermanentlyClosed\": false,\n      \"x-numUpcomingEvents\": 12\n    }\n  ],\n  \"request\": {\n    \"endpoint\": \"string\",\n    \"method\": \"string\",\n    \"ip\": \"49.249.205.34\",\n    \"userAgent\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfba7e89-2116-4b6d-96cc-8fd1f9fe9644",
+              "name": "Invalid input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "40"
+                    },
+                    {
+                      "key": "venueName",
+                      "value": "Brooklyn%20Bowl"
+                    },
+                    {
+                      "key": "geoCityId",
+                      "value": "jambase:4223296"
+                    },
+                    {
+                      "key": "geoCityName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geoCountryIso2",
+                      "value": "US"
+                    },
+                    {
+                      "key": "geoCountryIso3",
+                      "value": "USA"
+                    },
+                    {
+                      "key": "geoIp",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "40.7505"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "-73.9934"
+                    },
+                    {
+                      "key": "geoMetroId",
+                      "value": "jambase:1"
+                    },
+                    {
+                      "key": "geoRadiusAmount",
+                      "value": "60"
+                    },
+                    {
+                      "key": "geoRadiusUnits",
+                      "value": "mi"
+                    },
+                    {
+                      "key": "geoStateIso",
+                      "value": "US-AZ"
+                    },
+                    {
+                      "key": "dateModifiedFrom",
+                      "value": "2022-10-31 00:00:00"
+                    },
+                    {
+                      "key": "datePublishedFrom",
+                      "value": "2022-01-01 00:00:00"
+                    },
+                    {
+                      "key": "venueHasUpcomingEvents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"lookup_error\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"parameter_invalid\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75705b59-fbcc-4c4b-84fd-16a11216eae6",
+              "name": "API key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "40"
+                    },
+                    {
+                      "key": "venueName",
+                      "value": "Brooklyn%20Bowl"
+                    },
+                    {
+                      "key": "geoCityId",
+                      "value": "jambase:4223296"
+                    },
+                    {
+                      "key": "geoCityName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geoCountryIso2",
+                      "value": "US"
+                    },
+                    {
+                      "key": "geoCountryIso3",
+                      "value": "USA"
+                    },
+                    {
+                      "key": "geoIp",
+                      "value": "<ipv4>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "40.7505"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "-73.9934"
+                    },
+                    {
+                      "key": "geoMetroId",
+                      "value": "jambase:1"
+                    },
+                    {
+                      "key": "geoRadiusAmount",
+                      "value": "60"
+                    },
+                    {
+                      "key": "geoRadiusUnits",
+                      "value": "mi"
+                    },
+                    {
+                      "key": "geoStateIso",
+                      "value": "US-AZ"
+                    },
+                    {
+                      "key": "dateModifiedFrom",
+                      "value": "2022-10-31 00:00:00"
+                    },
+                    {
+                      "key": "datePublishedFrom",
+                      "value": "2022-01-01 00:00:00"
+                    },
+                    {
+                      "key": "venueHasUpcomingEvents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW_Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2e11014-e7f4-48bf-9292-7a9451b3c19a",
+          "name": "Get / reverse-lookup a Venue by JamBase or third-party ID",
+          "request": {
+            "name": "Get / reverse-lookup a Venue by JamBase or third-party ID",
+            "description": {
+              "content": "Retrieve a specific venue by JamBase or third-party ID.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "venues",
+                "id",
+                "{{venueDataSource}}:{{venueId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expandUpcomingEvents",
+                  "value": "false",
+                  "description": "Use `true` to include the `event` node with any upcoming Concerts and Festivals for the venue."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludeEventPerformers",
+                  "value": "false",
+                  "description": "Use `true` to suppress the `performer` node in `Concert` and `Festival` objects.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandExternalIdentifiers",
+                  "value": "false",
+                  "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandArtistSameAs",
+                  "value": "false",
+                  "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandPastEvents",
+                  "value": "false",
+                  "description": "Use `true` to include past/historical `Concert` and `Festival` objects.\n\\\nWhen searching events, must be combined with `artistId` or `venueId` parameter.\n\\\nNote: The `expandPastEvents` parameter requires that your apikey has the `expandPastEvents` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "387e71a4-57a5-401e-9423-0951574a2abd",
+              "name": "A single Venue",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    "id",
+                    "{{venueDataSource}}:{{venueId}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expandUpcomingEvents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "excludeEventPerformers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandPastEvents",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"venue\": {\n    \"name\": \"string\",\n    \"identifier\": \"jambase:194164\",\n    \"url\": \"https://riPCJyZikfKcWtWBH.razvj-fJE.SuUdw\",\n    \"image\": \"http://WErLn.ojd2een,6SH.6MH\",\n    \"sameAs\": [\n      {\n        \"@type\": \"URL\",\n        \"identifier\": \"musicbrainz\",\n        \"url\": \"http://VIKMgihLCwQzCiRFUpL.iyo+wteuv0kXAnHqLJMBt,FYU8\"\n      },\n      {\n        \"@type\": \"URL\",\n        \"identifier\": \"musicbrainz\",\n        \"url\": \"https://Ld.igiZETw7GYf.qMVM9POqaLNN3mxvjhyNFvoNpA+tltzq\"\n      }\n    ],\n    \"datePublished\": \"2022-12-14T15:35:48Z\",\n    \"dateModified\": \"2022-12-14T03:41:20Z\",\n    \"deletionStatus\": \"deleted\",\n    \"deletedAt\": \"2026-04-12T18:01:00Z\",\n    \"mergedInto\": \"jambase:5632389\",\n    \"maximumAttendeeCapacity\": 20789,\n    \"address\": {\n      \"@type\": \"PostalAddress\",\n      \"streetAddress\": \"4 Pennsylvania Plaza\",\n      \"addressLocality\": \"New York\",\n      \"postalCode\": \"10001\",\n      \"addressRegion\": {\n        \"@type\": \"State\",\n        \"identifier\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"Arizona\",\n        \"alternateName\": \"AZ\",\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-numUpcomingEvents\": 12\n      },\n      \"addressCountry\": {\n        \"@type\": \"Country\",\n        \"identifier\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"United States\",\n        \"alternateName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-numUpcomingEvents\": 12\n      },\n      \"x-streetAddress2\": \"Second Floor\",\n      \"x-timezone\": \"America/New_York\",\n      \"x-jamBaseMetroId\": 1,\n      \"x-jamBaseCityId\": 4223296\n    },\n    \"geo\": {\n      \"@type\": \"GeoCoordinates\",\n      \"latitude\": 40.7505,\n      \"longitude\": -73.9934\n    },\n    \"events\": [\n      {\n        \"@type\": \"Concert\",\n        \"deletionStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mergedInto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-externalIdentifiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"x-customTitle\": \"string\",\n        \"x-subtitle\": \"string\",\n        \"x-headlinerInSupport\": false,\n        \"x-streamIds\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"Concert\",\n        \"deletionStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mergedInto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-externalIdentifiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"x-customTitle\": \"string\",\n        \"x-subtitle\": \"string\",\n        \"x-headlinerInSupport\": false,\n        \"x-streamIds\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ],\n    \"x-isPermanentlyClosed\": false,\n    \"x-numUpcomingEvents\": 12\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f7adc01-0fe8-40c4-87f7-6fcc956fc8c0",
+              "name": "Invalid input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    "id",
+                    "{{venueDataSource}}:{{venueId}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expandUpcomingEvents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "excludeEventPerformers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandPastEvents",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"lookup_error\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"parameter_invalid\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ccd8109-c711-4daa-8127-b5c393499c45",
+              "name": "API key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    "id",
+                    "{{venueDataSource}}:{{venueId}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expandUpcomingEvents",
+                      "value": "false"
+                    },
+                    {
+                      "key": "excludeEventPerformers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandPastEvents",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW_Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.data.jambase.com/v3",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) the VenueDataSource of the ID for the artist",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "venueDataSource"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) the unique ID for the Venue",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "venueId"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9615e582-6616-4d7b-a844-1d9b067a8a56",
+    "name": "JamBase Concert Data Artists Venues API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.\n\nContact Support:\n Name: Team JamBase\n Email: developer@jambase.com",
+      "type": "text/plain"
+    }
+  }
+}

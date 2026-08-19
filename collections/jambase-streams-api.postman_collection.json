@@ -1,0 +1,625 @@
+{
+  "item": [
+    {
+      "id": "987863aa-c75d-436d-a967-e52c77f2b120",
+      "name": "Streams",
+      "description": {
+        "content": "Search Streams",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7ecbb25f-9ffa-47c3-b62a-ece347eecc54",
+          "name": "Search Upcoming Streams",
+          "request": {
+            "name": "Search Upcoming Streams",
+            "description": {
+              "content": "Search upcoming streams by date, artist, genre, and more.\nPast streams are not available via the API.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "streams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number of results to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "40",
+                  "description": "Number of events per page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "eventDatePreset",
+                  "value": "<string>",
+                  "description": "Use a dynamic date preset.\n- eventDatePreset=tomorrow\n\nNotes: \n- The `eventDatePreset` will override `eventDateFrom` & `eventDateTo` if those are set as well.\n- The `halloween` preset returns events on 10/31 only. The `newYears` preset returns events on 12/31 only. The `july4th` preset returns events on or near July 4th.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "eventDateFrom",
+                  "value": "<date>",
+                  "description": "For `concerts` must start on or after this date.\\\nFor `festivals`, must start on or after this date.\\\nIf left blank or omitted, will use the current date.\\\nThe `expandPastEvents` parameter is required when using `eventDateFrom` before the current date.\n\n- eventDateFrom=2023-10-31\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "eventDateTo",
+                  "value": "<date>",
+                  "description": "For `concerts` must start on or before this date.\\\nFor `festivals` must end on or before this date.\\\nIf left blank or omitted, will return all events after `eventDateFrom`.\n\n- eventDateTo=2023-12-31\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "streamDataSource",
+                  "value": "<string>",
+                  "description": "Filter streams to those sourced from a specific stream platform.\n\nv3 currently exposes a single source slug — `jambase` — which represents JamBase's normalized stream catalog. Pipe-delimited values are supported for forward compatibility:\n\n- streamDataSource=jambase\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateModifiedFrom",
+                  "value": "<rfc3339>",
+                  "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "datePublishedFrom",
+                  "value": "<rfc3339>",
+                  "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandExternalIdentifiers",
+                  "value": "false",
+                  "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandArtistSameAs",
+                  "value": "false",
+                  "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a830610c-d916-4700-8231-ca238a8ad909",
+              "name": "A list of Streams",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "40"
+                    },
+                    {
+                      "key": "eventDatePreset",
+                      "value": "tomorrow"
+                    },
+                    {
+                      "key": "eventDateFrom",
+                      "value": "2023-10-01"
+                    },
+                    {
+                      "key": "eventDateTo",
+                      "value": "2023-12-31"
+                    },
+                    {
+                      "key": "streamDataSource",
+                      "value": "jambase"
+                    },
+                    {
+                      "key": "dateModifiedFrom",
+                      "value": "2022-10-31 00:00:00"
+                    },
+                    {
+                      "key": "datePublishedFrom",
+                      "value": "2022-01-01 00:00:00"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"pagination\": {\n    \"page\": 1,\n    \"perPage\": 10,\n    \"totalItems\": 50,\n    \"totalPages\": 5,\n    \"nextPage\": \"string\",\n    \"previousPage\": \"string\"\n  },\n  \"streams\": [\n    {\n      \"@type\": \"Stream\",\n      \"eventStatus\": \"cancelled\",\n      \"startDate\": \"string\",\n      \"location\": {\n        \"deletionStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mergedInto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"maximumAttendeeCapacity\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"geo\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"events\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-isPermanentlyClosed\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-numUpcomingEvents\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-externalIdentifiers\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"performer\": [\n        {\n          \"x-performanceDate\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-performanceRank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-isHeadliner\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-dateIsConfirmed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"x-performanceDate\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-performanceRank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-isHeadliner\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-dateIsConfirmed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"sameAs\": {},\n      \"endDate\": \"string\",\n      \"previousStartDate\": \"string\",\n      \"doorTime\": \"string\",\n      \"offers\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"eventAttendanceMode\": \"offline\",\n      \"isAccessibleForFree\": false,\n      \"x-promoImage\": \"https://iRJ.lpqcbuXt\",\n      \"deletionStatus\": \"deleted\",\n      \"deletedAt\": \"2026-04-12T18:01:00Z\",\n      \"mergedInto\": \"jambase:5632389\",\n      \"isLiveBroadcast\": true,\n      \"broadcastOfEvent\": [\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"x-customTitle\": \"string\"\n    },\n    {\n      \"@type\": \"Stream\",\n      \"eventStatus\": \"rescheduled\",\n      \"startDate\": \"string\",\n      \"location\": {\n        \"deletionStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mergedInto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"maximumAttendeeCapacity\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"geo\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"events\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-isPermanentlyClosed\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-numUpcomingEvents\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-externalIdentifiers\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"performer\": [\n        {\n          \"x-performanceDate\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-performanceRank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-isHeadliner\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-dateIsConfirmed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"x-performanceDate\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-performanceRank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-isHeadliner\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-dateIsConfirmed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"sameAs\": {},\n      \"endDate\": \"string\",\n      \"previousStartDate\": \"string\",\n      \"doorTime\": \"string\",\n      \"offers\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"eventAttendanceMode\": \"offline\",\n      \"isAccessibleForFree\": false,\n      \"x-promoImage\": \"http://CxZRnjdUapnSoiPlwRU.tozqs1b9GBNL6YgnzEvOL.pePslx8oGdpvJ9qv,F6g,jojP7vcLsZLe\",\n      \"deletionStatus\": \"deleted\",\n      \"deletedAt\": \"2026-04-12T18:01:00Z\",\n      \"mergedInto\": \"jambase:5632389\",\n      \"isLiveBroadcast\": true,\n      \"broadcastOfEvent\": [\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"x-customTitle\": \"string\"\n    }\n  ],\n  \"request\": {\n    \"endpoint\": \"string\",\n    \"method\": \"string\",\n    \"ip\": \"48.214.233.204\",\n    \"userAgent\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f93c9b4-9d73-48d6-b6a6-9e869b750c18",
+              "name": "Invalid input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "40"
+                    },
+                    {
+                      "key": "eventDatePreset",
+                      "value": "tomorrow"
+                    },
+                    {
+                      "key": "eventDateFrom",
+                      "value": "2023-10-01"
+                    },
+                    {
+                      "key": "eventDateTo",
+                      "value": "2023-12-31"
+                    },
+                    {
+                      "key": "streamDataSource",
+                      "value": "jambase"
+                    },
+                    {
+                      "key": "dateModifiedFrom",
+                      "value": "2022-10-31 00:00:00"
+                    },
+                    {
+                      "key": "datePublishedFrom",
+                      "value": "2022-01-01 00:00:00"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"parameter_out_of_range\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"parameter_missing\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c11c864c-5bad-4a86-8425-2c61148d95ec",
+              "name": "API key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "40"
+                    },
+                    {
+                      "key": "eventDatePreset",
+                      "value": "tomorrow"
+                    },
+                    {
+                      "key": "eventDateFrom",
+                      "value": "2023-10-01"
+                    },
+                    {
+                      "key": "eventDateTo",
+                      "value": "2023-12-31"
+                    },
+                    {
+                      "key": "streamDataSource",
+                      "value": "jambase"
+                    },
+                    {
+                      "key": "dateModifiedFrom",
+                      "value": "2022-10-31 00:00:00"
+                    },
+                    {
+                      "key": "datePublishedFrom",
+                      "value": "2022-01-01 00:00:00"
+                    },
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW_Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "801ece60-a32b-4c2e-a8a4-26748686f089",
+          "name": "Get / reverse-lookup a Stream by JamBase or third-party ID",
+          "request": {
+            "name": "Get / reverse-lookup a Stream by JamBase or third-party ID",
+            "description": {
+              "content": "Retrieve a specific stream by JamBase or third-party ID.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "streams",
+                "id",
+                "{{streamDataSource}}:{{streamId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expandExternalIdentifiers",
+                  "value": "false",
+                  "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "expandArtistSameAs",
+                  "value": "false",
+                  "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b83ceadc-a2da-4040-9430-5f264649e434",
+              "name": "A single Stream (`Stream`).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "id",
+                    "{{streamDataSource}}:{{streamId}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"stream\": {\n    \"@type\": \"Stream\",\n    \"eventStatus\": \"postponed\",\n    \"startDate\": \"string\",\n    \"location\": {\n      \"name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"identifier\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"url\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"image\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"sameAs\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"datePublished\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dateModified\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"deletionStatus\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"deletedAt\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"mergedInto\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"maximumAttendeeCapacity\": 20789,\n      \"address\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"geo\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"events\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"x-isPermanentlyClosed\": false,\n      \"x-numUpcomingEvents\": 12,\n      \"x-externalIdentifiers\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    },\n    \"performer\": [\n      {\n        \"x-performanceDate\": \"string\",\n        \"x-performanceRank\": 8305.326351319583,\n        \"x-isHeadliner\": false,\n        \"x-dateIsConfirmed\": false\n      },\n      {\n        \"x-performanceDate\": \"string\",\n        \"x-performanceRank\": 6270.477838507548,\n        \"x-isHeadliner\": false,\n        \"x-dateIsConfirmed\": false\n      }\n    ],\n    \"sameAs\": {},\n    \"endDate\": \"string\",\n    \"previousStartDate\": \"string\",\n    \"doorTime\": \"string\",\n    \"offers\": [\n      {\n        \"identifier\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"url\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"category\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"seller\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"validFrom\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"priceSpecification\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"identifier\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"url\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"category\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"seller\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"validFrom\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"priceSpecification\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"eventAttendanceMode\": \"offline\",\n    \"isAccessibleForFree\": false,\n    \"x-promoImage\": \"https://ZwNfCGZrgNEQmbwQf.lkC3w.T+UGRCSGlPvN55g6Yidfs7hCzdndYXC5UA8zs6ilPremz79wpWw\",\n    \"deletionStatus\": \"deleted\",\n    \"deletedAt\": \"2026-04-12T18:01:00Z\",\n    \"mergedInto\": \"jambase:5632389\",\n    \"isLiveBroadcast\": true,\n    \"broadcastOfEvent\": [\n      {\n        \"@type\": \"Concert\",\n        \"deletionStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mergedInto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-externalIdentifiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"x-customTitle\": \"string\",\n        \"x-subtitle\": \"string\",\n        \"x-headlinerInSupport\": false,\n        \"x-streamIds\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"Concert\",\n        \"deletionStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mergedInto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-externalIdentifiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"x-customTitle\": \"string\",\n        \"x-subtitle\": \"string\",\n        \"x-headlinerInSupport\": false,\n        \"x-streamIds\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ],\n    \"x-customTitle\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8facd904-81d0-435c-bfe0-aa156ded2629",
+              "name": "Invalid input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "id",
+                    "{{streamDataSource}}:{{streamId}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"parameter_out_of_range\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"parameter_missing\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ed51023-5f0b-4d7e-8d60-4aa9ff829795",
+              "name": "API key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "id",
+                    "{{streamDataSource}}:{{streamId}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expandExternalIdentifiers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "expandArtistSameAs",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW_Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.data.jambase.com/v3",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The StreamDataSource of the ID for the Stream.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "streamDataSource"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique ID for the Stream.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "streamId"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e0e4e57f-d63b-4256-b7c9-c5c86db0e5a0",
+    "name": "JamBase Concert Data Artists Streams API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.\n\nContact Support:\n Name: Team JamBase\n Email: developer@jambase.com",
+      "type": "text/plain"
+    }
+  }
+}
