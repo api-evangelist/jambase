@@ -24,6 +24,17 @@ image: https://www.jambase.com/favicon.ico
 tags:
   - Artists
   - Concerts
+  - Event
+  - Festivals
+  - Live Music
+  - Music
+  - Setlists
+  - Tickets
+  - Tours
+  - Venues
+tags_raw:
+  - Artists
+  - Concerts
   - Events
   - Festivals
   - Live Music
@@ -70,6 +81,8 @@ apis:
   humanURL: https://data.jambase.com/api/reference
   baseURL: https://data.jambase.com/v3
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
