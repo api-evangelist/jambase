@@ -7,6 +7,18 @@ description: >-
   delivers real-time global show listings, festival schedules, artist metadata, venue details,
   and ticket pricing data. JamBase Data is trusted by Google, Spotify, and 450+ companies for
   jam band and concert discovery, setlist information, tour dates, and live music event data.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: open
