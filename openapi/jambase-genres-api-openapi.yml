@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.
   version: 3.1.0
-  title: JamBase Concert Data Artists Genres API
+  title: JamBase Concert Data Genres API
   contact:
     email: developer@jambase.com
     name: Team JamBase
@@ -31,9 +31,7 @@ paths:
 
         \
 
-        Returns all Genres in Alphabetical order.
-
-        '
+        Returns all Genres in Alphabetical order.'
       responses:
         '200':
           description: A list of Genres
@@ -114,43 +112,6 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
 components:
   schemas:
-    Genre:
-      title: Genre
-      description: A music genre
-      type: object
-      properties:
-        name:
-          type: string
-          description: The display name for the genre.
-        identifier:
-          $ref: '#/components/schemas/enumGenres'
-    Success:
-      name: success
-      description: A successful response.
-      type: boolean
-      default: true
-    ErrorsList:
-      description: A list of errors
-      x-stoplight:
-        id: 1253ab38a345c
-      type: array
-      items:
-        type: object
-        properties:
-          errorCode:
-            type: string
-            enum:
-            - no_lookup_results
-            - lookup_error
-            - parameter_missing
-            - parameter_invalid
-            - identifier_missing
-            - identifier_invalid
-            - parameter_out_of_range
-            - general_error
-          errorMessage:
-            type: string
-            example: The identifier `jambase:87121` is invalid.
     enumGenres:
       type: string
       description: Music genres
@@ -178,6 +139,43 @@ components:
       - tribute
       x-tags:
       - Enums
+    Success:
+      name: success
+      description: A successful response.
+      type: boolean
+      default: true
+    Genre:
+      title: Genre
+      description: A music genre
+      type: object
+      properties:
+        name:
+          type: string
+          description: The display name for the genre.
+        identifier:
+          $ref: '#/components/schemas/enumGenres'
+    ErrorsList:
+      description: A list of errors
+      x-stoplight:
+        id: 1253ab38a345c
+      type: array
+      items:
+        type: object
+        properties:
+          errorCode:
+            type: string
+            enum:
+            - no_lookup_results
+            - lookup_error
+            - parameter_missing
+            - parameter_invalid
+            - identifier_missing
+            - identifier_invalid
+            - parameter_out_of_range
+            - general_error
+          errorMessage:
+            type: string
+            example: The identifier `jambase:87121` is invalid.
   responses:
     BadRequest:
       description: Invalid input parameter

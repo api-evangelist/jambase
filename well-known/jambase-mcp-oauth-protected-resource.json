@@ -1,0 +1,1 @@
+{"resource":"https://mcp.jambase.com","authorization_servers":["https://app-api.data.jambase.com/oauth"],"scopes_supported":["mcp:read","openid"],"bearer_methods_supported":["header"],"resource_documentation":"https://app-api.data.jambase.com/docs"}
