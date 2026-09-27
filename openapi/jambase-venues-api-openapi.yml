@@ -105,34 +105,77 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
 components:
   schemas:
-    Request:
-      title: Request
-      description: Enclosure for request details.
+    propMergedInto:
+      title: propMergedInto
+      type: string
+      example: jambase:5632389
+      description: 'On a `merged` tombstone (see `deletionStatus`), the `identifier` of the surviving record this one was folded into. Repoint cached references from `identifier` to `mergedInto`.
+
+        '
+    Pagination:
+      title: Pagination
+      description: Enclosure for pagination values.
       type: object
       properties:
-        endpoint:
+        page:
+          type: integer
+          description: The current page of results.
+          example: 1
+          minimum: 0
+        perPage:
+          type: integer
+          description: Number of events per page of results.
+          example: 10
+          minimum: 1
+        totalItems:
+          type: integer
+          description: Total results for the request.
+          example: 50
+          minimum: 0
+        totalPages:
+          type: integer
+          description: Total pages for the request.
+          example: 5
+          minimum: 0
+        nextPage:
           type: string
           format: url
-          description: The base endpoint requested
-        method:
+          description: The absolute URL for the next page of results, if available (e.g. `https://api.data.jambase.com/v3/events?page=2`).
+        previousPage:
           type: string
-          description: The request method (e.g. GET, POST)
-        params:
-          type: array
-          items: {}
-          format: string
-          description: The parameters for the request
-        ip:
-          oneOf:
-          - type: string
-            format: ipv4
-          - type: string
-            format: ipv6
-          description: The requesting IP address, IPv4 or IPv6
-        userAgent:
-          type: string
-          format: string
-          description: The requesting UserAgent
+          format: url
+          description: The absolute URL for the previous page of results, if available (e.g. `https://api.data.jambase.com/v3/events?page=1`).
+    Festival:
+      title: Festival
+      description: A music festival
+      type: object
+      required:
+      - '@type'
+      - name
+      - identifier
+      - url
+      - eventStatus
+      - startDate
+      - endDate
+      - location
+      - performer
+      - x-lineupDisplayOption
+      allOf:
+      - $ref: '#/components/schemas/Event'
+      - type: object
+        properties:
+          '@type':
+            type: string
+            enum:
+            - Festival
+          deletionStatus:
+            $ref: '#/components/schemas/propDeletionStatus'
+          deletedAt:
+            $ref: '#/components/schemas/propDeletedAt'
+          mergedInto:
+            $ref: '#/components/schemas/propMergedInto'
+          x-lineupDisplayOption:
+            $ref: '#/components/schemas/enumFestivalLineupDisplayOption'
     enumAttendanceMode:
       type: string
       default: offline
@@ -143,392 +186,41 @@ components:
       - online
       x-tags:
       - Enums
-    propDeletionStatus:
-      title: propDeletionStatus
-      type: string
-      enum:
-      - deleted
-      - trashed
-      - merged
-      example: deleted
-      description: 'Present ONLY on tombstone rows returned by delta polls of the core feeds (i.e. requests that include `dateModifiedFrom`). Marks a record that has left the catalog so a long-lived mirror can drop or redirect it:
-
-        - `deleted` — permanently removed.
-
-        - `trashed` — soft-deleted (events only; recoverable upstream). Treat the same as `deleted` in your cache.
-
-        - `merged` — folded into another record; follow `mergedInto`.
-
-        \
-
-        A tombstone row carries only `@type`, `identifier`, `deletionStatus`, `deletedAt`, `dateModified`, and (when `merged`) `mergedInto` — no other fields. Tombstones count toward `perPage` and `pagination.totalItems` and are appended after the live rows in the merged result sequence. Retention: `deleted` / `trashed` tombstones are emitted for 90 days after `deletedAt`; `merged` tombstones never expire. Queries WITHOUT `dateModifiedFrom` never return tombstones.
-
-        '
-    enumVenueDataSource:
-      type: string
-      description: Data source slugs to use for Venue IDs
-      enum:
-      - axs
-      - dice
-      - etix
-      - eventbrite
-      - eventim-de
-      - jambase
-      - seated
-      - seatgeek
-      - suitehop
-      - ticketmaster
-      - viagogo
-      x-stoplight:
-        id: vg16q2jczs7fg
-      x-tags:
-      - Enums
-    enumArtistDataSource:
-      type: string
-      description: Data source slugs to use for Artist IDs
-      enum:
-      - axs
-      - dice
-      - etix
-      - eventbrite
-      - eventim-de
-      - jambase
-      - seated
-      - seatgeek
-      - spotify
-      - ticketmaster
-      - viagogo
-      - musicbrainz
-      default: jambase
-      x-stoplight:
-        id: m7pyhha21d3n6
-      x-tags:
-      - Enums
-    ErrorsList:
-      description: A list of errors
-      x-stoplight:
-        id: 1253ab38a345c
-      type: array
-      items:
-        type: object
-        properties:
-          errorCode:
-            type: string
-            enum:
-            - no_lookup_results
-            - lookup_error
-            - parameter_missing
-            - parameter_invalid
-            - identifier_missing
-            - identifier_invalid
-            - parameter_out_of_range
-            - general_error
-          errorMessage:
-            type: string
-            example: The identifier `jambase:87121` is invalid.
-    enumUrlType:
-      type: string
-      x-stoplight:
-        id: cf4040b56ddd2
-      description: The type of the external URL
-      enum:
-      - officialSite
-      - facebook
-      - twitter
-      - instagram
-      - youtube
-      - musicbrainz
-      - spotify
-      - androidApp
-      - iosApp
-      x-tags:
-      - Enums
-    URL:
-      title: URL
-      x-stoplight:
-        id: ac90d6bc4bf17
-      description: A third-party link.
+    PriceSpecification:
+      title: PriceSpecification
+      description: The price or price range for the thing
       type: object
+      required:
+      - price
+      - priceCurrency
       properties:
         '@type':
           type: string
           enum:
-          - URL
-        identifier:
-          $ref: '#/components/schemas/enumUrlType'
-        url:
-          type: string
-          format: uri
-          description: The URL of the external link.
-    enumEventDataSource:
-      type: string
-      description: Data source slugs to use for Event IDs
-      enum:
-      - axs
-      - dice
-      - etix
-      - eventbrite
-      - eventim-de
-      - jambase
-      - seated
-      - see-tickets
-      - see-tickets-uk
-      - sofar-sounds
-      - seatgeek
-      - suitehop
-      - ticketmaster
-      - tixr
-      - viagogo
-      x-tags:
-      - Enums
-    enumGenres:
-      type: string
-      description: Music genres
-      summary: Multiple genres
-      enum:
-      - bluegrass
-      - blues
-      - christian
-      - classical
-      - country-music
-      - edm
-      - folk
-      - hip-hop-rap
-      - indie
-      - jamband
-      - jazz
-      - kpop
-      - latin
-      - metal
-      - pop
-      - punk
-      - reggae
-      - rhythm-and-blues-soul
-      - rock
-      - tribute
-      x-tags:
-      - Enums
-    Success:
-      name: success
-      description: A successful response.
-      type: boolean
-      default: true
-    enumRadiusUnits:
-      type: string
-      description: The units of measure for a geo search radius
-      enum:
-      - mi
-      - km
-      x-tags:
-      - Enums
-    State:
-      title: State
-      description: 'A State, Region, or Province.
-
-        \
-
-        Note 1: Available for United States, Canada, and Australia only.
-
-        \
-
-        Note 2: The `country` and `x-numUpcomingEvents` nodes are only provided in the Geography lookup endpoints, not as part of `addressRegion` within a Concert, Festival, or Stream.
-
-        '
-      type: object
-      x-stoplight:
-        id: rbp08k99t5o7m
-      properties:
-        '@type':
-          type: string
-          enum:
-          - State
-        identifier:
-          $ref: '#/components/schemas/enumState'
-        name:
-          type: string
-          example: Arizona
-          description: The name of the State
-        alternateName:
-          type: string
-          example: AZ
-          description: The indentifier without the Country code prefix
-        country:
-          $ref: '#/components/schemas/Country'
-          description: 'The country in which the state belongs.
-
-            \
-
-            Note: this is only provided in the Geography lookup endpoints, not as part of a location''s `addressCountry` within a Concert, Festival, or Stream.
-
-            '
-        x-numUpcomingEvents:
+          - PriceSpecification
+        minPrice:
+          description: The lowest price if the price is a range
           type: number
-          format: int32
-          example: 12
-          description: 'The number of upcoming events in this State.
-
-            \
-
-            Note: this is only provided in the Geography lookup endpoints, not as part of a location within a Concert, Festival, or Stream.
-
-            '
-    enumEventStatus:
-      type: string
-      description: The scheduling status for the event
-      enum:
-      - scheduled
-      - postponed
-      - rescheduled
-      - cancelled
-      x-tags:
-      - Enums
-    MusicGroup:
-      title: MusicGroup
-      description: A band or musician
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Thing'
-      - type: object
-        properties:
-          '@type':
-            type: string
-            enum:
-            - MusicGroup
-          deletionStatus:
-            $ref: '#/components/schemas/propDeletionStatus'
-          deletedAt:
-            $ref: '#/components/schemas/propDeletedAt'
-          mergedInto:
-            $ref: '#/components/schemas/propMergedInto'
-          member:
-            type: array
-            description: For bands, an array of the band's members
-            items:
-              type: object
-              properties:
-                type:
-                  type: string
-                  enum:
-                  - MusicGroup
-                name:
-                  type: string
-                  description: The name of the item
-                identifier:
-                  type: string
-                  example: jambase:12345
-                  description: A unique identifier of the item
-                image:
-                  type: string
-                  format: uri
-                  description: An image of the item
-                url:
-                  type: string
-                  format: uri
-                  description: URL of the item
-          memberOf:
-            type: array
-            description: For musicians, an array of the band's the musician is a member of
-            items:
-              type: object
-              properties:
-                '@type':
-                  type: string
-                  enum:
-                  - MusicGroup
-                name:
-                  type: string
-                  description: The name of the item
-                identifier:
-                  type: string
-                  example: jambase:98765
-                  description: A unique identifier of the item
-                image:
-                  type: string
-                  format: uri
-                  description: An image of the item
-                url:
-                  type: string
-                  format: uri
-                  description: URL of the item
-          foundingLocation:
-            type: object
-            properties:
-              '@type':
-                type: string
-                enum:
-                - Place
-              name:
-                type: string
-                example: Chicago, IL
-            description: The hometown of the artist
-          foundingDate:
-            type: string
-            format: iso-8601
-            example: '1983'
-            description: The year the artist first performed
-          genre:
-            type: array
-            items:
-              $ref: '#/components/schemas/enumGenres'
-          events:
-            type: array
-            items:
-              oneOf:
-              - $ref: '#/components/schemas/Concert'
-              - $ref: '#/components/schemas/Festival'
-              - $ref: '#/components/schemas/Stream'
-            description: 'Only available when using `expandUpcomingEvents=true` and/or `expandUpcomingStreams=true` URL param.
-
-              '
-          x-bandOrMusician:
-            type: string
-            enum:
-            - band
-            - musician
-          x-numUpcomingEvents:
-            type: number
-            format: int32
-            example: 12
-            description: "The number of upcoming events for this artist.            \n"
-          x-externalIdentifiers:
-            type: array
-            items:
-            - $ref: '#/components/schemas/ExternalIdentifier'
-    ExternalIdentifier:
-      title: ExternalIdentifier
-      description: A third-party non-JamBase ID for an artist, venue, or event.
-      type: object
-      properties:
-        '@type':
+          format: decimal
+          min: 0
+          example: 15.99
+        maxPrice:
+          description: The highest price if the price is a range
+          type: number
+          format: decimal
+          min: 0
+          example: 35.99
+        price:
+          description: The singular price if not a range, same as `minPrice` if a range
+          type: number
+          format: decimal
+          min: 0
+          example: 35.99
+        priceCurrency:
           type: string
-          enum:
-          - ExternalIdentifier
-        source:
-          oneOf:
-          - $ref: '#/components/schemas/enumEventDataSource'
-          - $ref: '#/components/schemas/enumArtistDataSource'
-          - $ref: '#/components/schemas/enumVenueDataSource'
-        identifier:
-          type: string
-          description: The unique identifier of the item from the third-party source.
-      examples:
-      - '@type': ExternalIdentifier
-        source: ticketmaster
-        identifier: e3asdf3ad
-      - '@type': ExternalIdentifier
-        source: axs
-        identifier: '123423'
-    enumFestivalLineupDisplayOption:
-      type: string
-      default: full
-      description: Whether to display the `full` lineup or a `daybyday` breakdown
-      enum:
-      - full
-      - daybyday
-      x-stoplight:
-        id: hfetwdodwtcz5
-      x-tags:
-      - Enums
+          format: iso-4217
+          description: The currency of the price in ISO 4217 format [[docs](https://en.wikipedia.org/wiki/ISO_4217)]
+          example: USD
     Concert:
       title: Concert
       description: A concert / show
@@ -578,559 +270,32 @@ components:
             description: An array of one or more IDs for Streams associated with a Concert
       x-stoplight:
         id: d7j9iw8g683w2
-    PriceSpecification:
-      title: PriceSpecification
-      description: The price or price range for the thing
-      type: object
-      required:
-      - price
-      - priceCurrency
-      properties:
-        '@type':
-          type: string
-          enum:
-          - PriceSpecification
-        minPrice:
-          description: The lowest price if the price is a range
-          type: number
-          format: decimal
-          min: 0
-          example: 15.99
-        maxPrice:
-          description: The highest price if the price is a range
-          type: number
-          format: decimal
-          min: 0
-          example: 35.99
-        price:
-          description: The singular price if not a range, same as `minPrice` if a range
-          type: number
-          format: decimal
-          min: 0
-          example: 35.99
-        priceCurrency:
-          type: string
-          format: iso-4217
-          description: The currency of the price in ISO 4217 format [[docs](https://en.wikipedia.org/wiki/ISO_4217)]
-          example: USD
-    enumCountryIso3:
+    Success:
+      name: success
+      description: A successful response.
+      type: boolean
+      default: true
+    enumArtistDataSource:
       type: string
-      format: iso-3166-alpha-3
-      example: USA
-      description: 'The Country code in ISO 3166-1 alpha-3 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)].
-
-        '
+      description: Data source slugs to use for Artist IDs
       enum:
-      - ABW
-      - AFG
-      - AGO
-      - AIA
-      - ALB
-      - AND
-      - ARE
-      - ARG
-      - ARM
-      - ASM
-      - ATF
-      - ATG
-      - AUS
-      - AZE
-      - BDI
-      - BEL
-      - BEN
-      - BFA
-      - BGD
-      - BGR
-      - BHR
-      - BHS
-      - BIH
-      - BLM
-      - BLR
-      - BLZ
-      - BMU
-      - BOL
-      - BRA
-      - BRB
-      - BRN
-      - BTN
-      - BWA
-      - CAF
-      - CAN
-      - CCK
-      - CHE
-      - CHL
-      - CHN
-      - CIV
-      - CMR
-      - COD
-      - COG
-      - COK
-      - COL
-      - COM
-      - CPV
-      - CRI
-      - CUB
-      - CUW
-      - CXR
-      - CYM
-      - CYP
-      - CZE
-      - DEU
-      - DJI
-      - DMA
-      - DNK
-      - DOM
-      - DZA
-      - ECU
-      - EGY
-      - ERI
-      - ESH
-      - ESP
-      - EST
-      - ETH
-      - FIN
-      - FJI
-      - FLK
-      - FRA
-      - FRO
-      - FSM
-      - GAB
-      - GBR
-      - GEO
-      - GGY
-      - GHA
-      - GIB
-      - GIN
-      - GLP
-      - GMB
-      - GNB
-      - GNQ
-      - GRC
-      - GRD
-      - GRL
-      - GTM
-      - GUF
-      - GUM
-      - GUY
-      - HKG
-      - HND
-      - HRV
-      - HTI
-      - HUN
-      - IDN
-      - IMN
-      - IND
-      - IOT
-      - IRL
-      - IRN
-      - IRQ
-      - ISL
-      - ISR
-      - ITA
-      - JAM
-      - JEY
-      - JOR
-      - JPN
-      - KAZ
-      - KEN
-      - KGZ
-      - KHM
-      - KIR
-      - KNA
-      - KOR
-      - KWT
-      - LAO
-      - LBN
-      - LBR
-      - LBY
-      - LCA
-      - LIE
-      - LKA
-      - LSO
-      - LTU
-      - LUX
-      - LVA
-      - MAC
-      - MAF
-      - MAR
-      - MCO
-      - MDA
-      - MDG
-      - MDV
-      - MEX
-      - MHL
-      - MKD
-      - MLI
-      - MLT
-      - MMR
-      - MNE
-      - MNG
-      - MNP
-      - MOZ
-      - MRT
-      - MSR
-      - MTQ
-      - MUS
-      - MWI
-      - MYS
-      - MYT
-      - NAM
-      - NCL
-      - NER
-      - NFK
-      - NGA
-      - NIC
-      - NIU
-      - NLD
-      - NOR
-      - NPL
-      - NRU
-      - NZL
-      - OMN
-      - PAK
-      - PAN
-      - PCN
-      - PER
-      - PHL
-      - PLW
-      - PNG
-      - POL
-      - PRI
-      - PRK
-      - PRT
-      - PRY
-      - PYF
-      - QAT
-      - REU
-      - ROU
-      - RUS
-      - RWA
-      - SAU
-      - SDN
-      - SEN
-      - SGP
-      - SGS
-      - SHN
-      - SLB
-      - SLE
-      - SLV
-      - SMR
-      - SOM
-      - SPM
-      - SRB
-      - SSD
-      - STP
-      - SUR
-      - SVK
-      - SVN
-      - SWE
-      - SWZ
-      - SXM
-      - SYC
-      - SYR
-      - TCA
-      - TCD
-      - TGO
-      - THA
-      - TJK
-      - TKL
-      - TKM
-      - TLS
-      - TON
-      - TTO
-      - TUN
-      - TUR
-      - TUV
-      - TWN
-      - TZA
-      - UGA
-      - UKR
-      - URY
-      - USA
-      - UZB
-      - VCT
-      - VEN
-      - VGB
-      - VIR
-      - VNM
-      - VUT
-      - WLF
-      - WSM
-      - XGZ
-      - XKS
-      - XPR
-      - XQZ
-      - XSP
-      - XSV
-      - XWB
-      - XXD
-      - YEM
-      - ZAF
-      - ZMB
-      - ZWE
+      - axs
+      - dice
+      - etix
+      - eventbrite
+      - eventim-de
+      - jambase
+      - seated
+      - seatgeek
+      - spotify
+      - ticketmaster
+      - viagogo
+      - musicbrainz
+      default: jambase
+      x-stoplight:
+        id: m7pyhha21d3n6
       x-tags:
       - Enums
-    Organization:
-      title: Organization
-      description: 'An organization or business.\
-
-        Typically a ticket vendor or data source in this API.\
-
-        The `identifier` or "slug" can also be used as `ticket[vendor][id]` in `/events` and `/livestreams` search endpoints.
-
-        '
-      type: object
-      required:
-      - name
-      - identifier
-      - disambiguatingDescription
-      - datePublished
-      - dateModified
-      allOf:
-      - type: object
-        properties:
-          '@type':
-            type: string
-            enum:
-            - Organization
-          identifier:
-            type: string
-            description: A unique identifier of the item
-            example: ticketmaster
-          disambiguatingDescription:
-            type: string
-            examples:
-            - eventTicketVendorPrimary
-            - eventTicketVendorSecondary
-            - streamTicketVendorPrimary
-            - streamDataSource
-            - eventDataSource
-            - artistDataSource
-            - venueDataSource
-      - $ref: '#/components/schemas/Thing'
-    PostalAddress:
-      title: PostalAddress
-      description: A postal address, typically for a MusicVenue
-      type: object
-      properties:
-        '@type':
-          type: string
-          enum:
-          - PostalAddress
-        streetAddress:
-          type: string
-          example: 4 Pennsylvania Plaza
-          description: The street address
-        addressLocality:
-          type: string
-          example: New York
-          description: The city/locality in which the place is in
-        postalCode:
-          type: string
-          example: '10001'
-          description: The postal code
-        addressRegion:
-          allOf:
-          - $ref: '#/components/schemas/State'
-        addressCountry:
-          allOf:
-          - $ref: '#/components/schemas/Country'
-        x-streetAddress2:
-          type: string
-          example: Second Floor
-          description: An optional second line for street address.
-        x-timezone:
-          type: string
-          description: 'A "tz database" timezone [[see list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)].
-
-            '
-          example: America/New_York
-        x-jamBaseMetroId:
-          type: number
-          format: int32
-          example: 1
-          description: A unique identifier to the JamBase metro.
-        x-jamBaseCityId:
-          type: number
-          format: int32
-          example: 4223296
-          description: A unique identifier to the JamBase city.
-    Country:
-      title: Country
-      description: A Country.
-      type: object
-      properties:
-        '@type':
-          type: string
-          enum:
-          - Country
-        identifier:
-          $ref: '#/components/schemas/enumCountryIso2'
-        name:
-          type: string
-          example: United States
-          description: The name of the Country Area
-        alternateName:
-          $ref: '#/components/schemas/enumCountryIso3'
-        x-numUpcomingEvents:
-          type: number
-          format: int32
-          example: 12
-          description: 'The number of upcoming events in this Country.
-
-            \
-
-            Note: this is only provided in the Geography lookup endpoints, not as part of a location within a Concert, Festival, or Stream.
-
-            '
-    propLatitude:
-      title: propLatitude
-      type: number
-      format: float
-      minimum: -90
-      maximum: 90
-      example: 40.7505
-      description: The latitude of a location
-      x-stoplight:
-        id: 0gf3yu2lypo1r
-    propMergedInto:
-      title: propMergedInto
-      type: string
-      example: jambase:5632389
-      description: 'On a `merged` tombstone (see `deletionStatus`), the `identifier` of the surviving record this one was folded into. Repoint cached references from `identifier` to `mergedInto`.
-
-        '
-    propLongitude:
-      title: propLongitude
-      type: number
-      format: float
-      minimum: -180
-      maximum: 180
-      example: -73.9934
-      description: The longitude of a location
-      x-stoplight:
-        id: udrk05v1mvsv9
-    Stream:
-      title: Stream
-      description: A stream
-      type: object
-      required:
-      - '@type'
-      - name
-      - identifier
-      - url
-      - eventStatus
-      - startDate
-      - location
-      - performer
-      allOf:
-      - $ref: '#/components/schemas/Event'
-      - type: object
-        properties:
-          '@type':
-            type: string
-            enum:
-            - Stream
-          deletionStatus:
-            $ref: '#/components/schemas/propDeletionStatus'
-          deletedAt:
-            $ref: '#/components/schemas/propDeletedAt'
-          mergedInto:
-            $ref: '#/components/schemas/propMergedInto'
-          isLiveBroadcast:
-            type: boolean
-            description: True if the broadcast is of a live event
-          broadcastOfEvent:
-            type: array
-            items:
-              oneOf:
-              - $ref: '#/components/schemas/Concert'
-              - $ref: '#/components/schemas/Festival'
-          x-customTitle:
-            type: string
-            description: To replace the default `event[name]` property
-      x-stoplight:
-        id: fijmf4s5a9h9x
-    MusicVenue:
-      title: MusicVenue
-      description: A place to Go See Live Music
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Thing'
-      - type: object
-        properties:
-          deletionStatus:
-            $ref: '#/components/schemas/propDeletionStatus'
-          deletedAt:
-            $ref: '#/components/schemas/propDeletedAt'
-          mergedInto:
-            $ref: '#/components/schemas/propMergedInto'
-          maximumAttendeeCapacity:
-            type: number
-            format: int32
-            example: 20789
-            description: The total number of individuals that may attend an event or venue.
-          address:
-            $ref: '#/components/schemas/PostalAddress'
-          geo:
-            $ref: '#/components/schemas/GeoCoordinates'
-          events:
-            type: array
-            items:
-              oneOf:
-              - $ref: '#/components/schemas/Concert'
-              - $ref: '#/components/schemas/Festival'
-          x-isPermanentlyClosed:
-            type: boolean
-            default: false
-            description: If the venue is permanently closed.
-          x-numUpcomingEvents:
-            type: number
-            format: int32
-            example: 12
-            description: The number of upcoming events at this venue.
-          x-externalIdentifiers:
-            type: array
-            items:
-            - $ref: '#/components/schemas/ExternalIdentifier'
-    Offer:
-      title: Offer
-      description: Something for sale, typically a concert ticket
-      type: object
-      required:
-      - identifier
-      - url
-      - category
-      - seller
-      - validFrom
-      allOf:
-      - $ref: '#/components/schemas/Thing'
-      - type: object
-        properties:
-          identifier:
-            type: string
-            description: A unique identifier of the item
-            example: jambase:194164
-          url:
-            type: string
-            format: uri
-            description: URL of the item
-          category:
-            type: string
-            description: The category of the Offer, typically used to identify a primary or secondary ticketing link
-            examples:
-            - ticketingLinkPrimary
-            - ticketingLinkSecondary
-          priceSpecification:
-            $ref: '#/components/schemas/PriceSpecification'
-          seller:
-            $ref: '#/components/schemas/Organization'
-            required: true
-          validFrom:
-            example: '2022-12-07T12:42:00'
-            schema:
-              type: string
-              format: dateTime
     enumState:
       type: string
       format: iso-3166-2
@@ -1219,230 +384,127 @@ components:
       - CA-YT
       x-tags:
       - Enums
-    Thing:
-      title: Thing
-      description: A generic thing
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the item
-        identifier:
-          type: string
-          example: jambase:194164
-          description: A unique identifier of the item
-        url:
-          type: string
-          format: uri
-          description: URL of the item
-        image:
-          type: string
-          format: uri
-          description: 'An image of the item.\
+    Organization:
+      title: Organization
+      description: 'An organization or business.\
 
-            \
+        Typically a ticket vendor or data source in this API.\
 
-            Please note that ''image'' may not be provided for all Schemas that include `Thing` (e.g. `Organization`)
+        The `identifier` or "slug" can also be used as `ticket[vendor][id]` in `/events` and `/livestreams` search endpoints.
 
-            '
-        sameAs:
-          type: array
-          items:
-            $ref: '#/components/schemas/URL'
-          description: URL of a reference Web page that unambiguously indicates the item's identity
-        datePublished:
-          type: string
-          format: iso-8601
-          example: '2022-12-14T15:35:48Z'
-          description: 'The date the Event first appeared in ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]
-
-            \
-
-            Please note that ''datePublished'' may not be provided for all Schemas that include `Thing` (e.g. `Organization`)
-
-            '
-        dateModified:
-          type: string
-          format: iso-8601
-          example: '2022-12-14T03:41:20Z'
-          description: 'The date the Event was last updated in ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]
-
-            \
-
-            Please note that ''dateModified'' may not be provided for all Schemas that include `Thing` (e.g. `Organization`).
-
-            \
-
-            Indexing timestamps for Concert / Festival / Stream / MusicGroup / MusicVenue live on `datePublished` and `dateModified`. The sibling `x-createdOnDate` and `x-updatedOnDate` fields are scoped to data-source / `Organization` responses (e.g. ticket vendors, performance-rights organizations) and are not present on Event-derived schemas.
-
-            '
-    Pagination:
-      title: Pagination
-      description: Enclosure for pagination values.
-      type: object
-      properties:
-        page:
-          type: integer
-          description: The current page of results.
-          example: 1
-          minimum: 0
-        perPage:
-          type: integer
-          description: Number of events per page of results.
-          example: 10
-          minimum: 1
-        totalItems:
-          type: integer
-          description: Total results for the request.
-          example: 50
-          minimum: 0
-        totalPages:
-          type: integer
-          description: Total pages for the request.
-          example: 5
-          minimum: 0
-        nextPage:
-          type: string
-          format: url
-          description: The absolute URL for the next page of results, if available (e.g. `https://api.data.jambase.com/v3/events?page=2`).
-        previousPage:
-          type: string
-          format: url
-          description: The absolute URL for the previous page of results, if available (e.g. `https://api.data.jambase.com/v3/events?page=1`).
-    Festival:
-      title: Festival
-      description: A music festival
+        '
       type: object
       required:
-      - '@type'
       - name
       - identifier
-      - url
-      - eventStatus
-      - startDate
-      - endDate
-      - location
-      - performer
-      - x-lineupDisplayOption
+      - disambiguatingDescription
+      - datePublished
+      - dateModified
       allOf:
-      - $ref: '#/components/schemas/Event'
       - type: object
         properties:
           '@type':
             type: string
             enum:
-            - Festival
-          deletionStatus:
-            $ref: '#/components/schemas/propDeletionStatus'
-          deletedAt:
-            $ref: '#/components/schemas/propDeletedAt'
-          mergedInto:
-            $ref: '#/components/schemas/propMergedInto'
-          x-lineupDisplayOption:
-            $ref: '#/components/schemas/enumFestivalLineupDisplayOption'
-    Event:
-      title: Event
-      description: 'A generic event.Please note that `startDate`,`endDate`,`previousStartDate`, and `doorTime` are all returned based on the venue''s local time but without an offset. You can find the timezone at `event > location > address > x-timezone` if you need to do any conversions.
-
-        '
-      type: object
-      allOf:
+            - Organization
+          identifier:
+            type: string
+            description: A unique identifier of the item
+            example: ticketmaster
+          disambiguatingDescription:
+            type: string
+            examples:
+            - eventTicketVendorPrimary
+            - eventTicketVendorSecondary
+            - streamTicketVendorPrimary
+            - streamDataSource
+            - eventDataSource
+            - artistDataSource
+            - venueDataSource
       - $ref: '#/components/schemas/Thing'
-        properties:
-          sameAs:
-            description: Only available for `Festival` type events, not `Concert`
-      - type: object
-        properties:
-          eventStatus:
-            $ref: '#/components/schemas/enumEventStatus'
-          startDate:
-            type: string
-            format: iso-8601
-            description: 'The start date and time of the item using ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]
-
-              \
-
-              Please note that `startDate` is returned based on the venue''s local time but without an offset. You can find the timezone at `event > location > address > x-timezone` if you need to do any conversions.
-
-              '
-          endDate:
-            type: string
-            format: iso-8601
-            description: 'The end date of the item using ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]
-
-              \
-
-              Please note that `endDate` is returned based on the venue''s local time but without an offset. You can find the timezone at `event > location > address > x-timezone` if you need to do any conversions.
-
-              '
-          previousStartDate:
-            type: string
-            format: iso-8601
-            description: 'For rescheduled events, the previously scheduled start date using ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]
-
-              \
-
-              Please note that `previousStartDate` is returned based on the venue''s local time but without an offset. You can find the timezone at `event > location > address > x-timezone` if you need to do any conversions.
-
-              '
-          doorTime:
-            type: string
-            format: iso-8601
-            description: 'The time admission will commence in local time using ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]
-
-              \
-
-              Please note that `doorTime` is returned based on the venue''s local time but without an offset. You can find the timezone at `event > location > address > x-timezone` if you need to do any conversions.
-
-              '
-          location:
-            $ref: '#/components/schemas/MusicVenue'
-          offers:
-            type: array
-            items:
-              $ref: '#/components/schemas/Offer'
-          performer:
-            type: array
-            items:
-              allOf:
-              - $ref: '#/components/schemas/MusicGroup'
-              - type: object
-                properties:
-                  x-performanceDate:
-                    type: string
-                    format: iso-8601
-                    description: 'The date of the performance using ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]
-
-                      '
-                  x-performanceRank:
-                    type: number
-                    format: int32
-                    require: true
-                    description: The "rank" for this performance whithin the event
-                  x-isHeadliner:
-                    type: boolean
-                    default: false
-                    require: true
-                    description: If this performer is a headliner
-                  x-dateIsConfirmed:
-                    type: boolean
-                    default: false
-                    description: 'Required for Festivals.
-
-                      If a Festival performance date is confirmed or not.\
-
-                      If not, it will appear on the first day of the Festival.
-
-                      '
-          eventAttendanceMode:
-            $ref: '#/components/schemas/enumAttendanceMode'
-          isAccessibleForFree:
-            type: boolean
-            default: false
-          x-promoImage:
-            type: string
-            format: uri
-            description: A secondary promotional image for the event (e.g. admat)
+    enumUrlType:
+      type: string
+      x-stoplight:
+        id: cf4040b56ddd2
+      description: The type of the external URL
+      enum:
+      - officialSite
+      - facebook
+      - twitter
+      - instagram
+      - youtube
+      - musicbrainz
+      - spotify
+      - androidApp
+      - iosApp
+      x-tags:
+      - Enums
+    enumFestivalLineupDisplayOption:
+      type: string
+      default: full
+      description: Whether to display the `full` lineup or a `daybyday` breakdown
+      enum:
+      - full
+      - daybyday
+      x-stoplight:
+        id: hfetwdodwtcz5
+      x-tags:
+      - Enums
+    propLatitude:
+      title: propLatitude
+      type: number
+      format: float
+      minimum: -90
+      maximum: 90
+      example: 40.7505
+      description: The latitude of a location
+      x-stoplight:
+        id: 0gf3yu2lypo1r
+    ExternalIdentifier:
+      title: ExternalIdentifier
+      description: A third-party non-JamBase ID for an artist, venue, or event.
+      type: object
+      properties:
+        '@type':
+          type: string
+          enum:
+          - ExternalIdentifier
+        source:
+          oneOf:
+          - $ref: '#/components/schemas/enumEventDataSource'
+          - $ref: '#/components/schemas/enumArtistDataSource'
+          - $ref: '#/components/schemas/enumVenueDataSource'
+        identifier:
+          type: string
+          description: The unique identifier of the item from the third-party source.
+      examples:
+      - '@type': ExternalIdentifier
+        source: ticketmaster
+        identifier: e3asdf3ad
+      - '@type': ExternalIdentifier
+        source: axs
+        identifier: '123423'
+    enumEventDataSource:
+      type: string
+      description: Data source slugs to use for Event IDs
+      enum:
+      - axs
+      - dice
+      - etix
+      - eventbrite
+      - eventim-de
+      - jambase
+      - seated
+      - see-tickets
+      - see-tickets-uk
+      - sofar-sounds
+      - seatgeek
+      - suitehop
+      - ticketmaster
+      - tixr
+      - viagogo
+      x-tags:
+      - Enums
     enumCountryIso2:
       type: string
       format: iso-3166-alpha-2
@@ -1702,6 +764,101 @@ components:
         id: 1ef0ob0u4hu6w
       x-tags:
       - Enums
+    State:
+      title: State
+      description: 'A State, Region, or Province.
+
+        \
+
+        Note 1: Available for United States, Canada, and Australia only.
+
+        \
+
+        Note 2: The `country` and `x-numUpcomingEvents` nodes are only provided in the Geography lookup endpoints, not as part of `addressRegion` within a Concert, Festival, or Stream.
+
+        '
+      type: object
+      x-stoplight:
+        id: rbp08k99t5o7m
+      properties:
+        '@type':
+          type: string
+          enum:
+          - State
+        identifier:
+          $ref: '#/components/schemas/enumState'
+        name:
+          type: string
+          example: Arizona
+          description: The name of the State
+        alternateName:
+          type: string
+          example: AZ
+          description: The indentifier without the Country code prefix
+        country:
+          $ref: '#/components/schemas/Country'
+          description: 'The country in which the state belongs.
+
+            \
+
+            Note: this is only provided in the Geography lookup endpoints, not as part of a location''s `addressCountry` within a Concert, Festival, or Stream.
+
+            '
+        x-numUpcomingEvents:
+          type: number
+          format: int32
+          example: 12
+          description: 'The number of upcoming events in this State.
+
+            \
+
+            Note: this is only provided in the Geography lookup endpoints, not as part of a location within a Concert, Festival, or Stream.
+
+            '
+    URL:
+      title: URL
+      x-stoplight:
+        id: ac90d6bc4bf17
+      description: A third-party link.
+      type: object
+      properties:
+        '@type':
+          type: string
+          enum:
+          - URL
+        identifier:
+          $ref: '#/components/schemas/enumUrlType'
+        url:
+          type: string
+          format: uri
+          description: The URL of the external link.
+    enumGenres:
+      type: string
+      description: Music genres
+      summary: Multiple genres
+      enum:
+      - bluegrass
+      - blues
+      - christian
+      - classical
+      - country-music
+      - edm
+      - folk
+      - hip-hop-rap
+      - indie
+      - jamband
+      - jazz
+      - kpop
+      - latin
+      - metal
+      - pop
+      - punk
+      - reggae
+      - rhythm-and-blues-soul
+      - rock
+      - tribute
+      x-tags:
+      - Enums
     GeoCoordinates:
       title: GeoCoordinates
       description: The latitude and longitude for a place
@@ -1715,6 +872,535 @@ components:
           $ref: '#/components/schemas/propLatitude'
         longitude:
           $ref: '#/components/schemas/propLongitude'
+    Event:
+      title: Event
+      description: 'A generic event.Please note that `startDate`,`endDate`,`previousStartDate`, and `doorTime` are all returned based on the venue''s local time but without an offset. You can find the timezone at `event > location > address > x-timezone` if you need to do any conversions.
+
+        '
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Thing'
+        properties:
+          sameAs:
+            description: Only available for `Festival` type events, not `Concert`
+      - type: object
+        properties:
+          eventStatus:
+            $ref: '#/components/schemas/enumEventStatus'
+          startDate:
+            type: string
+            format: iso-8601
+            description: 'The start date and time of the item using ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]
+
+              \
+
+              Please note that `startDate` is returned based on the venue''s local time but without an offset. You can find the timezone at `event > location > address > x-timezone` if you need to do any conversions.
+
+              '
+          endDate:
+            type: string
+            format: iso-8601
+            description: 'The end date of the item using ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]
+
+              \
+
+              Please note that `endDate` is returned based on the venue''s local time but without an offset. You can find the timezone at `event > location > address > x-timezone` if you need to do any conversions.
+
+              '
+          previousStartDate:
+            type: string
+            format: iso-8601
+            description: 'For rescheduled events, the previously scheduled start date using ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]
+
+              \
+
+              Please note that `previousStartDate` is returned based on the venue''s local time but without an offset. You can find the timezone at `event > location > address > x-timezone` if you need to do any conversions.
+
+              '
+          doorTime:
+            type: string
+            format: iso-8601
+            description: 'The time admission will commence in local time using ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]
+
+              \
+
+              Please note that `doorTime` is returned based on the venue''s local time but without an offset. You can find the timezone at `event > location > address > x-timezone` if you need to do any conversions.
+
+              '
+          location:
+            $ref: '#/components/schemas/MusicVenue'
+          offers:
+            type: array
+            items:
+              $ref: '#/components/schemas/Offer'
+          performer:
+            type: array
+            items:
+              allOf:
+              - $ref: '#/components/schemas/MusicGroup'
+              - type: object
+                properties:
+                  x-performanceDate:
+                    type: string
+                    format: iso-8601
+                    description: 'The date of the performance using ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]
+
+                      '
+                  x-performanceRank:
+                    type: number
+                    format: int32
+                    require: true
+                    description: The "rank" for this performance whithin the event
+                  x-isHeadliner:
+                    type: boolean
+                    default: false
+                    require: true
+                    description: If this performer is a headliner
+                  x-dateIsConfirmed:
+                    type: boolean
+                    default: false
+                    description: 'Required for Festivals.
+
+                      If a Festival performance date is confirmed or not.\
+
+                      If not, it will appear on the first day of the Festival.
+
+                      '
+          eventAttendanceMode:
+            $ref: '#/components/schemas/enumAttendanceMode'
+          isAccessibleForFree:
+            type: boolean
+            default: false
+          x-promoImage:
+            type: string
+            format: uri
+            description: A secondary promotional image for the event (e.g. admat)
+    MusicVenue:
+      title: MusicVenue
+      description: A place to Go See Live Music
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Thing'
+      - type: object
+        properties:
+          deletionStatus:
+            $ref: '#/components/schemas/propDeletionStatus'
+          deletedAt:
+            $ref: '#/components/schemas/propDeletedAt'
+          mergedInto:
+            $ref: '#/components/schemas/propMergedInto'
+          maximumAttendeeCapacity:
+            type: number
+            format: int32
+            example: 20789
+            description: The total number of individuals that may attend an event or venue.
+          address:
+            $ref: '#/components/schemas/PostalAddress'
+          geo:
+            $ref: '#/components/schemas/GeoCoordinates'
+          events:
+            type: array
+            items:
+              oneOf:
+              - $ref: '#/components/schemas/Concert'
+              - $ref: '#/components/schemas/Festival'
+          x-isPermanentlyClosed:
+            type: boolean
+            default: false
+            description: If the venue is permanently closed.
+          x-numUpcomingEvents:
+            type: number
+            format: int32
+            example: 12
+            description: The number of upcoming events at this venue.
+          x-externalIdentifiers:
+            type: array
+            items:
+            - $ref: '#/components/schemas/ExternalIdentifier'
+    Country:
+      title: Country
+      description: A Country.
+      type: object
+      properties:
+        '@type':
+          type: string
+          enum:
+          - Country
+        identifier:
+          $ref: '#/components/schemas/enumCountryIso2'
+        name:
+          type: string
+          example: United States
+          description: The name of the Country Area
+        alternateName:
+          $ref: '#/components/schemas/enumCountryIso3'
+        x-numUpcomingEvents:
+          type: number
+          format: int32
+          example: 12
+          description: 'The number of upcoming events in this Country.
+
+            \
+
+            Note: this is only provided in the Geography lookup endpoints, not as part of a location within a Concert, Festival, or Stream.
+
+            '
+    MusicGroup:
+      title: MusicGroup
+      description: A band or musician
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Thing'
+      - type: object
+        properties:
+          '@type':
+            type: string
+            enum:
+            - MusicGroup
+          deletionStatus:
+            $ref: '#/components/schemas/propDeletionStatus'
+          deletedAt:
+            $ref: '#/components/schemas/propDeletedAt'
+          mergedInto:
+            $ref: '#/components/schemas/propMergedInto'
+          member:
+            type: array
+            description: For bands, an array of the band's members
+            items:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - MusicGroup
+                name:
+                  type: string
+                  description: The name of the item
+                identifier:
+                  type: string
+                  example: jambase:12345
+                  description: A unique identifier of the item
+                image:
+                  type: string
+                  format: uri
+                  description: An image of the item
+                url:
+                  type: string
+                  format: uri
+                  description: URL of the item
+          memberOf:
+            type: array
+            description: For musicians, an array of the band's the musician is a member of
+            items:
+              type: object
+              properties:
+                '@type':
+                  type: string
+                  enum:
+                  - MusicGroup
+                name:
+                  type: string
+                  description: The name of the item
+                identifier:
+                  type: string
+                  example: jambase:98765
+                  description: A unique identifier of the item
+                image:
+                  type: string
+                  format: uri
+                  description: An image of the item
+                url:
+                  type: string
+                  format: uri
+                  description: URL of the item
+          foundingLocation:
+            type: object
+            properties:
+              '@type':
+                type: string
+                enum:
+                - Place
+              name:
+                type: string
+                example: Chicago, IL
+            description: The hometown of the artist
+          foundingDate:
+            type: string
+            format: iso-8601
+            example: '1983'
+            description: The year the artist first performed
+          genre:
+            type: array
+            items:
+              $ref: '#/components/schemas/enumGenres'
+          events:
+            type: array
+            items:
+              oneOf:
+              - $ref: '#/components/schemas/Concert'
+              - $ref: '#/components/schemas/Festival'
+              - $ref: '#/components/schemas/Stream'
+            description: 'Only available when using `expandUpcomingEvents=true` and/or `expandUpcomingStreams=true` URL param.
+
+              '
+          x-bandOrMusician:
+            type: string
+            enum:
+            - band
+            - musician
+          x-numUpcomingEvents:
+            type: number
+            format: int32
+            example: 12
+            description: "The number of upcoming events for this artist.            \n"
+          x-externalIdentifiers:
+            type: array
+            items:
+            - $ref: '#/components/schemas/ExternalIdentifier'
+    enumEventStatus:
+      type: string
+      description: The scheduling status for the event
+      enum:
+      - scheduled
+      - postponed
+      - rescheduled
+      - cancelled
+      x-tags:
+      - Enums
+    Offer:
+      title: Offer
+      description: Something for sale, typically a concert ticket
+      type: object
+      required:
+      - identifier
+      - url
+      - category
+      - seller
+      - validFrom
+      allOf:
+      - $ref: '#/components/schemas/Thing'
+      - type: object
+        properties:
+          identifier:
+            type: string
+            description: A unique identifier of the item
+            example: jambase:194164
+          url:
+            type: string
+            format: uri
+            description: URL of the item
+          category:
+            type: string
+            description: The category of the Offer, typically used to identify a primary or secondary ticketing link
+            examples:
+            - ticketingLinkPrimary
+            - ticketingLinkSecondary
+          priceSpecification:
+            $ref: '#/components/schemas/PriceSpecification'
+          seller:
+            $ref: '#/components/schemas/Organization'
+            required: true
+          validFrom:
+            example: '2022-12-07T12:42:00'
+            schema:
+              type: string
+              format: dateTime
+    ErrorsList:
+      description: A list of errors
+      x-stoplight:
+        id: 1253ab38a345c
+      type: array
+      items:
+        type: object
+        properties:
+          errorCode:
+            type: string
+            enum:
+            - no_lookup_results
+            - lookup_error
+            - parameter_missing
+            - parameter_invalid
+            - identifier_missing
+            - identifier_invalid
+            - parameter_out_of_range
+            - general_error
+          errorMessage:
+            type: string
+            example: The identifier `jambase:87121` is invalid.
+    enumVenueDataSource:
+      type: string
+      description: Data source slugs to use for Venue IDs
+      enum:
+      - axs
+      - dice
+      - etix
+      - eventbrite
+      - eventim-de
+      - jambase
+      - seated
+      - seatgeek
+      - suitehop
+      - ticketmaster
+      - viagogo
+      x-stoplight:
+        id: vg16q2jczs7fg
+      x-tags:
+      - Enums
+    propDeletionStatus:
+      title: propDeletionStatus
+      type: string
+      enum:
+      - deleted
+      - trashed
+      - merged
+      example: deleted
+      description: 'Present ONLY on tombstone rows returned by delta polls of the core feeds (i.e. requests that include `dateModifiedFrom`). Marks a record that has left the catalog so a long-lived mirror can drop or redirect it:
+
+        - `deleted` — permanently removed.
+
+        - `trashed` — soft-deleted (events only; recoverable upstream). Treat the same as `deleted` in your cache.
+
+        - `merged` — folded into another record; follow `mergedInto`.
+
+        \
+
+        A tombstone row carries only `@type`, `identifier`, `deletionStatus`, `deletedAt`, `dateModified`, and (when `merged`) `mergedInto` — no other fields. Tombstones count toward `perPage` and `pagination.totalItems` and are appended after the live rows in the merged result sequence. Retention: `deleted` / `trashed` tombstones are emitted for 90 days after `deletedAt`; `merged` tombstones never expire. Queries WITHOUT `dateModifiedFrom` never return tombstones.
+
+        '
+    enumRadiusUnits:
+      type: string
+      description: The units of measure for a geo search radius
+      enum:
+      - mi
+      - km
+      x-tags:
+      - Enums
+    Thing:
+      title: Thing
+      description: A generic thing
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the item
+        identifier:
+          type: string
+          example: jambase:194164
+          description: A unique identifier of the item
+        url:
+          type: string
+          format: uri
+          description: URL of the item
+        image:
+          type: string
+          format: uri
+          description: 'An image of the item.\
+
+            \
+
+            Please note that ''image'' may not be provided for all Schemas that include `Thing` (e.g. `Organization`)
+
+            '
+        sameAs:
+          type: array
+          items:
+            $ref: '#/components/schemas/URL'
+          description: URL of a reference Web page that unambiguously indicates the item's identity
+        datePublished:
+          type: string
+          format: iso-8601
+          example: '2022-12-14T15:35:48Z'
+          description: 'The date the Event first appeared in ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]
+
+            \
+
+            Please note that ''datePublished'' may not be provided for all Schemas that include `Thing` (e.g. `Organization`)
+
+            '
+        dateModified:
+          type: string
+          format: iso-8601
+          example: '2022-12-14T03:41:20Z'
+          description: 'The date the Event was last updated in ISO 8601 date format [[docs](https://en.wikipedia.org/wiki/ISO_8601)]
+
+            \
+
+            Please note that ''dateModified'' may not be provided for all Schemas that include `Thing` (e.g. `Organization`).
+
+            \
+
+            Indexing timestamps for Concert / Festival / Stream / MusicGroup / MusicVenue live on `datePublished` and `dateModified`. The sibling `x-createdOnDate` and `x-updatedOnDate` fields are scoped to data-source / `Organization` responses (e.g. ticket vendors, performance-rights organizations) and are not present on Event-derived schemas.
+
+            '
+    Stream:
+      title: Stream
+      description: A stream
+      type: object
+      required:
+      - '@type'
+      - name
+      - identifier
+      - url
+      - eventStatus
+      - startDate
+      - location
+      - performer
+      allOf:
+      - $ref: '#/components/schemas/Event'
+      - type: object
+        properties:
+          '@type':
+            type: string
+            enum:
+            - Stream
+          deletionStatus:
+            $ref: '#/components/schemas/propDeletionStatus'
+          deletedAt:
+            $ref: '#/components/schemas/propDeletedAt'
+          mergedInto:
+            $ref: '#/components/schemas/propMergedInto'
+          isLiveBroadcast:
+            type: boolean
+            description: True if the broadcast is of a live event
+          broadcastOfEvent:
+            type: array
+            items:
+              oneOf:
+              - $ref: '#/components/schemas/Concert'
+              - $ref: '#/components/schemas/Festival'
+          x-customTitle:
+            type: string
+            description: To replace the default `event[name]` property
+      x-stoplight:
+        id: fijmf4s5a9h9x
+    Request:
+      title: Request
+      description: Enclosure for request details.
+      type: object
+      properties:
+        endpoint:
+          type: string
+          format: url
+          description: The base endpoint requested
+        method:
+          type: string
+          description: The request method (e.g. GET, POST)
+        params:
+          type: array
+          items: {}
+          format: string
+          description: The parameters for the request
+        ip:
+          oneOf:
+          - type: string
+            format: ipv4
+          - type: string
+            format: ipv6
+          description: The requesting IP address, IPv4 or IPv6
+        userAgent:
+          type: string
+          format: string
+          description: The requesting UserAgent
     propDeletedAt:
       title: propDeletedAt
       type: string
@@ -1723,21 +1409,329 @@ components:
       description: 'The moment the record left the catalog, in ISO 8601. Present only on tombstone rows (see `deletionStatus`). Equals the row''s `dateModified` so the same `dateModifiedFrom` watermark that catches updates also catches the removal.
 
         '
-  parameters:
-    geoLongitudeParam:
-      in: query
-      name: geoLongitude
-      description: 'The longitude for geographic radius.
+    PostalAddress:
+      title: PostalAddress
+      description: A postal address, typically for a MusicVenue
+      type: object
+      properties:
+        '@type':
+          type: string
+          enum:
+          - PostalAddress
+        streetAddress:
+          type: string
+          example: 4 Pennsylvania Plaza
+          description: The street address
+        addressLocality:
+          type: string
+          example: New York
+          description: The city/locality in which the place is in
+        postalCode:
+          type: string
+          example: '10001'
+          description: The postal code
+        addressRegion:
+          allOf:
+          - $ref: '#/components/schemas/State'
+        addressCountry:
+          allOf:
+          - $ref: '#/components/schemas/Country'
+        x-streetAddress2:
+          type: string
+          example: Second Floor
+          description: An optional second line for street address.
+        x-timezone:
+          type: string
+          description: 'A "tz database" timezone [[see list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)].
 
-        - geoLongitude=-73.9934
+            '
+          example: America/New_York
+        x-jamBaseMetroId:
+          type: number
+          format: int32
+          example: 1
+          description: A unique identifier to the JamBase metro.
+        x-jamBaseCityId:
+          type: number
+          format: int32
+          example: 4223296
+          description: A unique identifier to the JamBase city.
+    propLongitude:
+      title: propLongitude
+      type: number
+      format: float
+      minimum: -180
+      maximum: 180
+      example: -73.9934
+      description: The longitude of a location
+      x-stoplight:
+        id: udrk05v1mvsv9
+    enumCountryIso3:
+      type: string
+      format: iso-3166-alpha-3
+      example: USA
+      description: 'The Country code in ISO 3166-1 alpha-3 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)].
 
         '
-      schema:
-        $ref: '#/components/schemas/propLongitude'
-    excludeEventPerformersParam:
+      enum:
+      - ABW
+      - AFG
+      - AGO
+      - AIA
+      - ALB
+      - AND
+      - ARE
+      - ARG
+      - ARM
+      - ASM
+      - ATF
+      - ATG
+      - AUS
+      - AZE
+      - BDI
+      - BEL
+      - BEN
+      - BFA
+      - BGD
+      - BGR
+      - BHR
+      - BHS
+      - BIH
+      - BLM
+      - BLR
+      - BLZ
+      - BMU
+      - BOL
+      - BRA
+      - BRB
+      - BRN
+      - BTN
+      - BWA
+      - CAF
+      - CAN
+      - CCK
+      - CHE
+      - CHL
+      - CHN
+      - CIV
+      - CMR
+      - COD
+      - COG
+      - COK
+      - COL
+      - COM
+      - CPV
+      - CRI
+      - CUB
+      - CUW
+      - CXR
+      - CYM
+      - CYP
+      - CZE
+      - DEU
+      - DJI
+      - DMA
+      - DNK
+      - DOM
+      - DZA
+      - ECU
+      - EGY
+      - ERI
+      - ESH
+      - ESP
+      - EST
+      - ETH
+      - FIN
+      - FJI
+      - FLK
+      - FRA
+      - FRO
+      - FSM
+      - GAB
+      - GBR
+      - GEO
+      - GGY
+      - GHA
+      - GIB
+      - GIN
+      - GLP
+      - GMB
+      - GNB
+      - GNQ
+      - GRC
+      - GRD
+      - GRL
+      - GTM
+      - GUF
+      - GUM
+      - GUY
+      - HKG
+      - HND
+      - HRV
+      - HTI
+      - HUN
+      - IDN
+      - IMN
+      - IND
+      - IOT
+      - IRL
+      - IRN
+      - IRQ
+      - ISL
+      - ISR
+      - ITA
+      - JAM
+      - JEY
+      - JOR
+      - JPN
+      - KAZ
+      - KEN
+      - KGZ
+      - KHM
+      - KIR
+      - KNA
+      - KOR
+      - KWT
+      - LAO
+      - LBN
+      - LBR
+      - LBY
+      - LCA
+      - LIE
+      - LKA
+      - LSO
+      - LTU
+      - LUX
+      - LVA
+      - MAC
+      - MAF
+      - MAR
+      - MCO
+      - MDA
+      - MDG
+      - MDV
+      - MEX
+      - MHL
+      - MKD
+      - MLI
+      - MLT
+      - MMR
+      - MNE
+      - MNG
+      - MNP
+      - MOZ
+      - MRT
+      - MSR
+      - MTQ
+      - MUS
+      - MWI
+      - MYS
+      - MYT
+      - NAM
+      - NCL
+      - NER
+      - NFK
+      - NGA
+      - NIC
+      - NIU
+      - NLD
+      - NOR
+      - NPL
+      - NRU
+      - NZL
+      - OMN
+      - PAK
+      - PAN
+      - PCN
+      - PER
+      - PHL
+      - PLW
+      - PNG
+      - POL
+      - PRI
+      - PRK
+      - PRT
+      - PRY
+      - PYF
+      - QAT
+      - REU
+      - ROU
+      - RUS
+      - RWA
+      - SAU
+      - SDN
+      - SEN
+      - SGP
+      - SGS
+      - SHN
+      - SLB
+      - SLE
+      - SLV
+      - SMR
+      - SOM
+      - SPM
+      - SRB
+      - SSD
+      - STP
+      - SUR
+      - SVK
+      - SVN
+      - SWE
+      - SWZ
+      - SXM
+      - SYC
+      - SYR
+      - TCA
+      - TCD
+      - TGO
+      - THA
+      - TJK
+      - TKL
+      - TKM
+      - TLS
+      - TON
+      - TTO
+      - TUN
+      - TUR
+      - TUV
+      - TWN
+      - TZA
+      - UGA
+      - UKR
+      - URY
+      - USA
+      - UZB
+      - VCT
+      - VEN
+      - VGB
+      - VIR
+      - VNM
+      - VUT
+      - WLF
+      - WSM
+      - XGZ
+      - XKS
+      - XPR
+      - XQZ
+      - XSP
+      - XSV
+      - XWB
+      - XXD
+      - YEM
+      - ZAF
+      - ZMB
+      - ZWE
+      x-tags:
+      - Enums
+  parameters:
+    expandExternalIdentifiersParam:
       in: query
-      name: excludeEventPerformers
-      description: 'Use `true` to suppress the `performer` node in `Concert` and `Festival` objects.
+      name: expandExternalIdentifiers
+      description: 'Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.
+
+        \
+
+        Note: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.
 
         '
       schema:
@@ -1761,6 +1755,32 @@ components:
       schema:
         type: string
         format: rfc3339
+    excludeEventPerformersParam:
+      in: query
+      name: excludeEventPerformers
+      description: 'Use `true` to suppress the `performer` node in `Concert` and `Festival` objects.
+
+        '
+      schema:
+        type: boolean
+        default: false
+    expandPastEventsParam:
+      in: query
+      name: expandPastEvents
+      description: 'Use `true` to include past/historical `Concert` and `Festival` objects.
+
+        \
+
+        When searching events, must be combined with `artistId` or `venueId` parameter.
+
+        \
+
+        Note: The `expandPastEvents` parameter requires that your apikey has the `expandPastEvents` enhancement turned on. Please contact JamBase to request access to this feature.
+
+        '
+      schema:
+        type: boolean
+        default: false
     pageParam:
       in: query
       name: page
@@ -1769,6 +1789,31 @@ components:
       schema:
         type: integer
         default: 1
+    geoRadiusUnitsParam:
+      in: query
+      name: geoRadiusUnits
+      description: 'Whether to use miles (default) or kilometers for radius.
+
+        - geoRadiusUnits=km
+
+        '
+      schema:
+        $ref: '#/components/schemas/enumRadiusUnits'
+    geoCountryIso3Param:
+      in: query
+      name: geoCountryIso3
+      description: 'The three-letter ISO code for a country.
+
+        - geoCountryIso3=USA
+
+
+        Use a pipe (|) to include multiple countries.
+
+        - geoCountryIso3=USA|CAN
+
+        '
+      schema:
+        $ref: '#/components/schemas/enumCountryIso3'
     geoStateIsoParam:
       in: query
       name: geoStateIso
@@ -1787,16 +1832,6 @@ components:
         '
       schema:
         $ref: '#/components/schemas/enumState'
-    geoLatitudeParam:
-      in: query
-      name: geoLatitude
-      description: 'The latitude for geographic radius.
-
-        - geoLatitude=40.7505
-
-        '
-      schema:
-        $ref: '#/components/schemas/propLatitude'
     geoRadiusAmountParam:
       in: query
       name: geoRadiusAmount
@@ -1831,131 +1866,6 @@ components:
       schema:
         type: string
         format: rfc3339
-    venueNameParam:
-      in: query
-      name: venueName
-      description: 'A keyword-based search for venue name(s).
-
-        - venueName=Brooklyn%20Bowl
-
-
-        Use a pipe (|) to include multiple venue IDs.
-
-        - venueName=Brooklyn%20Bowl|House%20of%20Blues
-
-
-        For more precise venue-specific results try using `venueId` or `venue[slug]`.
-
-        '
-      example: Brooklyn%20Bowl
-      schema:
-        type: string
-    expandArtistSameAsParam:
-      in: query
-      name: expandArtistSameAs
-      description: 'Use `true` to include `sameAs` (i.e. links) for `Artist` responses.
-
-        '
-      schema:
-        type: boolean
-        default: false
-    perPageParam:
-      in: query
-      name: perPage
-      description: Number of events per page of results
-      required: false
-      schema:
-        type: integer
-        default: 40
-        minimum: 1
-        maximum: 100
-    geoMetroIdParam:
-      in: query
-      name: geoMetroId
-      description: 'Use to retrieve events for specific <a href="https://apidocs.jambase.com/docs/jambase-api/5b89026bb2462-get-metros">metro ID(s)</a>.
-
-        - geoMetroId=jambase:1
-
-
-        Use a pipe (|) to include multiple metro IDs.
-
-        - geoMetroId=jambase:1|jambase:5
-
-        '
-      example: jambase:1
-      schema:
-        type: string
-    geoRadiusUnitsParam:
-      in: query
-      name: geoRadiusUnits
-      description: 'Whether to use miles (default) or kilometers for radius.
-
-        - geoRadiusUnits=km
-
-        '
-      schema:
-        $ref: '#/components/schemas/enumRadiusUnits'
-    geoIpParam:
-      in: query
-      name: geoIp
-      description: 'Use to retrieve events near an IP address.\
-
-        Supports IPv4 or IPv6 values.
-
-        - geoIp=55.123.456.789
-
-        '
-      schema:
-        oneOf:
-        - type: string
-          format: ipv4
-        - type: string
-          format: ipv6
-    expandExternalIdentifiersParam:
-      in: query
-      name: expandExternalIdentifiers
-      description: 'Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.
-
-        \
-
-        Note: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.
-
-        '
-      schema:
-        type: boolean
-        default: false
-    expandPastEventsParam:
-      in: query
-      name: expandPastEvents
-      description: 'Use `true` to include past/historical `Concert` and `Festival` objects.
-
-        \
-
-        When searching events, must be combined with `artistId` or `venueId` parameter.
-
-        \
-
-        Note: The `expandPastEvents` parameter requires that your apikey has the `expandPastEvents` enhancement turned on. Please contact JamBase to request access to this feature.
-
-        '
-      schema:
-        type: boolean
-        default: false
-    geoCountryIso2Param:
-      in: query
-      name: geoCountryIso2
-      description: 'The two-letter ISO code for a country.
-
-        - geoCountryIso2=US
-
-
-        Use a pipe (|) to include multiple countries.
-
-        - geoCountryIso2=US|CA
-
-        '
-      schema:
-        $ref: '#/components/schemas/enumCountryIso2'
     geoCityNameParam:
       in: query
       name: geoCityName
@@ -1981,22 +1891,130 @@ components:
       example: jambase:4223296
       schema:
         type: string
-    geoCountryIso3Param:
+    geoLongitudeParam:
       in: query
-      name: geoCountryIso3
-      description: 'The three-letter ISO code for a country.
+      name: geoLongitude
+      description: 'The longitude for geographic radius.
 
-        - geoCountryIso3=USA
+        - geoLongitude=-73.9934
+
+        '
+      schema:
+        $ref: '#/components/schemas/propLongitude'
+    venueNameParam:
+      in: query
+      name: venueName
+      description: 'A keyword-based search for venue name(s).
+
+        - venueName=Brooklyn%20Bowl
+
+
+        Use a pipe (|) to include multiple venue IDs.
+
+        - venueName=Brooklyn%20Bowl|House%20of%20Blues
+
+
+        For more precise venue-specific results try using `venueId` or `venue[slug]`.
+
+        '
+      example: Brooklyn%20Bowl
+      schema:
+        type: string
+    geoCountryIso2Param:
+      in: query
+      name: geoCountryIso2
+      description: 'The two-letter ISO code for a country.
+
+        - geoCountryIso2=US
 
 
         Use a pipe (|) to include multiple countries.
 
-        - geoCountryIso3=USA|CAN
+        - geoCountryIso2=US|CA
 
         '
       schema:
-        $ref: '#/components/schemas/enumCountryIso3'
+        $ref: '#/components/schemas/enumCountryIso2'
+    expandArtistSameAsParam:
+      in: query
+      name: expandArtistSameAs
+      description: 'Use `true` to include `sameAs` (i.e. links) for `Artist` responses.
+
+        '
+      schema:
+        type: boolean
+        default: false
+    geoIpParam:
+      in: query
+      name: geoIp
+      description: 'Use to retrieve events near an IP address.\
+
+        Supports IPv4 or IPv6 values.
+
+        - geoIp=55.123.456.789
+
+        '
+      schema:
+        oneOf:
+        - type: string
+          format: ipv4
+        - type: string
+          format: ipv6
+    geoMetroIdParam:
+      in: query
+      name: geoMetroId
+      description: 'Use to retrieve events for specific <a href="https://apidocs.jambase.com/docs/jambase-api/5b89026bb2462-get-metros">metro ID(s)</a>.
+
+        - geoMetroId=jambase:1
+
+
+        Use a pipe (|) to include multiple metro IDs.
+
+        - geoMetroId=jambase:1|jambase:5
+
+        '
+      example: jambase:1
+      schema:
+        type: string
+    perPageParam:
+      in: query
+      name: perPage
+      description: Number of events per page of results
+      required: false
+      schema:
+        type: integer
+        default: 40
+        minimum: 1
+        maximum: 100
+    geoLatitudeParam:
+      in: query
+      name: geoLatitude
+      description: 'The latitude for geographic radius.
+
+        - geoLatitude=40.7505
+
+        '
+      schema:
+        $ref: '#/components/schemas/propLatitude'
   responses:
+    getSingleVenueResponse:
+      description: A single Venue
+      content:
+        application/json:
+          schema:
+            title: getSingleVenueResponseSchema
+            description: A single Venue response
+            properties:
+              success:
+                $ref: '#/components/schemas/Success'
+              venue:
+                $ref: '#/components/schemas/MusicVenue'
+    UnauthorizedError:
+      description: API key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
     searchVenuesResponse:
       description: A list of Venues
       content:
@@ -2028,24 +2046,6 @@ components:
                 default: false
               errors:
                 $ref: '#/components/schemas/ErrorsList'
-    UnauthorizedError:
-      description: API key is missing or invalid
-      headers:
-        WWW_Authenticate:
-          schema:
-            type: string
-    getSingleVenueResponse:
-      description: A single Venue
-      content:
-        application/json:
-          schema:
-            title: getSingleVenueResponseSchema
-            description: A single Venue response
-            properties:
-              success:
-                $ref: '#/components/schemas/Success'
-              venue:
-                $ref: '#/components/schemas/MusicVenue'
   securitySchemes:
     BearerAuth:
       type: http

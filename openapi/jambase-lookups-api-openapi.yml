@@ -457,49 +457,23 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
 components:
   schemas:
-    Organization:
-      title: Organization
-      description: 'An organization or business.\
-
-        Typically a ticket vendor or data source in this API.\
-
-        The `identifier` or "slug" can also be used as `ticket[vendor][id]` in `/events` and `/livestreams` search endpoints.
-
-        '
+    URL:
+      title: URL
+      x-stoplight:
+        id: ac90d6bc4bf17
+      description: A third-party link.
       type: object
-      required:
-      - name
-      - identifier
-      - disambiguatingDescription
-      - datePublished
-      - dateModified
-      allOf:
-      - type: object
-        properties:
-          '@type':
-            type: string
-            enum:
-            - Organization
-          identifier:
-            type: string
-            description: A unique identifier of the item
-            example: ticketmaster
-          disambiguatingDescription:
-            type: string
-            examples:
-            - eventTicketVendorPrimary
-            - eventTicketVendorSecondary
-            - streamTicketVendorPrimary
-            - streamDataSource
-            - eventDataSource
-            - artistDataSource
-            - venueDataSource
-      - $ref: '#/components/schemas/Thing'
-    Success:
-      name: success
-      description: A successful response.
-      type: boolean
-      default: true
+      properties:
+        '@type':
+          type: string
+          enum:
+          - URL
+        identifier:
+          $ref: '#/components/schemas/enumUrlType'
+        url:
+          type: string
+          format: uri
+          description: The URL of the external link.
     Thing:
       title: Thing
       description: A generic thing
@@ -557,6 +531,61 @@ components:
             Indexing timestamps for Concert / Festival / Stream / MusicGroup / MusicVenue live on `datePublished` and `dateModified`. The sibling `x-createdOnDate` and `x-updatedOnDate` fields are scoped to data-source / `Organization` responses (e.g. ticket vendors, performance-rights organizations) and are not present on Event-derived schemas.
 
             '
+    Organization:
+      title: Organization
+      description: 'An organization or business.\
+
+        Typically a ticket vendor or data source in this API.\
+
+        The `identifier` or "slug" can also be used as `ticket[vendor][id]` in `/events` and `/livestreams` search endpoints.
+
+        '
+      type: object
+      required:
+      - name
+      - identifier
+      - disambiguatingDescription
+      - datePublished
+      - dateModified
+      allOf:
+      - type: object
+        properties:
+          '@type':
+            type: string
+            enum:
+            - Organization
+          identifier:
+            type: string
+            description: A unique identifier of the item
+            example: ticketmaster
+          disambiguatingDescription:
+            type: string
+            examples:
+            - eventTicketVendorPrimary
+            - eventTicketVendorSecondary
+            - streamTicketVendorPrimary
+            - streamDataSource
+            - eventDataSource
+            - artistDataSource
+            - venueDataSource
+      - $ref: '#/components/schemas/Thing'
+    enumUrlType:
+      type: string
+      x-stoplight:
+        id: cf4040b56ddd2
+      description: The type of the external URL
+      enum:
+      - officialSite
+      - facebook
+      - twitter
+      - instagram
+      - youtube
+      - musicbrainz
+      - spotify
+      - androidApp
+      - iosApp
+      x-tags:
+      - Enums
     ErrorsList:
       description: A list of errors
       x-stoplight:
@@ -579,41 +608,18 @@ components:
           errorMessage:
             type: string
             example: The identifier `jambase:87121` is invalid.
-    enumUrlType:
-      type: string
-      x-stoplight:
-        id: cf4040b56ddd2
-      description: The type of the external URL
-      enum:
-      - officialSite
-      - facebook
-      - twitter
-      - instagram
-      - youtube
-      - musicbrainz
-      - spotify
-      - androidApp
-      - iosApp
-      x-tags:
-      - Enums
-    URL:
-      title: URL
-      x-stoplight:
-        id: ac90d6bc4bf17
-      description: A third-party link.
-      type: object
-      properties:
-        '@type':
-          type: string
-          enum:
-          - URL
-        identifier:
-          $ref: '#/components/schemas/enumUrlType'
-        url:
-          type: string
-          format: uri
-          description: The URL of the external link.
+    Success:
+      name: success
+      description: A successful response.
+      type: boolean
+      default: true
   responses:
+    UnauthorizedError:
+      description: API key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
     BadRequest:
       description: Invalid input parameter
       content:
@@ -626,12 +632,6 @@ components:
                 default: false
               errors:
                 $ref: '#/components/schemas/ErrorsList'
-    UnauthorizedError:
-      description: API key is missing or invalid
-      headers:
-        WWW_Authenticate:
-          schema:
-            type: string
   securitySchemes:
     BearerAuth:
       type: http

@@ -139,21 +139,6 @@ components:
       - tribute
       x-tags:
       - Enums
-    Success:
-      name: success
-      description: A successful response.
-      type: boolean
-      default: true
-    Genre:
-      title: Genre
-      description: A music genre
-      type: object
-      properties:
-        name:
-          type: string
-          description: The display name for the genre.
-        identifier:
-          $ref: '#/components/schemas/enumGenres'
     ErrorsList:
       description: A list of errors
       x-stoplight:
@@ -176,7 +161,28 @@ components:
           errorMessage:
             type: string
             example: The identifier `jambase:87121` is invalid.
+    Success:
+      name: success
+      description: A successful response.
+      type: boolean
+      default: true
+    Genre:
+      title: Genre
+      description: A music genre
+      type: object
+      properties:
+        name:
+          type: string
+          description: The display name for the genre.
+        identifier:
+          $ref: '#/components/schemas/enumGenres'
   responses:
+    UnauthorizedError:
+      description: API key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
     BadRequest:
       description: Invalid input parameter
       content:
@@ -189,12 +195,6 @@ components:
                 default: false
               errors:
                 $ref: '#/components/schemas/ErrorsList'
-    UnauthorizedError:
-      description: API key is missing or invalid
-      headers:
-        WWW_Authenticate:
-          schema:
-            type: string
   securitySchemes:
     BearerAuth:
       type: http
