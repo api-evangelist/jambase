@@ -456,48 +456,24 @@ paths:
         '401':
           $ref: '#/components/responses/UnauthorizedError'
 components:
-  responses:
-    BadRequest:
-      description: Invalid input parameter
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                default: false
-              errors:
-                $ref: '#/components/schemas/ErrorsList'
-    UnauthorizedError:
-      description: API key is missing or invalid
-      headers:
-        WWW_Authenticate:
-          schema:
-            type: string
   schemas:
-    ErrorsList:
-      description: A list of errors
+    enumUrlType:
+      type: string
       x-stoplight:
-        id: 1253ab38a345c
-      type: array
-      items:
-        type: object
-        properties:
-          errorCode:
-            type: string
-            enum:
-            - no_lookup_results
-            - lookup_error
-            - parameter_missing
-            - parameter_invalid
-            - identifier_missing
-            - identifier_invalid
-            - parameter_out_of_range
-            - general_error
-          errorMessage:
-            type: string
-            example: The identifier `jambase:87121` is invalid.
+        id: cf4040b56ddd2
+      description: The type of the external URL
+      enum:
+      - officialSite
+      - facebook
+      - twitter
+      - instagram
+      - youtube
+      - musicbrainz
+      - spotify
+      - androidApp
+      - iosApp
+      x-tags:
+      - Enums
     URL:
       title: URL
       x-stoplight:
@@ -577,23 +553,28 @@ components:
       description: A successful response.
       type: boolean
       default: true
-    enumUrlType:
-      type: string
+    ErrorsList:
+      description: A list of errors
       x-stoplight:
-        id: cf4040b56ddd2
-      description: The type of the external URL
-      enum:
-      - officialSite
-      - facebook
-      - twitter
-      - instagram
-      - youtube
-      - musicbrainz
-      - spotify
-      - androidApp
-      - iosApp
-      x-tags:
-      - Enums
+        id: 1253ab38a345c
+      type: array
+      items:
+        type: object
+        properties:
+          errorCode:
+            type: string
+            enum:
+            - no_lookup_results
+            - lookup_error
+            - parameter_missing
+            - parameter_invalid
+            - identifier_missing
+            - identifier_invalid
+            - parameter_out_of_range
+            - general_error
+          errorMessage:
+            type: string
+            example: The identifier `jambase:87121` is invalid.
     Organization:
       title: Organization
       description: 'An organization or business.\
@@ -632,6 +613,25 @@ components:
             - artistDataSource
             - venueDataSource
       - $ref: '#/components/schemas/Thing'
+  responses:
+    UnauthorizedError:
+      description: API key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+    BadRequest:
+      description: Invalid input parameter
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                default: false
+              errors:
+                $ref: '#/components/schemas/ErrorsList'
   securitySchemes:
     BearerAuth:
       type: http
