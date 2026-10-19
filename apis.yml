@@ -257,6 +257,26 @@ apis:
     url: json-schema/jambase-schemas.json
   - type: JSONLDContext
     url: json-ld/jambase-context.jsonld
+- aid: jambase:jambase-festivalseries-api
+  name: JamBase Festival Series API
+  description: The FestivalSeries API from JamBase — 3 operation(s) for festivalseries.
+  humanURL: https://data.jambase.com/api/reference
+  baseURL: https://data.jambase.com/v3
+  tags:
+  - FestivalSeries
+  properties:
+  - type: OpenAPI
+    url: openapi/jambase-festivalseries-api-openapi.yml
+- aid: jambase:jambase-usage-api
+  name: JamBase Usage API
+  description: The Usage API from JamBase — 1 operation(s) for usage.
+  humanURL: https://data.jambase.com/api/reference
+  baseURL: https://data.jambase.com/v3
+  tags:
+  - Usage
+  properties:
+  - type: OpenAPI
+    url: openapi/jambase-usage-api-openapi.yml
 common:
   - type: Plans
     url: plans/jambase-plans-pricing.yml

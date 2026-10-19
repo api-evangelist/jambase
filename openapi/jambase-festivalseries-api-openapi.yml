@@ -1,0 +1,460 @@
+openapi: 3.2.0
+info:
+  description: REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.
+  version: 3.1.0
+  title: JamBase Concert Data Festival Series API
+  contact:
+    email: developer@jambase.com
+    name: Team JamBase
+    url: /contact
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.jambase.com/terms
+  summary: REST API for live music data from JamBase
+servers:
+- url: https://api.data.jambase.com/v3
+  description: JamBase Concert Data API
+security:
+- BearerAuth: []
+tags:
+- name: FestivalSeries
+paths:
+  /festivals:
+    get:
+      tags:
+      - FestivalSeries
+      summary: Search Festival Series
+      operationId: searchFestivalSeries
+      x-internal: true
+      description: 'Search festival series (e.g. Outside Lands - the parent that ties every edition of a festival together) by name. Each hit includes the stable series id used by the detail and archive endpoints, plus edition count and most recent edition year/city.
+
+
+        Note: `GET /v3/festivals` without `name`/`festivalSeriesName` is the festival events feed (geo/date filters, etc.); providing a series name switches to series search.'
+      parameters:
+      - in: query
+        name: name
+        description: 'Festival series name to search for (min 2 characters).
+
+          - name=Outside Lands
+
+          '
+        schema:
+          type: string
+      - in: query
+        name: festivalSeriesName
+        description: Alias of `name`.
+        schema:
+          type: string
+      - in: query
+        name: perPage
+        description: Results per page (1-50, default 20).
+        schema:
+          type: integer
+      - in: query
+        name: page
+        description: Page of results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Matching festival series
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  festivalSeries:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        '@type':
+                          type: string
+                          example: FestivalSeries
+                        identifier:
+                          type: string
+                          example: jambase:13969984
+                        name:
+                          type: string
+                          example: Outside Lands
+                        url:
+                          type: string
+                          format: url
+                          description: JamBase page for the series.
+                        image:
+                          type: string
+                          format: url
+                        x-editionCount:
+                          type: integer
+                        x-latestYear:
+                          type: integer
+                        x-latestCity:
+                          type: string
+                        x-apiUrl:
+                          type: string
+                          example: /v3/festivals/13969984
+                  request:
+                    $ref: '#/components/schemas/Request'
+  /festivals/{festivalSeriesId}:
+    get:
+      tags:
+      - FestivalSeries
+      summary: Get Festival Series
+      operationId: getFestivalSeries
+      x-internal: true
+      description: Festival series detail plus its editions timeline as slim event stubs (event id, year, dates, venue, headliners). Historical editions require festival archive history access on your plan (implied by `allow_past_events`); non-entitled keys see upcoming editions plus a `historyLocked` notice.
+      parameters:
+      - in: path
+        name: festivalSeriesId
+        required: true
+        schema:
+          type: string
+          pattern: ^(jambase:)?[0-9]+$
+          example: '13969984'
+        description: Stable festival series id from the search endpoint (`GET /v3/festivals?name=`). The bare numeric form (e.g. `13969984`) is canonical; the `jambase:`-prefixed identifier form returned in response bodies (e.g. `jambase:13969984`) is also accepted.
+      responses:
+        '200':
+          description: Festival series detail with edition stubs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  festivalSeries:
+                    type: object
+                    properties:
+                      '@type':
+                        type: string
+                        example: FestivalSeries
+                      identifier:
+                        type: string
+                        example: jambase:13969984
+                      name:
+                        type: string
+                      url:
+                        type: string
+                        format: url
+                      image:
+                        type: string
+                        format: url
+                      x-officialSite:
+                        type: string
+                        format: url
+                      x-editionCount:
+                        type: integer
+                      x-firstYear:
+                        type: integer
+                      x-latestYear:
+                        type: integer
+                      x-nextEditionDate:
+                        type: string
+                        format: date
+                      x-distinctArtists:
+                        type: integer
+                      location:
+                        type: object
+                        properties:
+                          '@type':
+                            type: string
+                            example: Place
+                          address:
+                            type: object
+                            properties:
+                              '@type':
+                                type: string
+                                example: PostalAddress
+                              addressLocality:
+                                type: string
+                              addressRegion:
+                                type: string
+                              addressCountry:
+                                type: string
+                      x-archiveUrl:
+                        type: string
+                        example: /v3/festivals/13969984/events
+                  events:
+                    type: array
+                    items:
+                      type: object
+                      description: Slim edition stub; the archive endpoint serves the full events.
+                      properties:
+                        '@type':
+                          type: string
+                          example: Festival
+                        identifier:
+                          type: string
+                          example: jambase:15738826
+                        name:
+                          type: string
+                          example: Outside Lands 2026
+                        startDate:
+                          type: string
+                          format: date
+                        location:
+                          type: object
+                          properties:
+                            '@type':
+                              type: string
+                              example: MusicVenue
+                            name:
+                              type: string
+                            address:
+                              type: object
+                              properties:
+                                '@type':
+                                  type: string
+                                  example: PostalAddress
+                                addressLocality:
+                                  type: string
+                                addressRegion:
+                                  type: string
+                                addressCountry:
+                                  type: string
+                        x-isUpcoming:
+                          type: boolean
+                        x-lineupCount:
+                          type: integer
+                        x-headliners:
+                          type: array
+                          items:
+                            type: string
+                  historyLocked:
+                    type: boolean
+                  historyInfo:
+                    type: string
+                  request:
+                    $ref: '#/components/schemas/Request'
+  /festivals/{festivalSeriesId}/events:
+    get:
+      tags:
+      - FestivalSeries
+      summary: Get Festival Series Archive
+      operationId: getFestivalSeriesEvents
+      x-internal: true
+      description: 'The full archive: every edition as a core-spec `Festival` event with a flat `performer` array carrying `x-performanceDate` / `x-performanceRank` / `x-isHeadliner` per artist (billing rank resets per day), plus per-artist JamBase id, genres and image URL. `expandExternalIdentifiers=true` adds MusicBrainz + Spotify ids per performer. Series context rides once at the top level as `x-festivalSeries`. Requires festival archive history access on your plan (implied by `allow_past_events`).'
+      parameters:
+      - in: path
+        name: festivalSeriesId
+        required: true
+        schema:
+          type: string
+          pattern: ^(jambase:)?[0-9]+$
+          example: '13969984'
+        description: Stable festival series id from the search endpoint (`GET /v3/festivals?name=`). The bare numeric form (e.g. `13969984`) is canonical; the `jambase:`-prefixed identifier form returned in response bodies (e.g. `jambase:13969984`) is also accepted.
+      - in: query
+        name: expandExternalIdentifiers
+        description: 'Include MusicBrainz + Spotify ids per performer.
+
+          - expandExternalIdentifiers=true
+
+          '
+        schema:
+          type: boolean
+      - in: query
+        name: perPage
+        description: Editions per page (1-100, default 50).
+        schema:
+          type: integer
+      - in: query
+        name: page
+        description: Page of results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Full edition-by-edition archive as events
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  x-festivalSeries:
+                    type: object
+                    properties:
+                      '@type':
+                        type: string
+                        example: FestivalSeries
+                      identifier:
+                        type: string
+                        example: jambase:13969984
+                      name:
+                        type: string
+                      url:
+                        type: string
+                        format: url
+                      image:
+                        type: string
+                        format: url
+                  events:
+                    type: array
+                    items:
+                      type: object
+                      description: A festival edition as a core-spec event.
+                      properties:
+                        '@type':
+                          type: string
+                          example: Festival
+                        identifier:
+                          type: string
+                          example: jambase:15738826
+                        name:
+                          type: string
+                          example: Outside Lands 2026
+                        startDate:
+                          type: string
+                          format: date
+                        endDate:
+                          type: string
+                          format: date
+                        eventStatus:
+                          type: string
+                          example: scheduled
+                        location:
+                          type: object
+                          properties:
+                            '@type':
+                              type: string
+                              example: MusicVenue
+                            name:
+                              type: string
+                            address:
+                              type: object
+                              properties:
+                                '@type':
+                                  type: string
+                                  example: PostalAddress
+                                addressLocality:
+                                  type: string
+                                addressRegion:
+                                  type: string
+                                addressCountry:
+                                  type: string
+                        x-isUpcoming:
+                          type: boolean
+                        x-performerCount:
+                          type: integer
+                        performer:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              '@type':
+                                type: string
+                                example: MusicGroup
+                              name:
+                                type: string
+                              identifier:
+                                type: string
+                                example: jambase:52143
+                              image:
+                                type: string
+                                format: url
+                              genre:
+                                type: array
+                                items:
+                                  type: string
+                              x-performanceDate:
+                                type: string
+                                format: date
+                                description: Performance day; billing rank resets per day.
+                              x-performanceRank:
+                                type: integer
+                                description: Billing rank within the performance day (1 = top of the bill).
+                              x-isHeadliner:
+                                type: boolean
+                              x-externalIdentifiers:
+                                type: array
+                                description: Present when `expandExternalIdentifiers=true`.
+                                items:
+                                  type: object
+                                  properties:
+                                    source:
+                                      type: string
+                                      example: musicbrainz
+                                    identifier:
+                                      type: array
+                                      items:
+                                        type: string
+                  request:
+                    $ref: '#/components/schemas/Request'
+        '403':
+          description: Caller lacks festival archive history access
+components:
+  schemas:
+    Pagination:
+      title: Pagination
+      description: Enclosure for pagination values.
+      type: object
+      properties:
+        page:
+          type: integer
+          description: The current page of results.
+          example: 1
+          minimum: 0
+        perPage:
+          type: integer
+          description: Number of events per page of results.
+          example: 10
+          minimum: 1
+        totalItems:
+          type: integer
+          description: Total results for the request.
+          example: 50
+          minimum: 0
+        totalPages:
+          type: integer
+          description: Total pages for the request.
+          example: 5
+          minimum: 0
+        nextPage:
+          type: string
+          format: url
+          description: The absolute URL for the next page of results, if available (e.g. `https://api.data.jambase.com/v3/events?page=2`).
+        previousPage:
+          type: string
+          format: url
+          description: The absolute URL for the previous page of results, if available (e.g. `https://api.data.jambase.com/v3/events?page=1`).
+    Request:
+      title: Request
+      description: Enclosure for request details.
+      type: object
+      properties:
+        endpoint:
+          type: string
+          format: url
+          description: The base endpoint requested
+        method:
+          type: string
+          description: The request method (e.g. GET, POST)
+        params:
+          type: array
+          items: {}
+          format: string
+          description: The parameters for the request
+        ip:
+          oneOf:
+          - type: string
+            format: ipv4
+          - type: string
+            format: ipv6
+          description: The requesting IP address, IPv4 or IPv6
+        userAgent:
+          type: string
+          format: string
+          description: The requesting UserAgent
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key as Bearer token. Get your key from your account dashboard.

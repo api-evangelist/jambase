@@ -1,0 +1,168 @@
+openapi: 3.2.0
+info:
+  description: REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.
+  version: 3.1.0
+  title: JamBase Concert Data Usage API
+  contact:
+    email: developer@jambase.com
+    name: Team JamBase
+    url: /contact
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.jambase.com/terms
+  summary: REST API for live music data from JamBase
+servers:
+- url: https://api.data.jambase.com/v3
+  description: JamBase Concert Data API
+security:
+- BearerAuth: []
+tags:
+- name: Usage
+paths:
+  /quota:
+    get:
+      tags:
+      - Usage
+      summary: Get subscription quota and usage
+      operationId: getQuota
+      description: Accepts an API key Bearer token or supported OAuth Bearer token. Returns the effective quota and usage for the authenticated shared subscription pool. The effective quota includes applicable plan entitlements, overrides, and bonuses. This endpoint does not meter billing or analytics usage. Response rate-limit headers describe short-window abuse limits, not the subscription quota; overage values are not a provisional estimate of the final charge. For cost projections, use the Usage page.
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: Current quota and usage
+          headers:
+            RateLimit:
+              description: Short-window rate-limit status; does not describe the subscription quota.
+              schema:
+                type: string
+            RateLimit-Policy:
+              description: Short-window rate-limit policy; does not describe the subscription quota.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - plan
+                - quota
+                - usedCalls
+                - remainingCalls
+                - overageCalls
+                - noMonthlyCap
+                - periodStart
+                - periodEnd
+                - periodSource
+                - limitType
+                - blocksAtQuota
+                - notes
+                properties:
+                  plan:
+                    type: string
+                  quota:
+                    type:
+                    - integer
+                    - 'null'
+                    minimum: 0
+                  usedCalls:
+                    type: integer
+                    minimum: 0
+                  remainingCalls:
+                    type:
+                    - integer
+                    - 'null'
+                    minimum: 0
+                  overageCalls:
+                    type: integer
+                    minimum: 0
+                  noMonthlyCap:
+                    type: boolean
+                  periodStart:
+                    type: string
+                    format: date-time
+                  periodEnd:
+                    type: string
+                    format: date-time
+                  periodSource:
+                    type: string
+                    enum:
+                    - openmeter
+                    - anchor
+                    - calendar
+                  limitType:
+                    type: string
+                    enum:
+                    - hard
+                    - soft
+                    - unlimited
+                    - no_monthly_cap
+                  blocksAtQuota:
+                    type: boolean
+                  notes:
+                    type: object
+                    required:
+                    - rateLimitHeaders
+                    - overage
+                    properties:
+                      rateLimitHeaders:
+                        type: string
+                        description: Rate-limit headers describe short windows, not monthly quota counters.
+                      overage:
+                        type: string
+                        description: Overage calls are not a final invoice balance.
+              example:
+                plan: developer
+                quota: 100000
+                usedCalls: 4200
+                remainingCalls: 95800
+                overageCalls: 0
+                noMonthlyCap: false
+                periodStart: '2026-03-01T00:00:00.000Z'
+                periodEnd: '2026-04-01T00:00:00.000Z'
+                periodSource: anchor
+                limitType: soft
+                blocksAtQuota: false
+                notes:
+                  rateLimitHeaders: Rate-limit headers describe short windows, not monthly quota counters.
+                  overage: Overage calls are not a final invoice balance.
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '403':
+          description: Authenticated caller is not authorized to view this subscription quota.
+        '429':
+          description: Short-window abuse rate limit exceeded.
+        '503':
+          description: Quota usage is temporarily unavailable because meter or entitlement data could not be read.
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                required:
+                - type
+                - title
+                - status
+                - detail
+                properties:
+                  type:
+                    type: string
+                    format: uri-reference
+                  title:
+                    type: string
+                  status:
+                    type: integer
+                    const: 503
+                  detail:
+                    type: string
+              example:
+                type: https://api.data.jambase.com/errors/quota_usage_unavailable
+                title: Quota Usage Unavailable
+                status: 503
+                detail: Current quota usage is unavailable. Please retry later.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key as Bearer token. Get your key from your account dashboard.

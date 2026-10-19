@@ -1,15 +1,17 @@
 {
   "provider": "jambase",
   "sources": [
-    "_original/openapi.json"
+    "_original/jambase-openapi.json"
   ],
   "outputs": [
     "jambase-artists-api-openapi.yml",
     "jambase-events-api-openapi.yml",
+    "jambase-festivalseries-api-openapi.yml",
     "jambase-genres-api-openapi.yml",
     "jambase-geographies-api-openapi.yml",
     "jambase-lookups-api-openapi.yml",
     "jambase-streams-api-openapi.yml",
+    "jambase-usage-api-openapi.yml",
     "jambase-venues-api-openapi.yml"
   ],
   "archived": [],
@@ -17,16 +19,10 @@
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
-    "openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "jambase-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "jambase-openapi.json: declared missing tag: FestivalSeries",
+    "jambase-openapi.json: declared missing tag: Usage",
+    "apis.yml register: written (+2 apis, 9 total)"
   ],
-  "skipped": [
-    "jambase-artists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jambase-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jambase-genres-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jambase-geographies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jambase-lookups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jambase-streams-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jambase-venues-api-openapi.yml: previously refined output, superseded by openapi/_original/"
-  ]
+  "skipped": []
 }
