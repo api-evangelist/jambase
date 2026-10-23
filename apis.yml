@@ -278,6 +278,8 @@ apis:
   - type: OpenAPI
     url: openapi/jambase-usage-api-openapi.yml
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/jambase/overview
   - type: Plans
     url: plans/jambase-plans-pricing.yml
   - type: RateLimits
