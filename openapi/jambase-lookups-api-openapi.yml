@@ -637,3 +637,9 @@ components:
       type: http
       scheme: bearer
       description: API key as Bearer token. Get your key from your account dashboard.
+x-provenance:
+  method: harvested
+  publisher: JamBase
+  source: https://data.jambase.com/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
