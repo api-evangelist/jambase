@@ -1,0 +1,281 @@
+{
+  "info": {
+    "_postman_id": "0e7a7463-3a44-4d71-8bab-7241a0d4549b",
+    "name": "JamBase Concert Data Usage API",
+    "description": "REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.\n\nContact Support:\n Name: Team JamBase\n Email: developer@jambase.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:03:35.000Z",
+    "updatedAt": "2026-10-21T20:03:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0e7a7463-3a44-4d71-8bab-7241a0d4549b"
+  },
+  "item": [
+    {
+      "name": "quota",
+      "item": [
+        {
+          "name": "Get subscription quota and usage",
+          "id": "7c32a0e6-3806-4e23-b5f6-beec36aaec79",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/quota",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "quota"
+              ]
+            },
+            "description": "Accepts an API key Bearer token or supported OAuth Bearer token. Returns the effective quota and usage for the authenticated shared subscription pool. The effective quota includes applicable plan entitlements, overrides, and bonuses. This endpoint does not meter billing or analytics usage. Response rate-limit headers describe short-window abuse limits, not the subscription quota; overage values are not a provisional estimate of the final charge. For cost projections, use the Usage page."
+          },
+          "response": [
+            {
+              "id": "8b112cd5-ac41-41d6-916d-40a3f1f0c392",
+              "name": "Current quota and usage",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/quota",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "quota"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Short-window rate-limit status; does not describe the subscription quota.",
+                    "type": "text/plain"
+                  },
+                  "key": "RateLimit",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Short-window rate-limit policy; does not describe the subscription quota.",
+                    "type": "text/plain"
+                  },
+                  "key": "RateLimit-Policy",
+                  "value": "<string>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"plan\": \"<string>\",\n  \"quota\": \"<integer,null>\",\n  \"usedCalls\": \"<integer>\",\n  \"remainingCalls\": \"<integer,null>\",\n  \"overageCalls\": \"<integer>\",\n  \"noMonthlyCap\": \"<boolean>\",\n  \"periodStart\": \"<dateTime>\",\n  \"periodEnd\": \"<dateTime>\",\n  \"periodSource\": \"anchor\",\n  \"limitType\": \"soft\",\n  \"blocksAtQuota\": \"<boolean>\",\n  \"notes\": {\n    \"rateLimitHeaders\": \"<string>\",\n    \"overage\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:03:35.000Z",
+              "updatedAt": "2026-10-21T20:03:35.000Z",
+              "uid": "35240-8b112cd5-ac41-41d6-916d-40a3f1f0c392"
+            },
+            {
+              "id": "8492810d-7e32-41b1-acaf-6c55d298a265",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/quota",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "quota"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:03:35.000Z",
+              "updatedAt": "2026-10-21T20:03:35.000Z",
+              "uid": "35240-8492810d-7e32-41b1-acaf-6c55d298a265"
+            },
+            {
+              "id": "73fbf749-3464-4fd0-aa35-3606dc08d850",
+              "name": "Authenticated caller is not authorized to view this subscription quota.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/quota",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "quota"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:03:35.000Z",
+              "updatedAt": "2026-10-21T20:03:35.000Z",
+              "uid": "35240-73fbf749-3464-4fd0-aa35-3606dc08d850"
+            },
+            {
+              "id": "bc1720c6-355e-481b-a866-50650c898cc4",
+              "name": "Short-window abuse rate limit exceeded.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/quota",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "quota"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:03:35.000Z",
+              "updatedAt": "2026-10-21T20:03:35.000Z",
+              "uid": "35240-bc1720c6-355e-481b-a866-50650c898cc4"
+            },
+            {
+              "id": "d2f2659f-373f-4ec5-aaa7-10e0bd02e0e5",
+              "name": "Quota usage is temporarily unavailable because meter or entitlement data could not be read.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/quota",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "quota"
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"<uri-reference>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:03:35.000Z",
+              "updatedAt": "2026-10-21T20:03:35.000Z",
+              "uid": "35240-d2f2659f-373f-4ec5-aaa7-10e0bd02e0e5"
+            }
+          ],
+          "createdAt": "2026-10-21T20:03:35.000Z",
+          "updatedAt": "2026-10-21T20:03:35.000Z",
+          "uid": "35240-7c32a0e6-3806-4e23-b5f6-beec36aaec79"
+        }
+      ],
+      "id": "05e8b25b-a462-453f-ae98-41544e4f8951",
+      "createdAt": "2026-10-21T20:03:35.000Z",
+      "updatedAt": "2026-10-21T20:03:35.000Z",
+      "uid": "35240-05e8b25b-a462-453f-ae98-41544e4f8951"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.data.jambase.com/v3"
+    }
+  ]
+}

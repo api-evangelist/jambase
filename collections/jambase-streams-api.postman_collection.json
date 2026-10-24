@@ -1,607 +1,621 @@
 {
+  "info": {
+    "_postman_id": "5512d8e3-b532-4c33-a677-f4b18c692dcb",
+    "name": "JamBase Concert Data Streams API",
+    "description": "REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.\n\nContact Support:\n Name: Team JamBase\n Email: developer@jambase.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:03:16.000Z",
+    "updatedAt": "2026-10-21T20:03:16.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5512d8e3-b532-4c33-a677-f4b18c692dcb"
+  },
   "item": [
     {
-      "id": "987863aa-c75d-436d-a967-e52c77f2b120",
-      "name": "Streams",
-      "description": {
-        "content": "Search Streams",
-        "type": "text/plain"
-      },
+      "name": "streams",
       "item": [
         {
-          "id": "7ecbb25f-9ffa-47c3-b62a-ece347eecc54",
+          "name": "id",
+          "item": [
+            {
+              "name": "{streamDataSource}:{streamId}",
+              "item": [
+                {
+                  "name": "Look up a stream by ID",
+                  "id": "c6815fef-fac3-4c50-9e5a-47e74c8fcc2a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/id/{{streamDataSource}}:{{streamId}}?expandExternalIdentifiers=false&expandArtistSameAs=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        "id",
+                        "{{streamDataSource}}:{{streamId}}"
+                      ],
+                      "query": [
+                        {
+                          "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                          "key": "expandExternalIdentifiers",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n\\\nNote: `expandArtistSameAs` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                          "key": "expandArtistSameAs",
+                          "value": "false"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a single livestream by its JamBase ID \u2014 or directly by a supported third-party ID with no ID-mapping step."
+                  },
+                  "response": [
+                    {
+                      "id": "25200399-047c-4898-8f1e-3b529e0c6f06",
+                      "name": "A single Stream (`Stream`).",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/streams/id/{{streamDataSource}}:{{streamId}}?expandExternalIdentifiers=false&expandArtistSameAs=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "streams",
+                            "id",
+                            "{{streamDataSource}}:{{streamId}}"
+                          ],
+                          "query": [
+                            {
+                              "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                              "key": "expandExternalIdentifiers",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n\\\nNote: `expandArtistSameAs` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                              "key": "expandArtistSameAs",
+                              "value": "false"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"success\": true,\n  \"stream\": {\n    \"@type\": \"Stream\",\n    \"name\": \"<string>\",\n    \"identifier\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"eventStatus\": \"scheduled\",\n    \"startDate\": \"<string>\",\n    \"location\": {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"image\": \"<uri>\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"officialSite\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"twitter\",\n          \"url\": \"<uri>\"\n        }\n      ],\n      \"datePublished\": \"<string>\",\n      \"dateModified\": \"<string>\",\n      \"deletionStatus\": \"trashed\",\n      \"deletedAt\": \"<string>\",\n      \"mergedInto\": \"<string>\",\n      \"maximumAttendeeCapacity\": \"<number>\",\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"streetAddress\": \"<string>\",\n        \"addressLocality\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"addressRegion\": {\n          \"@type\": \"State\",\n          \"identifier\": \"CA-YT\",\n          \"name\": \"<string>\",\n          \"alternateName\": \"<string>\",\n          \"country\": {\n            \"@type\": \"Country\",\n            \"identifier\": \"SC\",\n            \"name\": \"<string>\",\n            \"alternateName\": \"FRO\",\n            \"x-numUpcomingEvents\": \"<number>\"\n          },\n          \"x-numUpcomingEvents\": \"<number>\"\n        },\n        \"addressCountry\": {\n          \"@type\": \"Country\",\n          \"identifier\": \"HR\",\n          \"name\": \"<string>\",\n          \"alternateName\": \"LCA\",\n          \"x-numUpcomingEvents\": \"<number>\"\n        },\n        \"x-streetAddress2\": \"<string>\",\n        \"x-timezone\": \"<string>\",\n        \"x-jamBaseMetroId\": \"<number>\",\n        \"x-jamBaseCityId\": \"<number>\"\n      },\n      \"geo\": {\n        \"@type\": \"GeoCoordinates\",\n        \"latitude\": \"<float>\",\n        \"longitude\": \"<float>\"\n      },\n      \"events\": [\n        {\n          \"@type\": \"Concert\",\n          \"deletionStatus\": \"merged\",\n          \"deletedAt\": \"<string>\",\n          \"mergedInto\": \"<string>\",\n          \"x-customTitle\": \"<string>\",\n          \"x-subtitle\": \"<string>\",\n          \"x-headlinerInSupport\": false,\n          \"x-streamIds\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"@type\": \"Concert\",\n          \"deletionStatus\": \"deleted\",\n          \"deletedAt\": \"<string>\",\n          \"mergedInto\": \"<string>\",\n          \"x-customTitle\": \"<string>\",\n          \"x-subtitle\": \"<string>\",\n          \"x-headlinerInSupport\": false,\n          \"x-streamIds\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"x-isPermanentlyClosed\": false,\n      \"x-numUpcomingEvents\": \"<number>\"\n    },\n    \"performer\": [\n      {\n        \"name\": \"<string>\",\n        \"identifier\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"image\": \"<uri>\",\n        \"sameAs\": [\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"musicbrainz\",\n            \"url\": \"<uri>\"\n          },\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"spotify\",\n            \"url\": \"<uri>\"\n          }\n        ],\n        \"datePublished\": \"<string>\",\n        \"dateModified\": \"<string>\",\n        \"@type\": \"MusicGroup\",\n        \"deletionStatus\": \"merged\",\n        \"deletedAt\": \"<string>\",\n        \"mergedInto\": \"<string>\",\n        \"member\": [\n          {\n            \"type\": \"MusicGroup\",\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"image\": \"<uri>\",\n            \"url\": \"<uri>\"\n          },\n          {\n            \"type\": \"MusicGroup\",\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"image\": \"<uri>\",\n            \"url\": \"<uri>\"\n          }\n        ],\n        \"memberOf\": [\n          {\n            \"@type\": \"MusicGroup\",\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"image\": \"<uri>\",\n            \"url\": \"<uri>\"\n          },\n          {\n            \"@type\": \"MusicGroup\",\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"image\": \"<uri>\",\n            \"url\": \"<uri>\"\n          }\n        ],\n        \"foundingLocation\": {\n          \"@type\": \"Place\",\n          \"name\": \"<string>\"\n        },\n        \"foundingDate\": \"<string>\",\n        \"genre\": [\n          \"hip-hop-rap\",\n          \"punk\"\n        ],\n        \"events\": [\n          {\n            \"@type\": \"Concert\",\n            \"deletionStatus\": \"merged\",\n            \"deletedAt\": \"<string>\",\n            \"mergedInto\": \"<string>\",\n            \"x-customTitle\": \"<string>\",\n            \"x-subtitle\": \"<string>\",\n            \"x-headlinerInSupport\": false,\n            \"x-streamIds\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"@type\": \"Concert\",\n            \"deletionStatus\": \"deleted\",\n            \"deletedAt\": \"<string>\",\n            \"mergedInto\": \"<string>\",\n            \"x-customTitle\": \"<string>\",\n            \"x-subtitle\": \"<string>\",\n            \"x-headlinerInSupport\": false,\n            \"x-streamIds\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ],\n        \"x-bandOrMusician\": \"band\",\n        \"x-numUpcomingEvents\": \"<number>\",\n        \"x-performanceDate\": \"<string>\",\n        \"x-performanceRank\": \"<number>\",\n        \"x-isHeadliner\": false,\n        \"x-dateIsConfirmed\": false\n      },\n      {\n        \"name\": \"<string>\",\n        \"identifier\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"image\": \"<uri>\",\n        \"sameAs\": [\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"twitter\",\n            \"url\": \"<uri>\"\n          },\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"youtube\",\n            \"url\": \"<uri>\"\n          }\n        ],\n        \"datePublished\": \"<string>\",\n        \"dateModified\": \"<string>\",\n        \"@type\": \"MusicGroup\",\n        \"deletionStatus\": \"merged\",\n        \"deletedAt\": \"<string>\",\n        \"mergedInto\": \"<string>\",\n        \"member\": [\n          {\n            \"type\": \"MusicGroup\",\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"image\": \"<uri>\",\n            \"url\": \"<uri>\"\n          },\n          {\n            \"type\": \"MusicGroup\",\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"image\": \"<uri>\",\n            \"url\": \"<uri>\"\n          }\n        ],\n        \"memberOf\": [\n          {\n            \"@type\": \"MusicGroup\",\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"image\": \"<uri>\",\n            \"url\": \"<uri>\"\n          },\n          {\n            \"@type\": \"MusicGroup\",\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"image\": \"<uri>\",\n            \"url\": \"<uri>\"\n          }\n        ],\n        \"foundingLocation\": {\n          \"@type\": \"Place\",\n          \"name\": \"<string>\"\n        },\n        \"foundingDate\": \"<string>\",\n        \"genre\": [\n          \"reggae\",\n          \"bluegrass\"\n        ],\n        \"events\": [\n          {\n            \"@type\": \"Concert\",\n            \"deletionStatus\": \"merged\",\n            \"deletedAt\": \"<string>\",\n            \"mergedInto\": \"<string>\",\n            \"x-customTitle\": \"<string>\",\n            \"x-subtitle\": \"<string>\",\n            \"x-headlinerInSupport\": false,\n            \"x-streamIds\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"@type\": \"Concert\",\n            \"deletionStatus\": \"deleted\",\n            \"deletedAt\": \"<string>\",\n            \"mergedInto\": \"<string>\",\n            \"x-customTitle\": \"<string>\",\n            \"x-subtitle\": \"<string>\",\n            \"x-headlinerInSupport\": false,\n            \"x-streamIds\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ],\n        \"x-bandOrMusician\": \"musician\",\n        \"x-numUpcomingEvents\": \"<number>\",\n        \"x-performanceDate\": \"<string>\",\n        \"x-performanceRank\": \"<number>\",\n        \"x-isHeadliner\": false,\n        \"x-dateIsConfirmed\": false\n      }\n    ],\n    \"image\": \"<uri>\",\n    \"sameAs\": [\n      {\n        \"@type\": \"URL\",\n        \"identifier\": \"facebook\",\n        \"url\": \"<uri>\"\n      },\n      {\n        \"@type\": \"URL\",\n        \"identifier\": \"youtube\",\n        \"url\": \"<uri>\"\n      }\n    ],\n    \"datePublished\": \"<string>\",\n    \"dateModified\": \"<string>\",\n    \"endDate\": \"<string>\",\n    \"previousStartDate\": \"<string>\",\n    \"doorTime\": \"<string>\",\n    \"offers\": [\n      {\n        \"identifier\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"category\": \"<string>\",\n        \"seller\": {\n          \"name\": \"<string>\",\n          \"identifier\": \"<string>\",\n          \"disambiguatingDescription\": \"<string>\",\n          \"datePublished\": \"<string>\",\n          \"dateModified\": \"<string>\",\n          \"@type\": \"Organization\",\n          \"url\": \"<uri>\",\n          \"image\": \"<uri>\",\n          \"sameAs\": [\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"spotify\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"musicbrainz\",\n              \"url\": \"<uri>\"\n            }\n          ]\n        },\n        \"validFrom\": {\n          \"example\": \"2022-12-07T12:42:00\",\n          \"schema\": \"in ut enim ipsum\"\n        },\n        \"name\": \"<string>\",\n        \"image\": \"<uri>\",\n        \"sameAs\": [\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"facebook\",\n            \"url\": \"<uri>\"\n          },\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"androidApp\",\n            \"url\": \"<uri>\"\n          }\n        ],\n        \"datePublished\": \"<string>\",\n        \"dateModified\": \"<string>\",\n        \"priceSpecification\": {\n          \"price\": \"<number>\",\n          \"priceCurrency\": \"<string>\",\n          \"@type\": \"PriceSpecification\",\n          \"minPrice\": \"<number>\",\n          \"maxPrice\": \"<number>\"\n        }\n      },\n      {\n        \"identifier\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"category\": \"<string>\",\n        \"seller\": {\n          \"name\": \"<string>\",\n          \"identifier\": \"<string>\",\n          \"disambiguatingDescription\": \"<string>\",\n          \"datePublished\": \"<string>\",\n          \"dateModified\": \"<string>\",\n          \"@type\": \"Organization\",\n          \"url\": \"<uri>\",\n          \"image\": \"<uri>\",\n          \"sameAs\": [\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"officialSite\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"musicbrainz\",\n              \"url\": \"<uri>\"\n            }\n          ]\n        },\n        \"validFrom\": {\n          \"example\": \"2022-12-07T12:42:00\",\n          \"schema\": \"irure aliqua voluptate\"\n        },\n        \"name\": \"<string>\",\n        \"image\": \"<uri>\",\n        \"sameAs\": [\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"facebook\",\n            \"url\": \"<uri>\"\n          },\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"twitter\",\n            \"url\": \"<uri>\"\n          }\n        ],\n        \"datePublished\": \"<string>\",\n        \"dateModified\": \"<string>\",\n        \"priceSpecification\": {\n          \"price\": \"<number>\",\n          \"priceCurrency\": \"<string>\",\n          \"@type\": \"PriceSpecification\",\n          \"minPrice\": \"<number>\",\n          \"maxPrice\": \"<number>\"\n        }\n      }\n    ],\n    \"eventAttendanceMode\": \"offline\",\n    \"isAccessibleForFree\": false,\n    \"x-promoImage\": \"<uri>\",\n    \"deletionStatus\": \"trashed\",\n    \"deletedAt\": \"<string>\",\n    \"mergedInto\": \"<string>\",\n    \"isLiveBroadcast\": \"<boolean>\",\n    \"broadcastOfEvent\": [\n      {\n        \"@type\": \"Concert\",\n        \"deletionStatus\": \"deleted\",\n        \"deletedAt\": \"<string>\",\n        \"mergedInto\": \"<string>\",\n        \"x-customTitle\": \"<string>\",\n        \"x-subtitle\": \"<string>\",\n        \"x-headlinerInSupport\": false,\n        \"x-streamIds\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"@type\": \"Concert\",\n        \"deletionStatus\": \"deleted\",\n        \"deletedAt\": \"<string>\",\n        \"mergedInto\": \"<string>\",\n        \"x-customTitle\": \"<string>\",\n        \"x-subtitle\": \"<string>\",\n        \"x-headlinerInSupport\": false,\n        \"x-streamIds\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"x-customTitle\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:03:17.000Z",
+                      "updatedAt": "2026-10-21T20:03:17.000Z",
+                      "uid": "35240-25200399-047c-4898-8f1e-3b529e0c6f06"
+                    },
+                    {
+                      "id": "0398136d-f121-4599-b0d3-bf9b96b40f0d",
+                      "name": "Invalid input parameter",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/streams/id/{{streamDataSource}}:{{streamId}}?expandExternalIdentifiers=false&expandArtistSameAs=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "streams",
+                            "id",
+                            "{{streamDataSource}}:{{streamId}}"
+                          ],
+                          "query": [
+                            {
+                              "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                              "key": "expandExternalIdentifiers",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n\\\nNote: `expandArtistSameAs` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                              "key": "expandArtistSameAs",
+                              "value": "false"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"parameter_invalid\",\n      \"errorMessage\": \"<string>\"\n    },\n    {\n      \"errorCode\": \"identifier_invalid\",\n      \"errorMessage\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:03:17.000Z",
+                      "updatedAt": "2026-10-21T20:03:17.000Z",
+                      "uid": "35240-0398136d-f121-4599-b0d3-bf9b96b40f0d"
+                    },
+                    {
+                      "id": "d54cb52a-2b73-40bf-8ebe-4b0a5d9bfa65",
+                      "name": "API key is missing or invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/streams/id/{{streamDataSource}}:{{streamId}}?expandExternalIdentifiers=false&expandArtistSameAs=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "streams",
+                            "id",
+                            "{{streamDataSource}}:{{streamId}}"
+                          ],
+                          "query": [
+                            {
+                              "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                              "key": "expandExternalIdentifiers",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n\\\nNote: `expandArtistSameAs` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                              "key": "expandArtistSameAs",
+                              "value": "false"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "WWW_Authenticate",
+                          "value": "<string>"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:03:17.000Z",
+                      "updatedAt": "2026-10-21T20:03:17.000Z",
+                      "uid": "35240-d54cb52a-2b73-40bf-8ebe-4b0a5d9bfa65"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:03:17.000Z",
+                  "updatedAt": "2026-10-21T20:03:17.000Z",
+                  "uid": "35240-c6815fef-fac3-4c50-9e5a-47e74c8fcc2a"
+                }
+              ],
+              "id": "a9832414-40b4-447a-a9f8-3fedf80fd2f5",
+              "createdAt": "2026-10-21T20:03:16.000Z",
+              "updatedAt": "2026-10-21T20:03:16.000Z",
+              "uid": "35240-a9832414-40b4-447a-a9f8-3fedf80fd2f5"
+            }
+          ],
+          "id": "33ed594b-e63f-491d-87aa-72f9e7e56901",
+          "createdAt": "2026-10-21T20:03:16.000Z",
+          "updatedAt": "2026-10-21T20:03:16.000Z",
+          "uid": "35240-33ed594b-e63f-491d-87aa-72f9e7e56901"
+        },
+        {
           "name": "Search Upcoming Streams",
+          "id": "36ee2171-e39c-491c-a70c-f2340ce0fd3f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Search Upcoming Streams",
-            "description": {
-              "content": "Search upcoming streams by date, artist, genre, and more.\nPast streams are not available via the API.\n",
-              "type": "text/plain"
-            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/streams?page=1&perPage=40&eventDatePreset=today&eventDateFrom=<date>&eventDateTo=<date>&streamDataSource=jambase&dateModifiedFrom=<string>&datePublishedFrom=<string>&expandExternalIdentifiers=false&expandArtistSameAs=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "streams"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Page number of results to retrieve",
                   "key": "page",
-                  "value": "1",
-                  "description": "Page number of results to retrieve"
+                  "value": "1"
                 },
                 {
-                  "disabled": false,
+                  "description": "Number of events per page of results",
                   "key": "perPage",
-                  "value": "40",
-                  "description": "Number of events per page of results"
+                  "value": "40"
                 },
                 {
-                  "disabled": false,
+                  "description": "Use a dynamic date preset.\n- eventDatePreset=tomorrow\n\nNotes: \n- The `eventDatePreset` will override `eventDateFrom` & `eventDateTo` if those are set as well.\n- The `halloween` preset returns events on 10/31 only. The `newYears` preset returns events on 12/31 only. The `july4th` preset returns events on or near July 4th.\n",
                   "key": "eventDatePreset",
-                  "value": "<string>",
-                  "description": "Use a dynamic date preset.\n- eventDatePreset=tomorrow\n\nNotes: \n- The `eventDatePreset` will override `eventDateFrom` & `eventDateTo` if those are set as well.\n- The `halloween` preset returns events on 10/31 only. The `newYears` preset returns events on 12/31 only. The `july4th` preset returns events on or near July 4th.\n"
+                  "value": "today"
                 },
                 {
-                  "disabled": false,
+                  "description": "For `concerts` must start on or after this date.\\\nFor `festivals`, must start on or after this date.\\\nIf left blank or omitted, will use the current date.\n\n- eventDateFrom=2023-10-31\n\nUsing a date before the current date requires historical access:\n- On plans with geo + historical search (Enterprise baseline, or granted by request), send a past `eventDateFrom` (and optionally `eventDateTo`) together with any geo parameter such as `geoCountryIso2`. No expand flag is needed; historical intent is inferred from the date range. Requests beyond the 5,000/day per-subscription allowance fall back to the standard search path and set the `X-JBD-Geo-Historical-Fallback` response header (check it during backfills).\n- On other plans with historical access, combine `expandPastEvents=true` with `artistId` or `venueId` for a single artist or venue timeline (window depends on plan).\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n",
                   "key": "eventDateFrom",
-                  "value": "<date>",
-                  "description": "For `concerts` must start on or after this date.\\\nFor `festivals`, must start on or after this date.\\\nIf left blank or omitted, will use the current date.\\\nThe `expandPastEvents` parameter is required when using `eventDateFrom` before the current date.\n\n- eventDateFrom=2023-10-31\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n"
+                  "value": "<date>"
                 },
                 {
-                  "disabled": false,
+                  "description": "For `concerts` must start on or before this date.\\\nFor `festivals` must end on or before this date.\\\nIf left blank or omitted, will return all events after `eventDateFrom`.\n\n- eventDateTo=2023-12-31\n\nFor historical queries, pair with a past `eventDateFrom` (see that parameter for the per-plan access patterns).\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n",
                   "key": "eventDateTo",
-                  "value": "<date>",
-                  "description": "For `concerts` must start on or before this date.\\\nFor `festivals` must end on or before this date.\\\nIf left blank or omitted, will return all events after `eventDateFrom`.\n\n- eventDateTo=2023-12-31\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n"
+                  "value": "<date>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Filter streams to those sourced from a specific stream platform.\n\nv3 currently exposes a single source slug \u2014 `jambase` \u2014 which represents JamBase's normalized stream catalog. Pipe-delimited values are supported for forward compatibility:\n\n- streamDataSource=jambase\n",
                   "key": "streamDataSource",
-                  "value": "<string>",
-                  "description": "Filter streams to those sourced from a specific stream platform.\n\nv3 currently exposes a single source slug — `jambase` — which represents JamBase's normalized stream catalog. Pipe-delimited values are supported for forward compatibility:\n\n- streamDataSource=jambase\n"
+                  "value": "jambase"
                 },
                 {
-                  "disabled": false,
+                  "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nOn its own, a `dateModifiedFrom` sweep only returns events whose dates have not yet passed \u2014 modifications to past-dated events never appear in a plain delta sweep. To catch changes to past shows, plans with geo + historical search (Enterprise baseline, or granted by request) can combine `dateModifiedFrom` with a geo parameter (such as `geoCountryIso2`) and an explicit past `eventDateFrom`/`eventDateTo` range. Two caveats: the historical index refreshes on a delay (up to about a day), so overlap historical watermarks by 24-48 hours; and a response carrying the `X-JBD-Geo-Historical-Fallback` header was served without past events and should be re-run after the UTC day resets.\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                   "key": "dateModifiedFrom",
-                  "value": "<rfc3339>",
-                  "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                   "key": "datePublishedFrom",
-                  "value": "<rfc3339>",
-                  "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
                   "key": "expandExternalIdentifiers",
-                  "value": "false",
-                  "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+                  "value": "false"
                 },
                 {
-                  "disabled": false,
+                  "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n\\\nNote: `expandArtistSameAs` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
                   "key": "expandArtistSameAs",
-                  "value": "false",
-                  "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
+                  "value": "false"
                 }
-              ],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Search upcoming streams by date, artist, genre, and more.\nPast streams are not available via the API."
           },
           "response": [
             {
-              "id": "a830610c-d916-4700-8231-ca238a8ad909",
+              "id": "3bde6daa-2c73-4367-83fe-60954e239720",
               "name": "A list of Streams",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "streams"
-                  ],
+                  "raw": "{{baseUrl}}/streams?page=1&perPage=40&eventDatePreset=today&eventDateFrom=<date>&eventDateTo=<date>&streamDataSource=jambase&dateModifiedFrom=<string>&datePublishedFrom=<string>&expandExternalIdentifiers=false&expandArtistSameAs=false",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "streams"
+                  ],
                   "query": [
                     {
+                      "description": "Page number of results to retrieve",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of events per page of results",
                       "key": "perPage",
                       "value": "40"
                     },
                     {
+                      "description": "Use a dynamic date preset.\n- eventDatePreset=tomorrow\n\nNotes: \n- The `eventDatePreset` will override `eventDateFrom` & `eventDateTo` if those are set as well.\n- The `halloween` preset returns events on 10/31 only. The `newYears` preset returns events on 12/31 only. The `july4th` preset returns events on or near July 4th.\n",
                       "key": "eventDatePreset",
-                      "value": "tomorrow"
+                      "value": "today"
                     },
                     {
+                      "description": "For `concerts` must start on or after this date.\\\nFor `festivals`, must start on or after this date.\\\nIf left blank or omitted, will use the current date.\n\n- eventDateFrom=2023-10-31\n\nUsing a date before the current date requires historical access:\n- On plans with geo + historical search (Enterprise baseline, or granted by request), send a past `eventDateFrom` (and optionally `eventDateTo`) together with any geo parameter such as `geoCountryIso2`. No expand flag is needed; historical intent is inferred from the date range. Requests beyond the 5,000/day per-subscription allowance fall back to the standard search path and set the `X-JBD-Geo-Historical-Fallback` response header (check it during backfills).\n- On other plans with historical access, combine `expandPastEvents=true` with `artistId` or `venueId` for a single artist or venue timeline (window depends on plan).\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n",
                       "key": "eventDateFrom",
-                      "value": "2023-10-01"
+                      "value": "<date>"
                     },
                     {
+                      "description": "For `concerts` must start on or before this date.\\\nFor `festivals` must end on or before this date.\\\nIf left blank or omitted, will return all events after `eventDateFrom`.\n\n- eventDateTo=2023-12-31\n\nFor historical queries, pair with a past `eventDateFrom` (see that parameter for the per-plan access patterns).\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n",
                       "key": "eventDateTo",
-                      "value": "2023-12-31"
+                      "value": "<date>"
                     },
                     {
+                      "description": "Filter streams to those sourced from a specific stream platform.\n\nv3 currently exposes a single source slug \u2014 `jambase` \u2014 which represents JamBase's normalized stream catalog. Pipe-delimited values are supported for forward compatibility:\n\n- streamDataSource=jambase\n",
                       "key": "streamDataSource",
                       "value": "jambase"
                     },
                     {
+                      "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nOn its own, a `dateModifiedFrom` sweep only returns events whose dates have not yet passed \u2014 modifications to past-dated events never appear in a plain delta sweep. To catch changes to past shows, plans with geo + historical search (Enterprise baseline, or granted by request) can combine `dateModifiedFrom` with a geo parameter (such as `geoCountryIso2`) and an explicit past `eventDateFrom`/`eventDateTo` range. Two caveats: the historical index refreshes on a delay (up to about a day), so overlap historical watermarks by 24-48 hours; and a response carrying the `X-JBD-Geo-Historical-Fallback` header was served without past events and should be re-run after the UTC day resets.\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                       "key": "dateModifiedFrom",
-                      "value": "2022-10-31 00:00:00"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                       "key": "datePublishedFrom",
-                      "value": "2022-01-01 00:00:00"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
                       "key": "expandExternalIdentifiers",
                       "value": "false"
                     },
                     {
+                      "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n\\\nNote: `expandArtistSameAs` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
                       "key": "expandArtistSameAs",
                       "value": "false"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"success\": true,\n  \"pagination\": {\n    \"page\": 1,\n    \"perPage\": 10,\n    \"totalItems\": 50,\n    \"totalPages\": 5,\n    \"nextPage\": \"string\",\n    \"previousPage\": \"string\"\n  },\n  \"streams\": [\n    {\n      \"@type\": \"Stream\",\n      \"eventStatus\": \"cancelled\",\n      \"startDate\": \"string\",\n      \"location\": {\n        \"deletionStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mergedInto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"maximumAttendeeCapacity\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"geo\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"events\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-isPermanentlyClosed\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-numUpcomingEvents\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-externalIdentifiers\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"performer\": [\n        {\n          \"x-performanceDate\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-performanceRank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-isHeadliner\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-dateIsConfirmed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"x-performanceDate\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-performanceRank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-isHeadliner\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-dateIsConfirmed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"sameAs\": {},\n      \"endDate\": \"string\",\n      \"previousStartDate\": \"string\",\n      \"doorTime\": \"string\",\n      \"offers\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"eventAttendanceMode\": \"offline\",\n      \"isAccessibleForFree\": false,\n      \"x-promoImage\": \"https://iRJ.lpqcbuXt\",\n      \"deletionStatus\": \"deleted\",\n      \"deletedAt\": \"2026-04-12T18:01:00Z\",\n      \"mergedInto\": \"jambase:5632389\",\n      \"isLiveBroadcast\": true,\n      \"broadcastOfEvent\": [\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"x-customTitle\": \"string\"\n    },\n    {\n      \"@type\": \"Stream\",\n      \"eventStatus\": \"rescheduled\",\n      \"startDate\": \"string\",\n      \"location\": {\n        \"deletionStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mergedInto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"maximumAttendeeCapacity\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"geo\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"events\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-isPermanentlyClosed\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-numUpcomingEvents\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-externalIdentifiers\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"performer\": [\n        {\n          \"x-performanceDate\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-performanceRank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-isHeadliner\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-dateIsConfirmed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"x-performanceDate\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-performanceRank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-isHeadliner\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-dateIsConfirmed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"sameAs\": {},\n      \"endDate\": \"string\",\n      \"previousStartDate\": \"string\",\n      \"doorTime\": \"string\",\n      \"offers\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"eventAttendanceMode\": \"offline\",\n      \"isAccessibleForFree\": false,\n      \"x-promoImage\": \"http://CxZRnjdUapnSoiPlwRU.tozqs1b9GBNL6YgnzEvOL.pePslx8oGdpvJ9qv,F6g,jojP7vcLsZLe\",\n      \"deletionStatus\": \"deleted\",\n      \"deletedAt\": \"2026-04-12T18:01:00Z\",\n      \"mergedInto\": \"jambase:5632389\",\n      \"isLiveBroadcast\": true,\n      \"broadcastOfEvent\": [\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"x-customTitle\": \"string\"\n    }\n  ],\n  \"request\": {\n    \"endpoint\": \"string\",\n    \"method\": \"string\",\n    \"ip\": \"48.214.233.204\",\n    \"userAgent\": \"string\"\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"success\": true,\n  \"pagination\": {\n    \"page\": \"<integer>\",\n    \"perPage\": \"<integer>\",\n    \"totalItems\": \"<integer>\",\n    \"totalPages\": \"<integer>\",\n    \"nextPage\": \"<string>\",\n    \"previousPage\": \"<string>\"\n  },\n  \"streams\": [\n    {\n      \"@type\": \"Stream\",\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"eventStatus\": \"cancelled\",\n      \"startDate\": \"<string>\",\n      \"location\": {\n        \"name\": \"<string>\",\n        \"identifier\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"image\": \"<uri>\",\n        \"sameAs\": [\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"spotify\",\n            \"url\": \"<uri>\"\n          },\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"iosApp\",\n            \"url\": \"<uri>\"\n          }\n        ],\n        \"datePublished\": \"<string>\",\n        \"dateModified\": \"<string>\",\n        \"deletionStatus\": \"trashed\",\n        \"deletedAt\": \"<string>\",\n        \"mergedInto\": \"<string>\",\n        \"maximumAttendeeCapacity\": \"<number>\",\n        \"address\": {\n          \"@type\": \"PostalAddress\",\n          \"streetAddress\": \"<string>\",\n          \"addressLocality\": \"<string>\",\n          \"postalCode\": \"<string>\",\n          \"addressRegion\": {\n            \"@type\": \"State\",\n            \"identifier\": \"US-WV\",\n            \"name\": \"<string>\",\n            \"alternateName\": \"<string>\",\n            \"country\": {\n              \"@type\": \"Country\",\n              \"identifier\": \"BB\",\n              \"name\": \"<string>\",\n              \"alternateName\": \"ABW\",\n              \"x-numUpcomingEvents\": \"<number>\"\n            },\n            \"x-numUpcomingEvents\": \"<number>\"\n          },\n          \"addressCountry\": {\n            \"@type\": \"Country\",\n            \"identifier\": \"LU\",\n            \"name\": \"<string>\",\n            \"alternateName\": \"KIR\",\n            \"x-numUpcomingEvents\": \"<number>\"\n          },\n          \"x-streetAddress2\": \"<string>\",\n          \"x-timezone\": \"<string>\",\n          \"x-jamBaseMetroId\": \"<number>\",\n          \"x-jamBaseCityId\": \"<number>\"\n        },\n        \"geo\": {\n          \"@type\": \"GeoCoordinates\",\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"events\": [\n          {\n            \"@type\": \"Concert\",\n            \"deletionStatus\": \"trashed\",\n            \"deletedAt\": \"<string>\",\n            \"mergedInto\": \"<string>\",\n            \"x-customTitle\": \"<string>\",\n            \"x-subtitle\": \"<string>\",\n            \"x-headlinerInSupport\": false,\n            \"x-streamIds\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"@type\": \"Concert\",\n            \"deletionStatus\": \"trashed\",\n            \"deletedAt\": \"<string>\",\n            \"mergedInto\": \"<string>\",\n            \"x-customTitle\": \"<string>\",\n            \"x-subtitle\": \"<string>\",\n            \"x-headlinerInSupport\": false,\n            \"x-streamIds\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ],\n        \"x-isPermanentlyClosed\": false,\n        \"x-numUpcomingEvents\": \"<number>\"\n      },\n      \"performer\": [\n        {\n          \"name\": \"<string>\",\n          \"identifier\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"image\": \"<uri>\",\n          \"sameAs\": [\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"youtube\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"youtube\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"datePublished\": \"<string>\",\n          \"dateModified\": \"<string>\",\n          \"@type\": \"MusicGroup\",\n          \"deletionStatus\": \"merged\",\n          \"deletedAt\": \"<string>\",\n          \"mergedInto\": \"<string>\",\n          \"member\": [\n            {\n              \"type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"memberOf\": [\n            {\n              \"@type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"foundingLocation\": {\n            \"@type\": \"Place\",\n            \"name\": \"<string>\"\n          },\n          \"foundingDate\": \"<string>\",\n          \"genre\": [\n            \"hip-hop-rap\",\n            \"pop\"\n          ],\n          \"events\": [\n            {\n              \"@type\": \"Concert\",\n              \"deletionStatus\": \"trashed\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"x-customTitle\": \"<string>\",\n              \"x-subtitle\": \"<string>\",\n              \"x-headlinerInSupport\": false,\n              \"x-streamIds\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"@type\": \"Concert\",\n              \"deletionStatus\": \"merged\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"x-customTitle\": \"<string>\",\n              \"x-subtitle\": \"<string>\",\n              \"x-headlinerInSupport\": false,\n              \"x-streamIds\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ],\n          \"x-bandOrMusician\": \"band\",\n          \"x-numUpcomingEvents\": \"<number>\",\n          \"x-performanceDate\": \"<string>\",\n          \"x-performanceRank\": \"<number>\",\n          \"x-isHeadliner\": false,\n          \"x-dateIsConfirmed\": false\n        },\n        {\n          \"name\": \"<string>\",\n          \"identifier\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"image\": \"<uri>\",\n          \"sameAs\": [\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"musicbrainz\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"spotify\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"datePublished\": \"<string>\",\n          \"dateModified\": \"<string>\",\n          \"@type\": \"MusicGroup\",\n          \"deletionStatus\": \"trashed\",\n          \"deletedAt\": \"<string>\",\n          \"mergedInto\": \"<string>\",\n          \"member\": [\n            {\n              \"type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"memberOf\": [\n            {\n              \"@type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"foundingLocation\": {\n            \"@type\": \"Place\",\n            \"name\": \"<string>\"\n          },\n          \"foundingDate\": \"<string>\",\n          \"genre\": [\n            \"country-music\",\n            \"reggae\"\n          ],\n          \"events\": [\n            {\n              \"@type\": \"Concert\",\n              \"deletionStatus\": \"trashed\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"x-customTitle\": \"<string>\",\n              \"x-subtitle\": \"<string>\",\n              \"x-headlinerInSupport\": false,\n              \"x-streamIds\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"@type\": \"Concert\",\n              \"deletionStatus\": \"trashed\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"x-customTitle\": \"<string>\",\n              \"x-subtitle\": \"<string>\",\n              \"x-headlinerInSupport\": false,\n              \"x-streamIds\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ],\n          \"x-bandOrMusician\": \"musician\",\n          \"x-numUpcomingEvents\": \"<number>\",\n          \"x-performanceDate\": \"<string>\",\n          \"x-performanceRank\": \"<number>\",\n          \"x-isHeadliner\": false,\n          \"x-dateIsConfirmed\": false\n        }\n      ],\n      \"image\": \"<uri>\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"musicbrainz\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"officialSite\",\n          \"url\": \"<uri>\"\n        }\n      ],\n      \"datePublished\": \"<string>\",\n      \"dateModified\": \"<string>\",\n      \"endDate\": \"<string>\",\n      \"previousStartDate\": \"<string>\",\n      \"doorTime\": \"<string>\",\n      \"offers\": [\n        {\n          \"identifier\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"category\": \"<string>\",\n          \"seller\": {\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"disambiguatingDescription\": \"<string>\",\n            \"datePublished\": \"<string>\",\n            \"dateModified\": \"<string>\",\n            \"@type\": \"Organization\",\n            \"url\": \"<uri>\",\n            \"image\": \"<uri>\",\n            \"sameAs\": [\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"facebook\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"facebook\",\n                \"url\": \"<uri>\"\n              }\n            ]\n          },\n          \"validFrom\": {\n            \"example\": \"2022-12-07T12:42:00\",\n            \"schema\": \"consequat pariatur tempor\"\n          },\n          \"name\": \"<string>\",\n          \"image\": \"<uri>\",\n          \"sameAs\": [\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"officialSite\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"facebook\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"datePublished\": \"<string>\",\n          \"dateModified\": \"<string>\",\n          \"priceSpecification\": {\n            \"price\": \"<number>\",\n            \"priceCurrency\": \"<string>\",\n            \"@type\": \"PriceSpecification\",\n            \"minPrice\": \"<number>\",\n            \"maxPrice\": \"<number>\"\n          }\n        },\n        {\n          \"identifier\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"category\": \"<string>\",\n          \"seller\": {\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"disambiguatingDescription\": \"<string>\",\n            \"datePublished\": \"<string>\",\n            \"dateModified\": \"<string>\",\n            \"@type\": \"Organization\",\n            \"url\": \"<uri>\",\n            \"image\": \"<uri>\",\n            \"sameAs\": [\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"officialSite\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"facebook\",\n                \"url\": \"<uri>\"\n              }\n            ]\n          },\n          \"validFrom\": {\n            \"example\": \"2022-12-07T12:42:00\",\n            \"schema\": \"tempor mollit\"\n          },\n          \"name\": \"<string>\",\n          \"image\": \"<uri>\",\n          \"sameAs\": [\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"iosApp\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"instagram\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"datePublished\": \"<string>\",\n          \"dateModified\": \"<string>\",\n          \"priceSpecification\": {\n            \"price\": \"<number>\",\n            \"priceCurrency\": \"<string>\",\n            \"@type\": \"PriceSpecification\",\n            \"minPrice\": \"<number>\",\n            \"maxPrice\": \"<number>\"\n          }\n        }\n      ],\n      \"eventAttendanceMode\": \"offline\",\n      \"isAccessibleForFree\": false,\n      \"x-promoImage\": \"<uri>\",\n      \"deletionStatus\": \"deleted\",\n      \"deletedAt\": \"<string>\",\n      \"mergedInto\": \"<string>\",\n      \"isLiveBroadcast\": \"<boolean>\",\n      \"broadcastOfEvent\": [\n        {\n          \"@type\": \"Concert\",\n          \"deletionStatus\": \"deleted\",\n          \"deletedAt\": \"<string>\",\n          \"mergedInto\": \"<string>\",\n          \"x-customTitle\": \"<string>\",\n          \"x-subtitle\": \"<string>\",\n          \"x-headlinerInSupport\": false,\n          \"x-streamIds\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"@type\": \"Concert\",\n          \"deletionStatus\": \"merged\",\n          \"deletedAt\": \"<string>\",\n          \"mergedInto\": \"<string>\",\n          \"x-customTitle\": \"<string>\",\n          \"x-subtitle\": \"<string>\",\n          \"x-headlinerInSupport\": false,\n          \"x-streamIds\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"x-customTitle\": \"<string>\"\n    },\n    {\n      \"@type\": \"Stream\",\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"eventStatus\": \"scheduled\",\n      \"startDate\": \"<string>\",\n      \"location\": {\n        \"name\": \"<string>\",\n        \"identifier\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"image\": \"<uri>\",\n        \"sameAs\": [\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"facebook\",\n            \"url\": \"<uri>\"\n          },\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"twitter\",\n            \"url\": \"<uri>\"\n          }\n        ],\n        \"datePublished\": \"<string>\",\n        \"dateModified\": \"<string>\",\n        \"deletionStatus\": \"deleted\",\n        \"deletedAt\": \"<string>\",\n        \"mergedInto\": \"<string>\",\n        \"maximumAttendeeCapacity\": \"<number>\",\n        \"address\": {\n          \"@type\": \"PostalAddress\",\n          \"streetAddress\": \"<string>\",\n          \"addressLocality\": \"<string>\",\n          \"postalCode\": \"<string>\",\n          \"addressRegion\": {\n            \"@type\": \"State\",\n            \"identifier\": \"AU-NSW\",\n            \"name\": \"<string>\",\n            \"alternateName\": \"<string>\",\n            \"country\": {\n              \"@type\": \"Country\",\n              \"identifier\": \"AT\",\n              \"name\": \"<string>\",\n              \"alternateName\": \"VIR\",\n              \"x-numUpcomingEvents\": \"<number>\"\n            },\n            \"x-numUpcomingEvents\": \"<number>\"\n          },\n          \"addressCountry\": {\n            \"@type\": \"Country\",\n            \"identifier\": \"MZ\",\n            \"name\": \"<string>\",\n            \"alternateName\": \"TKL\",\n            \"x-numUpcomingEvents\": \"<number>\"\n          },\n          \"x-streetAddress2\": \"<string>\",\n          \"x-timezone\": \"<string>\",\n          \"x-jamBaseMetroId\": \"<number>\",\n          \"x-jamBaseCityId\": \"<number>\"\n        },\n        \"geo\": {\n          \"@type\": \"GeoCoordinates\",\n          \"latitude\": \"<float>\",\n          \"longitude\": \"<float>\"\n        },\n        \"events\": [\n          {\n            \"@type\": \"Concert\",\n            \"deletionStatus\": \"merged\",\n            \"deletedAt\": \"<string>\",\n            \"mergedInto\": \"<string>\",\n            \"x-customTitle\": \"<string>\",\n            \"x-subtitle\": \"<string>\",\n            \"x-headlinerInSupport\": false,\n            \"x-streamIds\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"@type\": \"Concert\",\n            \"deletionStatus\": \"trashed\",\n            \"deletedAt\": \"<string>\",\n            \"mergedInto\": \"<string>\",\n            \"x-customTitle\": \"<string>\",\n            \"x-subtitle\": \"<string>\",\n            \"x-headlinerInSupport\": false,\n            \"x-streamIds\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ],\n        \"x-isPermanentlyClosed\": false,\n        \"x-numUpcomingEvents\": \"<number>\"\n      },\n      \"performer\": [\n        {\n          \"name\": \"<string>\",\n          \"identifier\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"image\": \"<uri>\",\n          \"sameAs\": [\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"spotify\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"spotify\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"datePublished\": \"<string>\",\n          \"dateModified\": \"<string>\",\n          \"@type\": \"MusicGroup\",\n          \"deletionStatus\": \"trashed\",\n          \"deletedAt\": \"<string>\",\n          \"mergedInto\": \"<string>\",\n          \"member\": [\n            {\n              \"type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"memberOf\": [\n            {\n              \"@type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"foundingLocation\": {\n            \"@type\": \"Place\",\n            \"name\": \"<string>\"\n          },\n          \"foundingDate\": \"<string>\",\n          \"genre\": [\n            \"indie\",\n            \"latin\"\n          ],\n          \"events\": [\n            {\n              \"@type\": \"Concert\",\n              \"deletionStatus\": \"trashed\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"x-customTitle\": \"<string>\",\n              \"x-subtitle\": \"<string>\",\n              \"x-headlinerInSupport\": false,\n              \"x-streamIds\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"@type\": \"Concert\",\n              \"deletionStatus\": \"trashed\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"x-customTitle\": \"<string>\",\n              \"x-subtitle\": \"<string>\",\n              \"x-headlinerInSupport\": false,\n              \"x-streamIds\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ],\n          \"x-bandOrMusician\": \"musician\",\n          \"x-numUpcomingEvents\": \"<number>\",\n          \"x-performanceDate\": \"<string>\",\n          \"x-performanceRank\": \"<number>\",\n          \"x-isHeadliner\": false,\n          \"x-dateIsConfirmed\": false\n        },\n        {\n          \"name\": \"<string>\",\n          \"identifier\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"image\": \"<uri>\",\n          \"sameAs\": [\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"facebook\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"androidApp\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"datePublished\": \"<string>\",\n          \"dateModified\": \"<string>\",\n          \"@type\": \"MusicGroup\",\n          \"deletionStatus\": \"merged\",\n          \"deletedAt\": \"<string>\",\n          \"mergedInto\": \"<string>\",\n          \"member\": [\n            {\n              \"type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"memberOf\": [\n            {\n              \"@type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"MusicGroup\",\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"foundingLocation\": {\n            \"@type\": \"Place\",\n            \"name\": \"<string>\"\n          },\n          \"foundingDate\": \"<string>\",\n          \"genre\": [\n            \"tribute\",\n            \"metal\"\n          ],\n          \"events\": [\n            {\n              \"@type\": \"Concert\",\n              \"deletionStatus\": \"trashed\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"x-customTitle\": \"<string>\",\n              \"x-subtitle\": \"<string>\",\n              \"x-headlinerInSupport\": false,\n              \"x-streamIds\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"@type\": \"Concert\",\n              \"deletionStatus\": \"deleted\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"x-customTitle\": \"<string>\",\n              \"x-subtitle\": \"<string>\",\n              \"x-headlinerInSupport\": false,\n              \"x-streamIds\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ],\n          \"x-bandOrMusician\": \"musician\",\n          \"x-numUpcomingEvents\": \"<number>\",\n          \"x-performanceDate\": \"<string>\",\n          \"x-performanceRank\": \"<number>\",\n          \"x-isHeadliner\": false,\n          \"x-dateIsConfirmed\": false\n        }\n      ],\n      \"image\": \"<uri>\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"youtube\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"spotify\",\n          \"url\": \"<uri>\"\n        }\n      ],\n      \"datePublished\": \"<string>\",\n      \"dateModified\": \"<string>\",\n      \"endDate\": \"<string>\",\n      \"previousStartDate\": \"<string>\",\n      \"doorTime\": \"<string>\",\n      \"offers\": [\n        {\n          \"identifier\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"category\": \"<string>\",\n          \"seller\": {\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"disambiguatingDescription\": \"<string>\",\n            \"datePublished\": \"<string>\",\n            \"dateModified\": \"<string>\",\n            \"@type\": \"Organization\",\n            \"url\": \"<uri>\",\n            \"image\": \"<uri>\",\n            \"sameAs\": [\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"instagram\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"instagram\",\n                \"url\": \"<uri>\"\n              }\n            ]\n          },\n          \"validFrom\": {\n            \"example\": \"2022-12-07T12:42:00\",\n            \"schema\": \"sunt nulla\"\n          },\n          \"name\": \"<string>\",\n          \"image\": \"<uri>\",\n          \"sameAs\": [\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"musicbrainz\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"androidApp\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"datePublished\": \"<string>\",\n          \"dateModified\": \"<string>\",\n          \"priceSpecification\": {\n            \"price\": \"<number>\",\n            \"priceCurrency\": \"<string>\",\n            \"@type\": \"PriceSpecification\",\n            \"minPrice\": \"<number>\",\n            \"maxPrice\": \"<number>\"\n          }\n        },\n        {\n          \"identifier\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"category\": \"<string>\",\n          \"seller\": {\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"disambiguatingDescription\": \"<string>\",\n            \"datePublished\": \"<string>\",\n            \"dateModified\": \"<string>\",\n            \"@type\": \"Organization\",\n            \"url\": \"<uri>\",\n            \"image\": \"<uri>\",\n            \"sameAs\": [\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"youtube\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"twitter\",\n                \"url\": \"<uri>\"\n              }\n            ]\n          },\n          \"validFrom\": {\n            \"example\": \"2022-12-07T12:42:00\",\n            \"schema\": \"irure nostrud\"\n          },\n          \"name\": \"<string>\",\n          \"image\": \"<uri>\",\n          \"sameAs\": [\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"musicbrainz\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"androidApp\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"datePublished\": \"<string>\",\n          \"dateModified\": \"<string>\",\n          \"priceSpecification\": {\n            \"price\": \"<number>\",\n            \"priceCurrency\": \"<string>\",\n            \"@type\": \"PriceSpecification\",\n            \"minPrice\": \"<number>\",\n            \"maxPrice\": \"<number>\"\n          }\n        }\n      ],\n      \"eventAttendanceMode\": \"offline\",\n      \"isAccessibleForFree\": false,\n      \"x-promoImage\": \"<uri>\",\n      \"deletionStatus\": \"merged\",\n      \"deletedAt\": \"<string>\",\n      \"mergedInto\": \"<string>\",\n      \"isLiveBroadcast\": \"<boolean>\",\n      \"broadcastOfEvent\": [\n        {\n          \"@type\": \"Concert\",\n          \"deletionStatus\": \"merged\",\n          \"deletedAt\": \"<string>\",\n          \"mergedInto\": \"<string>\",\n          \"x-customTitle\": \"<string>\",\n          \"x-subtitle\": \"<string>\",\n          \"x-headlinerInSupport\": false,\n          \"x-streamIds\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"@type\": \"Concert\",\n          \"deletionStatus\": \"trashed\",\n          \"deletedAt\": \"<string>\",\n          \"mergedInto\": \"<string>\",\n          \"x-customTitle\": \"<string>\",\n          \"x-subtitle\": \"<string>\",\n          \"x-headlinerInSupport\": false,\n          \"x-streamIds\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"x-customTitle\": \"<string>\"\n    }\n  ],\n  \"request\": {\n    \"endpoint\": \"<string>\",\n    \"method\": \"<string>\",\n    \"ip\": \"<ipv4>\",\n    \"userAgent\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:03:17.000Z",
+              "updatedAt": "2026-10-21T20:03:17.000Z",
+              "uid": "35240-3bde6daa-2c73-4367-83fe-60954e239720"
             },
             {
-              "id": "4f93c9b4-9d73-48d6-b6a6-9e869b750c18",
+              "id": "880ff21f-20b1-43b0-8f0d-108dd63e497e",
               "name": "Invalid input parameter",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "streams"
-                  ],
+                  "raw": "{{baseUrl}}/streams?page=1&perPage=40&eventDatePreset=today&eventDateFrom=<date>&eventDateTo=<date>&streamDataSource=jambase&dateModifiedFrom=<string>&datePublishedFrom=<string>&expandExternalIdentifiers=false&expandArtistSameAs=false",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "streams"
+                  ],
                   "query": [
                     {
+                      "description": "Page number of results to retrieve",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of events per page of results",
                       "key": "perPage",
                       "value": "40"
                     },
                     {
+                      "description": "Use a dynamic date preset.\n- eventDatePreset=tomorrow\n\nNotes: \n- The `eventDatePreset` will override `eventDateFrom` & `eventDateTo` if those are set as well.\n- The `halloween` preset returns events on 10/31 only. The `newYears` preset returns events on 12/31 only. The `july4th` preset returns events on or near July 4th.\n",
                       "key": "eventDatePreset",
-                      "value": "tomorrow"
+                      "value": "today"
                     },
                     {
+                      "description": "For `concerts` must start on or after this date.\\\nFor `festivals`, must start on or after this date.\\\nIf left blank or omitted, will use the current date.\n\n- eventDateFrom=2023-10-31\n\nUsing a date before the current date requires historical access:\n- On plans with geo + historical search (Enterprise baseline, or granted by request), send a past `eventDateFrom` (and optionally `eventDateTo`) together with any geo parameter such as `geoCountryIso2`. No expand flag is needed; historical intent is inferred from the date range. Requests beyond the 5,000/day per-subscription allowance fall back to the standard search path and set the `X-JBD-Geo-Historical-Fallback` response header (check it during backfills).\n- On other plans with historical access, combine `expandPastEvents=true` with `artistId` or `venueId` for a single artist or venue timeline (window depends on plan).\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n",
                       "key": "eventDateFrom",
-                      "value": "2023-10-01"
+                      "value": "<date>"
                     },
                     {
+                      "description": "For `concerts` must start on or before this date.\\\nFor `festivals` must end on or before this date.\\\nIf left blank or omitted, will return all events after `eventDateFrom`.\n\n- eventDateTo=2023-12-31\n\nFor historical queries, pair with a past `eventDateFrom` (see that parameter for the per-plan access patterns).\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n",
                       "key": "eventDateTo",
-                      "value": "2023-12-31"
+                      "value": "<date>"
                     },
                     {
+                      "description": "Filter streams to those sourced from a specific stream platform.\n\nv3 currently exposes a single source slug \u2014 `jambase` \u2014 which represents JamBase's normalized stream catalog. Pipe-delimited values are supported for forward compatibility:\n\n- streamDataSource=jambase\n",
                       "key": "streamDataSource",
                       "value": "jambase"
                     },
                     {
+                      "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nOn its own, a `dateModifiedFrom` sweep only returns events whose dates have not yet passed \u2014 modifications to past-dated events never appear in a plain delta sweep. To catch changes to past shows, plans with geo + historical search (Enterprise baseline, or granted by request) can combine `dateModifiedFrom` with a geo parameter (such as `geoCountryIso2`) and an explicit past `eventDateFrom`/`eventDateTo` range. Two caveats: the historical index refreshes on a delay (up to about a day), so overlap historical watermarks by 24-48 hours; and a response carrying the `X-JBD-Geo-Historical-Fallback` header was served without past events and should be re-run after the UTC day resets.\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                       "key": "dateModifiedFrom",
-                      "value": "2022-10-31 00:00:00"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                       "key": "datePublishedFrom",
-                      "value": "2022-01-01 00:00:00"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
                       "key": "expandExternalIdentifiers",
                       "value": "false"
                     },
                     {
+                      "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n\\\nNote: `expandArtistSameAs` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
                       "key": "expandArtistSameAs",
                       "value": "false"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"parameter_out_of_range\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"parameter_missing\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"parameter_invalid\",\n      \"errorMessage\": \"<string>\"\n    },\n    {\n      \"errorCode\": \"identifier_invalid\",\n      \"errorMessage\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:03:17.000Z",
+              "updatedAt": "2026-10-21T20:03:17.000Z",
+              "uid": "35240-880ff21f-20b1-43b0-8f0d-108dd63e497e"
             },
             {
-              "id": "c11c864c-5bad-4a86-8425-2c61148d95ec",
+              "id": "d158b38d-8cd5-4b4f-9969-2f17a4c432cb",
               "name": "API key is missing or invalid",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "streams"
-                  ],
+                  "raw": "{{baseUrl}}/streams?page=1&perPage=40&eventDatePreset=today&eventDateFrom=<date>&eventDateTo=<date>&streamDataSource=jambase&dateModifiedFrom=<string>&datePublishedFrom=<string>&expandExternalIdentifiers=false&expandArtistSameAs=false",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "streams"
+                  ],
                   "query": [
                     {
+                      "description": "Page number of results to retrieve",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of events per page of results",
                       "key": "perPage",
                       "value": "40"
                     },
                     {
+                      "description": "Use a dynamic date preset.\n- eventDatePreset=tomorrow\n\nNotes: \n- The `eventDatePreset` will override `eventDateFrom` & `eventDateTo` if those are set as well.\n- The `halloween` preset returns events on 10/31 only. The `newYears` preset returns events on 12/31 only. The `july4th` preset returns events on or near July 4th.\n",
                       "key": "eventDatePreset",
-                      "value": "tomorrow"
+                      "value": "today"
                     },
                     {
+                      "description": "For `concerts` must start on or after this date.\\\nFor `festivals`, must start on or after this date.\\\nIf left blank or omitted, will use the current date.\n\n- eventDateFrom=2023-10-31\n\nUsing a date before the current date requires historical access:\n- On plans with geo + historical search (Enterprise baseline, or granted by request), send a past `eventDateFrom` (and optionally `eventDateTo`) together with any geo parameter such as `geoCountryIso2`. No expand flag is needed; historical intent is inferred from the date range. Requests beyond the 5,000/day per-subscription allowance fall back to the standard search path and set the `X-JBD-Geo-Historical-Fallback` response header (check it during backfills).\n- On other plans with historical access, combine `expandPastEvents=true` with `artistId` or `venueId` for a single artist or venue timeline (window depends on plan).\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n",
                       "key": "eventDateFrom",
-                      "value": "2023-10-01"
+                      "value": "<date>"
                     },
                     {
+                      "description": "For `concerts` must start on or before this date.\\\nFor `festivals` must end on or before this date.\\\nIf left blank or omitted, will return all events after `eventDateFrom`.\n\n- eventDateTo=2023-12-31\n\nFor historical queries, pair with a past `eventDateFrom` (see that parameter for the per-plan access patterns).\n\nNote: Dates use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format.\n",
                       "key": "eventDateTo",
-                      "value": "2023-12-31"
+                      "value": "<date>"
                     },
                     {
+                      "description": "Filter streams to those sourced from a specific stream platform.\n\nv3 currently exposes a single source slug \u2014 `jambase` \u2014 which represents JamBase's normalized stream catalog. Pipe-delimited values are supported for forward compatibility:\n\n- streamDataSource=jambase\n",
                       "key": "streamDataSource",
                       "value": "jambase"
                     },
                     {
+                      "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nOn its own, a `dateModifiedFrom` sweep only returns events whose dates have not yet passed \u2014 modifications to past-dated events never appear in a plain delta sweep. To catch changes to past shows, plans with geo + historical search (Enterprise baseline, or granted by request) can combine `dateModifiedFrom` with a geo parameter (such as `geoCountryIso2`) and an explicit past `eventDateFrom`/`eventDateTo` range. Two caveats: the historical index refreshes on a delay (up to about a day), so overlap historical watermarks by 24-48 hours; and a response carrying the `X-JBD-Geo-Historical-Fallback` header was served without past events and should be re-run after the UTC day resets.\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                       "key": "dateModifiedFrom",
-                      "value": "2022-10-31 00:00:00"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                       "key": "datePublishedFrom",
-                      "value": "2022-01-01 00:00:00"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
                       "key": "expandExternalIdentifiers",
                       "value": "false"
                     },
                     {
+                      "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n\\\nNote: `expandArtistSameAs` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
                       "key": "expandArtistSameAs",
                       "value": "false"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "text",
               "header": [
                 {
                   "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
                   "key": "WWW_Authenticate",
-                  "value": "string",
-                  "description": ""
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "<string>"
                 }
               ],
-              "body": "",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:03:17.000Z",
+              "updatedAt": "2026-10-21T20:03:17.000Z",
+              "uid": "35240-d158b38d-8cd5-4b4f-9969-2f17a4c432cb"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "801ece60-a32b-4c2e-a8a4-26748686f089",
-          "name": "Get / reverse-lookup a Stream by JamBase or third-party ID",
-          "request": {
-            "name": "Get / reverse-lookup a Stream by JamBase or third-party ID",
-            "description": {
-              "content": "Retrieve a specific stream by JamBase or third-party ID.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "streams",
-                "id",
-                "{{streamDataSource}}:{{streamId}}"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "expandExternalIdentifiers",
-                  "value": "false",
-                  "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
-                },
-                {
-                  "disabled": false,
-                  "key": "expandArtistSameAs",
-                  "value": "false",
-                  "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "b83ceadc-a2da-4040-9430-5f264649e434",
-              "name": "A single Stream (`Stream`).",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    "id",
-                    "{{streamDataSource}}:{{streamId}}"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "expandExternalIdentifiers",
-                      "value": "false"
-                    },
-                    {
-                      "key": "expandArtistSameAs",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"success\": true,\n  \"stream\": {\n    \"@type\": \"Stream\",\n    \"eventStatus\": \"postponed\",\n    \"startDate\": \"string\",\n    \"location\": {\n      \"name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"identifier\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"url\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"image\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"sameAs\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"datePublished\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dateModified\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"deletionStatus\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"deletedAt\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"mergedInto\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"maximumAttendeeCapacity\": 20789,\n      \"address\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"geo\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"events\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"x-isPermanentlyClosed\": false,\n      \"x-numUpcomingEvents\": 12,\n      \"x-externalIdentifiers\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    },\n    \"performer\": [\n      {\n        \"x-performanceDate\": \"string\",\n        \"x-performanceRank\": 8305.326351319583,\n        \"x-isHeadliner\": false,\n        \"x-dateIsConfirmed\": false\n      },\n      {\n        \"x-performanceDate\": \"string\",\n        \"x-performanceRank\": 6270.477838507548,\n        \"x-isHeadliner\": false,\n        \"x-dateIsConfirmed\": false\n      }\n    ],\n    \"sameAs\": {},\n    \"endDate\": \"string\",\n    \"previousStartDate\": \"string\",\n    \"doorTime\": \"string\",\n    \"offers\": [\n      {\n        \"identifier\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"url\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"category\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"seller\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"validFrom\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"priceSpecification\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"identifier\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"url\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"category\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"seller\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"validFrom\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"priceSpecification\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"eventAttendanceMode\": \"offline\",\n    \"isAccessibleForFree\": false,\n    \"x-promoImage\": \"https://ZwNfCGZrgNEQmbwQf.lkC3w.T+UGRCSGlPvN55g6Yidfs7hCzdndYXC5UA8zs6ilPremz79wpWw\",\n    \"deletionStatus\": \"deleted\",\n    \"deletedAt\": \"2026-04-12T18:01:00Z\",\n    \"mergedInto\": \"jambase:5632389\",\n    \"isLiveBroadcast\": true,\n    \"broadcastOfEvent\": [\n      {\n        \"@type\": \"Concert\",\n        \"deletionStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mergedInto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-externalIdentifiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"x-customTitle\": \"string\",\n        \"x-subtitle\": \"string\",\n        \"x-headlinerInSupport\": false,\n        \"x-streamIds\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"Concert\",\n        \"deletionStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mergedInto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-externalIdentifiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"x-customTitle\": \"string\",\n        \"x-subtitle\": \"string\",\n        \"x-headlinerInSupport\": false,\n        \"x-streamIds\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ],\n    \"x-customTitle\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8facd904-81d0-435c-bfe0-aa156ded2629",
-              "name": "Invalid input parameter",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    "id",
-                    "{{streamDataSource}}:{{streamId}}"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "expandExternalIdentifiers",
-                      "value": "false"
-                    },
-                    {
-                      "key": "expandArtistSameAs",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"parameter_out_of_range\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"parameter_missing\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0ed51023-5f0b-4d7e-8d60-4aa9ff829795",
-              "name": "API key is missing or invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    "id",
-                    "{{streamDataSource}}:{{streamId}}"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "expandExternalIdentifiers",
-                      "value": "false"
-                    },
-                    {
-                      "key": "expandArtistSameAs",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "disabled": false,
-                  "key": "WWW_Authenticate",
-                  "value": "string",
-                  "description": ""
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:03:17.000Z",
+          "updatedAt": "2026-10-21T20:03:17.000Z",
+          "uid": "35240-36ee2171-e39c-491c-a70c-f2340ce0fd3f"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.data.jambase.com/v3",
-      "key": "baseUrl"
-    },
-    {
-      "disabled": false,
-      "description": {
-        "content": "(Required) The StreamDataSource of the ID for the Stream.",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "<string>",
-      "key": "streamDataSource"
-    },
-    {
-      "disabled": false,
-      "description": {
-        "content": "(Required) The unique ID for the Stream.",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "<string>",
-      "key": "streamId"
+      "id": "c33841b3-4761-4ed5-9da2-af5b02c86d91",
+      "createdAt": "2026-10-21T20:03:16.000Z",
+      "updatedAt": "2026-10-21T20:03:16.000Z",
+      "uid": "35240-c33841b3-4761-4ed5-9da2-af5b02c86d91"
     }
   ],
   "auth": {
@@ -609,17 +623,23 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "e0e4e57f-d63b-4256-b7c9-c5c86db0e5a0",
-    "name": "JamBase Concert Data Artists Streams API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.\n\nContact Support:\n Name: Team JamBase\n Email: developer@jambase.com",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.data.jambase.com/v3"
+    },
+    {
+      "key": "streamDataSource",
+      "value": "jambase"
+    },
+    {
+      "key": "streamId",
+      "value": "<string>"
     }
-  }
+  ]
 }

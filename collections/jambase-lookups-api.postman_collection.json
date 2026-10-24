@@ -1,703 +1,707 @@
 {
+  "info": {
+    "_postman_id": "ee7fcf7a-991f-48d0-a349-610e711921d2",
+    "name": "JamBase Concert Data Lookups API",
+    "description": "REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.\n\nContact Support:\n Name: Team JamBase\n Email: developer@jambase.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:03:09.000Z",
+    "updatedAt": "2026-10-21T20:03:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ee7fcf7a-991f-48d0-a349-610e711921d2"
+  },
   "item": [
     {
-      "id": "c0c91f7d-f272-460d-87f8-c43808111af2",
-      "name": "Lookups",
-      "description": {
-        "content": "Lookup Identifiers",
-        "type": "text/plain"
-      },
+      "name": "lookups",
       "item": [
         {
-          "id": "e675ff79-818a-48d1-be97-790f089fff43",
-          "name": "Get Event Data Sources",
-          "request": {
-            "name": "Get Event Data Sources",
-            "description": {
-              "content": "These can be used to filter events by Event IDs from third-party Data Sources.\\\n\\\nReturns all Event Data Sources in Alphabetical order.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "lookups",
-                "event-data-sources"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "event-data-sources",
+          "item": [
             {
-              "id": "7d1f5ba4-be3b-43e5-800a-d23eae6c5d61",
-              "name": "A list of Event Data Sources",
-              "originalRequest": {
+              "name": "Get Event Data Sources",
+              "id": "0bcb5762-bb3f-48fb-bc70-f9089d726453",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/lookups/event-data-sources",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "lookups",
                     "event-data-sources"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                "description": "These can be used to filter events by Event IDs from third-party Data Sources.\\\n\\\nReturns all Event Data Sources in Alphabetical order."
+              },
+              "response": [
+                {
+                  "id": "29d187fe-3c76-426f-912d-589317825bd0",
+                  "name": "A list of Event Data Sources",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lookups/event-data-sources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lookups",
+                        "event-data-sources"
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"success\": true,\n  \"dataSources\": [\n    {\n      \"name\": \"string\",\n      \"identifier\": \"ticketmaster\",\n      \"disambiguatingDescription\": \"eventTicketVendorPrimary\",\n      \"datePublished\": \"2022-12-14T15:35:48Z\",\n      \"dateModified\": \"2022-12-14T03:41:20Z\",\n      \"@type\": \"Organization\",\n      \"url\": \"https://SuXn.jtvjtITXOnVSMcp\",\n      \"image\": \"http://pBOEgfgeCqVvDKfymxAqq.lhy.fY5hb-N\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://xwoYzEZuuWEEHxaaVpaWikLT.cdjpqf8XMRUF455o5N0azFQtY2fDV6yVeh6FlGcDC1IQx-yukzBcyN3I3\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://zMQSr.xxwUe1QKQ4vEtg2Bu0aMfW5qrJjAToF,xu2d0XnKAiPEOixJilYTSs+ZBbQDIFtz6yhNos\"\n        }\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"identifier\": \"ticketmaster\",\n      \"disambiguatingDescription\": \"eventTicketVendorPrimary\",\n      \"datePublished\": \"2022-12-14T15:35:48Z\",\n      \"dateModified\": \"2022-12-14T03:41:20Z\",\n      \"@type\": \"Organization\",\n      \"url\": \"https://qUPQdosGBPnzzlAClgZScCfNej.bupWG-s\",\n      \"image\": \"https://tNrciVGeFyeYCRrwCdNNDmprfZvhEG.crgzDYiQZHh-AKP\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://MUTHgRqGiyLWuVnivswfCEoUzv.ewhDl2JJrgDZTgr0zGWDGxVv7CPbsNm5FeAEinLBO\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"http://FDBfJGZiNncBucuOOqRIlrPyFeSnGll.yiztuiu0dmjyQPW.pe,tG1MEYoSAyOb9E3gaIX\"\n        }\n      ]\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "32386eef-9165-495e-a4ea-f2bff72c1ea9",
-              "name": "Invalid input parameter",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "lookups",
-                    "event-data-sources"
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": true,\n  \"dataSources\": [\n    {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"disambiguatingDescription\": \"<string>\",\n      \"datePublished\": \"<string>\",\n      \"dateModified\": \"<string>\",\n      \"@type\": \"Organization\",\n      \"url\": \"<uri>\",\n      \"image\": \"<uri>\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"spotify\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"musicbrainz\",\n          \"url\": \"<uri>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"disambiguatingDescription\": \"<string>\",\n      \"datePublished\": \"<string>\",\n      \"dateModified\": \"<string>\",\n      \"@type\": \"Organization\",\n      \"url\": \"<uri>\",\n      \"image\": \"<uri>\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"spotify\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"androidApp\",\n          \"url\": \"<uri>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:03:10.000Z",
+                  "updatedAt": "2026-10-21T20:03:10.000Z",
+                  "uid": "35240-29d187fe-3c76-426f-912d-589317825bd0"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                {
+                  "id": "44093860-4807-4ede-992a-9f0a7938b99e",
+                  "name": "Invalid input parameter",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lookups/event-data-sources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lookups",
+                        "event-data-sources"
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"no_lookup_results\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"parameter_out_of_range\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "da32f50b-a1cf-4f3f-89ba-344d87bd5071",
-              "name": "API key is missing or invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "lookups",
-                    "event-data-sources"
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "disabled": false,
-                  "key": "WWW_Authenticate",
-                  "value": "string",
-                  "description": ""
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"identifier_invalid\",\n      \"errorMessage\": \"<string>\"\n    },\n    {\n      \"errorCode\": \"lookup_error\",\n      \"errorMessage\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:03:10.000Z",
+                  "updatedAt": "2026-10-21T20:03:10.000Z",
+                  "uid": "35240-44093860-4807-4ede-992a-9f0a7938b99e"
                 },
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "ab89e825-2fc9-4037-a2b4-64c6c1a63c4c",
+                  "name": "API key is missing or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lookups/event-data-sources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lookups",
+                        "event-data-sources"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "WWW_Authenticate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:10.000Z",
+                  "updatedAt": "2026-10-21T20:03:10.000Z",
+                  "uid": "35240-ab89e825-2fc9-4037-a2b4-64c6c1a63c4c"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T20:03:10.000Z",
+              "updatedAt": "2026-10-21T20:03:10.000Z",
+              "uid": "35240-0bcb5762-bb3f-48fb-bc70-f9089d726453"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "fec23f36-03e6-4da9-9433-78ecc2a0908d",
+          "createdAt": "2026-10-21T20:03:10.000Z",
+          "updatedAt": "2026-10-21T20:03:10.000Z",
+          "uid": "35240-fec23f36-03e6-4da9-9433-78ecc2a0908d"
         },
         {
-          "id": "6dd93ad0-b678-4e37-8919-f5c096ada9f2",
-          "name": "Get Stream Data Sources",
-          "request": {
-            "name": "Get Stream Data Sources",
-            "description": {
-              "content": "These can be used to filter Streams from a specific Streaming platform.\\\n\\\nReturns all Stream Data Sources in Alphabetical order.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "lookups",
-                "stream-data-sources"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "stream-data-sources",
+          "item": [
             {
-              "id": "06c0a2ff-be56-43ef-b807-ee2a8e4ad9e7",
-              "name": "A list of Stream Ticket Vendors",
-              "originalRequest": {
+              "name": "Get Stream Data Sources",
+              "id": "01e91124-2b51-4e68-a7b2-9644c9d0a263",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/lookups/stream-data-sources",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "lookups",
                     "stream-data-sources"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                "description": "These can be used to filter Streams from a specific Streaming platform.\\\n\\\nReturns all Stream Data Sources in Alphabetical order."
+              },
+              "response": [
+                {
+                  "id": "349b89b6-d368-4c45-8612-3aaba1fc9c89",
+                  "name": "A list of Stream Ticket Vendors",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lookups/stream-data-sources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lookups",
+                        "stream-data-sources"
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"success\": true,\n  \"ticketVendors\": [\n    {\n      \"name\": \"string\",\n      \"identifier\": \"ticketmaster\",\n      \"disambiguatingDescription\": \"eventTicketVendorPrimary\",\n      \"datePublished\": \"2022-12-14T15:35:48Z\",\n      \"dateModified\": \"2022-12-14T03:41:20Z\",\n      \"@type\": \"Organization\",\n      \"url\": \"https://hQBGjmwTJmLiNcvsmQ.uxzD1Hsivj9ht+ue07jywoqls1,wQ,7fd7k3uO570wZ9P.TBQEGpmen0nWPvuwBs\",\n      \"image\": \"http://MeAWl.qaszQT6WFQ.Q3,AHgbeC,zr1JD669VYgD62w\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"http://BvVbOYHpAmWNaOCKUwCxGvjH.osdkc9D,KNls7iArMc1LP4QRZc1C2Ok\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://ufQOGumLAbR.jzqgXpjo+yINj3jN1k1lZoHyRr,t5fWOmNCvtU\"\n        }\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"identifier\": \"ticketmaster\",\n      \"disambiguatingDescription\": \"eventTicketVendorPrimary\",\n      \"datePublished\": \"2022-12-14T15:35:48Z\",\n      \"dateModified\": \"2022-12-14T03:41:20Z\",\n      \"@type\": \"Organization\",\n      \"url\": \"https://LjXRjVCuYcllAAQTpPoavNLbhjt.qbzmAufbjps8ufh\",\n      \"image\": \"https://rxQGmlOOksWdrUYxWvC.bkugosg\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://grVHXgnfgINqsgjOeIgLid.gbpaYYe5m4dj-vw4miMhO3lXdUN\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"http://wo.gtsbkTVQAsVcOHGaKFjM1yJUxPyATOZvMcHttcPYVqA+3PWp3x,IGu8An4W9aIV\"\n        }\n      ]\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "807d742f-655b-457b-a0ed-b6db4a351be4",
-              "name": "Invalid input parameter",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "lookups",
-                    "stream-data-sources"
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": true,\n  \"ticketVendors\": [\n    {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"disambiguatingDescription\": \"<string>\",\n      \"datePublished\": \"<string>\",\n      \"dateModified\": \"<string>\",\n      \"@type\": \"Organization\",\n      \"url\": \"<uri>\",\n      \"image\": \"<uri>\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"spotify\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"youtube\",\n          \"url\": \"<uri>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"disambiguatingDescription\": \"<string>\",\n      \"datePublished\": \"<string>\",\n      \"dateModified\": \"<string>\",\n      \"@type\": \"Organization\",\n      \"url\": \"<uri>\",\n      \"image\": \"<uri>\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"musicbrainz\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"instagram\",\n          \"url\": \"<uri>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:03:10.000Z",
+                  "updatedAt": "2026-10-21T20:03:10.000Z",
+                  "uid": "35240-349b89b6-d368-4c45-8612-3aaba1fc9c89"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                {
+                  "id": "7585fad1-bb4b-4e45-a276-fc5725b86660",
+                  "name": "Invalid input parameter",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lookups/stream-data-sources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lookups",
+                        "stream-data-sources"
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"no_lookup_results\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"parameter_out_of_range\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2e0e1674-7758-4c50-98e5-026bc5d9b5ba",
-              "name": "API key is missing or invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "lookups",
-                    "stream-data-sources"
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "disabled": false,
-                  "key": "WWW_Authenticate",
-                  "value": "string",
-                  "description": ""
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"identifier_invalid\",\n      \"errorMessage\": \"<string>\"\n    },\n    {\n      \"errorCode\": \"lookup_error\",\n      \"errorMessage\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:03:10.000Z",
+                  "updatedAt": "2026-10-21T20:03:10.000Z",
+                  "uid": "35240-7585fad1-bb4b-4e45-a276-fc5725b86660"
                 },
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "2f296425-3e5d-4f75-928e-2a20008dfbeb",
+                  "name": "API key is missing or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lookups/stream-data-sources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lookups",
+                        "stream-data-sources"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "WWW_Authenticate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:10.000Z",
+                  "updatedAt": "2026-10-21T20:03:10.000Z",
+                  "uid": "35240-2f296425-3e5d-4f75-928e-2a20008dfbeb"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T20:03:10.000Z",
+              "updatedAt": "2026-10-21T20:03:10.000Z",
+              "uid": "35240-01e91124-2b51-4e68-a7b2-9644c9d0a263"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "c071b557-14f0-496f-8996-6bd77250de6b",
+          "createdAt": "2026-10-21T20:03:10.000Z",
+          "updatedAt": "2026-10-21T20:03:10.000Z",
+          "uid": "35240-c071b557-14f0-496f-8996-6bd77250de6b"
         },
         {
-          "id": "8034d992-3b89-48df-8bea-ac857d64755d",
-          "name": "Get Artist Data Sources",
-          "request": {
-            "name": "Get Artist Data Sources",
-            "description": {
-              "content": "These can be used to filter events by Artist IDs from third-party Data Sources.\\\n\\\nReturns all Artist Data Sources in Alphabetical order.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "lookups",
-                "artist-data-sources"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "artist-data-sources",
+          "item": [
             {
-              "id": "cb73beb3-e2f5-45e2-bcbd-86599b37642d",
-              "name": "A list of Artist Data Sources",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "lookups",
-                    "artist-data-sources"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Get Artist Data Sources",
+              "id": "c7323051-a74d-4309-80de-71f8b43aaaa1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"success\": true,\n  \"dataSources\": [\n    {\n      \"name\": \"string\",\n      \"identifier\": \"ticketmaster\",\n      \"disambiguatingDescription\": \"eventTicketVendorPrimary\",\n      \"datePublished\": \"2022-12-14T15:35:48Z\",\n      \"dateModified\": \"2022-12-14T03:41:20Z\",\n      \"@type\": \"Organization\",\n      \"url\": \"https://EUVnmOeeixTccKASkUpkCqCxDdE.qbmP\",\n      \"image\": \"https://IEIzghWt.baOHsfriwQpVqJm8pt0Yh2h7WOGcuB\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"http://PxtpUElwgkYdUMzIaFI.mhvvSK-UuvzSDo-7m,KDQ5F1pLqZTKpRNomfUSwsNCRWY,9CXLYkUoqR\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://nRjQddIWdoadMTYgM.zybPatTbBdx9qLo0mNDWiAuvKgQ1Sq+Kg5oAMdMaZsEK5IlDiqD1V+0,SSNmYJAvVuViouyr.-hbKbmkv2c\"\n        }\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"identifier\": \"ticketmaster\",\n      \"disambiguatingDescription\": \"eventTicketVendorPrimary\",\n      \"datePublished\": \"2022-12-14T15:35:48Z\",\n      \"dateModified\": \"2022-12-14T03:41:20Z\",\n      \"@type\": \"Organization\",\n      \"url\": \"http://qekzcSPFvctzBpy.qzeNouvfByQYMiMmxue,zi\",\n      \"image\": \"http://rbyqWThyGaLFpprFZlgxYpLMCGcar.xfpqwY.NxrcumiB-VCFn5Znbl9wlkgHedNU19AMco,.Q7qnyych8AxqV\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"http://vnhjNNSlFsnpmBKdoXqWHiJ.nxfj\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"http://YvQcXhYGKqVzKokbcQbijLuGcUslSyQc.bdogbANScG+Xnl\"\n        }\n      ]\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "693c6131-5387-4e37-8589-c405678a85a1",
-              "name": "Invalid input parameter",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "lookups",
-                    "artist-data-sources"
-                  ],
+                  "raw": "{{baseUrl}}/lookups/artist-data-sources",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
+                  "path": [
+                    "lookups",
+                    "artist-data-sources"
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                "description": "These can be used to filter events by Artist IDs from third-party Data Sources.\\\n\\\nReturns all Artist Data Sources in Alphabetical order."
+              },
+              "response": [
+                {
+                  "id": "ed75acb0-7335-40c5-b0c6-dca5058b18d1",
+                  "name": "A list of Artist Data Sources",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lookups/artist-data-sources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lookups",
+                        "artist-data-sources"
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"no_lookup_results\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"parameter_out_of_range\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ddaedd29-9fdd-451f-9ea7-fba042560000",
-              "name": "API key is missing or invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "lookups",
-                    "artist-data-sources"
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "disabled": false,
-                  "key": "WWW_Authenticate",
-                  "value": "string",
-                  "description": ""
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": true,\n  \"dataSources\": [\n    {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"disambiguatingDescription\": \"<string>\",\n      \"datePublished\": \"<string>\",\n      \"dateModified\": \"<string>\",\n      \"@type\": \"Organization\",\n      \"url\": \"<uri>\",\n      \"image\": \"<uri>\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"musicbrainz\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"androidApp\",\n          \"url\": \"<uri>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"disambiguatingDescription\": \"<string>\",\n      \"datePublished\": \"<string>\",\n      \"dateModified\": \"<string>\",\n      \"@type\": \"Organization\",\n      \"url\": \"<uri>\",\n      \"image\": \"<uri>\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"officialSite\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"spotify\",\n          \"url\": \"<uri>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:03:10.000Z",
+                  "updatedAt": "2026-10-21T20:03:10.000Z",
+                  "uid": "35240-ed75acb0-7335-40c5-b0c6-dca5058b18d1"
                 },
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "4b2490ea-8746-4c00-9ff4-bf752b996f2b",
+                  "name": "Invalid input parameter",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lookups/artist-data-sources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lookups",
+                        "artist-data-sources"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"identifier_invalid\",\n      \"errorMessage\": \"<string>\"\n    },\n    {\n      \"errorCode\": \"lookup_error\",\n      \"errorMessage\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:03:10.000Z",
+                  "updatedAt": "2026-10-21T20:03:10.000Z",
+                  "uid": "35240-4b2490ea-8746-4c00-9ff4-bf752b996f2b"
+                },
+                {
+                  "id": "dbf74652-a08c-435d-bb5c-702761f9cdc8",
+                  "name": "API key is missing or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lookups/artist-data-sources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lookups",
+                        "artist-data-sources"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "WWW_Authenticate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:10.000Z",
+                  "updatedAt": "2026-10-21T20:03:10.000Z",
+                  "uid": "35240-dbf74652-a08c-435d-bb5c-702761f9cdc8"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T20:03:10.000Z",
+              "updatedAt": "2026-10-21T20:03:10.000Z",
+              "uid": "35240-c7323051-a74d-4309-80de-71f8b43aaaa1"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "103ec623-cdf6-4456-92f0-add93e2eeb8d",
+          "createdAt": "2026-10-21T20:03:10.000Z",
+          "updatedAt": "2026-10-21T20:03:10.000Z",
+          "uid": "35240-103ec623-cdf6-4456-92f0-add93e2eeb8d"
         },
         {
-          "id": "a0c9b6bb-4ce5-40df-bd9b-7349a2b96fd2",
-          "name": "Get Venue Data Sources",
-          "request": {
-            "name": "Get Venue Data Sources",
-            "description": {
-              "content": "These can be used to filter events by Venue IDs from third-party Data Sources.\\\n\\\nThis endpoint returns all Venue Data Sources in Alphabetical order.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "lookups",
-                "venue-data-sources"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "venue-data-sources",
+          "item": [
             {
-              "id": "a691a0f1-d8df-4673-89c4-02a13dea2806",
-              "name": "A list of Venue Data Sources",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "lookups",
-                    "venue-data-sources"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Get Venue Data Sources",
+              "id": "147d41a0-4e2f-4936-ba82-0bda680fa436",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"success\": true,\n  \"dataSources\": [\n    {\n      \"name\": \"string\",\n      \"identifier\": \"ticketmaster\",\n      \"disambiguatingDescription\": \"eventTicketVendorPrimary\",\n      \"datePublished\": \"2022-12-14T15:35:48Z\",\n      \"dateModified\": \"2022-12-14T03:41:20Z\",\n      \"@type\": \"Organization\",\n      \"url\": \"https://aWkOBGYwJLVxTAMJMaUVrNRE.zehGYJEyOf,UDxfOBMsLp,HCtCk8f\",\n      \"image\": \"http://tDHcMAMPAhWeOdUFnqwugGJlUechAkOr.hlvtWBOlzTrpBBNUE8FAy+sDX5CtAOKX7AH-Kwy8Wcj0hI\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://YRzju.nlzak08uB.q7v,Dr1d-JXZx.J.zwofh,HyL0RoSIIasImavKIAI\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://CS.zpkB-Ml7ETKNqVfg.1Lu9g3NN.j+XerqIcaptVh.0v7qLzEkXY\"\n        }\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"identifier\": \"ticketmaster\",\n      \"disambiguatingDescription\": \"eventTicketVendorPrimary\",\n      \"datePublished\": \"2022-12-14T15:35:48Z\",\n      \"dateModified\": \"2022-12-14T03:41:20Z\",\n      \"@type\": \"Organization\",\n      \"url\": \"https://uFkiKPxxIJnLonduLHUsiWv.yfT+XNvuv-\",\n      \"image\": \"http://fCarh.xsf5UB71L0hZkI,KYfCe,IMO4UD+DFV49WwzewTspjYHtMuheW8b4Lw5zLR\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://pDHuJVVrrIYPmLeeTXGxUPlS.fcxIGhmSG6v.K6Jsie6HQONV2Bmh1XEJz0bzbs0dcL,BJ\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://gfqkgsPIbqTIybhpNFhkrW.sxotmen3PuOOFfaA++DgTRMaduhepgCL1tUI+5oIfNscvg8IEB\"\n        }\n      ]\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cdd8c81c-b250-45fd-913a-1ca05c4ab5b2",
-              "name": "Invalid input parameter",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "lookups",
-                    "venue-data-sources"
-                  ],
+                  "raw": "{{baseUrl}}/lookups/venue-data-sources",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
+                  "path": [
+                    "lookups",
+                    "venue-data-sources"
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                "description": "These can be used to filter events by Venue IDs from third-party Data Sources.\\\n\\\nThis endpoint returns all Venue Data Sources in Alphabetical order."
+              },
+              "response": [
+                {
+                  "id": "202762a6-def4-4f2f-b3a5-bc4c4ee8f04d",
+                  "name": "A list of Venue Data Sources",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lookups/venue-data-sources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lookups",
+                        "venue-data-sources"
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"no_lookup_results\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"parameter_out_of_range\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "acd37e33-66f2-4a31-be46-d818eb717c98",
-              "name": "API key is missing or invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "lookups",
-                    "venue-data-sources"
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "disabled": false,
-                  "key": "WWW_Authenticate",
-                  "value": "string",
-                  "description": ""
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": true,\n  \"dataSources\": [\n    {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"disambiguatingDescription\": \"<string>\",\n      \"datePublished\": \"<string>\",\n      \"dateModified\": \"<string>\",\n      \"@type\": \"Organization\",\n      \"url\": \"<uri>\",\n      \"image\": \"<uri>\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"youtube\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"twitter\",\n          \"url\": \"<uri>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"disambiguatingDescription\": \"<string>\",\n      \"datePublished\": \"<string>\",\n      \"dateModified\": \"<string>\",\n      \"@type\": \"Organization\",\n      \"url\": \"<uri>\",\n      \"image\": \"<uri>\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"iosApp\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"officialSite\",\n          \"url\": \"<uri>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:03:10.000Z",
+                  "updatedAt": "2026-10-21T20:03:10.000Z",
+                  "uid": "35240-202762a6-def4-4f2f-b3a5-bc4c4ee8f04d"
                 },
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "d3b6beff-69d3-4907-a0cc-a3edf472d5a8",
+                  "name": "Invalid input parameter",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lookups/venue-data-sources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lookups",
+                        "venue-data-sources"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"identifier_invalid\",\n      \"errorMessage\": \"<string>\"\n    },\n    {\n      \"errorCode\": \"lookup_error\",\n      \"errorMessage\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:03:10.000Z",
+                  "updatedAt": "2026-10-21T20:03:10.000Z",
+                  "uid": "35240-d3b6beff-69d3-4907-a0cc-a3edf472d5a8"
+                },
+                {
+                  "id": "bee0689d-71d7-460f-a23c-08153d95ec56",
+                  "name": "API key is missing or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lookups/venue-data-sources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lookups",
+                        "venue-data-sources"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "WWW_Authenticate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:10.000Z",
+                  "updatedAt": "2026-10-21T20:03:10.000Z",
+                  "uid": "35240-bee0689d-71d7-460f-a23c-08153d95ec56"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T20:03:10.000Z",
+              "updatedAt": "2026-10-21T20:03:10.000Z",
+              "uid": "35240-147d41a0-4e2f-4936-ba82-0bda680fa436"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "9829e43a-74ea-401b-a7fd-740868d5be23",
+          "createdAt": "2026-10-21T20:03:10.000Z",
+          "updatedAt": "2026-10-21T20:03:10.000Z",
+          "uid": "35240-9829e43a-74ea-401b-a7fd-740868d5be23"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.data.jambase.com/v3",
-      "key": "baseUrl"
+      "id": "b297be04-300d-46d7-a9ac-282da39f9411",
+      "createdAt": "2026-10-21T20:03:10.000Z",
+      "updatedAt": "2026-10-21T20:03:10.000Z",
+      "uid": "35240-b297be04-300d-46d7-a9ac-282da39f9411"
     }
   ],
   "auth": {
@@ -705,17 +709,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "88f98908-93c1-4867-9564-060323926a6f",
-    "name": "JamBase Concert Data Artists Lookups API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.\n\nContact Support:\n Name: Team JamBase\n Email: developer@jambase.com",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.data.jambase.com/v3"
     }
-  }
+  ]
 }

@@ -1,189 +1,181 @@
 {
+  "info": {
+    "_postman_id": "6fae7034-949d-433b-b002-e13991e2ef79",
+    "name": "JamBase Concert Data Genres API",
+    "description": "REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.\n\nContact Support:\n Name: Team JamBase\n Email: developer@jambase.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:02:56.000Z",
+    "updatedAt": "2026-10-21T20:02:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6fae7034-949d-433b-b002-e13991e2ef79"
+  },
   "item": [
     {
-      "id": "3fcd8958-3cab-4fd3-ac46-f8a3dec39009",
-      "name": "Genres",
-      "description": {
-        "content": "Lookup Genres",
-        "type": "text/plain"
-      },
+      "name": "genres",
       "item": [
         {
-          "id": "4544b931-56a1-4742-ab4b-6262a771c2e2",
           "name": "Get Genres",
+          "id": "71f3e8f9-78a3-44cb-b149-4a2d65da6328",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Get Genres",
-            "description": {
-              "content": "These can be used to filter Artists and Events.\\\n\\\nReturns all Genres in Alphabetical order.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "genres"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/genres",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "genres"
+              ]
+            },
+            "description": "These can be used to filter Artists and Events.\\\n\\\nReturns all Genres in Alphabetical order."
           },
           "response": [
             {
-              "id": "3f6ffbd3-726e-42c0-b328-e90e80eff046",
+              "id": "33a726d9-fb8d-4f9c-b73d-359f3a0c8406",
               "name": "A list of Genres",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "genres"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/genres",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "genres"
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"success\": true,\n  \"genres\": [\n    {\n      \"name\": \"string\",\n      \"identifier\": \"hip-hop-rap\"\n    },\n    {\n      \"name\": \"string\",\n      \"identifier\": \"metal\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"success\": true,\n  \"genres\": [\n    {\n      \"name\": \"<string>\",\n      \"identifier\": \"reggae\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"identifier\": \"country-music\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:02:57.000Z",
+              "updatedAt": "2026-10-21T20:02:57.000Z",
+              "uid": "35240-33a726d9-fb8d-4f9c-b73d-359f3a0c8406"
             },
             {
-              "id": "bbb415f9-ca55-4f1a-8314-8f5a61a41a75",
+              "id": "00169de5-8da9-44e3-a7ae-1b910ee17320",
               "name": "Invalid input parameter",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "genres"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/genres",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "genres"
+                  ]
+                }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"parameter_out_of_range\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"no_lookup_results\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"parameter_missing\",\n      \"errorMessage\": \"<string>\"\n    },\n    {\n      \"errorCode\": \"no_lookup_results\",\n      \"errorMessage\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:02:57.000Z",
+              "updatedAt": "2026-10-21T20:02:57.000Z",
+              "uid": "35240-00169de5-8da9-44e3-a7ae-1b910ee17320"
             },
             {
-              "id": "ca9373cf-22ff-4cac-aa69-1f33411dc505",
+              "id": "916f951f-f106-4af4-b0e7-562fda96946b",
               "name": "API key is missing or invalid",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "genres"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
+                    "description": "Added as a part of security scheme: bearer",
                     "key": "Authorization",
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/genres",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "genres"
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "text",
               "header": [
                 {
                   "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
                   "key": "WWW_Authenticate",
-                  "value": "string",
-                  "description": ""
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "<string>"
                 }
               ],
-              "body": "",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:02:57.000Z",
+              "updatedAt": "2026-10-21T20:02:57.000Z",
+              "uid": "35240-916f951f-f106-4af4-b0e7-562fda96946b"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:02:57.000Z",
+          "updatedAt": "2026-10-21T20:02:57.000Z",
+          "uid": "35240-71f3e8f9-78a3-44cb-b149-4a2d65da6328"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.data.jambase.com/v3",
-      "key": "baseUrl"
+      "id": "6996ae5c-4c8b-4ede-976f-a05276f7e6c6",
+      "createdAt": "2026-10-21T20:02:57.000Z",
+      "updatedAt": "2026-10-21T20:02:57.000Z",
+      "uid": "35240-6996ae5c-4c8b-4ede-976f-a05276f7e6c6"
     }
   ],
   "auth": {
@@ -191,17 +183,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "4ba8cd39-3447-49de-ad09-b0fa50db8627",
-    "name": "JamBase Concert Data Artists Genres API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.\n\nContact Support:\n Name: Team JamBase\n Email: developer@jambase.com",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.data.jambase.com/v3"
     }
-  }
+  ]
 }

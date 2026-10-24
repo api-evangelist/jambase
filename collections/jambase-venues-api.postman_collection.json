@@ -1,805 +1,861 @@
 {
+  "info": {
+    "_postman_id": "97c05312-b1ce-4c9e-b7c7-6c0ab7407847",
+    "name": "JamBase Concert Data Venues API",
+    "description": "REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.\n\nContact Support:\n Name: Team JamBase\n Email: developer@jambase.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:03:21.000Z",
+    "updatedAt": "2026-10-21T20:03:22.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-97c05312-b1ce-4c9e-b7c7-6c0ab7407847"
+  },
   "item": [
     {
-      "id": "f782b207-8ba7-4114-8be7-c677f19024f7",
-      "name": "Venues",
-      "description": {
-        "content": "Search Venues",
-        "type": "text/plain"
-      },
+      "name": "venues",
       "item": [
         {
-          "id": "e4ce0a17-3aa1-47e2-a9d8-0bff6e3ea4a8",
+          "name": "id",
+          "item": [
+            {
+              "name": "{venueDataSource}:{venueId}",
+              "item": [
+                {
+                  "name": "Look up a venue by ID",
+                  "id": "f995549d-17c3-4f0a-b410-56d98e790176",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/venues/id/{{venueDataSource}}:{{venueId}}?expandUpcomingEvents=false&excludeEventPerformers=false&expandExternalIdentifiers=false&expandArtistSameAs=false&expandPastEvents=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "venues",
+                        "id",
+                        "{{venueDataSource}}:{{venueId}}"
+                      ],
+                      "query": [
+                        {
+                          "description": "Use `true` to include the `event` node with any upcoming Concerts and Festivals for the venue.",
+                          "key": "expandUpcomingEvents",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Use `true` to suppress the `performer` node in `Concert` and `Festival` objects.\n",
+                          "key": "excludeEventPerformers",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                          "key": "expandExternalIdentifiers",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n\\\nNote: `expandArtistSameAs` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                          "key": "expandArtistSameAs",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Use `true` to explicitly request past/historical `Concert` and `Festival` objects.\n\\\nOn entity-scoped historical access, including standard Pro, combine it with one of the six accepted scope selectors: `artistId`, `artistSlug`, `artistName`, `venueId`, `venueSlug`, or `venueName`. Requests without a scope selector are denied with a 403 explaining how to correct the request. An explicit all-scope entitlement removes that gateway scope requirement, but the request remains subject to endpoint validation and its independent historical window.\n\\\nNote: `dateModifiedFrom` is a modification-date filter, not an entity scope or request for history, and cannot substitute for a scope selector.\n\\\nAvailability is tiered by plan: Trial and the free MCP plan get a rolling 1-year window, Pro a rolling 3-year window (artist/venue lookups only), and Pro+ and Enterprise include all-scope access with the full archive. Scope and time window are independent contract dimensions: a per-subscription all-scope grant widens which queries may use history but does not change that subscription's historical window.\n\\\nOn plans with geo + historical search (Enterprise baseline, or granted by request), a licensed past event-date window together with any geo parameter such as `geoCountryIso2` is sufficient, with no expand flag needed. This flag is also accepted as explicit historical intent on an entitled geo request. Geo filters alone return normal upcoming events. When an authorized historical request omits its lower event-date bound, the gateway forwards its effective fixed-plus-rolling historical floor before fetching; truly unlimited history receives no invented floor.\n",
+                          "key": "expandPastEvents",
+                          "value": "false"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a single venue by JamBase ID \u2014 or directly by a third-party ID (Ticketmaster, SeatGeek, and more) with no ID-mapping step."
+                  },
+                  "response": [
+                    {
+                      "id": "f23ed683-24f8-4d98-82fe-2497b319eb55",
+                      "name": "A single Venue",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/venues/id/{{venueDataSource}}:{{venueId}}?expandUpcomingEvents=false&excludeEventPerformers=false&expandExternalIdentifiers=false&expandArtistSameAs=false&expandPastEvents=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "venues",
+                            "id",
+                            "{{venueDataSource}}:{{venueId}}"
+                          ],
+                          "query": [
+                            {
+                              "description": "Use `true` to include the `event` node with any upcoming Concerts and Festivals for the venue.",
+                              "key": "expandUpcomingEvents",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Use `true` to suppress the `performer` node in `Concert` and `Festival` objects.\n",
+                              "key": "excludeEventPerformers",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                              "key": "expandExternalIdentifiers",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n\\\nNote: `expandArtistSameAs` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                              "key": "expandArtistSameAs",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Use `true` to explicitly request past/historical `Concert` and `Festival` objects.\n\\\nOn entity-scoped historical access, including standard Pro, combine it with one of the six accepted scope selectors: `artistId`, `artistSlug`, `artistName`, `venueId`, `venueSlug`, or `venueName`. Requests without a scope selector are denied with a 403 explaining how to correct the request. An explicit all-scope entitlement removes that gateway scope requirement, but the request remains subject to endpoint validation and its independent historical window.\n\\\nNote: `dateModifiedFrom` is a modification-date filter, not an entity scope or request for history, and cannot substitute for a scope selector.\n\\\nAvailability is tiered by plan: Trial and the free MCP plan get a rolling 1-year window, Pro a rolling 3-year window (artist/venue lookups only), and Pro+ and Enterprise include all-scope access with the full archive. Scope and time window are independent contract dimensions: a per-subscription all-scope grant widens which queries may use history but does not change that subscription's historical window.\n\\\nOn plans with geo + historical search (Enterprise baseline, or granted by request), a licensed past event-date window together with any geo parameter such as `geoCountryIso2` is sufficient, with no expand flag needed. This flag is also accepted as explicit historical intent on an entitled geo request. Geo filters alone return normal upcoming events. When an authorized historical request omits its lower event-date bound, the gateway forwards its effective fixed-plus-rolling historical floor before fetching; truly unlimited history receives no invented floor.\n",
+                              "key": "expandPastEvents",
+                              "value": "false"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"success\": true,\n  \"venue\": {\n    \"name\": \"<string>\",\n    \"identifier\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"image\": \"<uri>\",\n    \"sameAs\": [\n      {\n        \"@type\": \"URL\",\n        \"identifier\": \"officialSite\",\n        \"url\": \"<uri>\"\n      },\n      {\n        \"@type\": \"URL\",\n        \"identifier\": \"officialSite\",\n        \"url\": \"<uri>\"\n      }\n    ],\n    \"datePublished\": \"<string>\",\n    \"dateModified\": \"<string>\",\n    \"deletionStatus\": \"merged\",\n    \"deletedAt\": \"<string>\",\n    \"mergedInto\": \"<string>\",\n    \"maximumAttendeeCapacity\": \"<number>\",\n    \"address\": {\n      \"@type\": \"PostalAddress\",\n      \"streetAddress\": \"<string>\",\n      \"addressLocality\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"addressRegion\": {\n        \"@type\": \"State\",\n        \"identifier\": \"US-OR\",\n        \"name\": \"<string>\",\n        \"alternateName\": \"<string>\",\n        \"country\": {\n          \"@type\": \"Country\",\n          \"identifier\": \"BR\",\n          \"name\": \"<string>\",\n          \"alternateName\": \"IRL\",\n          \"x-numUpcomingEvents\": \"<number>\"\n        },\n        \"x-numUpcomingEvents\": \"<number>\"\n      },\n      \"addressCountry\": {\n        \"@type\": \"Country\",\n        \"identifier\": \"CU\",\n        \"name\": \"<string>\",\n        \"alternateName\": \"XKS\",\n        \"x-numUpcomingEvents\": \"<number>\"\n      },\n      \"x-streetAddress2\": \"<string>\",\n      \"x-timezone\": \"<string>\",\n      \"x-jamBaseMetroId\": \"<number>\",\n      \"x-jamBaseCityId\": \"<number>\"\n    },\n    \"geo\": {\n      \"@type\": \"GeoCoordinates\",\n      \"latitude\": \"<float>\",\n      \"longitude\": \"<float>\"\n    },\n    \"events\": [\n      {\n        \"@type\": \"Concert\",\n        \"name\": \"<string>\",\n        \"identifier\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"eventStatus\": \"postponed\",\n        \"startDate\": \"<string>\",\n        \"location\": {\n          \"value\": \"<Circular reference to #/components/schemas/MusicVenue detected>\"\n        },\n        \"performer\": [\n          {\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"url\": \"<uri>\",\n            \"image\": \"<uri>\",\n            \"sameAs\": [\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"twitter\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"officialSite\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"datePublished\": \"<string>\",\n            \"dateModified\": \"<string>\",\n            \"@type\": \"MusicGroup\",\n            \"deletionStatus\": \"deleted\",\n            \"deletedAt\": \"<string>\",\n            \"mergedInto\": \"<string>\",\n            \"member\": [\n              {\n                \"type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"memberOf\": [\n              {\n                \"@type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"foundingLocation\": {\n              \"@type\": \"Place\",\n              \"name\": \"<string>\"\n            },\n            \"foundingDate\": \"<string>\",\n            \"genre\": [\n              \"folk\",\n              \"punk\"\n            ],\n            \"events\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n              }\n            ],\n            \"x-bandOrMusician\": \"musician\",\n            \"x-numUpcomingEvents\": \"<number>\",\n            \"x-performanceDate\": \"<string>\",\n            \"x-performanceRank\": \"<number>\",\n            \"x-isHeadliner\": false,\n            \"x-dateIsConfirmed\": false\n          },\n          {\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"url\": \"<uri>\",\n            \"image\": \"<uri>\",\n            \"sameAs\": [\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"spotify\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"officialSite\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"datePublished\": \"<string>\",\n            \"dateModified\": \"<string>\",\n            \"@type\": \"MusicGroup\",\n            \"deletionStatus\": \"deleted\",\n            \"deletedAt\": \"<string>\",\n            \"mergedInto\": \"<string>\",\n            \"member\": [\n              {\n                \"type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"memberOf\": [\n              {\n                \"@type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"foundingLocation\": {\n              \"@type\": \"Place\",\n              \"name\": \"<string>\"\n            },\n            \"foundingDate\": \"<string>\",\n            \"genre\": [\n              \"indie\",\n              \"indie\"\n            ],\n            \"events\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n              }\n            ],\n            \"x-bandOrMusician\": \"band\",\n            \"x-numUpcomingEvents\": \"<number>\",\n            \"x-performanceDate\": \"<string>\",\n            \"x-performanceRank\": \"<number>\",\n            \"x-isHeadliner\": false,\n            \"x-dateIsConfirmed\": false\n          }\n        ],\n        \"image\": \"<uri>\",\n        \"sameAs\": [\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"officialSite\",\n            \"url\": \"<uri>\"\n          },\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"officialSite\",\n            \"url\": \"<uri>\"\n          }\n        ],\n        \"datePublished\": \"<string>\",\n        \"dateModified\": \"<string>\",\n        \"endDate\": \"<string>\",\n        \"previousStartDate\": \"<string>\",\n        \"doorTime\": \"<string>\",\n        \"offers\": [\n          {\n            \"identifier\": \"<string>\",\n            \"url\": \"<uri>\",\n            \"category\": \"<string>\",\n            \"seller\": {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"disambiguatingDescription\": \"<string>\",\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"@type\": \"Organization\",\n              \"url\": \"<uri>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"facebook\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"musicbrainz\",\n                  \"url\": \"<uri>\"\n                }\n              ]\n            },\n            \"validFrom\": {\n              \"example\": \"2022-12-07T12:42:00\",\n              \"schema\": \"Duis occa\"\n            },\n            \"name\": \"<string>\",\n            \"image\": \"<uri>\",\n            \"sameAs\": [\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"facebook\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"facebook\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"datePublished\": \"<string>\",\n            \"dateModified\": \"<string>\",\n            \"priceSpecification\": {\n              \"price\": \"<number>\",\n              \"priceCurrency\": \"<string>\",\n              \"@type\": \"PriceSpecification\",\n              \"minPrice\": \"<number>\",\n              \"maxPrice\": \"<number>\"\n            }\n          },\n          {\n            \"identifier\": \"<string>\",\n            \"url\": \"<uri>\",\n            \"category\": \"<string>\",\n            \"seller\": {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"disambiguatingDescription\": \"<string>\",\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"@type\": \"Organization\",\n              \"url\": \"<uri>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"youtube\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"facebook\",\n                  \"url\": \"<uri>\"\n                }\n              ]\n            },\n            \"validFrom\": {\n              \"example\": \"2022-12-07T12:42:00\",\n              \"schema\": \"in dolor id mollit\"\n            },\n            \"name\": \"<string>\",\n            \"image\": \"<uri>\",\n            \"sameAs\": [\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"musicbrainz\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"facebook\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"datePublished\": \"<string>\",\n            \"dateModified\": \"<string>\",\n            \"priceSpecification\": {\n              \"price\": \"<number>\",\n              \"priceCurrency\": \"<string>\",\n              \"@type\": \"PriceSpecification\",\n              \"minPrice\": \"<number>\",\n              \"maxPrice\": \"<number>\"\n            }\n          }\n        ],\n        \"eventAttendanceMode\": \"offline\",\n        \"isAccessibleForFree\": false,\n        \"x-promoImage\": \"<uri>\",\n        \"deletionStatus\": \"trashed\",\n        \"deletedAt\": \"<string>\",\n        \"mergedInto\": \"<string>\",\n        \"x-customTitle\": \"<string>\",\n        \"x-subtitle\": \"<string>\",\n        \"x-headlinerInSupport\": false,\n        \"x-streamIds\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"@type\": \"Concert\",\n        \"name\": \"<string>\",\n        \"identifier\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"eventStatus\": \"scheduled\",\n        \"startDate\": \"<string>\",\n        \"location\": {\n          \"value\": \"<Circular reference to #/components/schemas/MusicVenue detected>\"\n        },\n        \"performer\": [\n          {\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"url\": \"<uri>\",\n            \"image\": \"<uri>\",\n            \"sameAs\": [\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"twitter\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"officialSite\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"datePublished\": \"<string>\",\n            \"dateModified\": \"<string>\",\n            \"@type\": \"MusicGroup\",\n            \"deletionStatus\": \"deleted\",\n            \"deletedAt\": \"<string>\",\n            \"mergedInto\": \"<string>\",\n            \"member\": [\n              {\n                \"type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"memberOf\": [\n              {\n                \"@type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"foundingLocation\": {\n              \"@type\": \"Place\",\n              \"name\": \"<string>\"\n            },\n            \"foundingDate\": \"<string>\",\n            \"genre\": [\n              \"rock\",\n              \"hip-hop-rap\"\n            ],\n            \"events\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n              }\n            ],\n            \"x-bandOrMusician\": \"band\",\n            \"x-numUpcomingEvents\": \"<number>\",\n            \"x-performanceDate\": \"<string>\",\n            \"x-performanceRank\": \"<number>\",\n            \"x-isHeadliner\": false,\n            \"x-dateIsConfirmed\": false\n          },\n          {\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"url\": \"<uri>\",\n            \"image\": \"<uri>\",\n            \"sameAs\": [\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"androidApp\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"officialSite\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"datePublished\": \"<string>\",\n            \"dateModified\": \"<string>\",\n            \"@type\": \"MusicGroup\",\n            \"deletionStatus\": \"trashed\",\n            \"deletedAt\": \"<string>\",\n            \"mergedInto\": \"<string>\",\n            \"member\": [\n              {\n                \"type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"memberOf\": [\n              {\n                \"@type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"MusicGroup\",\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"image\": \"<uri>\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"foundingLocation\": {\n              \"@type\": \"Place\",\n              \"name\": \"<string>\"\n            },\n            \"foundingDate\": \"<string>\",\n            \"genre\": [\n              \"jazz\",\n              \"reggae\"\n            ],\n            \"events\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n              }\n            ],\n            \"x-bandOrMusician\": \"band\",\n            \"x-numUpcomingEvents\": \"<number>\",\n            \"x-performanceDate\": \"<string>\",\n            \"x-performanceRank\": \"<number>\",\n            \"x-isHeadliner\": false,\n            \"x-dateIsConfirmed\": false\n          }\n        ],\n        \"image\": \"<uri>\",\n        \"sameAs\": [\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"androidApp\",\n            \"url\": \"<uri>\"\n          },\n          {\n            \"@type\": \"URL\",\n            \"identifier\": \"twitter\",\n            \"url\": \"<uri>\"\n          }\n        ],\n        \"datePublished\": \"<string>\",\n        \"dateModified\": \"<string>\",\n        \"endDate\": \"<string>\",\n        \"previousStartDate\": \"<string>\",\n        \"doorTime\": \"<string>\",\n        \"offers\": [\n          {\n            \"identifier\": \"<string>\",\n            \"url\": \"<uri>\",\n            \"category\": \"<string>\",\n            \"seller\": {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"disambiguatingDescription\": \"<string>\",\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"@type\": \"Organization\",\n              \"url\": \"<uri>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"androidApp\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"iosApp\",\n                  \"url\": \"<uri>\"\n                }\n              ]\n            },\n            \"validFrom\": {\n              \"example\": \"2022-12-07T12:42:00\",\n              \"schema\": \"ea adipisicing in\"\n            },\n            \"name\": \"<string>\",\n            \"image\": \"<uri>\",\n            \"sameAs\": [\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"facebook\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"twitter\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"datePublished\": \"<string>\",\n            \"dateModified\": \"<string>\",\n            \"priceSpecification\": {\n              \"price\": \"<number>\",\n              \"priceCurrency\": \"<string>\",\n              \"@type\": \"PriceSpecification\",\n              \"minPrice\": \"<number>\",\n              \"maxPrice\": \"<number>\"\n            }\n          },\n          {\n            \"identifier\": \"<string>\",\n            \"url\": \"<uri>\",\n            \"category\": \"<string>\",\n            \"seller\": {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"disambiguatingDescription\": \"<string>\",\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"@type\": \"Organization\",\n              \"url\": \"<uri>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"iosApp\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"androidApp\",\n                  \"url\": \"<uri>\"\n                }\n              ]\n            },\n            \"validFrom\": {\n              \"example\": \"2022-12-07T12:42:00\",\n              \"schema\": \"Ut minim ut\"\n            },\n            \"name\": \"<string>\",\n            \"image\": \"<uri>\",\n            \"sameAs\": [\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"musicbrainz\",\n                \"url\": \"<uri>\"\n              },\n              {\n                \"@type\": \"URL\",\n                \"identifier\": \"youtube\",\n                \"url\": \"<uri>\"\n              }\n            ],\n            \"datePublished\": \"<string>\",\n            \"dateModified\": \"<string>\",\n            \"priceSpecification\": {\n              \"price\": \"<number>\",\n              \"priceCurrency\": \"<string>\",\n              \"@type\": \"PriceSpecification\",\n              \"minPrice\": \"<number>\",\n              \"maxPrice\": \"<number>\"\n            }\n          }\n        ],\n        \"eventAttendanceMode\": \"offline\",\n        \"isAccessibleForFree\": false,\n        \"x-promoImage\": \"<uri>\",\n        \"deletionStatus\": \"merged\",\n        \"deletedAt\": \"<string>\",\n        \"mergedInto\": \"<string>\",\n        \"x-customTitle\": \"<string>\",\n        \"x-subtitle\": \"<string>\",\n        \"x-headlinerInSupport\": false,\n        \"x-streamIds\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"x-isPermanentlyClosed\": false,\n    \"x-numUpcomingEvents\": \"<number>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:03:22.000Z",
+                      "updatedAt": "2026-10-21T20:03:22.000Z",
+                      "uid": "35240-f23ed683-24f8-4d98-82fe-2497b319eb55"
+                    },
+                    {
+                      "id": "87561385-d1f2-462d-a3e5-b0d7e78e5c88",
+                      "name": "Invalid input parameter",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/venues/id/{{venueDataSource}}:{{venueId}}?expandUpcomingEvents=false&excludeEventPerformers=false&expandExternalIdentifiers=false&expandArtistSameAs=false&expandPastEvents=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "venues",
+                            "id",
+                            "{{venueDataSource}}:{{venueId}}"
+                          ],
+                          "query": [
+                            {
+                              "description": "Use `true` to include the `event` node with any upcoming Concerts and Festivals for the venue.",
+                              "key": "expandUpcomingEvents",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Use `true` to suppress the `performer` node in `Concert` and `Festival` objects.\n",
+                              "key": "excludeEventPerformers",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                              "key": "expandExternalIdentifiers",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n\\\nNote: `expandArtistSameAs` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                              "key": "expandArtistSameAs",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Use `true` to explicitly request past/historical `Concert` and `Festival` objects.\n\\\nOn entity-scoped historical access, including standard Pro, combine it with one of the six accepted scope selectors: `artistId`, `artistSlug`, `artistName`, `venueId`, `venueSlug`, or `venueName`. Requests without a scope selector are denied with a 403 explaining how to correct the request. An explicit all-scope entitlement removes that gateway scope requirement, but the request remains subject to endpoint validation and its independent historical window.\n\\\nNote: `dateModifiedFrom` is a modification-date filter, not an entity scope or request for history, and cannot substitute for a scope selector.\n\\\nAvailability is tiered by plan: Trial and the free MCP plan get a rolling 1-year window, Pro a rolling 3-year window (artist/venue lookups only), and Pro+ and Enterprise include all-scope access with the full archive. Scope and time window are independent contract dimensions: a per-subscription all-scope grant widens which queries may use history but does not change that subscription's historical window.\n\\\nOn plans with geo + historical search (Enterprise baseline, or granted by request), a licensed past event-date window together with any geo parameter such as `geoCountryIso2` is sufficient, with no expand flag needed. This flag is also accepted as explicit historical intent on an entitled geo request. Geo filters alone return normal upcoming events. When an authorized historical request omits its lower event-date bound, the gateway forwards its effective fixed-plus-rolling historical floor before fetching; truly unlimited history receives no invented floor.\n",
+                              "key": "expandPastEvents",
+                              "value": "false"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"general_error\",\n      \"errorMessage\": \"<string>\"\n    },\n    {\n      \"errorCode\": \"identifier_missing\",\n      \"errorMessage\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:03:22.000Z",
+                      "updatedAt": "2026-10-21T20:03:22.000Z",
+                      "uid": "35240-87561385-d1f2-462d-a3e5-b0d7e78e5c88"
+                    },
+                    {
+                      "id": "f08d905d-e93e-4ea8-a30c-f27543446c3a",
+                      "name": "API key is missing or invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/venues/id/{{venueDataSource}}:{{venueId}}?expandUpcomingEvents=false&excludeEventPerformers=false&expandExternalIdentifiers=false&expandArtistSameAs=false&expandPastEvents=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "venues",
+                            "id",
+                            "{{venueDataSource}}:{{venueId}}"
+                          ],
+                          "query": [
+                            {
+                              "description": "Use `true` to include the `event` node with any upcoming Concerts and Festivals for the venue.",
+                              "key": "expandUpcomingEvents",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Use `true` to suppress the `performer` node in `Concert` and `Festival` objects.\n",
+                              "key": "excludeEventPerformers",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                              "key": "expandExternalIdentifiers",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n\\\nNote: `expandArtistSameAs` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
+                              "key": "expandArtistSameAs",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Use `true` to explicitly request past/historical `Concert` and `Festival` objects.\n\\\nOn entity-scoped historical access, including standard Pro, combine it with one of the six accepted scope selectors: `artistId`, `artistSlug`, `artistName`, `venueId`, `venueSlug`, or `venueName`. Requests without a scope selector are denied with a 403 explaining how to correct the request. An explicit all-scope entitlement removes that gateway scope requirement, but the request remains subject to endpoint validation and its independent historical window.\n\\\nNote: `dateModifiedFrom` is a modification-date filter, not an entity scope or request for history, and cannot substitute for a scope selector.\n\\\nAvailability is tiered by plan: Trial and the free MCP plan get a rolling 1-year window, Pro a rolling 3-year window (artist/venue lookups only), and Pro+ and Enterprise include all-scope access with the full archive. Scope and time window are independent contract dimensions: a per-subscription all-scope grant widens which queries may use history but does not change that subscription's historical window.\n\\\nOn plans with geo + historical search (Enterprise baseline, or granted by request), a licensed past event-date window together with any geo parameter such as `geoCountryIso2` is sufficient, with no expand flag needed. This flag is also accepted as explicit historical intent on an entitled geo request. Geo filters alone return normal upcoming events. When an authorized historical request omits its lower event-date bound, the gateway forwards its effective fixed-plus-rolling historical floor before fetching; truly unlimited history receives no invented floor.\n",
+                              "key": "expandPastEvents",
+                              "value": "false"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "WWW_Authenticate",
+                          "value": "<string>"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:03:22.000Z",
+                      "updatedAt": "2026-10-21T20:03:22.000Z",
+                      "uid": "35240-f08d905d-e93e-4ea8-a30c-f27543446c3a"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:03:22.000Z",
+                  "updatedAt": "2026-10-21T20:03:22.000Z",
+                  "uid": "35240-f995549d-17c3-4f0a-b410-56d98e790176"
+                }
+              ],
+              "id": "f9d2416b-344f-465c-b13a-a26015e1d4f8",
+              "createdAt": "2026-10-21T20:03:22.000Z",
+              "updatedAt": "2026-10-21T20:03:22.000Z",
+              "uid": "35240-f9d2416b-344f-465c-b13a-a26015e1d4f8"
+            }
+          ],
+          "id": "fa9a8c67-6c4a-4e5f-8a65-063019ea3de0",
+          "createdAt": "2026-10-21T20:03:22.000Z",
+          "updatedAt": "2026-10-21T20:03:22.000Z",
+          "uid": "35240-fa9a8c67-6c4a-4e5f-8a65-063019ea3de0"
+        },
+        {
           "name": "Search Venues",
+          "id": "613e5a07-d4a1-4c1a-b676-3e99c6fe8b83",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Search Venues",
-            "description": {
-              "content": "Search venues by location and more.\n\n<!-- theme: info  -->\n> #### Requirement\n>\n> Your request must include at the `venueName` or at least one of the geo parameters such as `geoCityId`, `geoCountryIso2`, `geoCountryIso3`, `geoIp`, `geoMetroId`, `geoStateIso`, or , `geoLatitude` and `geoLongitude`.\n",
-              "type": "text/plain"
-            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/venues?page=1&perPage=40&venueId=<string>&venueName=<string>&geoCityId=<string>&geoCityName=<string>&geoCountryIso2=GA&geoCountryIso3=BLZ&geoIp=<ipv4>&geoLatitude=<float>&geoLongitude=<float>&geoMetroId=<string>&geoRadiusAmount=60&geoRadiusUnits=mi&geoStateIso=US-MI&dateModifiedFrom=<string>&datePublishedFrom=<string>&venueHasUpcomingEvents=false&expandExternalIdentifiers=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "venues"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Page number of results to retrieve",
                   "key": "page",
-                  "value": "1",
-                  "description": "Page number of results to retrieve"
+                  "value": "1"
                 },
                 {
-                  "disabled": false,
+                  "description": "Number of events per page of results",
                   "key": "perPage",
-                  "value": "40",
-                  "description": "Number of events per page of results"
+                  "value": "40"
                 },
                 {
-                  "disabled": false,
+                  "description": "The source and unique identifier for the venue(s)\n- venueId=jambase:62108\n\nUse a pipe (|) to include multiple venue IDs\n- venueId=jambase:62108|jambase:7932731\n\nTo use non-JamBase IDs, use the <a href=\"https://apidocs.jambase.com/docs/jambase-api/vg16q2jczs7fg-enum-venue-data-source\">source slug</a> for the ID(s) you are using\n- venueId=ticketmaster:k7vGF99ORYpnS\n",
+                  "key": "venueId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "A keyword-based search for venue name(s).\n- venueName=Brooklyn%20Bowl\n\nUse a pipe (|) to include multiple venue IDs.\n- venueName=Brooklyn%20Bowl|House%20of%20Blues\n\nFor more precise venue-specific results try using `venueId` or `venue[slug]`.\n",
                   "key": "venueName",
-                  "value": "<string>",
-                  "description": "A keyword-based search for venue name(s).\n- venueName=Brooklyn%20Bowl\n\nUse a pipe (|) to include multiple venue IDs.\n- venueName=Brooklyn%20Bowl|House%20of%20Blues\n\nFor more precise venue-specific results try using `venueId` or `venue[slug]`.\n"
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5474ac2525de2-search-cities\">JamBase city ID(s)</a>   .     \n- geoCityId=jambase:4223296\n\nUse a pipe (|) to include multiple city IDs.\n- geoCityId=jambase:4223296|jambase:4224564\n\nWhen using the `geoCityId` parameter, you can omit the the `geoRadiusAmount` parameter (or) set it to `0` (or) leave it empty to include only results from the city. Else, you can use a radius amount to include events within a radius around the city-center.\n",
                   "key": "geoCityId",
-                  "value": "<string>",
-                  "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5474ac2525de2-search-cities\">JamBase city ID(s)</a>   .     \n- geoCityId=jambase:4223296\n\nUse a pipe (|) to include multiple city IDs.\n- geoCityId=jambase:4223296|jambase:4224564\n\nWhen using the `geoCityId` parameter, you can omit the the `geoRadiusAmount` parameter (or) set it to `0` (or) leave it empty to include only results from the city. Else, you can use a radius amount to include events within a radius around the city-center.\n"
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Use to retrieve events for city name(s).\n- geoCityName=Seattle\n\nUse a pipe (|) to include multiple city names.\n- geoCityName=Seattle|Tacoma\n\nFor more precise city-specific results try using `city[id]`\n",
                   "key": "geoCityName",
-                  "value": "<string>",
-                  "description": "Use to retrieve events for city name(s).\n- geoCityName=Seattle\n\nUse a pipe (|) to include multiple city names.\n- geoCityName=Seattle|Tacoma\n\nFor more precise city-specific results try using `city[id]`\n"
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "The two-letter ISO 3166-1 alpha-2 code for a country.\n- geoCountryIso2=US\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso2=US|CA\n\nGeographic filters alone request the normal upcoming-events dataset, even on historically entitled subscriptions; dateModifiedFrom alone is not historical intent either. On plans with geo + historical search (Enterprise baseline, or granted by request), request history explicitly with a licensed past event-date window or expandPastEvents=true. For country-by-country historical backfills, prefer bounded eventDateFrom/eventDateTo windows with no expand flag needed. An authorized historical request with no lower event-date bound receives the later fixed subscription date and rolling plan/override floor before origin fetch; truly unlimited history gets no invented floor. Iterate only countries that actually have data for your target date range (ask support for the coverage list) rather than sweeping every ISO code. Note the code for the United Kingdom is `GB`, not `UK` \u2014 source data occasionally shows `UK`, but this filter expects `GB`.\n",
                   "key": "geoCountryIso2",
-                  "value": "<iso-3166-alpha-2>",
-                  "description": "The two-letter ISO code for a country.\n- geoCountryIso2=US\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso2=US|CA\n"
+                  "value": "GA"
                 },
                 {
-                  "disabled": false,
+                  "description": "The three-letter ISO code for a country.\n- geoCountryIso3=USA\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso3=USA|CAN\n",
                   "key": "geoCountryIso3",
-                  "value": "<iso-3166-alpha-3>",
-                  "description": "The three-letter ISO code for a country.\n- geoCountryIso3=USA\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso3=USA|CAN\n"
+                  "value": "BLZ"
                 },
                 {
-                  "disabled": false,
+                  "description": "Use to retrieve events near an IP address.\\\nSupports IPv4 or IPv6 values.\n- geoIp=55.123.456.789\n",
                   "key": "geoIp",
-                  "value": "<ipv4>",
-                  "description": "Use to retrieve events near an IP address.\\\nSupports IPv4 or IPv6 values.\n- geoIp=55.123.456.789\n"
+                  "value": "<ipv4>"
                 },
                 {
-                  "disabled": false,
+                  "description": "The latitude for geographic radius.\n- geoLatitude=40.7505\n",
                   "key": "geoLatitude",
-                  "value": "<float>",
-                  "description": "The latitude for geographic radius.\n- geoLatitude=40.7505\n"
+                  "value": "<float>"
                 },
                 {
-                  "disabled": false,
+                  "description": "The longitude for geographic radius.\n- geoLongitude=-73.9934\n",
                   "key": "geoLongitude",
-                  "value": "<float>",
-                  "description": "The longitude for geographic radius.\n- geoLongitude=-73.9934\n"
+                  "value": "<float>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5b89026bb2462-get-metros\">metro ID(s)</a>.\n- geoMetroId=jambase:1\n\nUse a pipe (|) to include multiple metro IDs.\n- geoMetroId=jambase:1|jambase:5\n",
                   "key": "geoMetroId",
-                  "value": "<string>",
-                  "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5b89026bb2462-get-metros\">metro ID(s)</a>.\n- geoMetroId=jambase:1\n\nUse a pipe (|) to include multiple metro IDs.\n- geoMetroId=jambase:1|jambase:5\n"
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "The search radius for lat/lng type searches.\n- geoRadiusAmount=60\n",
                   "key": "geoRadiusAmount",
-                  "value": "60",
-                  "description": "The search radius for lat/lng type searches.\n- geoRadiusAmount=60\n"
+                  "value": "60"
                 },
                 {
-                  "disabled": false,
+                  "description": "Whether to use miles (default) or kilometers for radius.\n- geoRadiusUnits=km\n",
                   "key": "geoRadiusUnits",
-                  "value": "<string>",
-                  "description": "Whether to use miles (default) or kilometers for radius.\n- geoRadiusUnits=km\n"
+                  "value": "mi"
                 },
                 {
-                  "disabled": false,
+                  "description": "The State code in ISO_3166-2 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-2)].\n- geoStateIso=US-NY\n\nUse a pipe (|) to include multiple State codes.\n- geoStateIso=US-NY|=US-PA\n\nNote: Available for United States, Canada, and Australia only.\n",
                   "key": "geoStateIso",
-                  "value": "<iso-3166-2>",
-                  "description": "The State code in ISO_3166-2 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-2)].\n- geoStateIso=US-NY\n\nUse a pipe (|) to include multiple State codes.\n- geoStateIso=US-NY|=US-PA\n\nNote: Available for United States, Canada, and Australia only.\n"
+                  "value": "US-MI"
                 },
                 {
-                  "disabled": false,
+                  "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nOn its own, a `dateModifiedFrom` sweep only returns events whose dates have not yet passed \u2014 modifications to past-dated events never appear in a plain delta sweep. To catch changes to past shows, plans with geo + historical search (Enterprise baseline, or granted by request) can combine `dateModifiedFrom` with a geo parameter (such as `geoCountryIso2`) and an explicit past `eventDateFrom`/`eventDateTo` range. Two caveats: the historical index refreshes on a delay (up to about a day), so overlap historical watermarks by 24-48 hours; and a response carrying the `X-JBD-Geo-Historical-Fallback` header was served without past events and should be re-run after the UTC day resets.\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                   "key": "dateModifiedFrom",
-                  "value": "<rfc3339>",
-                  "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                   "key": "datePublishedFrom",
-                  "value": "<rfc3339>",
-                  "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n"
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Set to true to only return venues that have at least one upcoming event",
                   "key": "venueHasUpcomingEvents",
-                  "value": "false",
-                  "description": "Set to true to only return venues that have at least one upcoming event"
+                  "value": "false"
                 },
                 {
-                  "disabled": false,
+                  "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
                   "key": "expandExternalIdentifiers",
-                  "value": "false",
-                  "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
+                  "value": "false"
                 }
-              ],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Search venues by id, location, and more.\n\n> #### Requirement\n>\n> Your request must include the `venueId` or `venueName` or at least one of the geo parameters such as `geoCityId`, `geoCountryIso2`, `geoCountryIso3`, `geoIp`, `geoMetroId`, `geoStateIso`, or , `geoLatitude` and `geoLongitude`."
           },
           "response": [
             {
-              "id": "88d0eeff-beef-4827-8d1a-2c545b4c4f36",
+              "id": "4ac5402e-dd0d-42e7-8ddb-44fdabab2442",
               "name": "A list of Venues",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "venues"
-                  ],
+                  "raw": "{{baseUrl}}/venues?page=1&perPage=40&venueId=<string>&venueName=<string>&geoCityId=<string>&geoCityName=<string>&geoCountryIso2=GA&geoCountryIso3=BLZ&geoIp=<ipv4>&geoLatitude=<float>&geoLongitude=<float>&geoMetroId=<string>&geoRadiusAmount=60&geoRadiusUnits=mi&geoStateIso=US-MI&dateModifiedFrom=<string>&datePublishedFrom=<string>&venueHasUpcomingEvents=false&expandExternalIdentifiers=false",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "venues"
+                  ],
                   "query": [
                     {
+                      "description": "Page number of results to retrieve",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of events per page of results",
                       "key": "perPage",
                       "value": "40"
                     },
                     {
+                      "description": "The source and unique identifier for the venue(s)\n- venueId=jambase:62108\n\nUse a pipe (|) to include multiple venue IDs\n- venueId=jambase:62108|jambase:7932731\n\nTo use non-JamBase IDs, use the <a href=\"https://apidocs.jambase.com/docs/jambase-api/vg16q2jczs7fg-enum-venue-data-source\">source slug</a> for the ID(s) you are using\n- venueId=ticketmaster:k7vGF99ORYpnS\n",
+                      "key": "venueId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A keyword-based search for venue name(s).\n- venueName=Brooklyn%20Bowl\n\nUse a pipe (|) to include multiple venue IDs.\n- venueName=Brooklyn%20Bowl|House%20of%20Blues\n\nFor more precise venue-specific results try using `venueId` or `venue[slug]`.\n",
                       "key": "venueName",
-                      "value": "Brooklyn%20Bowl"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5474ac2525de2-search-cities\">JamBase city ID(s)</a>   .     \n- geoCityId=jambase:4223296\n\nUse a pipe (|) to include multiple city IDs.\n- geoCityId=jambase:4223296|jambase:4224564\n\nWhen using the `geoCityId` parameter, you can omit the the `geoRadiusAmount` parameter (or) set it to `0` (or) leave it empty to include only results from the city. Else, you can use a radius amount to include events within a radius around the city-center.\n",
                       "key": "geoCityId",
-                      "value": "jambase:4223296"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Use to retrieve events for city name(s).\n- geoCityName=Seattle\n\nUse a pipe (|) to include multiple city names.\n- geoCityName=Seattle|Tacoma\n\nFor more precise city-specific results try using `city[id]`\n",
                       "key": "geoCityName",
                       "value": "<string>"
                     },
                     {
+                      "description": "The two-letter ISO 3166-1 alpha-2 code for a country.\n- geoCountryIso2=US\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso2=US|CA\n\nGeographic filters alone request the normal upcoming-events dataset, even on historically entitled subscriptions; dateModifiedFrom alone is not historical intent either. On plans with geo + historical search (Enterprise baseline, or granted by request), request history explicitly with a licensed past event-date window or expandPastEvents=true. For country-by-country historical backfills, prefer bounded eventDateFrom/eventDateTo windows with no expand flag needed. An authorized historical request with no lower event-date bound receives the later fixed subscription date and rolling plan/override floor before origin fetch; truly unlimited history gets no invented floor. Iterate only countries that actually have data for your target date range (ask support for the coverage list) rather than sweeping every ISO code. Note the code for the United Kingdom is `GB`, not `UK` \u2014 source data occasionally shows `UK`, but this filter expects `GB`.\n",
                       "key": "geoCountryIso2",
-                      "value": "US"
+                      "value": "GA"
                     },
                     {
+                      "description": "The three-letter ISO code for a country.\n- geoCountryIso3=USA\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso3=USA|CAN\n",
                       "key": "geoCountryIso3",
-                      "value": "USA"
+                      "value": "BLZ"
                     },
                     {
+                      "description": "Use to retrieve events near an IP address.\\\nSupports IPv4 or IPv6 values.\n- geoIp=55.123.456.789\n",
                       "key": "geoIp",
                       "value": "<ipv4>"
                     },
                     {
+                      "description": "The latitude for geographic radius.\n- geoLatitude=40.7505\n",
                       "key": "geoLatitude",
-                      "value": "40.7505"
+                      "value": "<float>"
                     },
                     {
+                      "description": "The longitude for geographic radius.\n- geoLongitude=-73.9934\n",
                       "key": "geoLongitude",
-                      "value": "-73.9934"
+                      "value": "<float>"
                     },
                     {
+                      "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5b89026bb2462-get-metros\">metro ID(s)</a>.\n- geoMetroId=jambase:1\n\nUse a pipe (|) to include multiple metro IDs.\n- geoMetroId=jambase:1|jambase:5\n",
                       "key": "geoMetroId",
-                      "value": "jambase:1"
+                      "value": "<string>"
                     },
                     {
+                      "description": "The search radius for lat/lng type searches.\n- geoRadiusAmount=60\n",
                       "key": "geoRadiusAmount",
                       "value": "60"
                     },
                     {
+                      "description": "Whether to use miles (default) or kilometers for radius.\n- geoRadiusUnits=km\n",
                       "key": "geoRadiusUnits",
                       "value": "mi"
                     },
                     {
+                      "description": "The State code in ISO_3166-2 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-2)].\n- geoStateIso=US-NY\n\nUse a pipe (|) to include multiple State codes.\n- geoStateIso=US-NY|=US-PA\n\nNote: Available for United States, Canada, and Australia only.\n",
                       "key": "geoStateIso",
-                      "value": "US-AZ"
+                      "value": "US-MI"
                     },
                     {
+                      "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nOn its own, a `dateModifiedFrom` sweep only returns events whose dates have not yet passed \u2014 modifications to past-dated events never appear in a plain delta sweep. To catch changes to past shows, plans with geo + historical search (Enterprise baseline, or granted by request) can combine `dateModifiedFrom` with a geo parameter (such as `geoCountryIso2`) and an explicit past `eventDateFrom`/`eventDateTo` range. Two caveats: the historical index refreshes on a delay (up to about a day), so overlap historical watermarks by 24-48 hours; and a response carrying the `X-JBD-Geo-Historical-Fallback` header was served without past events and should be re-run after the UTC day resets.\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                       "key": "dateModifiedFrom",
-                      "value": "2022-10-31 00:00:00"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                       "key": "datePublishedFrom",
-                      "value": "2022-01-01 00:00:00"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Set to true to only return venues that have at least one upcoming event",
                       "key": "venueHasUpcomingEvents",
                       "value": "false"
                     },
                     {
+                      "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
                       "key": "expandExternalIdentifiers",
                       "value": "false"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"success\": true,\n  \"pagination\": {\n    \"page\": 1,\n    \"perPage\": 10,\n    \"totalItems\": 50,\n    \"totalPages\": 5,\n    \"nextPage\": \"string\",\n    \"previousPage\": \"string\"\n  },\n  \"venues\": [\n    {\n      \"name\": \"string\",\n      \"identifier\": \"jambase:194164\",\n      \"url\": \"http://JMdpQkecuGEdp.kpxcxLO4VVYqDENIxt0DPDceFs+Xc0HKQPkARIA\",\n      \"image\": \"http://Xs.zsYnzv4OoZvuYDRN7QNs5s+NZBD-MUUdV7P0p5uIxUENQq\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"http://fItwemyOJXDgTtrVeSbiKOeQULUePd.jdMC7YibWnXdkh8l0n1hCtDgBz3\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://xQpotiInxDSlAoibnqqeVlRyDjdgi.icEe9DiGCi\"\n        }\n      ],\n      \"datePublished\": \"2022-12-14T15:35:48Z\",\n      \"dateModified\": \"2022-12-14T03:41:20Z\",\n      \"deletionStatus\": \"deleted\",\n      \"deletedAt\": \"2026-04-12T18:01:00Z\",\n      \"mergedInto\": \"jambase:5632389\",\n      \"maximumAttendeeCapacity\": 20789,\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"streetAddress\": \"4 Pennsylvania Plaza\",\n        \"addressLocality\": \"New York\",\n        \"postalCode\": \"10001\",\n        \"addressRegion\": {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"alternateName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"country\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-numUpcomingEvents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"addressCountry\": {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"alternateName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-numUpcomingEvents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"x-streetAddress2\": \"Second Floor\",\n        \"x-timezone\": \"America/New_York\",\n        \"x-jamBaseMetroId\": 1,\n        \"x-jamBaseCityId\": 4223296\n      },\n      \"geo\": {\n        \"@type\": \"GeoCoordinates\",\n        \"latitude\": 40.7505,\n        \"longitude\": -73.9934\n      },\n      \"events\": [\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"x-isPermanentlyClosed\": false,\n      \"x-numUpcomingEvents\": 12\n    },\n    {\n      \"name\": \"string\",\n      \"identifier\": \"jambase:194164\",\n      \"url\": \"https://eLUciqeaFcxBQaHlWtdNUjG.jlgkDcbFlb72Ul4tGNdaPyhl4R.H.vbCWCichMQGqSX5WCZQu-nTfBR1FafJhcYVh\",\n      \"image\": \"https://UfrfaxclxvGrtepyy.tsievK0L1oULX43zN5eGjUd6lzLc8FpAKKwbyAwvKtx048nY6ilvKiZvSTcfB\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"https://SocwnCFPeWjcSUtAMbTg.aaoztO-KxVDd+I,fncnzw+-dS2KGTyUIkknp6E\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": \"http://FxYJwEnqkYLlDTQhNICBpBJOP.qymGejlirzvCsNqrZnhIsf4S6CpePV7eWX.MDC-kRxBsGiW2Fg,EsqB2eBKcYA.tId\"\n        }\n      ],\n      \"datePublished\": \"2022-12-14T15:35:48Z\",\n      \"dateModified\": \"2022-12-14T03:41:20Z\",\n      \"deletionStatus\": \"deleted\",\n      \"deletedAt\": \"2026-04-12T18:01:00Z\",\n      \"mergedInto\": \"jambase:5632389\",\n      \"maximumAttendeeCapacity\": 20789,\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"streetAddress\": \"4 Pennsylvania Plaza\",\n        \"addressLocality\": \"New York\",\n        \"postalCode\": \"10001\",\n        \"addressRegion\": {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"alternateName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"country\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-numUpcomingEvents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"addressCountry\": {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"alternateName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-numUpcomingEvents\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"x-streetAddress2\": \"Second Floor\",\n        \"x-timezone\": \"America/New_York\",\n        \"x-jamBaseMetroId\": 1,\n        \"x-jamBaseCityId\": 4223296\n      },\n      \"geo\": {\n        \"@type\": \"GeoCoordinates\",\n        \"latitude\": 40.7505,\n        \"longitude\": -73.9934\n      },\n      \"events\": [\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"@type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletionStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mergedInto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-externalIdentifiers\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-customTitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-subtitle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-headlinerInSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"x-streamIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"x-isPermanentlyClosed\": false,\n      \"x-numUpcomingEvents\": 12\n    }\n  ],\n  \"request\": {\n    \"endpoint\": \"string\",\n    \"method\": \"string\",\n    \"ip\": \"49.249.205.34\",\n    \"userAgent\": \"string\"\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"success\": true,\n  \"pagination\": {\n    \"page\": \"<integer>\",\n    \"perPage\": \"<integer>\",\n    \"totalItems\": \"<integer>\",\n    \"totalPages\": \"<integer>\",\n    \"nextPage\": \"<string>\",\n    \"previousPage\": \"<string>\"\n  },\n  \"venues\": [\n    {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"image\": \"<uri>\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"facebook\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"musicbrainz\",\n          \"url\": \"<uri>\"\n        }\n      ],\n      \"datePublished\": \"<string>\",\n      \"dateModified\": \"<string>\",\n      \"deletionStatus\": \"merged\",\n      \"deletedAt\": \"<string>\",\n      \"mergedInto\": \"<string>\",\n      \"maximumAttendeeCapacity\": \"<number>\",\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"streetAddress\": \"<string>\",\n        \"addressLocality\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"addressRegion\": {\n          \"@type\": \"State\",\n          \"identifier\": \"US-RI\",\n          \"name\": \"<string>\",\n          \"alternateName\": \"<string>\",\n          \"country\": {\n            \"@type\": \"Country\",\n            \"identifier\": \"PA\",\n            \"name\": \"<string>\",\n            \"alternateName\": \"ATG\",\n            \"x-numUpcomingEvents\": \"<number>\"\n          },\n          \"x-numUpcomingEvents\": \"<number>\"\n        },\n        \"addressCountry\": {\n          \"@type\": \"Country\",\n          \"identifier\": \"PE\",\n          \"name\": \"<string>\",\n          \"alternateName\": \"MDA\",\n          \"x-numUpcomingEvents\": \"<number>\"\n        },\n        \"x-streetAddress2\": \"<string>\",\n        \"x-timezone\": \"<string>\",\n        \"x-jamBaseMetroId\": \"<number>\",\n        \"x-jamBaseCityId\": \"<number>\"\n      },\n      \"geo\": {\n        \"@type\": \"GeoCoordinates\",\n        \"latitude\": \"<float>\",\n        \"longitude\": \"<float>\"\n      },\n      \"events\": [\n        {\n          \"@type\": \"Concert\",\n          \"name\": \"<string>\",\n          \"identifier\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"eventStatus\": \"postponed\",\n          \"startDate\": \"<string>\",\n          \"location\": {\n            \"value\": \"<Circular reference to #/components/schemas/MusicVenue detected>\"\n          },\n          \"performer\": [\n            {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"twitter\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"twitter\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"@type\": \"MusicGroup\",\n              \"deletionStatus\": \"merged\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"member\": [\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"memberOf\": [\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"foundingLocation\": {\n                \"@type\": \"Place\",\n                \"name\": \"<string>\"\n              },\n              \"foundingDate\": \"<string>\",\n              \"genre\": [\n                \"classical\",\n                \"country-music\"\n              ],\n              \"events\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                }\n              ],\n              \"x-bandOrMusician\": \"musician\",\n              \"x-numUpcomingEvents\": \"<number>\",\n              \"x-performanceDate\": \"<string>\",\n              \"x-performanceRank\": \"<number>\",\n              \"x-isHeadliner\": false,\n              \"x-dateIsConfirmed\": false\n            },\n            {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"facebook\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"androidApp\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"@type\": \"MusicGroup\",\n              \"deletionStatus\": \"merged\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"member\": [\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"memberOf\": [\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"foundingLocation\": {\n                \"@type\": \"Place\",\n                \"name\": \"<string>\"\n              },\n              \"foundingDate\": \"<string>\",\n              \"genre\": [\n                \"bluegrass\",\n                \"christian\"\n              ],\n              \"events\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                }\n              ],\n              \"x-bandOrMusician\": \"band\",\n              \"x-numUpcomingEvents\": \"<number>\",\n              \"x-performanceDate\": \"<string>\",\n              \"x-performanceRank\": \"<number>\",\n              \"x-isHeadliner\": false,\n              \"x-dateIsConfirmed\": false\n            }\n          ],\n          \"image\": \"<uri>\",\n          \"sameAs\": [\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"facebook\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"twitter\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"datePublished\": \"<string>\",\n          \"dateModified\": \"<string>\",\n          \"endDate\": \"<string>\",\n          \"previousStartDate\": \"<string>\",\n          \"doorTime\": \"<string>\",\n          \"offers\": [\n            {\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"category\": \"<string>\",\n              \"seller\": {\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"disambiguatingDescription\": \"<string>\",\n                \"datePublished\": \"<string>\",\n                \"dateModified\": \"<string>\",\n                \"@type\": \"Organization\",\n                \"url\": \"<uri>\",\n                \"image\": \"<uri>\",\n                \"sameAs\": [\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"musicbrainz\",\n                    \"url\": \"<uri>\"\n                  },\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"musicbrainz\",\n                    \"url\": \"<uri>\"\n                  }\n                ]\n              },\n              \"validFrom\": {\n                \"example\": \"2022-12-07T12:42:00\",\n                \"schema\": \"et \"\n              },\n              \"name\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"facebook\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"youtube\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"priceSpecification\": {\n                \"price\": \"<number>\",\n                \"priceCurrency\": \"<string>\",\n                \"@type\": \"PriceSpecification\",\n                \"minPrice\": \"<number>\",\n                \"maxPrice\": \"<number>\"\n              }\n            },\n            {\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"category\": \"<string>\",\n              \"seller\": {\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"disambiguatingDescription\": \"<string>\",\n                \"datePublished\": \"<string>\",\n                \"dateModified\": \"<string>\",\n                \"@type\": \"Organization\",\n                \"url\": \"<uri>\",\n                \"image\": \"<uri>\",\n                \"sameAs\": [\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"twitter\",\n                    \"url\": \"<uri>\"\n                  },\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"officialSite\",\n                    \"url\": \"<uri>\"\n                  }\n                ]\n              },\n              \"validFrom\": {\n                \"example\": \"2022-12-07T12:42:00\",\n                \"schema\": \"culpa nisi irure\"\n              },\n              \"name\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"instagram\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"musicbrainz\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"priceSpecification\": {\n                \"price\": \"<number>\",\n                \"priceCurrency\": \"<string>\",\n                \"@type\": \"PriceSpecification\",\n                \"minPrice\": \"<number>\",\n                \"maxPrice\": \"<number>\"\n              }\n            }\n          ],\n          \"eventAttendanceMode\": \"offline\",\n          \"isAccessibleForFree\": false,\n          \"x-promoImage\": \"<uri>\",\n          \"deletionStatus\": \"deleted\",\n          \"deletedAt\": \"<string>\",\n          \"mergedInto\": \"<string>\",\n          \"x-customTitle\": \"<string>\",\n          \"x-subtitle\": \"<string>\",\n          \"x-headlinerInSupport\": false,\n          \"x-streamIds\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"@type\": \"Concert\",\n          \"name\": \"<string>\",\n          \"identifier\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"eventStatus\": \"postponed\",\n          \"startDate\": \"<string>\",\n          \"location\": {\n            \"value\": \"<Circular reference to #/components/schemas/MusicVenue detected>\"\n          },\n          \"performer\": [\n            {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"facebook\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"officialSite\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"@type\": \"MusicGroup\",\n              \"deletionStatus\": \"deleted\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"member\": [\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"memberOf\": [\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"foundingLocation\": {\n                \"@type\": \"Place\",\n                \"name\": \"<string>\"\n              },\n              \"foundingDate\": \"<string>\",\n              \"genre\": [\n                \"metal\",\n                \"metal\"\n              ],\n              \"events\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                }\n              ],\n              \"x-bandOrMusician\": \"musician\",\n              \"x-numUpcomingEvents\": \"<number>\",\n              \"x-performanceDate\": \"<string>\",\n              \"x-performanceRank\": \"<number>\",\n              \"x-isHeadliner\": false,\n              \"x-dateIsConfirmed\": false\n            },\n            {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"officialSite\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"iosApp\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"@type\": \"MusicGroup\",\n              \"deletionStatus\": \"trashed\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"member\": [\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"memberOf\": [\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"foundingLocation\": {\n                \"@type\": \"Place\",\n                \"name\": \"<string>\"\n              },\n              \"foundingDate\": \"<string>\",\n              \"genre\": [\n                \"latin\",\n                \"kpop\"\n              ],\n              \"events\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                }\n              ],\n              \"x-bandOrMusician\": \"musician\",\n              \"x-numUpcomingEvents\": \"<number>\",\n              \"x-performanceDate\": \"<string>\",\n              \"x-performanceRank\": \"<number>\",\n              \"x-isHeadliner\": false,\n              \"x-dateIsConfirmed\": false\n            }\n          ],\n          \"image\": \"<uri>\",\n          \"sameAs\": [\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"twitter\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"instagram\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"datePublished\": \"<string>\",\n          \"dateModified\": \"<string>\",\n          \"endDate\": \"<string>\",\n          \"previousStartDate\": \"<string>\",\n          \"doorTime\": \"<string>\",\n          \"offers\": [\n            {\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"category\": \"<string>\",\n              \"seller\": {\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"disambiguatingDescription\": \"<string>\",\n                \"datePublished\": \"<string>\",\n                \"dateModified\": \"<string>\",\n                \"@type\": \"Organization\",\n                \"url\": \"<uri>\",\n                \"image\": \"<uri>\",\n                \"sameAs\": [\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"twitter\",\n                    \"url\": \"<uri>\"\n                  },\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"instagram\",\n                    \"url\": \"<uri>\"\n                  }\n                ]\n              },\n              \"validFrom\": {\n                \"example\": \"2022-12-07T12:42:00\",\n                \"schema\": \"aute elit deserunt quis occaecat\"\n              },\n              \"name\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"facebook\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"officialSite\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"priceSpecification\": {\n                \"price\": \"<number>\",\n                \"priceCurrency\": \"<string>\",\n                \"@type\": \"PriceSpecification\",\n                \"minPrice\": \"<number>\",\n                \"maxPrice\": \"<number>\"\n              }\n            },\n            {\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"category\": \"<string>\",\n              \"seller\": {\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"disambiguatingDescription\": \"<string>\",\n                \"datePublished\": \"<string>\",\n                \"dateModified\": \"<string>\",\n                \"@type\": \"Organization\",\n                \"url\": \"<uri>\",\n                \"image\": \"<uri>\",\n                \"sameAs\": [\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"iosApp\",\n                    \"url\": \"<uri>\"\n                  },\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"androidApp\",\n                    \"url\": \"<uri>\"\n                  }\n                ]\n              },\n              \"validFrom\": {\n                \"example\": \"2022-12-07T12:42:00\",\n                \"schema\": \"aute eu\"\n              },\n              \"name\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"officialSite\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"androidApp\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"priceSpecification\": {\n                \"price\": \"<number>\",\n                \"priceCurrency\": \"<string>\",\n                \"@type\": \"PriceSpecification\",\n                \"minPrice\": \"<number>\",\n                \"maxPrice\": \"<number>\"\n              }\n            }\n          ],\n          \"eventAttendanceMode\": \"offline\",\n          \"isAccessibleForFree\": false,\n          \"x-promoImage\": \"<uri>\",\n          \"deletionStatus\": \"merged\",\n          \"deletedAt\": \"<string>\",\n          \"mergedInto\": \"<string>\",\n          \"x-customTitle\": \"<string>\",\n          \"x-subtitle\": \"<string>\",\n          \"x-headlinerInSupport\": false,\n          \"x-streamIds\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"x-isPermanentlyClosed\": false,\n      \"x-numUpcomingEvents\": \"<number>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"image\": \"<uri>\",\n      \"sameAs\": [\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"iosApp\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"@type\": \"URL\",\n          \"identifier\": \"twitter\",\n          \"url\": \"<uri>\"\n        }\n      ],\n      \"datePublished\": \"<string>\",\n      \"dateModified\": \"<string>\",\n      \"deletionStatus\": \"deleted\",\n      \"deletedAt\": \"<string>\",\n      \"mergedInto\": \"<string>\",\n      \"maximumAttendeeCapacity\": \"<number>\",\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"streetAddress\": \"<string>\",\n        \"addressLocality\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"addressRegion\": {\n          \"@type\": \"State\",\n          \"identifier\": \"US-PR\",\n          \"name\": \"<string>\",\n          \"alternateName\": \"<string>\",\n          \"country\": {\n            \"@type\": \"Country\",\n            \"identifier\": \"EC\",\n            \"name\": \"<string>\",\n            \"alternateName\": \"ALB\",\n            \"x-numUpcomingEvents\": \"<number>\"\n          },\n          \"x-numUpcomingEvents\": \"<number>\"\n        },\n        \"addressCountry\": {\n          \"@type\": \"Country\",\n          \"identifier\": \"LI\",\n          \"name\": \"<string>\",\n          \"alternateName\": \"MMR\",\n          \"x-numUpcomingEvents\": \"<number>\"\n        },\n        \"x-streetAddress2\": \"<string>\",\n        \"x-timezone\": \"<string>\",\n        \"x-jamBaseMetroId\": \"<number>\",\n        \"x-jamBaseCityId\": \"<number>\"\n      },\n      \"geo\": {\n        \"@type\": \"GeoCoordinates\",\n        \"latitude\": \"<float>\",\n        \"longitude\": \"<float>\"\n      },\n      \"events\": [\n        {\n          \"@type\": \"Concert\",\n          \"name\": \"<string>\",\n          \"identifier\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"eventStatus\": \"cancelled\",\n          \"startDate\": \"<string>\",\n          \"location\": {\n            \"value\": \"<Circular reference to #/components/schemas/MusicVenue detected>\"\n          },\n          \"performer\": [\n            {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"twitter\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"facebook\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"@type\": \"MusicGroup\",\n              \"deletionStatus\": \"merged\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"member\": [\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"memberOf\": [\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"foundingLocation\": {\n                \"@type\": \"Place\",\n                \"name\": \"<string>\"\n              },\n              \"foundingDate\": \"<string>\",\n              \"genre\": [\n                \"kpop\",\n                \"kpop\"\n              ],\n              \"events\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                }\n              ],\n              \"x-bandOrMusician\": \"band\",\n              \"x-numUpcomingEvents\": \"<number>\",\n              \"x-performanceDate\": \"<string>\",\n              \"x-performanceRank\": \"<number>\",\n              \"x-isHeadliner\": false,\n              \"x-dateIsConfirmed\": false\n            },\n            {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"youtube\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"instagram\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"@type\": \"MusicGroup\",\n              \"deletionStatus\": \"deleted\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"member\": [\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"memberOf\": [\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"foundingLocation\": {\n                \"@type\": \"Place\",\n                \"name\": \"<string>\"\n              },\n              \"foundingDate\": \"<string>\",\n              \"genre\": [\n                \"rock\",\n                \"tribute\"\n              ],\n              \"events\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                }\n              ],\n              \"x-bandOrMusician\": \"band\",\n              \"x-numUpcomingEvents\": \"<number>\",\n              \"x-performanceDate\": \"<string>\",\n              \"x-performanceRank\": \"<number>\",\n              \"x-isHeadliner\": false,\n              \"x-dateIsConfirmed\": false\n            }\n          ],\n          \"image\": \"<uri>\",\n          \"sameAs\": [\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"musicbrainz\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"instagram\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"datePublished\": \"<string>\",\n          \"dateModified\": \"<string>\",\n          \"endDate\": \"<string>\",\n          \"previousStartDate\": \"<string>\",\n          \"doorTime\": \"<string>\",\n          \"offers\": [\n            {\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"category\": \"<string>\",\n              \"seller\": {\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"disambiguatingDescription\": \"<string>\",\n                \"datePublished\": \"<string>\",\n                \"dateModified\": \"<string>\",\n                \"@type\": \"Organization\",\n                \"url\": \"<uri>\",\n                \"image\": \"<uri>\",\n                \"sameAs\": [\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"iosApp\",\n                    \"url\": \"<uri>\"\n                  },\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"spotify\",\n                    \"url\": \"<uri>\"\n                  }\n                ]\n              },\n              \"validFrom\": {\n                \"example\": \"2022-12-07T12:42:00\",\n                \"schema\": \"ut do irure aliqua\"\n              },\n              \"name\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"youtube\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"androidApp\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"priceSpecification\": {\n                \"price\": \"<number>\",\n                \"priceCurrency\": \"<string>\",\n                \"@type\": \"PriceSpecification\",\n                \"minPrice\": \"<number>\",\n                \"maxPrice\": \"<number>\"\n              }\n            },\n            {\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"category\": \"<string>\",\n              \"seller\": {\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"disambiguatingDescription\": \"<string>\",\n                \"datePublished\": \"<string>\",\n                \"dateModified\": \"<string>\",\n                \"@type\": \"Organization\",\n                \"url\": \"<uri>\",\n                \"image\": \"<uri>\",\n                \"sameAs\": [\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"spotify\",\n                    \"url\": \"<uri>\"\n                  },\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"androidApp\",\n                    \"url\": \"<uri>\"\n                  }\n                ]\n              },\n              \"validFrom\": {\n                \"example\": \"2022-12-07T12:42:00\",\n                \"schema\": \"sunt dolor\"\n              },\n              \"name\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"twitter\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"instagram\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"priceSpecification\": {\n                \"price\": \"<number>\",\n                \"priceCurrency\": \"<string>\",\n                \"@type\": \"PriceSpecification\",\n                \"minPrice\": \"<number>\",\n                \"maxPrice\": \"<number>\"\n              }\n            }\n          ],\n          \"eventAttendanceMode\": \"offline\",\n          \"isAccessibleForFree\": false,\n          \"x-promoImage\": \"<uri>\",\n          \"deletionStatus\": \"deleted\",\n          \"deletedAt\": \"<string>\",\n          \"mergedInto\": \"<string>\",\n          \"x-customTitle\": \"<string>\",\n          \"x-subtitle\": \"<string>\",\n          \"x-headlinerInSupport\": false,\n          \"x-streamIds\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"@type\": \"Concert\",\n          \"name\": \"<string>\",\n          \"identifier\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"eventStatus\": \"rescheduled\",\n          \"startDate\": \"<string>\",\n          \"location\": {\n            \"value\": \"<Circular reference to #/components/schemas/MusicVenue detected>\"\n          },\n          \"performer\": [\n            {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"instagram\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"twitter\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"@type\": \"MusicGroup\",\n              \"deletionStatus\": \"merged\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"member\": [\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"memberOf\": [\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"foundingLocation\": {\n                \"@type\": \"Place\",\n                \"name\": \"<string>\"\n              },\n              \"foundingDate\": \"<string>\",\n              \"genre\": [\n                \"latin\",\n                \"christian\"\n              ],\n              \"events\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                }\n              ],\n              \"x-bandOrMusician\": \"band\",\n              \"x-numUpcomingEvents\": \"<number>\",\n              \"x-performanceDate\": \"<string>\",\n              \"x-performanceRank\": \"<number>\",\n              \"x-isHeadliner\": false,\n              \"x-dateIsConfirmed\": false\n            },\n            {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"youtube\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"youtube\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"@type\": \"MusicGroup\",\n              \"deletionStatus\": \"merged\",\n              \"deletedAt\": \"<string>\",\n              \"mergedInto\": \"<string>\",\n              \"member\": [\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"memberOf\": [\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"MusicGroup\",\n                  \"name\": \"<string>\",\n                  \"identifier\": \"<string>\",\n                  \"image\": \"<uri>\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"foundingLocation\": {\n                \"@type\": \"Place\",\n                \"name\": \"<string>\"\n              },\n              \"foundingDate\": \"<string>\",\n              \"genre\": [\n                \"punk\",\n                \"kpop\"\n              ],\n              \"events\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Concert detected>\"\n                }\n              ],\n              \"x-bandOrMusician\": \"band\",\n              \"x-numUpcomingEvents\": \"<number>\",\n              \"x-performanceDate\": \"<string>\",\n              \"x-performanceRank\": \"<number>\",\n              \"x-isHeadliner\": false,\n              \"x-dateIsConfirmed\": false\n            }\n          ],\n          \"image\": \"<uri>\",\n          \"sameAs\": [\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"twitter\",\n              \"url\": \"<uri>\"\n            },\n            {\n              \"@type\": \"URL\",\n              \"identifier\": \"musicbrainz\",\n              \"url\": \"<uri>\"\n            }\n          ],\n          \"datePublished\": \"<string>\",\n          \"dateModified\": \"<string>\",\n          \"endDate\": \"<string>\",\n          \"previousStartDate\": \"<string>\",\n          \"doorTime\": \"<string>\",\n          \"offers\": [\n            {\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"category\": \"<string>\",\n              \"seller\": {\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"disambiguatingDescription\": \"<string>\",\n                \"datePublished\": \"<string>\",\n                \"dateModified\": \"<string>\",\n                \"@type\": \"Organization\",\n                \"url\": \"<uri>\",\n                \"image\": \"<uri>\",\n                \"sameAs\": [\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"iosApp\",\n                    \"url\": \"<uri>\"\n                  },\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"musicbrainz\",\n                    \"url\": \"<uri>\"\n                  }\n                ]\n              },\n              \"validFrom\": {\n                \"example\": \"2022-12-07T12:42:00\",\n                \"schema\": \"anim aliquip mollit\"\n              },\n              \"name\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"instagram\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"instagram\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"priceSpecification\": {\n                \"price\": \"<number>\",\n                \"priceCurrency\": \"<string>\",\n                \"@type\": \"PriceSpecification\",\n                \"minPrice\": \"<number>\",\n                \"maxPrice\": \"<number>\"\n              }\n            },\n            {\n              \"identifier\": \"<string>\",\n              \"url\": \"<uri>\",\n              \"category\": \"<string>\",\n              \"seller\": {\n                \"name\": \"<string>\",\n                \"identifier\": \"<string>\",\n                \"disambiguatingDescription\": \"<string>\",\n                \"datePublished\": \"<string>\",\n                \"dateModified\": \"<string>\",\n                \"@type\": \"Organization\",\n                \"url\": \"<uri>\",\n                \"image\": \"<uri>\",\n                \"sameAs\": [\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"twitter\",\n                    \"url\": \"<uri>\"\n                  },\n                  {\n                    \"@type\": \"URL\",\n                    \"identifier\": \"officialSite\",\n                    \"url\": \"<uri>\"\n                  }\n                ]\n              },\n              \"validFrom\": {\n                \"example\": \"2022-12-07T12:42:00\",\n                \"schema\": \"dolor magna occaecat\"\n              },\n              \"name\": \"<string>\",\n              \"image\": \"<uri>\",\n              \"sameAs\": [\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"spotify\",\n                  \"url\": \"<uri>\"\n                },\n                {\n                  \"@type\": \"URL\",\n                  \"identifier\": \"iosApp\",\n                  \"url\": \"<uri>\"\n                }\n              ],\n              \"datePublished\": \"<string>\",\n              \"dateModified\": \"<string>\",\n              \"priceSpecification\": {\n                \"price\": \"<number>\",\n                \"priceCurrency\": \"<string>\",\n                \"@type\": \"PriceSpecification\",\n                \"minPrice\": \"<number>\",\n                \"maxPrice\": \"<number>\"\n              }\n            }\n          ],\n          \"eventAttendanceMode\": \"offline\",\n          \"isAccessibleForFree\": false,\n          \"x-promoImage\": \"<uri>\",\n          \"deletionStatus\": \"merged\",\n          \"deletedAt\": \"<string>\",\n          \"mergedInto\": \"<string>\",\n          \"x-customTitle\": \"<string>\",\n          \"x-subtitle\": \"<string>\",\n          \"x-headlinerInSupport\": false,\n          \"x-streamIds\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"x-isPermanentlyClosed\": false,\n      \"x-numUpcomingEvents\": \"<number>\"\n    }\n  ],\n  \"request\": {\n    \"endpoint\": \"<string>\",\n    \"method\": \"<string>\",\n    \"ip\": \"<ipv4>\",\n    \"userAgent\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:03:22.000Z",
+              "updatedAt": "2026-10-21T20:03:22.000Z",
+              "uid": "35240-4ac5402e-dd0d-42e7-8ddb-44fdabab2442"
             },
             {
-              "id": "dfba7e89-2116-4b6d-96cc-8fd1f9fe9644",
+              "id": "6e010f80-559a-467a-8518-65d24575b7c3",
               "name": "Invalid input parameter",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "venues"
-                  ],
+                  "raw": "{{baseUrl}}/venues?page=1&perPage=40&venueId=<string>&venueName=<string>&geoCityId=<string>&geoCityName=<string>&geoCountryIso2=GA&geoCountryIso3=BLZ&geoIp=<ipv4>&geoLatitude=<float>&geoLongitude=<float>&geoMetroId=<string>&geoRadiusAmount=60&geoRadiusUnits=mi&geoStateIso=US-MI&dateModifiedFrom=<string>&datePublishedFrom=<string>&venueHasUpcomingEvents=false&expandExternalIdentifiers=false",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "venues"
+                  ],
                   "query": [
                     {
+                      "description": "Page number of results to retrieve",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of events per page of results",
                       "key": "perPage",
                       "value": "40"
                     },
                     {
+                      "description": "The source and unique identifier for the venue(s)\n- venueId=jambase:62108\n\nUse a pipe (|) to include multiple venue IDs\n- venueId=jambase:62108|jambase:7932731\n\nTo use non-JamBase IDs, use the <a href=\"https://apidocs.jambase.com/docs/jambase-api/vg16q2jczs7fg-enum-venue-data-source\">source slug</a> for the ID(s) you are using\n- venueId=ticketmaster:k7vGF99ORYpnS\n",
+                      "key": "venueId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A keyword-based search for venue name(s).\n- venueName=Brooklyn%20Bowl\n\nUse a pipe (|) to include multiple venue IDs.\n- venueName=Brooklyn%20Bowl|House%20of%20Blues\n\nFor more precise venue-specific results try using `venueId` or `venue[slug]`.\n",
                       "key": "venueName",
-                      "value": "Brooklyn%20Bowl"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5474ac2525de2-search-cities\">JamBase city ID(s)</a>   .     \n- geoCityId=jambase:4223296\n\nUse a pipe (|) to include multiple city IDs.\n- geoCityId=jambase:4223296|jambase:4224564\n\nWhen using the `geoCityId` parameter, you can omit the the `geoRadiusAmount` parameter (or) set it to `0` (or) leave it empty to include only results from the city. Else, you can use a radius amount to include events within a radius around the city-center.\n",
                       "key": "geoCityId",
-                      "value": "jambase:4223296"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Use to retrieve events for city name(s).\n- geoCityName=Seattle\n\nUse a pipe (|) to include multiple city names.\n- geoCityName=Seattle|Tacoma\n\nFor more precise city-specific results try using `city[id]`\n",
                       "key": "geoCityName",
                       "value": "<string>"
                     },
                     {
+                      "description": "The two-letter ISO 3166-1 alpha-2 code for a country.\n- geoCountryIso2=US\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso2=US|CA\n\nGeographic filters alone request the normal upcoming-events dataset, even on historically entitled subscriptions; dateModifiedFrom alone is not historical intent either. On plans with geo + historical search (Enterprise baseline, or granted by request), request history explicitly with a licensed past event-date window or expandPastEvents=true. For country-by-country historical backfills, prefer bounded eventDateFrom/eventDateTo windows with no expand flag needed. An authorized historical request with no lower event-date bound receives the later fixed subscription date and rolling plan/override floor before origin fetch; truly unlimited history gets no invented floor. Iterate only countries that actually have data for your target date range (ask support for the coverage list) rather than sweeping every ISO code. Note the code for the United Kingdom is `GB`, not `UK` \u2014 source data occasionally shows `UK`, but this filter expects `GB`.\n",
                       "key": "geoCountryIso2",
-                      "value": "US"
+                      "value": "GA"
                     },
                     {
+                      "description": "The three-letter ISO code for a country.\n- geoCountryIso3=USA\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso3=USA|CAN\n",
                       "key": "geoCountryIso3",
-                      "value": "USA"
+                      "value": "BLZ"
                     },
                     {
+                      "description": "Use to retrieve events near an IP address.\\\nSupports IPv4 or IPv6 values.\n- geoIp=55.123.456.789\n",
                       "key": "geoIp",
                       "value": "<ipv4>"
                     },
                     {
+                      "description": "The latitude for geographic radius.\n- geoLatitude=40.7505\n",
                       "key": "geoLatitude",
-                      "value": "40.7505"
+                      "value": "<float>"
                     },
                     {
+                      "description": "The longitude for geographic radius.\n- geoLongitude=-73.9934\n",
                       "key": "geoLongitude",
-                      "value": "-73.9934"
+                      "value": "<float>"
                     },
                     {
+                      "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5b89026bb2462-get-metros\">metro ID(s)</a>.\n- geoMetroId=jambase:1\n\nUse a pipe (|) to include multiple metro IDs.\n- geoMetroId=jambase:1|jambase:5\n",
                       "key": "geoMetroId",
-                      "value": "jambase:1"
+                      "value": "<string>"
                     },
                     {
+                      "description": "The search radius for lat/lng type searches.\n- geoRadiusAmount=60\n",
                       "key": "geoRadiusAmount",
                       "value": "60"
                     },
                     {
+                      "description": "Whether to use miles (default) or kilometers for radius.\n- geoRadiusUnits=km\n",
                       "key": "geoRadiusUnits",
                       "value": "mi"
                     },
                     {
+                      "description": "The State code in ISO_3166-2 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-2)].\n- geoStateIso=US-NY\n\nUse a pipe (|) to include multiple State codes.\n- geoStateIso=US-NY|=US-PA\n\nNote: Available for United States, Canada, and Australia only.\n",
                       "key": "geoStateIso",
-                      "value": "US-AZ"
+                      "value": "US-MI"
                     },
                     {
+                      "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nOn its own, a `dateModifiedFrom` sweep only returns events whose dates have not yet passed \u2014 modifications to past-dated events never appear in a plain delta sweep. To catch changes to past shows, plans with geo + historical search (Enterprise baseline, or granted by request) can combine `dateModifiedFrom` with a geo parameter (such as `geoCountryIso2`) and an explicit past `eventDateFrom`/`eventDateTo` range. Two caveats: the historical index refreshes on a delay (up to about a day), so overlap historical watermarks by 24-48 hours; and a response carrying the `X-JBD-Geo-Historical-Fallback` header was served without past events and should be re-run after the UTC day resets.\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                       "key": "dateModifiedFrom",
-                      "value": "2022-10-31 00:00:00"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                       "key": "datePublishedFrom",
-                      "value": "2022-01-01 00:00:00"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Set to true to only return venues that have at least one upcoming event",
                       "key": "venueHasUpcomingEvents",
                       "value": "false"
                     },
                     {
+                      "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
                       "key": "expandExternalIdentifiers",
                       "value": "false"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"lookup_error\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"parameter_invalid\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"general_error\",\n      \"errorMessage\": \"<string>\"\n    },\n    {\n      \"errorCode\": \"identifier_missing\",\n      \"errorMessage\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:03:22.000Z",
+              "updatedAt": "2026-10-21T20:03:22.000Z",
+              "uid": "35240-6e010f80-559a-467a-8518-65d24575b7c3"
             },
             {
-              "id": "75705b59-fbcc-4c4b-84fd-16a11216eae6",
+              "id": "360d206d-6332-46f5-8224-39ec9f469132",
               "name": "API key is missing or invalid",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "venues"
-                  ],
+                  "raw": "{{baseUrl}}/venues?page=1&perPage=40&venueId=<string>&venueName=<string>&geoCityId=<string>&geoCityName=<string>&geoCountryIso2=GA&geoCountryIso3=BLZ&geoIp=<ipv4>&geoLatitude=<float>&geoLongitude=<float>&geoMetroId=<string>&geoRadiusAmount=60&geoRadiusUnits=mi&geoStateIso=US-MI&dateModifiedFrom=<string>&datePublishedFrom=<string>&venueHasUpcomingEvents=false&expandExternalIdentifiers=false",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "venues"
+                  ],
                   "query": [
                     {
+                      "description": "Page number of results to retrieve",
                       "key": "page",
                       "value": "1"
                     },
                     {
+                      "description": "Number of events per page of results",
                       "key": "perPage",
                       "value": "40"
                     },
                     {
+                      "description": "The source and unique identifier for the venue(s)\n- venueId=jambase:62108\n\nUse a pipe (|) to include multiple venue IDs\n- venueId=jambase:62108|jambase:7932731\n\nTo use non-JamBase IDs, use the <a href=\"https://apidocs.jambase.com/docs/jambase-api/vg16q2jczs7fg-enum-venue-data-source\">source slug</a> for the ID(s) you are using\n- venueId=ticketmaster:k7vGF99ORYpnS\n",
+                      "key": "venueId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A keyword-based search for venue name(s).\n- venueName=Brooklyn%20Bowl\n\nUse a pipe (|) to include multiple venue IDs.\n- venueName=Brooklyn%20Bowl|House%20of%20Blues\n\nFor more precise venue-specific results try using `venueId` or `venue[slug]`.\n",
                       "key": "venueName",
-                      "value": "Brooklyn%20Bowl"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5474ac2525de2-search-cities\">JamBase city ID(s)</a>   .     \n- geoCityId=jambase:4223296\n\nUse a pipe (|) to include multiple city IDs.\n- geoCityId=jambase:4223296|jambase:4224564\n\nWhen using the `geoCityId` parameter, you can omit the the `geoRadiusAmount` parameter (or) set it to `0` (or) leave it empty to include only results from the city. Else, you can use a radius amount to include events within a radius around the city-center.\n",
                       "key": "geoCityId",
-                      "value": "jambase:4223296"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Use to retrieve events for city name(s).\n- geoCityName=Seattle\n\nUse a pipe (|) to include multiple city names.\n- geoCityName=Seattle|Tacoma\n\nFor more precise city-specific results try using `city[id]`\n",
                       "key": "geoCityName",
                       "value": "<string>"
                     },
                     {
+                      "description": "The two-letter ISO 3166-1 alpha-2 code for a country.\n- geoCountryIso2=US\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso2=US|CA\n\nGeographic filters alone request the normal upcoming-events dataset, even on historically entitled subscriptions; dateModifiedFrom alone is not historical intent either. On plans with geo + historical search (Enterprise baseline, or granted by request), request history explicitly with a licensed past event-date window or expandPastEvents=true. For country-by-country historical backfills, prefer bounded eventDateFrom/eventDateTo windows with no expand flag needed. An authorized historical request with no lower event-date bound receives the later fixed subscription date and rolling plan/override floor before origin fetch; truly unlimited history gets no invented floor. Iterate only countries that actually have data for your target date range (ask support for the coverage list) rather than sweeping every ISO code. Note the code for the United Kingdom is `GB`, not `UK` \u2014 source data occasionally shows `UK`, but this filter expects `GB`.\n",
                       "key": "geoCountryIso2",
-                      "value": "US"
+                      "value": "GA"
                     },
                     {
+                      "description": "The three-letter ISO code for a country.\n- geoCountryIso3=USA\n\nUse a pipe (|) to include multiple countries.\n- geoCountryIso3=USA|CAN\n",
                       "key": "geoCountryIso3",
-                      "value": "USA"
+                      "value": "BLZ"
                     },
                     {
+                      "description": "Use to retrieve events near an IP address.\\\nSupports IPv4 or IPv6 values.\n- geoIp=55.123.456.789\n",
                       "key": "geoIp",
                       "value": "<ipv4>"
                     },
                     {
+                      "description": "The latitude for geographic radius.\n- geoLatitude=40.7505\n",
                       "key": "geoLatitude",
-                      "value": "40.7505"
+                      "value": "<float>"
                     },
                     {
+                      "description": "The longitude for geographic radius.\n- geoLongitude=-73.9934\n",
                       "key": "geoLongitude",
-                      "value": "-73.9934"
+                      "value": "<float>"
                     },
                     {
+                      "description": "Use to retrieve events for specific <a href=\"https://apidocs.jambase.com/docs/jambase-api/5b89026bb2462-get-metros\">metro ID(s)</a>.\n- geoMetroId=jambase:1\n\nUse a pipe (|) to include multiple metro IDs.\n- geoMetroId=jambase:1|jambase:5\n",
                       "key": "geoMetroId",
-                      "value": "jambase:1"
+                      "value": "<string>"
                     },
                     {
+                      "description": "The search radius for lat/lng type searches.\n- geoRadiusAmount=60\n",
                       "key": "geoRadiusAmount",
                       "value": "60"
                     },
                     {
+                      "description": "Whether to use miles (default) or kilometers for radius.\n- geoRadiusUnits=km\n",
                       "key": "geoRadiusUnits",
                       "value": "mi"
                     },
                     {
+                      "description": "The State code in ISO_3166-2 format [[docs](https://en.wikipedia.org/wiki/ISO_3166-2)].\n- geoStateIso=US-NY\n\nUse a pipe (|) to include multiple State codes.\n- geoStateIso=US-NY|=US-PA\n\nNote: Available for United States, Canada, and Australia only.\n",
                       "key": "geoStateIso",
-                      "value": "US-AZ"
+                      "value": "US-MI"
                     },
                     {
+                      "description": "Must have been updated on or after this dateTime in GMT.\\\nIf left blank or omitted, will use all updated on dates\n\n- dateModifiedFrom=2022-10-31 00:00:00\n\nOn its own, a `dateModifiedFrom` sweep only returns events whose dates have not yet passed \u2014 modifications to past-dated events never appear in a plain delta sweep. To catch changes to past shows, plans with geo + historical search (Enterprise baseline, or granted by request) can combine `dateModifiedFrom` with a geo parameter (such as `geoCountryIso2`) and an explicit past `eventDateFrom`/`eventDateTo` range. Two caveats: the historical index refreshes on a delay (up to about a day), so overlap historical watermarks by 24-48 hours; and a response carrying the `X-JBD-Geo-Historical-Fallback` header was served without past events and should be re-run after the UTC day resets.\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                       "key": "dateModifiedFrom",
-                      "value": "2022-10-31 00:00:00"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Must have been first published on or after this dateTime in GMT.\\\n\\\nIf left blank or omitted, will use all first published on dates.\n\n- datePublishedFrom=2022-01-01 00:00:00\n\nNote: Use <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC3339</a> format for parameter values.\n",
                       "key": "datePublishedFrom",
-                      "value": "2022-01-01 00:00:00"
+                      "value": "<string>"
                     },
                     {
+                      "description": "Set to true to only return venues that have at least one upcoming event",
                       "key": "venueHasUpcomingEvents",
                       "value": "false"
                     },
                     {
+                      "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: `expandExternalIdentifiers` is included on Startup and higher plans and on Trial. Looking up a record by a third-party ID (for example `/v3/artists/id/spotify:{id}`) works on every plan; see [Reverse ID Lookup](https://data.jambase.com/api/docs/reverse-id-lookup).\n",
                       "key": "expandExternalIdentifiers",
                       "value": "false"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "text",
               "header": [
                 {
                   "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
                   "key": "WWW_Authenticate",
-                  "value": "string",
-                  "description": ""
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "value": "<string>"
                 }
               ],
-              "body": "",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:03:22.000Z",
+              "updatedAt": "2026-10-21T20:03:22.000Z",
+              "uid": "35240-360d206d-6332-46f5-8224-39ec9f469132"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c2e11014-e7f4-48bf-9292-7a9451b3c19a",
-          "name": "Get / reverse-lookup a Venue by JamBase or third-party ID",
-          "request": {
-            "name": "Get / reverse-lookup a Venue by JamBase or third-party ID",
-            "description": {
-              "content": "Retrieve a specific venue by JamBase or third-party ID.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "venues",
-                "id",
-                "{{venueDataSource}}:{{venueId}}"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "expandUpcomingEvents",
-                  "value": "false",
-                  "description": "Use `true` to include the `event` node with any upcoming Concerts and Festivals for the venue."
-                },
-                {
-                  "disabled": false,
-                  "key": "excludeEventPerformers",
-                  "value": "false",
-                  "description": "Use `true` to suppress the `performer` node in `Concert` and `Festival` objects.\n"
-                },
-                {
-                  "disabled": false,
-                  "key": "expandExternalIdentifiers",
-                  "value": "false",
-                  "description": "Use `true` to include external IDs for `Concert`, `Artist`, and `Venue` objects.\n\\\nNote: The `expandExternalIdentifiers` parameter requires that your apikey has the `expandExternalIdentifiers` enhancement turned on. Please contact JamBase to request access to this feature.\n"
-                },
-                {
-                  "disabled": false,
-                  "key": "expandArtistSameAs",
-                  "value": "false",
-                  "description": "Use `true` to include `sameAs` (i.e. links) for `Artist` responses.\n"
-                },
-                {
-                  "disabled": false,
-                  "key": "expandPastEvents",
-                  "value": "false",
-                  "description": "Use `true` to include past/historical `Concert` and `Festival` objects.\n\\\nWhen searching events, must be combined with `artistId` or `venueId` parameter.\n\\\nNote: The `expandPastEvents` parameter requires that your apikey has the `expandPastEvents` enhancement turned on. Please contact JamBase to request access to this feature.\n"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "387e71a4-57a5-401e-9423-0951574a2abd",
-              "name": "A single Venue",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "venues",
-                    "id",
-                    "{{venueDataSource}}:{{venueId}}"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "expandUpcomingEvents",
-                      "value": "false"
-                    },
-                    {
-                      "key": "excludeEventPerformers",
-                      "value": "false"
-                    },
-                    {
-                      "key": "expandExternalIdentifiers",
-                      "value": "false"
-                    },
-                    {
-                      "key": "expandArtistSameAs",
-                      "value": "false"
-                    },
-                    {
-                      "key": "expandPastEvents",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"success\": true,\n  \"venue\": {\n    \"name\": \"string\",\n    \"identifier\": \"jambase:194164\",\n    \"url\": \"https://riPCJyZikfKcWtWBH.razvj-fJE.SuUdw\",\n    \"image\": \"http://WErLn.ojd2een,6SH.6MH\",\n    \"sameAs\": [\n      {\n        \"@type\": \"URL\",\n        \"identifier\": \"musicbrainz\",\n        \"url\": \"http://VIKMgihLCwQzCiRFUpL.iyo+wteuv0kXAnHqLJMBt,FYU8\"\n      },\n      {\n        \"@type\": \"URL\",\n        \"identifier\": \"musicbrainz\",\n        \"url\": \"https://Ld.igiZETw7GYf.qMVM9POqaLNN3mxvjhyNFvoNpA+tltzq\"\n      }\n    ],\n    \"datePublished\": \"2022-12-14T15:35:48Z\",\n    \"dateModified\": \"2022-12-14T03:41:20Z\",\n    \"deletionStatus\": \"deleted\",\n    \"deletedAt\": \"2026-04-12T18:01:00Z\",\n    \"mergedInto\": \"jambase:5632389\",\n    \"maximumAttendeeCapacity\": 20789,\n    \"address\": {\n      \"@type\": \"PostalAddress\",\n      \"streetAddress\": \"4 Pennsylvania Plaza\",\n      \"addressLocality\": \"New York\",\n      \"postalCode\": \"10001\",\n      \"addressRegion\": {\n        \"@type\": \"State\",\n        \"identifier\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"Arizona\",\n        \"alternateName\": \"AZ\",\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-numUpcomingEvents\": 12\n      },\n      \"addressCountry\": {\n        \"@type\": \"Country\",\n        \"identifier\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"United States\",\n        \"alternateName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-numUpcomingEvents\": 12\n      },\n      \"x-streetAddress2\": \"Second Floor\",\n      \"x-timezone\": \"America/New_York\",\n      \"x-jamBaseMetroId\": 1,\n      \"x-jamBaseCityId\": 4223296\n    },\n    \"geo\": {\n      \"@type\": \"GeoCoordinates\",\n      \"latitude\": 40.7505,\n      \"longitude\": -73.9934\n    },\n    \"events\": [\n      {\n        \"@type\": \"Concert\",\n        \"deletionStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mergedInto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-externalIdentifiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"x-customTitle\": \"string\",\n        \"x-subtitle\": \"string\",\n        \"x-headlinerInSupport\": false,\n        \"x-streamIds\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"Concert\",\n        \"deletionStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedAt\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mergedInto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"x-externalIdentifiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"x-customTitle\": \"string\",\n        \"x-subtitle\": \"string\",\n        \"x-headlinerInSupport\": false,\n        \"x-streamIds\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ],\n    \"x-isPermanentlyClosed\": false,\n    \"x-numUpcomingEvents\": 12\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7f7adc01-0fe8-40c4-87f7-6fcc956fc8c0",
-              "name": "Invalid input parameter",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "venues",
-                    "id",
-                    "{{venueDataSource}}:{{venueId}}"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "expandUpcomingEvents",
-                      "value": "false"
-                    },
-                    {
-                      "key": "excludeEventPerformers",
-                      "value": "false"
-                    },
-                    {
-                      "key": "expandExternalIdentifiers",
-                      "value": "false"
-                    },
-                    {
-                      "key": "expandArtistSameAs",
-                      "value": "false"
-                    },
-                    {
-                      "key": "expandPastEvents",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"success\": false,\n  \"errors\": [\n    {\n      \"errorCode\": \"lookup_error\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    },\n    {\n      \"errorCode\": \"parameter_invalid\",\n      \"errorMessage\": \"The identifier `jambase:87121` is invalid.\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4ccd8109-c711-4daa-8127-b5c393499c45",
-              "name": "API key is missing or invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "venues",
-                    "id",
-                    "{{venueDataSource}}:{{venueId}}"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "expandUpcomingEvents",
-                      "value": "false"
-                    },
-                    {
-                      "key": "excludeEventPerformers",
-                      "value": "false"
-                    },
-                    {
-                      "key": "expandExternalIdentifiers",
-                      "value": "false"
-                    },
-                    {
-                      "key": "expandArtistSameAs",
-                      "value": "false"
-                    },
-                    {
-                      "key": "expandPastEvents",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "disabled": false,
-                  "key": "WWW_Authenticate",
-                  "value": "string",
-                  "description": ""
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:03:22.000Z",
+          "updatedAt": "2026-10-21T20:03:22.000Z",
+          "uid": "35240-613e5a07-d4a1-4c1a-b676-3e99c6fe8b83"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.data.jambase.com/v3",
-      "key": "baseUrl"
-    },
-    {
-      "disabled": false,
-      "description": {
-        "content": "(Required) the VenueDataSource of the ID for the artist",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "<string>",
-      "key": "venueDataSource"
-    },
-    {
-      "disabled": false,
-      "description": {
-        "content": "(Required) the unique ID for the Venue",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "<string>",
-      "key": "venueId"
+      "id": "197d4f1a-376c-4196-a08f-4496a012d919",
+      "createdAt": "2026-10-21T20:03:22.000Z",
+      "updatedAt": "2026-10-21T20:03:22.000Z",
+      "uid": "35240-197d4f1a-376c-4196-a08f-4496a012d919"
     }
   ],
   "auth": {
@@ -807,17 +863,23 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "9615e582-6616-4d7b-a844-1d9b067a8a56",
-    "name": "JamBase Concert Data Artists Venues API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.\n\nContact Support:\n Name: Team JamBase\n Email: developer@jambase.com",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.data.jambase.com/v3"
+    },
+    {
+      "key": "venueDataSource",
+      "value": "seated"
+    },
+    {
+      "key": "venueId",
+      "value": "<string>"
     }
-  }
+  ]
 }

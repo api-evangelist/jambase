@@ -1,0 +1,443 @@
+{
+  "info": {
+    "_postman_id": "3d6bfe0e-4b7d-457d-b189-7f9c0435e897",
+    "name": "JamBase Concert Data Festival Series API",
+    "description": "REST API for concerts, festivals, artists, and venues featuring normalized data from JamBase.\n\nContact Support:\n Name: Team JamBase\n Email: developer@jambase.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:03:29.000Z",
+    "updatedAt": "2026-10-21T20:03:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3d6bfe0e-4b7d-457d-b189-7f9c0435e897"
+  },
+  "item": [
+    {
+      "name": "festivals",
+      "item": [
+        {
+          "name": "{festivalSeriesId}",
+          "item": [
+            {
+              "name": "events",
+              "item": [
+                {
+                  "name": "Get Festival Series Archive",
+                  "id": "87be360d-7ca9-4876-9a03-248f5b7ab723",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/festivals/:festivalSeriesId/events?expandExternalIdentifiers=<boolean>&perPage=<integer>&page=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "festivals",
+                        ":festivalSeriesId",
+                        "events"
+                      ],
+                      "query": [
+                        {
+                          "description": "Include MusicBrainz + Spotify ids per performer.\n- expandExternalIdentifiers=true\n",
+                          "key": "expandExternalIdentifiers",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Editions per page (1-100, default 50).",
+                          "key": "perPage",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page of results.",
+                          "key": "page",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "39329ace-2485-470a-9f6b-92153b4aee91",
+                          "key": "festivalSeriesId",
+                          "value": "jambase:42783",
+                          "description": "(Required) Stable festival series id from the search endpoint (`GET /v3/festivals?name=`). The bare numeric form (e.g. `13969984`) is canonical; the `jambase:`-prefixed identifier form returned in response bodies (e.g. `jambase:13969984`) is also accepted."
+                        }
+                      ]
+                    },
+                    "description": "The full archive: every edition as a core-spec `Festival` event with a flat `performer` array carrying `x-performanceDate` / `x-performanceRank` / `x-isHeadliner` per artist (billing rank resets per day), plus per-artist JamBase id, genres and image URL. `expandExternalIdentifiers=true` adds MusicBrainz + Spotify ids per performer. Series context rides once at the top level as `x-festivalSeries`. Requires festival archive history access on your plan (implied by `allow_past_events`)."
+                  },
+                  "response": [
+                    {
+                      "id": "ed1e7f20-dcfe-4ab2-9f41-5525deaa8ae9",
+                      "name": "Full edition-by-edition archive as events",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/festivals/:festivalSeriesId/events?expandExternalIdentifiers=<boolean>&perPage=<integer>&page=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "festivals",
+                            ":festivalSeriesId",
+                            "events"
+                          ],
+                          "query": [
+                            {
+                              "description": "Include MusicBrainz + Spotify ids per performer.\n- expandExternalIdentifiers=true\n",
+                              "key": "expandExternalIdentifiers",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Editions per page (1-100, default 50).",
+                              "key": "perPage",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Page of results.",
+                              "key": "page",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "festivalSeriesId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"success\": \"<boolean>\",\n  \"pagination\": {\n    \"page\": \"<integer>\",\n    \"perPage\": \"<integer>\",\n    \"totalItems\": \"<integer>\",\n    \"totalPages\": \"<integer>\",\n    \"nextPage\": \"<string>\",\n    \"previousPage\": \"<string>\"\n  },\n  \"x-festivalSeries\": {\n    \"@type\": \"<string>\",\n    \"identifier\": \"<string>\",\n    \"name\": \"<string>\",\n    \"url\": \"<string>\",\n    \"image\": \"<string>\"\n  },\n  \"events\": [\n    {\n      \"@type\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\",\n      \"eventStatus\": \"<string>\",\n      \"location\": {\n        \"@type\": \"<string>\",\n        \"name\": \"<string>\",\n        \"address\": {\n          \"@type\": \"<string>\",\n          \"addressLocality\": \"<string>\",\n          \"addressRegion\": \"<string>\",\n          \"addressCountry\": \"<string>\"\n        }\n      },\n      \"x-isUpcoming\": \"<boolean>\",\n      \"x-performerCount\": \"<integer>\",\n      \"performer\": [\n        {\n          \"@type\": \"<string>\",\n          \"name\": \"<string>\",\n          \"identifier\": \"<string>\",\n          \"image\": \"<string>\",\n          \"genre\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"x-performanceDate\": \"<date>\",\n          \"x-performanceRank\": \"<integer>\",\n          \"x-isHeadliner\": \"<boolean>\",\n          \"x-externalIdentifiers\": [\n            {\n              \"source\": \"<string>\",\n              \"identifier\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"source\": \"<string>\",\n              \"identifier\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ]\n        },\n        {\n          \"@type\": \"<string>\",\n          \"name\": \"<string>\",\n          \"identifier\": \"<string>\",\n          \"image\": \"<string>\",\n          \"genre\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"x-performanceDate\": \"<date>\",\n          \"x-performanceRank\": \"<integer>\",\n          \"x-isHeadliner\": \"<boolean>\",\n          \"x-externalIdentifiers\": [\n            {\n              \"source\": \"<string>\",\n              \"identifier\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"source\": \"<string>\",\n              \"identifier\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"@type\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\",\n      \"eventStatus\": \"<string>\",\n      \"location\": {\n        \"@type\": \"<string>\",\n        \"name\": \"<string>\",\n        \"address\": {\n          \"@type\": \"<string>\",\n          \"addressLocality\": \"<string>\",\n          \"addressRegion\": \"<string>\",\n          \"addressCountry\": \"<string>\"\n        }\n      },\n      \"x-isUpcoming\": \"<boolean>\",\n      \"x-performerCount\": \"<integer>\",\n      \"performer\": [\n        {\n          \"@type\": \"<string>\",\n          \"name\": \"<string>\",\n          \"identifier\": \"<string>\",\n          \"image\": \"<string>\",\n          \"genre\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"x-performanceDate\": \"<date>\",\n          \"x-performanceRank\": \"<integer>\",\n          \"x-isHeadliner\": \"<boolean>\",\n          \"x-externalIdentifiers\": [\n            {\n              \"source\": \"<string>\",\n              \"identifier\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"source\": \"<string>\",\n              \"identifier\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ]\n        },\n        {\n          \"@type\": \"<string>\",\n          \"name\": \"<string>\",\n          \"identifier\": \"<string>\",\n          \"image\": \"<string>\",\n          \"genre\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"x-performanceDate\": \"<date>\",\n          \"x-performanceRank\": \"<integer>\",\n          \"x-isHeadliner\": \"<boolean>\",\n          \"x-externalIdentifiers\": [\n            {\n              \"source\": \"<string>\",\n              \"identifier\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"source\": \"<string>\",\n              \"identifier\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"request\": {\n    \"endpoint\": \"<string>\",\n    \"method\": \"<string>\",\n    \"ip\": \"<ipv4>\",\n    \"userAgent\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:03:30.000Z",
+                      "updatedAt": "2026-10-21T20:03:30.000Z",
+                      "uid": "35240-ed1e7f20-dcfe-4ab2-9f41-5525deaa8ae9"
+                    },
+                    {
+                      "id": "3c4d537a-a551-41e8-8aca-968f10dceebb",
+                      "name": "Caller lacks festival archive history access",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/festivals/:festivalSeriesId/events?expandExternalIdentifiers=<boolean>&perPage=<integer>&page=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "festivals",
+                            ":festivalSeriesId",
+                            "events"
+                          ],
+                          "query": [
+                            {
+                              "description": "Include MusicBrainz + Spotify ids per performer.\n- expandExternalIdentifiers=true\n",
+                              "key": "expandExternalIdentifiers",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Editions per page (1-100, default 50).",
+                              "key": "perPage",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Page of results.",
+                              "key": "page",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "festivalSeriesId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:03:30.000Z",
+                      "updatedAt": "2026-10-21T20:03:30.000Z",
+                      "uid": "35240-3c4d537a-a551-41e8-8aca-968f10dceebb"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:03:30.000Z",
+                  "updatedAt": "2026-10-21T20:03:30.000Z",
+                  "uid": "35240-87be360d-7ca9-4876-9a03-248f5b7ab723"
+                }
+              ],
+              "id": "69f7aed9-3dc1-4ef9-99aa-f9ef9ed68077",
+              "createdAt": "2026-10-21T20:03:30.000Z",
+              "updatedAt": "2026-10-21T20:03:30.000Z",
+              "uid": "35240-69f7aed9-3dc1-4ef9-99aa-f9ef9ed68077"
+            },
+            {
+              "name": "Get Festival Series",
+              "id": "b7574c04-98ec-4221-9a2b-c0d94409e062",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/festivals/:festivalSeriesId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "festivals",
+                    ":festivalSeriesId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "74a4312b-59d4-4f47-bdd8-58ab79e12935",
+                      "key": "festivalSeriesId",
+                      "value": "jambase:42783",
+                      "description": "(Required) Stable festival series id from the search endpoint (`GET /v3/festivals?name=`). The bare numeric form (e.g. `13969984`) is canonical; the `jambase:`-prefixed identifier form returned in response bodies (e.g. `jambase:13969984`) is also accepted."
+                    }
+                  ]
+                },
+                "description": "Festival series detail plus its editions timeline as slim event stubs (event id, year, dates, venue, headliners). Historical editions require festival archive history access on your plan (implied by `allow_past_events`); non-entitled keys see upcoming editions plus a `historyLocked` notice."
+              },
+              "response": [
+                {
+                  "id": "f015b3f5-1930-4573-a48e-55fae6614c71",
+                  "name": "Festival series detail with edition stubs",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/festivals/:festivalSeriesId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "festivals",
+                        ":festivalSeriesId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "festivalSeriesId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": \"<boolean>\",\n  \"festivalSeries\": {\n    \"@type\": \"<string>\",\n    \"identifier\": \"<string>\",\n    \"name\": \"<string>\",\n    \"url\": \"<string>\",\n    \"image\": \"<string>\",\n    \"x-officialSite\": \"<string>\",\n    \"x-editionCount\": \"<integer>\",\n    \"x-firstYear\": \"<integer>\",\n    \"x-latestYear\": \"<integer>\",\n    \"x-nextEditionDate\": \"<date>\",\n    \"x-distinctArtists\": \"<integer>\",\n    \"location\": {\n      \"@type\": \"<string>\",\n      \"address\": {\n        \"@type\": \"<string>\",\n        \"addressLocality\": \"<string>\",\n        \"addressRegion\": \"<string>\",\n        \"addressCountry\": \"<string>\"\n      }\n    },\n    \"x-archiveUrl\": \"<string>\"\n  },\n  \"events\": [\n    {\n      \"@type\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"startDate\": \"<date>\",\n      \"location\": {\n        \"@type\": \"<string>\",\n        \"name\": \"<string>\",\n        \"address\": {\n          \"@type\": \"<string>\",\n          \"addressLocality\": \"<string>\",\n          \"addressRegion\": \"<string>\",\n          \"addressCountry\": \"<string>\"\n        }\n      },\n      \"x-isUpcoming\": \"<boolean>\",\n      \"x-lineupCount\": \"<integer>\",\n      \"x-headliners\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"@type\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"startDate\": \"<date>\",\n      \"location\": {\n        \"@type\": \"<string>\",\n        \"name\": \"<string>\",\n        \"address\": {\n          \"@type\": \"<string>\",\n          \"addressLocality\": \"<string>\",\n          \"addressRegion\": \"<string>\",\n          \"addressCountry\": \"<string>\"\n        }\n      },\n      \"x-isUpcoming\": \"<boolean>\",\n      \"x-lineupCount\": \"<integer>\",\n      \"x-headliners\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"historyLocked\": \"<boolean>\",\n  \"historyInfo\": \"<string>\",\n  \"request\": {\n    \"endpoint\": \"<string>\",\n    \"method\": \"<string>\",\n    \"ip\": \"<ipv4>\",\n    \"userAgent\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:03:30.000Z",
+                  "updatedAt": "2026-10-21T20:03:30.000Z",
+                  "uid": "35240-f015b3f5-1930-4573-a48e-55fae6614c71"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:30.000Z",
+              "updatedAt": "2026-10-21T20:03:30.000Z",
+              "uid": "35240-b7574c04-98ec-4221-9a2b-c0d94409e062"
+            }
+          ],
+          "id": "6578f86f-ff3b-4eeb-b518-7542f7de9224",
+          "createdAt": "2026-10-21T20:03:30.000Z",
+          "updatedAt": "2026-10-21T20:03:30.000Z",
+          "uid": "35240-6578f86f-ff3b-4eeb-b518-7542f7de9224"
+        },
+        {
+          "name": "Search Festival Series",
+          "id": "4f1ed28f-1161-42a9-a5de-1550ee60e15b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/festivals?name=<string>&festivalSeriesName=<string>&perPage=<integer>&page=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "festivals"
+              ],
+              "query": [
+                {
+                  "description": "Festival series name to search for (min 2 characters).\n- name=Outside Lands\n",
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Alias of `name`.",
+                  "key": "festivalSeriesName",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Results per page (1-50, default 20).",
+                  "key": "perPage",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Page of results.",
+                  "key": "page",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Search festival series (e.g. Outside Lands - the parent that ties every edition of a festival together) by name. Each hit includes the stable series id used by the detail and archive endpoints, plus edition count and most recent edition year/city.\n\nNote: `GET /v3/festivals` without `name`/`festivalSeriesName` is the festival events feed (geo/date filters, etc.); providing a series name switches to series search."
+          },
+          "response": [
+            {
+              "id": "bc500616-6bb0-4823-b230-628642dfbde0",
+              "name": "Matching festival series",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/festivals?name=<string>&festivalSeriesName=<string>&perPage=<integer>&page=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "festivals"
+                  ],
+                  "query": [
+                    {
+                      "description": "Festival series name to search for (min 2 characters).\n- name=Outside Lands\n",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Alias of `name`.",
+                      "key": "festivalSeriesName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Results per page (1-50, default 20).",
+                      "key": "perPage",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Page of results.",
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"pagination\": {\n    \"page\": \"<integer>\",\n    \"perPage\": \"<integer>\",\n    \"totalItems\": \"<integer>\",\n    \"totalPages\": \"<integer>\",\n    \"nextPage\": \"<string>\",\n    \"previousPage\": \"<string>\"\n  },\n  \"festivalSeries\": [\n    {\n      \"@type\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"url\": \"<string>\",\n      \"image\": \"<string>\",\n      \"x-editionCount\": \"<integer>\",\n      \"x-latestYear\": \"<integer>\",\n      \"x-latestCity\": \"<string>\",\n      \"x-apiUrl\": \"<string>\"\n    },\n    {\n      \"@type\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"name\": \"<string>\",\n      \"url\": \"<string>\",\n      \"image\": \"<string>\",\n      \"x-editionCount\": \"<integer>\",\n      \"x-latestYear\": \"<integer>\",\n      \"x-latestCity\": \"<string>\",\n      \"x-apiUrl\": \"<string>\"\n    }\n  ],\n  \"request\": {\n    \"endpoint\": \"<string>\",\n    \"method\": \"<string>\",\n    \"ip\": \"<ipv4>\",\n    \"userAgent\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:03:30.000Z",
+              "updatedAt": "2026-10-21T20:03:30.000Z",
+              "uid": "35240-bc500616-6bb0-4823-b230-628642dfbde0"
+            }
+          ],
+          "createdAt": "2026-10-21T20:03:30.000Z",
+          "updatedAt": "2026-10-21T20:03:30.000Z",
+          "uid": "35240-4f1ed28f-1161-42a9-a5de-1550ee60e15b"
+        }
+      ],
+      "id": "fb57844a-6de6-4345-833e-43d5a371c7ee",
+      "createdAt": "2026-10-21T20:03:30.000Z",
+      "updatedAt": "2026-10-21T20:03:30.000Z",
+      "uid": "35240-fb57844a-6de6-4345-833e-43d5a371c7ee"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.data.jambase.com/v3"
+    }
+  ]
+}
