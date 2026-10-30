@@ -1,4 +1,4 @@
-# JamBase (jambase)
+# JamBase
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,73 +66,186 @@
 
 JamBase is a live music data platform with over 25 years of concert history, providing access to 5M+ performances, 616K+ artist profiles, 91K+ venues, and 20K+ festivals. Their REST API delivers real-time global show listings, festival schedules, artist metadata, venue details, and ticket pricing data. JamBase Data is trusted by Google, Spotify, and 450+ companies for jam band and concert discovery, setlist information, tour dates, and live music event data.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/jambase/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/jambase/refs/heads/main/apis.yml)
+**Areas:** Artists · Concerts · Event · Festivals · Live Music · Music · Setlists · Ticketing · Tours · Venues
 
-## Tags
+## JamBase on APIs.io
 
-- Artists
-- Concerts
-- Events
-- Festivals
-- Live Music
-- Music
-- Setlists
-- Tickets
-- Tours
-- Venues
+Everything profiled for JamBase is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/jambase/](https://apis.io/providers/jambase/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (7)
 
-- **Created:** 2026-06-13
-- **Modified:** 2026-06-13
+- [JamBase Artists API](https://apis.io/apis/jambase/jambase-artists-api/) — Search Artists
+- [JamBase Events API](https://apis.io/apis/jambase/jambase-events-api/) — Search Events
+- [JamBase Genres API](https://apis.io/apis/jambase/jambase-genres-api/) — Lookup Genres
+- [JamBase Geographies API](https://apis.io/apis/jambase/jambase-geographies-api/) — Lookup Countries, Cities, Etc
+- [JamBase Lookups API](https://apis.io/apis/jambase/jambase-lookups-api/) — Lookup Identifiers
+- [JamBase Streams API](https://apis.io/apis/jambase/jambase-streams-api/) — Search Streams
+- [JamBase Venues API](https://apis.io/apis/jambase/jambase-venues-api/) — Search Venues
 
-## APIs
+### Published properties
 
-### JamBase Data API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-The JamBase Data API provides REST access to the world's most comprehensive live music database with 25+ years of concert history. The v3 API covers events, artists, venues, festivals, and setlists with normalized data. Features include real-time event status updates (rescheduled, cancelled, postponed), third-party ID matching across 12 platforms including Spotify, MusicBrainz, Ticketmaster, and SeatGeek, plus historical event data dating back to 1999. Authentication uses Bearer token (API key) in the Authorization header.
+#### MCP servers (2)
 
-- **Human URL:** [https://data.jambase.com/api/reference](https://data.jambase.com/api/reference)
-- **Base URL:** `https://data.jambase.com/v3`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [jambase](https://apis.io/servers/jambase/jambase/)
+- [mcp](https://apis.io/servers/jambase/mcp/)
 
-- Artists
-- Concerts
-- Events
-- Festivals
-- Live Music
-- Setlists
-- Tickets
-- Tours
-- Venues
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://data.jambase.com/api/reference)
-- [Getting Started](https://data.jambase.com/api/docs/getting-started)
-- [Portal](https://data.jambase.com)
-- [Pricing](https://data.jambase.com/pricing)
-- [Plans](plans/jambase-plans-pricing.yml)
-- [Rate Limits](rate-limits/jambase-rate-limits.yml)
-- [Fin Ops](finops/jambase-finops.yml)
-- [OpenAPI](openapi/openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [JSON Schema](json-schema/jambase-schemas.json) — [JSON Schema](https://json-schema.org/specification)
-- [J S O N L D Context](json-ld/jambase-context.jsonld)
+- [Jambase Agentic Access](https://apis.io/agentic-access/jambase/jambase-agentic-access/)
 
-## Common Properties
+#### JSON Schema (9)
 
-- [Portal](https://data.jambase.com)
-- [Documentation](https://data.jambase.com/api/reference)
-- [Getting Started](https://data.jambase.com/api/docs/getting-started)
-- [Pricing](https://data.jambase.com/pricing)
-- [Solutions](https://data.jambase.com/solutions)
-- [Data](https://data.jambase.com/data)
-- [M C P](https://data.jambase.com/mcp)
-- [About](https://data.jambase.com/about)
+The data models the API reads and writes.
+
+- [Concert](https://apis.io/schemas/jambase/concert/)
+- [Event](https://apis.io/schemas/jambase/event/)
+- [Festival](https://apis.io/schemas/jambase/festival/)
+- [Genre](https://apis.io/schemas/jambase/genre/)
+- [JamBase Concert Data API Schemas](https://apis.io/schemas/jambase/jambase-schemas/)
+- [MusicGroup](https://apis.io/schemas/jambase/musicgroup/)
+- [MusicVenue](https://apis.io/schemas/jambase/musicvenue/)
+- [Offer](https://apis.io/schemas/jambase/offer/)
+- [Stream](https://apis.io/schemas/jambase/stream/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Jambase Context](https://apis.io/jsonld/jambase/jambase-context/)
+
+#### Examples (17)
+
+Example requests and responses.
+
+- [Getartistdatasources](https://apis.io/examples/jambase/getArtistDataSources/)
+- [Getcountries](https://apis.io/examples/jambase/getCountries/)
+- [Geteventdatasources](https://apis.io/examples/jambase/getEventDataSources/)
+- [Getgenres](https://apis.io/examples/jambase/getGenres/)
+- [Getmetros](https://apis.io/examples/jambase/getMetros/)
+- [Getsingleartist](https://apis.io/examples/jambase/getSingleArtist/)
+- [Getsinglevenue](https://apis.io/examples/jambase/getSingleVenue/)
+- [Getstates](https://apis.io/examples/jambase/getStates/)
+- [Getstream](https://apis.io/examples/jambase/getStream/)
+- [Getupcomingevent](https://apis.io/examples/jambase/getUpcomingEvent/)
+- [Getvenuedatasources](https://apis.io/examples/jambase/getVenueDataSources/)
+- [Getstreamdatasources](https://apis.io/examples/jambase/getstreamDataSources/)
+- [Searchartists](https://apis.io/examples/jambase/searchArtists/)
+- [Searchcities](https://apis.io/examples/jambase/searchCities/)
+- [Searchevents](https://apis.io/examples/jambase/searchEvents/)
+- [Searchupcomingstreams](https://apis.io/examples/jambase/searchUpcomingStreams/)
+- [Searchvenues](https://apis.io/examples/jambase/searchVenues/)
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [JamBase Concert Data Artists API](https://apis.io/collections/jambase/open-jambase-artists-api/)
+- [JamBase Concert Data Artists Events API](https://apis.io/collections/jambase/open-jambase-events-api/)
+- [JamBase Concert Data Artists Genres API](https://apis.io/collections/jambase/open-jambase-genres-api/)
+- [JamBase Concert Data Artists Geographies API](https://apis.io/collections/jambase/open-jambase-geographies-api/)
+- [JamBase Concert Data Artists Lookups API](https://apis.io/collections/jambase/open-jambase-lookups-api/)
+- [JamBase Concert Data Artists Streams API](https://apis.io/collections/jambase/open-jambase-streams-api/)
+- [JamBase Concert Data Artists Venues API](https://apis.io/collections/jambase/open-jambase-venues-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [JamBase — jsonschema rules](https://apis.io/rules/jambase/jambase-jsonschema-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Jambase Authentication](https://apis.io/security/jambase/jambase-authentication/)
+- [Jambase Domain Security](https://apis.io/security/jambase/jambase-domain-security/)
+- [Jambase Vulnerability Disclosure](https://apis.io/security/jambase/jambase-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Jambase Plans Pricing](https://apis.io/plans/jambase/jambase-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Jambase Rate Limits](https://apis.io/rate-limits/jambase/jambase-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Jambase Finops](https://apis.io/finops/jambase/jambase-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.jambase.com)
+- [Documentation](https://data.jambase.com/api/reference)
+- [Getting started](https://data.jambase.com/api/docs/getting-started)
+- [Pricing](https://data.jambase.com/pricing)
+- [Blog](https://www.jambase.com/feed)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 40.1** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 62.6 |
+| Contract governance | 9.8 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 46.4 |
+| Access clarity | 18.4 |
+
+**Agent readiness 58.5** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | verified |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 22.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/jambase/](https://apis.io/providers/jambase/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for JamBase: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/jambase/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
